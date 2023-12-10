@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Get,
   HttpStatus,
   Post,
   UnauthorizedException,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -11,6 +13,7 @@ import { UserService } from './user.service';
 import { SignUpUserDto } from './dto/signup-user.dto';
 import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -23,30 +26,34 @@ export class UserController {
       const result = await this.userService.signUp(signUpUserDto);
       return { message: result.message, statusCode: HttpStatus.CREATED };
     } catch (error) {
-      if (error.code === 11000) {
-        throw new DuplicateKeyException(
-          'Email already exists',
-          HttpStatus.BAD_REQUEST,
-        );
+      throw new DuplicateKeyException(error.message, error.getStatus());
+    }
+  }
+
+  @Get('signin')
+  @UsePipes(new ValidationPipe())
+  async signIn(@Body() signInUserDto: SigninUserDto) {
+    try {
+      const result = await this.userService.signIn(signInUserDto);
+      return {
+        message: result.message,
+        statusCode: result.statusCode,
+        accessToken: result.accessToken,
+      };
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw new UnauthorizedException({
+          message: error.message,
+          statusCode: error.getStatus(),
+        });
       }
       throw error;
     }
   }
 
-  @Post('signin')
-  @UsePipes(new ValidationPipe())
-  async signIn(@Body() signInUserDto: SigninUserDto) {
-    try {
-      const result = await this.userService.signIn(signInUserDto);
-      return { message: result.message, statusCode: HttpStatus.OK };
-    } catch (error) {
-      if (error instanceof UnauthorizedException) {
-        throw new UnauthorizedException({
-          message: 'Invalid credentials',
-          statusCode: HttpStatus.UNAUTHORIZED,
-        });
-      }
-      throw error;
-    }
+  @Get()
+  @UseGuards(AuthGuard)
+  getUserDetails() {
+    return 'Test auth guard';
   }
 }
