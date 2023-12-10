@@ -5,27 +5,34 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async signUp(
     userDto: SignUpUserDto,
   ): Promise<{ message: string; statusCode: number }> {
     try {
-      const newUser = new this.userModel(userDto);
+      const hashedPassword = await bcrypt.hash(userDto.password, 10);
+      const newUser = new this.userModel({
+        ...userDto,
+        password: hashedPassword,
+      });
       await newUser.save();
       return {
         message: 'User signed up successfully',
         statusCode: HttpStatus.CREATED,
       };
     } catch (error) {
-      if (error.code === 11000) {
+      if (error.name === 'ValidationError' && error.errors.email.message) {
         throw new DuplicateKeyException(
-          'Email already exists',
+          error.errors.email.message,
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -35,24 +42,37 @@ export class UserService {
 
   async signIn(
     signInUserDto: SigninUserDto,
-  ): Promise<{ message: string; statusCode: number }> {
-    const { email, password } = signInUserDto;
+  ): Promise<{ message: string; statusCode: number; accessToken?: string }> {
+    const { email, password, role } = signInUserDto;
 
-    const user = await this.userModel.findOne({ email, password }).exec();
-    console.log('user, ', user);
+    const user = await this.userModel.findOne({ email, role }).exec();
 
-    if (!user) {
+    if (!user || !(await this.comparePasswords(password, user.password))) {
       throw new UnauthorizedException({
         message: 'Invalid credentials',
         statusCode: HttpStatus.UNAUTHORIZED,
       });
     }
 
-    // Logic for successful sign-in (generate token, etc.)
+    const accessToken = this.generateAccessToken(user);
 
     return {
       message: 'User signed in successfully',
       statusCode: HttpStatus.OK,
+      accessToken,
     };
+  }
+
+  private generateAccessToken(user: User): string {
+    const payload = { sub: user.id, email: user.email, role: user.role };
+    const token = this.jwtService.sign(payload);
+    return `Bearer ${token}`;
+  }
+
+  private async comparePasswords(
+    plainText: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    return await bcrypt.compare(plainText, hashedPassword);
   }
 }

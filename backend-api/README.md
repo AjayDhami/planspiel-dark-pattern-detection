@@ -8,18 +8,22 @@ This is backend service of Dark Pattern Detection Project. It involves creating 
 $ npm install
 ```
 
+## Note
+
+- Create `.env` file in root directory of your `backend-api` project. Refer to `sample.env` file and replace actual values.
+
 ## Running the app
 
 ```bash
-# development
+# development mode
 $ npm run start
 
 # watch mode
 $ npm run start:dev
-```
-## Note 
-- Create `.env` file in root directory of your `backend-api` project. Refer to `sample.env` file and replace actual values.
 
+# debug mode
+$ npm run start:debug
+```
 
 ## Stay in touch
 
