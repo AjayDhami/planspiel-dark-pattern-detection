@@ -30,7 +30,7 @@ export class UserController {
     }
   }
 
-  @Get('signin')
+  @Post('signin')
   @UsePipes(new ValidationPipe())
   async signIn(@Body() signInUserDto: SigninUserDto) {
     try {
