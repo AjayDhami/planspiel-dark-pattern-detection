@@ -11,6 +11,8 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./SignUp.css";
+import AuthContext from "../context/AuthContext1";
+import { useContext } from "react";
 
 const defaultTheme = createTheme({
   palette: {
@@ -21,16 +23,12 @@ const defaultTheme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      first_name: data.get("first_name"),
-      last_name: data.get("last_name"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const authContext = useContext(AuthContext)
+  if(!authContext) {
+    console.log("not context");
+    return null
   };
+  const { signUpUser } = authContext
   const logo = require("./images/Logo.png");
   return (
     <>
@@ -60,7 +58,7 @@ export default function SignUp() {
             </div>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={signUpUser}
               noValidate
               sx={{ mt: 1 }}
             >
@@ -72,7 +70,7 @@ export default function SignUp() {
                     required
                     id="first_name"
                     label="First Name"
-                    name="text"
+                    name="firstName"
                     autoComplete="first_name"
                     autoFocus
                   />
@@ -84,7 +82,7 @@ export default function SignUp() {
                     required
                     id="last_name"
                     label="Last Name"
-                    name="text"
+                    name="lastName"
                     autoComplete="text"
                   />
                 </Grid>

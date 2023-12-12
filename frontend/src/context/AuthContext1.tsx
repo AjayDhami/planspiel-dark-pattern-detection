@@ -20,7 +20,7 @@ interface SignupData {
   role: string;
 }
 interface UserData {
-  // Define the structure of the user data as per your needs
+  email : string
 }
 
 interface AuthContextProps {
@@ -60,11 +60,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const history = useNavigate();
 
   const loginUser = async (e: React.FormEvent) => {
+    const {email, password} = e.target as unknown as {email : HTMLFormElement, password : HTMLFormElement}
+    console.log(email.value, password.value);
+    
     e.preventDefault();
     try {
       const response = await axios.post<{ accessToken: string }>(
         `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signin`,
-        credentials
+        {"email" : email.value, "password" : password.value, "role" : credentials.role}
       );
 
       if (response.status === 201) {
@@ -85,15 +88,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signUpUser = async(e: React.FormEvent) =>{
+    const {firstName, lastName,email, password} = e.target as unknown as {firstName : HTMLFormElement, lastName : HTMLFormElement, email : HTMLFormElement, password : HTMLFormElement}
     e.preventDefault();
     try {
       const response = await axios.post<{ accessToken: string }>(
         `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signup`,
-        signupData
+        {"firstName" : firstName.value,"lastName" : lastName.value, "email" : email.value, "password" : password.value, "role" : credentials.role}
       );
 
       if (response.status === 201) {
         console.log(response);
+        history('/signin')
         
       } else {
         alert('Something went wrong!');
