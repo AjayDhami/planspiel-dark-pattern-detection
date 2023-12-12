@@ -53,3 +53,6 @@ Install all dependencies
 
 start frontend
 ### npm start
+
+create a .env file in frontend directory
+check sample.env to add the backend host
