@@ -48,20 +48,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     password: 'xcxcxc',
     role: 'Client',
   };
-
-  const signupData: SignupData = {
-    firstName: 'Amay',
-    lastName: 'Rajvaidya',
-    email: 'amay@yaml.com',
-    password: 'xcxcxc',
-    role: 'Client',
-  };
-
   const history = useNavigate();
 
   const loginUser = async (e: React.FormEvent) => {
     const {email, password} = e.target as unknown as {email : HTMLFormElement, password : HTMLFormElement}
-    console.log(email.value, password.value);
     
     e.preventDefault();
     try {
@@ -83,7 +73,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
     } catch (error) {
       console.error('Error during login:', error);
-      // Handle error as needed
     }
   };
 
@@ -97,7 +86,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       );
 
       if (response.status === 201) {
-        console.log(response);
         history('/signin')
         
       } else {
@@ -105,7 +93,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
     } catch (error) {
       console.error('Error during login:', error);
-      // Handle error as needed
     }
   }
 
