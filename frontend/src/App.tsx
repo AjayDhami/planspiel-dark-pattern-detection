@@ -5,21 +5,24 @@ import ClientDashboardLayout from "./layouts/ClientDashboardLayout";
 import DashboardPage from "./pages/client/DashboardPage";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
+import { AuthProvider } from "./context/AuthContext1";
 
 function App() {
   return (
-    <Routes>
+    <AuthProvider>
+      <Routes>
       {/* <!-- Common routes --> */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       {/* <!-- Client Dashboard routes --> */}
-      <Route path="/client" element={<ClientDashboardLayout />}>
+        <Route path="/client" element={<ClientDashboardLayout />}>
         {/* Redirect to actual dashboard instead of just layout page */}
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-      </Route>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+        </Route>
     </Routes>
+    </AuthProvider>
   );
 }
 

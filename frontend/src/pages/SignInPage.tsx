@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./SignIn.css";
+import AuthContext from "../context/AuthContext1";
+import { useContext } from "react";
 
 function Copyright(props: any) {
   return (
@@ -42,14 +44,12 @@ const defaultTheme = createTheme({
 const logo = require("./images/Logo.png");
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const authContext = useContext(AuthContext)
+  if(!authContext) {
+    console.log("not context");
+    return null
   };
+  const { loginUser } = authContext
 
   return (
     <>
@@ -80,7 +80,7 @@ export default function SignIn() {
             </div>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={loginUser}
               noValidate
               sx={{ mt: 1 }}
             >
