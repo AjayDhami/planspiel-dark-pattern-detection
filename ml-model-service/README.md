@@ -10,4 +10,5 @@ It involves building, training AI Models for dark pattern detection as well as w
 - Install the required dependencies: `pip install -r requirements.txt`
 - Create `.env` file in root directory of your `cd ml-model-service` project. Refer to `sample.env` file and replace with actual values.
 - Command to run the application: `python api/main.py` or run `main.py` directly from IDE
+- Command to deactivate virtual environment: `deactivate`
 
