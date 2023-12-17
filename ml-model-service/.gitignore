@@ -8,5 +8,6 @@ venv/
 .ipynb_checkpoints/
 
 *.csv
-
+*.joblib
 trained_models/
+.env
