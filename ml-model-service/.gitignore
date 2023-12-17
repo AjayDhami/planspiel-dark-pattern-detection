@@ -1,0 +1,13 @@
+# Virtual Environment
+venv/
+
+# IDE files
+.vscode/
+.idea/
+
+.ipynb_checkpoints/
+
+*.csv
+*.joblib
+trained_models/
+.env
