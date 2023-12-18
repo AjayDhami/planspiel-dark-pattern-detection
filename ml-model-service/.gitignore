@@ -11,3 +11,5 @@ venv/
 *.joblib
 trained_models/
 .env
+
+__pycache__

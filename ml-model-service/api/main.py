@@ -1,8 +1,8 @@
 import certifi
 from flask import Flask
 from flask_pymongo import PyMongo
-from api.config.config import Config
-from api.routes import routes
+from config.config import Config
+from routes import routes
 
 # Create Flask api
 app = Flask(__name__)
