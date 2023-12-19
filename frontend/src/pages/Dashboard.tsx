@@ -1,8 +1,7 @@
-import { Box, Button, Grid, Stack } from "@mui/material";
 import React from "react";
-import { MdAdd } from "react-icons/md";
-import Card from "../../components/WebsiteCard";
 import { Link } from "react-router-dom";
+import { MdAdd } from "react-icons/md";
+import Card from "../components/WebsiteCard";
 
 const websiteDataList = [
   {
@@ -47,33 +46,32 @@ const websiteDataList = [
   },
 ];
 
-const DashboardPage = () => {
+const Dashboard = () => {
   return (
-    <Box>
-      <Stack direction="row" spacing={2} justifyContent="flex-end">
-        <Button
-          variant="contained"
-          startIcon={<MdAdd />}
-          component={Link}
-          to="/client/onboarding"
+    <>
+      <div className="flex justify-end mb-2">
+        <Link
+          to="project/new"
+          className="inline-flex justify-center rounded-full bg-primary text-white py-2 px-4 hover:bg-opacity-90"
         >
+          <MdAdd size={25} />
           Add Website for Certification
-        </Button>
-      </Stack>
-      <Grid container spacing={2} style={{ margin: "1rem 0", width: "100%" }}>
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-3 gap-6 mt-5">
         {websiteDataList.map((website) => (
-          <Grid item xs={12} md={4} key={website.id}>
-            <Card
-              id={website.id}
-              title={website.name}
-              isCertified={website.isCertified}
-              feedback={website.feedback}
-            />
-          </Grid>
+          <Card
+            key={website.id}
+            id={website.id}
+            title={website.name}
+            isCertified={website.isCertified}
+            feedback={website.feedback}
+          />
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </>
   );
 };
 
-export default DashboardPage;
+export default Dashboard;
