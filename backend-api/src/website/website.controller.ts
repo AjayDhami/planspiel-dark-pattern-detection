@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { WebsiteService } from './website.service';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -17,5 +25,13 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   async fetchParticularWebsiteDetails(@Param('websiteId') websiteId: string) {
     return await this.websiteService.fetchParticularWebsiteDetails(websiteId);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  async getAllWebsiteDetailsForParticularUser(@Query('userId') userId: string) {
+    const userResponse =
+      await this.websiteService.getAllWebsiteDetailsForParticularUser(userId);
+    return userResponse;
   }
 }

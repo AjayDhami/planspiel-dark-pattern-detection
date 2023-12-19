@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { SignUpUserDto } from './dto/signup-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
@@ -7,6 +12,7 @@ import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Injectable()
 export class UserService {
@@ -70,6 +76,22 @@ export class UserService {
     hashedPassword: string,
   ): Promise<boolean> {
     return await bcrypt.compare(plainText, hashedPassword);
+  }
+
+  async fetchParticularUserDetails(userId: string): Promise<UserResponseDto> {
+    const existingUser = await this.findUserById(userId);
+    if (!existingUser) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    const userResponseDto: UserResponseDto = {
+      userId: existingUser._id,
+      firstName: existingUser.firstName,
+      lastName: existingUser.lastName,
+      email: existingUser.email,
+      role: existingUser.role,
+    };
+
+    return userResponseDto;
   }
 
   async findUserById(userId: string): Promise<User | null> {

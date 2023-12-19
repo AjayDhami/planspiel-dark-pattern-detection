@@ -70,4 +70,23 @@ export class WebsiteService {
     };
     return websiteResponseDto;
   }
+
+  async getAllWebsiteDetailsForParticularUser(userId) {
+    const websites = await this.websiteModel.find({ userId }).exec();
+
+    const websiteResponseDtos: WebsiteResponseDto[] = websites.map(
+      (website) => ({
+        websiteId: website._id,
+        baseUrl: website.baseUrl,
+        websiteName: website.websiteName,
+        userId: website.userId,
+        additionalUrls: website.additionalUrls,
+        description: website.description,
+        isCompleted: website.isCompleted,
+        phase: website.phase,
+      }),
+    );
+
+    return websiteResponseDtos;
+  }
 }
