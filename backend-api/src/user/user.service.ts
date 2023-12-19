@@ -40,9 +40,7 @@ export class UserService {
     }
   }
 
-  async signIn(
-    signInUserDto: SigninUserDto,
-  ): Promise<{ message: string; statusCode: number; accessToken?: string }> {
+  async signIn(signInUserDto: SigninUserDto): Promise<{ accessToken: string }> {
     const { email, password, role } = signInUserDto;
 
     const user = await this.userModel.findOne({ email, role }).exec();
@@ -57,8 +55,6 @@ export class UserService {
     const accessToken = this.generateAccessToken(user);
 
     return {
-      message: 'User signed in successfully',
-      statusCode: HttpStatus.OK,
       accessToken,
     };
   }
@@ -74,5 +70,22 @@ export class UserService {
     hashedPassword: string,
   ): Promise<boolean> {
     return await bcrypt.compare(plainText, hashedPassword);
+  }
+
+  async findUserById(userId: string): Promise<User | null> {
+    return await this.userModel.findById(userId).exec();
+  }
+
+  async updateUserWithWebsiteId(
+    userId: string,
+    websiteId: string,
+  ): Promise<User | null> {
+    return this.userModel
+      .findByIdAndUpdate(
+        userId,
+        { $push: { websiteIds: websiteId.toString() } },
+        { new: true },
+      )
+      .exec();
   }
 }

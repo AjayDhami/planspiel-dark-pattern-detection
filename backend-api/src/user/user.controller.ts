@@ -36,8 +36,6 @@ export class UserController {
     try {
       const result = await this.userService.signIn(signInUserDto);
       return {
-        message: result.message,
-        statusCode: result.statusCode,
         accessToken: result.accessToken,
       };
     } catch (error) {
@@ -51,6 +49,7 @@ export class UserController {
     }
   }
 
+  // TODO Fetch general client details GET API
   @Get()
   @UseGuards(AuthGuard)
   getUserDetails() {
