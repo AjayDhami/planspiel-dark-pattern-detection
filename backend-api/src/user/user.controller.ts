@@ -3,11 +3,10 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
   UnauthorizedException,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { SignUpUserDto } from './dto/signup-user.dto';
@@ -20,7 +19,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
-  @UsePipes(new ValidationPipe())
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
     try {
       const result = await this.userService.signUp(signUpUserDto);
@@ -31,13 +29,10 @@ export class UserController {
   }
 
   @Post('signin')
-  @UsePipes(new ValidationPipe())
   async signIn(@Body() signInUserDto: SigninUserDto) {
     try {
       const result = await this.userService.signIn(signInUserDto);
       return {
-        message: result.message,
-        statusCode: result.statusCode,
         accessToken: result.accessToken,
       };
     } catch (error) {
@@ -51,9 +46,9 @@ export class UserController {
     }
   }
 
-  @Get()
+  @Get(':userId')
   @UseGuards(AuthGuard)
-  getUserDetails() {
-    return 'Test auth guard';
+  async fetchUserDetails(@Param('userId') userId: string) {
+    return await this.userService.fetchParticularUserDetails(userId);
   }
 }
