@@ -13,7 +13,7 @@ import { SignUpUserDto } from './dto/signup-user.dto';
 import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User')
 @Controller('user')
@@ -21,6 +21,10 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
+  @ApiOperation({
+    summary: 'User Sign Up',
+    description: 'Register a new user.',
+  })
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
     try {
       const result = await this.userService.signUp(signUpUserDto);
@@ -31,6 +35,10 @@ export class UserController {
   }
 
   @Post('signin')
+  @ApiOperation({
+    summary: 'User Sign In',
+    description: 'Authenticate and sign in a user.',
+  })
   async signIn(@Body() signInUserDto: SigninUserDto) {
     try {
       const result = await this.userService.signIn(signInUserDto);
@@ -51,6 +59,10 @@ export class UserController {
   @Get(':userId')
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Get User Details',
+    description: 'Retrieve details of a specific user.',
+  })
   async fetchUserDetails(@Param('userId') userId: string) {
     return await this.userService.fetchParticularUserDetails(userId);
   }
