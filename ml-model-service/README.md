@@ -1,4 +1,4 @@
-# ML Model Service
+# Description
 This repository is a Flask-based web service which is one of the submodule for Dark Pattern Detection Project.
 It involves building, training AI Models for dark pattern detection as well as web scrapping part.
 

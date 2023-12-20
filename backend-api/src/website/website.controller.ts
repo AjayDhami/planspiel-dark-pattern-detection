@@ -10,7 +10,10 @@ import {
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { WebsiteService } from './website.service';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Website')
+@ApiBearerAuth()
 @Controller('website')
 export class WebsiteController {
   constructor(private readonly websiteService: WebsiteService) {}

@@ -13,7 +13,9 @@ import { SignUpUserDto } from './dto/signup-user.dto';
 import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -48,6 +50,7 @@ export class UserController {
 
   @Get(':userId')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   async fetchUserDetails(@Param('userId') userId: string) {
     return await this.userService.fetchParticularUserDetails(userId);
   }
