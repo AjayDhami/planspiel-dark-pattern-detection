@@ -19,12 +19,18 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Authorization token not provided');
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: this.configService.get<string>('JWT_SECRET'),
       });
+
+      const roles = this.reflectRoles(context.getHandler());
+      if (roles && !roles.includes(payload.role)) {
+        throw new UnauthorizedException('Insufficient permissions');
+      }
+
       request.user = payload;
     } catch (error) {
       if (error.name === 'TokenExpiredError') {
@@ -32,7 +38,7 @@ export class AuthGuard implements CanActivate {
       } else if (error.name === 'JsonWebTokenError') {
         throw new UnauthorizedException('Invalid authorization token');
       } else {
-        throw new UnauthorizedException('Authorization failed');
+        throw error;
       }
     }
     return true;
@@ -41,5 +47,9 @@ export class AuthGuard implements CanActivate {
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
+  }
+
+  private reflectRoles(handler): any[] {
+    return Reflect.getMetadata('roles', handler);
   }
 }
