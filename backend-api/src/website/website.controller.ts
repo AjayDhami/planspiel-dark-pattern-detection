@@ -11,6 +11,8 @@ import { WebsiteCreateDto } from './dto/website-create.dto';
 import { WebsiteService } from './website.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/roles.decorator';
+import { UserType } from 'src/user/enum/user-type.enum';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -20,6 +22,7 @@ export class WebsiteController {
 
   @Post()
   @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
   @ApiOperation({
     summary: 'Create a new website',
     description: 'Persist details of a new website for a user.',
@@ -30,6 +33,7 @@ export class WebsiteController {
 
   @Get(':websiteId')
   @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
   @ApiOperation({
     summary: 'Fetch details of a website',
     description: 'Retrieve details of a specific website based on its ID.',
@@ -40,14 +44,15 @@ export class WebsiteController {
 
   @Get()
   @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
   @ApiOperation({
     summary: 'Get all websites for a user',
     description:
       'Retrieve details of all websites associated with a specific user.',
   })
   async getAllWebsiteDetailsForParticularUser(@Query('userId') userId: string) {
-    const userResponse =
-      await this.websiteService.getAllWebsiteDetailsForParticularUser(userId);
-    return userResponse;
+    return await this.websiteService.getAllWebsiteDetailsForParticularUser(
+      userId,
+    );
   }
 }

@@ -1,19 +1,11 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpStatus,
-  Param,
-  Post,
-  UnauthorizedException,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { SignUpUserDto } from './dto/signup-user.dto';
-import { DuplicateKeyException } from 'src/exception/duplicate-key.exception';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/roles.decorator';
+import { UserType } from './enum/user-type.enum';
 
 @ApiTags('User')
 @Controller('user')
@@ -26,12 +18,7 @@ export class UserController {
     description: 'Register a new user.',
   })
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
-    try {
-      const result = await this.userService.signUp(signUpUserDto);
-      return { message: result.message, statusCode: HttpStatus.CREATED };
-    } catch (error) {
-      throw new DuplicateKeyException(error.message, error.getStatus());
-    }
+    return await this.userService.signUp(signUpUserDto);
   }
 
   @Post('signin')
@@ -40,24 +27,12 @@ export class UserController {
     description: 'Authenticate and sign in a user.',
   })
   async signIn(@Body() signInUserDto: SigninUserDto) {
-    try {
-      const result = await this.userService.signIn(signInUserDto);
-      return {
-        accessToken: result.accessToken,
-      };
-    } catch (error) {
-      if (error instanceof UnauthorizedException) {
-        throw new UnauthorizedException({
-          message: error.message,
-          statusCode: error.getStatus(),
-        });
-      }
-      throw error;
-    }
+    return await this.userService.signIn(signInUserDto);
   }
 
   @Get(':userId')
   @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Get User Details',
