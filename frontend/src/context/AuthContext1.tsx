@@ -12,13 +12,7 @@ interface Credentials {
   password: string;
   role: string;
 }
-// interface SignupData {
-//   firstName : string,
-//   lastName : string,
-//   email: string;
-//   password: string;
-//   role: string;
-// }
+
 interface UserData {
   email : string
 }
