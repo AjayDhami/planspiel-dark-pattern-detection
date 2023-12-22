@@ -6,6 +6,7 @@ backend-build:
   script:
     - cd backend-api
     - npm install
+    - npm run build
 
 frontend-build:
   stage: build
