@@ -19,4 +19,6 @@ ml-model-build:
   stage: build
   script:
     - cd ml-model-service
+    - python -m venv venv
+    - source venv/bin/activate
     - pip install -r requirements.txt
