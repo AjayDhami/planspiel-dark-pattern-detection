@@ -1,0 +1,25 @@
+stages:
+  - build
+
+backend-build:
+  stage: build
+  script:
+    - cd backend-api
+    - npm install
+
+frontend-build:
+  stage: build
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+
+ml-model-build:
+  stage: build
+  script:
+    - cd ml-model-service
+    - pip install -r requirements.txt
+
+branches:
+  only:
+    - '*'
