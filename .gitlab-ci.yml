@@ -20,6 +20,6 @@ ml-model-build:
     - cd ml-model-service
     - pip install -r requirements.txt
 
-branches:
-  only:
-    - '*'
+rules:
+  - exists:
+      - '*'
