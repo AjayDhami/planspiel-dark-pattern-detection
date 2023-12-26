@@ -3,7 +3,7 @@ import { WebsiteCreateDto } from './dto/website-create.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Website } from './schemas/website.schema';
 import { Model } from 'mongoose';
-import { UserService } from 'src/user/user.service';
+import { UserService } from 'src/components/user/user.service';
 import { WebsiteResponseDto } from './dto/website-response.dto';
 
 @Injectable()

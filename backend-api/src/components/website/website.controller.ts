@@ -12,7 +12,7 @@ import { WebsiteService } from './website.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/roles.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
+import { UserType } from 'src/components/user/enum/user-type.enum';
 
 @ApiTags('Website')
 @ApiBearerAuth()

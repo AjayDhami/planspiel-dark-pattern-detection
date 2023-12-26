@@ -3,12 +3,12 @@ import { WebsiteController } from './website.controller';
 import { WebsiteService } from './website.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Website, WebsiteSchema } from './schemas/website.schema';
-import { UserService } from 'src/user/user.service';
+import { UserService } from 'src/components/user/user.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { User, UserSchema } from 'src/user/schemas/user.schema';
+import { User, UserSchema } from 'src/components/user/schemas/user.schema';
 
 @Module({
   imports: [
