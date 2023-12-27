@@ -13,6 +13,9 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/roles.decorator';
 import { UserType } from 'src/components/user/enum/user-type.enum';
+import { PatternCreateDto } from './dto/pattern-create.dto';
+import { CommentCreateDto } from './dto/comment-create.dto';
+import { ReplyCreateDto } from './dto/reply-create.dto';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -53,6 +56,63 @@ export class WebsiteController {
   async getAllWebsiteDetailsForParticularUser(@Query('userId') userId: string) {
     return await this.websiteService.getAllWebsiteDetailsForParticularUser(
       userId,
+    );
+  }
+
+  @Post(':websiteId/pattern')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Add pattern in a website',
+    description: 'Persist details of a new pattern for a website',
+  })
+  async addPatternInWebsite(
+    @Param('websiteId') websiteId: string,
+    @Body() patternCreateDto: PatternCreateDto,
+  ) {
+    return await this.websiteService.addPatternInWebsite(
+      websiteId,
+      patternCreateDto,
+    );
+  }
+
+  @Post(':websiteId/pattern/:patternId/comment')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Add comment to pattern',
+    description: 'Persist new comment to a pattern for a website',
+  })
+  async addCommentToPattern(
+    @Param('websiteId') websiteId: string,
+    @Param('patternId') patternId: string,
+    @Body() commentCreateDto: CommentCreateDto,
+  ) {
+    return await this.websiteService.addCommentToPattern(
+      websiteId,
+      patternId,
+      commentCreateDto,
+    );
+  }
+
+  @Post(':websiteId/pattern/:patternId/comment/:commentId/reply')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Add reply to a comment',
+    description: 'Persist reply to a comment of a pattern in a website',
+  })
+  async addReplyToComment(
+    @Param('websiteId') websiteId: string,
+    @Param('patternId') patternId: string,
+    @Param('commentId') commentId: string,
+    @Body() replyCreateDto: ReplyCreateDto,
+  ) {
+    return await this.websiteService.addReplyToComment(
+      websiteId,
+      patternId,
+      commentId,
+      replyCreateDto,
     );
   }
 }
