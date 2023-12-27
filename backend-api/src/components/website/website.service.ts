@@ -21,12 +21,7 @@ export class WebsiteService {
   ) {}
 
   async persistWebsiteDetails(websiteCreateDto: WebsiteCreateDto) {
-    const existingUser = await this.userService.findUserById(
-      websiteCreateDto.userId,
-    );
-    if (!existingUser) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
+    const existingUser = await this.checkUserExists(websiteCreateDto.userId);
 
     try {
       const newWebsite = new this.websiteModel(websiteCreateDto);
@@ -58,55 +53,21 @@ export class WebsiteService {
   async fetchParticularWebsiteDetails(
     websiteId: string,
   ): Promise<WebsiteResponseDto> {
-    const existingWebsite = await this.websiteModel.findById(websiteId).exec();
-    if (!existingWebsite) {
-      throw new HttpException(
-        'Failed to fetch website details',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-    const websiteResponseDto: WebsiteResponseDto = {
-      websiteId: existingWebsite._id,
-      baseUrl: existingWebsite.baseUrl,
-      websiteName: existingWebsite.websiteName,
-      userId: existingWebsite.userId,
-      additionalUrls: existingWebsite.additionalUrls,
-      description: existingWebsite.description,
-      isCompleted: existingWebsite.isCompleted,
-      phase: existingWebsite.phase,
-    };
-    return websiteResponseDto;
+    const existingWebsite = await this.checkWebsiteExists(websiteId);
+    return this.convertToWebsiteResponseDto(existingWebsite);
   }
 
   async getAllWebsiteDetailsForParticularUser(userId: string) {
     const websites = await this.websiteModel.find({ userId }).exec();
 
-    const websiteResponseDtos: WebsiteResponseDto[] = websites.map(
-      (website) => ({
-        websiteId: website._id,
-        baseUrl: website.baseUrl,
-        websiteName: website.websiteName,
-        userId: website.userId,
-        additionalUrls: website.additionalUrls,
-        description: website.description,
-        isCompleted: website.isCompleted,
-        phase: website.phase,
-      }),
-    );
-
-    return websiteResponseDtos;
+    return websites.map((website) => this.convertToWebsiteResponseDto(website));
   }
 
   async addPatternInWebsite(
     websiteId: string,
     patternCreateDto: PatternCreateDto,
   ) {
-    const existingUser = await this.userService.findUserById(
-      patternCreateDto.expertId,
-    );
-    if (!existingUser) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
+    await this.checkUserExists(patternCreateDto.expertId);
 
     const newPattern: Pattern = new this.patternModel({
       type: patternCreateDto.type,
@@ -133,22 +94,9 @@ export class WebsiteService {
     patternId: string,
     commentCreateDto: CommentCreateDto,
   ) {
-    const existingUser = await this.userService.findUserById(
-      commentCreateDto.expertId,
-    );
-    if (!existingUser) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
-
-    const existingWebsite = await this.websiteModel.findById(websiteId).exec();
-    if (!existingWebsite) {
-      throw new HttpException('Website not found', HttpStatus.NOT_FOUND);
-    }
-
-    const existingPattern = await this.patternModel.findById(patternId).exec();
-    if (!existingPattern) {
-      throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
-    }
+    await this.checkUserExists(commentCreateDto.expertId);
+    await this.checkWebsiteExists(websiteId);
+    await this.checkPatternExists(patternId);
 
     const newComment = new this.commentModel({
       ...commentCreateDto,
@@ -167,7 +115,6 @@ export class WebsiteService {
 
       return { commentId: savedComment._id };
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         'Failed to add comment',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -181,27 +128,11 @@ export class WebsiteService {
     commentId: string,
     replyCreateDto: ReplyCreateDto,
   ) {
-    const existingUser = await this.userService.findUserById(
-      replyCreateDto.expertId,
-    );
-    if (!existingUser) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
+    await this.checkUserExists(replyCreateDto.expertId);
+    await this.checkWebsiteExists(websiteId);
+    await this.checkPatternExists(patternId);
+    await this.checkCommentExists(commentId);
 
-    const existingWebsite = await this.websiteModel.findById(websiteId).exec();
-    if (!existingWebsite) {
-      throw new HttpException('Website not found', HttpStatus.NOT_FOUND);
-    }
-
-    const existingPattern = await this.patternModel.findById(patternId).exec();
-    if (!existingPattern) {
-      throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
-    }
-
-    const existingComment = await this.commentModel.findById(commentId).exec();
-    if (!existingComment) {
-      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
-    }
     try {
       const updatedComment = await this.commentModel.findByIdAndUpdate(
         commentId,
@@ -217,11 +148,53 @@ export class WebsiteService {
 
       return { message: 'Reply successfully added' };
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         'Failed to add reply',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }
+
+  private async checkUserExists(userId: string) {
+    const existingUser = await this.userService.findUserById(userId);
+    if (!existingUser) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    return existingUser;
+  }
+
+  private async checkWebsiteExists(websiteId: string) {
+    const existingWebsite = await this.websiteModel.findById(websiteId).exec();
+    if (!existingWebsite) {
+      throw new HttpException('Website not found', HttpStatus.NOT_FOUND);
+    }
+    return existingWebsite;
+  }
+
+  private async checkPatternExists(patternId: string) {
+    const existingPattern = await this.patternModel.findById(patternId).exec();
+    if (!existingPattern) {
+      throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  private async checkCommentExists(commentId: string) {
+    const existingComment = await this.commentModel.findById(commentId).exec();
+    if (!existingComment) {
+      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  private convertToWebsiteResponseDto(website: Website): WebsiteResponseDto {
+    return {
+      websiteId: website._id,
+      baseUrl: website.baseUrl,
+      websiteName: website.websiteName,
+      userId: website.userId,
+      additionalUrls: website.additionalUrls,
+      description: website.description,
+      isCompleted: website.isCompleted,
+      phase: website.phase,
+    };
   }
 }
