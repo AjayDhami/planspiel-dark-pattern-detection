@@ -8,10 +8,10 @@ type CardProps = {
 };
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   color: theme.palette.text.secondary,
+  background: theme.palette.background.paper,
 }));
 
 const WebsiteCard = ({ id, title, isCertified, feedback }: CardProps) => {
@@ -25,7 +25,7 @@ const WebsiteCard = ({ id, title, isCertified, feedback }: CardProps) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4" component="span">
+          <Typography variant="h5" component="span">
             {title}
           </Typography>
           {isCertified && (

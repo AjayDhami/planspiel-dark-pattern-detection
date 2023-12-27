@@ -12,7 +12,6 @@ const ClientDashboardLayout = () => {
         height: "100vh",
         maxHeight: "100vh",
         overflow: "hidden",
-        backgroundColor: "#FAF9F6",
       }}
     >
       <CssBaseline />
@@ -20,7 +19,7 @@ const ClientDashboardLayout = () => {
       <Container
         component="main"
         maxWidth="xl"
-        sx={{ mt: 4, overflowY: "auto" }}
+        sx={{ mt: 4, overflowY: "auto", height: "inherit" }}
       >
         <Outlet />
       </Container>

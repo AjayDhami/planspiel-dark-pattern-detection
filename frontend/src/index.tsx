@@ -1,9 +1,9 @@
+import { ThemeProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-// import './setupEnv';
-
+import { theme } from "./theme";
 import "./index.css";
 
 const root = ReactDOM.createRoot(
@@ -12,8 +12,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 );

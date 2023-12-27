@@ -6,6 +6,10 @@ body {
   background-color: #f1f5f9;
 }
 
+.form-error {
+  color: red;
+}
+
 .card-footer {
   display: flex;
   gap: 1rem;

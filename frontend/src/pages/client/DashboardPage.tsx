@@ -1,69 +1,60 @@
-import { Box, Button, Grid, Stack } from "@mui/material";
-import React from "react";
-import { MdAdd } from "react-icons/md";
-import Card from "../../components/WebsiteCard";
-import { Link } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  styled,
+} from "@mui/material";
+import WebsiteCard from "../../components/WebsiteCard";
+import { websiteDataList } from "../../data";
+import { useState } from "react";
+import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 
-const websiteDataList = [
-  {
-    id: "1",
-    name: "Website #1",
-    isCertified: true,
-    feedback: [],
-  },
-  {
-    id: "2",
-    name: "Website #2",
-    isCertified: false,
-    feedback: [],
-  },
-  {
-    id: "3",
-    name: "Website #3",
-    isCertified: false,
-    feedback: [
-      {
-        feedback_id: "301",
-        feedback_type: "misdirection",
-        feedback_description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut commodi officiis distinctio!",
-        snaps: [],
-        expert_id: "ex101",
-        link: "https://dummy_link.com",
-      },
-    ],
-  },
-  {
-    id: "4",
-    name: "Website #4",
-    isCertified: false,
-    feedback: [],
-  },
-  {
-    id: "5",
-    name: "Website #5",
-    isCertified: false,
-    feedback: [],
-  },
-];
+const BackgroundPaper = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  color: theme.palette.text.secondary,
+  borderRadius: 12,
+}));
 
 const DashboardPage = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Box>
-      <Stack direction="row" spacing={2} justifyContent="flex-end">
-        <Button
-          variant="contained"
-          startIcon={<MdAdd />}
-          component={Link}
-          to="/client/onboarding"
-        >
-          Add Website for Certification
+    <>
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        sx={{ py: 4, mb: 2 }}
+      >
+        <Typography variant="h4" component="h4">
+          Welcome to Dark pattern detection application
+        </Typography>
+        <Typography variant="body1" m={2}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur porro
+          accusantium hic molestiae distinctio minima cumque aperiam omnis,
+          sapiente eos nemo quos corrupti ipsum nulla exercitationem unde
+          ducimus illo modi voluptas laboriosam.
+        </Typography>
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          Certify your Website
         </Button>
       </Stack>
-      <Grid container spacing={2} style={{ margin: "1rem 0", width: "100%" }}>
+
+      <Typography variant="h5" component="h5" sx={{ mb: 2 }}>
+        Your Websites
+      </Typography>
+
+      <Grid container spacing={2}>
         {websiteDataList.map((website) => (
           <Grid item xs={12} md={4} key={website.id}>
-            <Card
+            <WebsiteCard
               id={website.id}
               title={website.name}
               isCertified={website.isCertified}
@@ -72,7 +63,9 @@ const DashboardPage = () => {
           </Grid>
         ))}
       </Grid>
-    </Box>
+
+      <WebsiteOnboardingForm open={open} onClose={handleClose} />
+    </>
   );
 };
 
