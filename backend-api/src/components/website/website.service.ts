@@ -165,7 +165,7 @@ export class WebsiteService {
         { new: true },
       );
 
-      return savedComment;
+      return { commentId: savedComment._id };
     } catch (error) {
       console.log(error);
       throw new HttpException(
@@ -215,7 +215,7 @@ export class WebsiteService {
         { arrayFilters: [{ 'elem._id': commentId }], new: true },
       );
 
-      return updatedComment;
+      return { message: 'Reply successfully added' };
     } catch (error) {
       console.log(error);
       throw new HttpException(

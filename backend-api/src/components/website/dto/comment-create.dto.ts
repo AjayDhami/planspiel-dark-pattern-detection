@@ -7,7 +7,7 @@ export class CommentCreateDto {
   patternId: string;
 
   @ApiProperty({ required: true })
-  @IsNotEmpty({ message: 'Comment content is required' })
+  @IsNotEmpty({ message: 'Expert id is required' })
   expertId: string;
 
   @ApiProperty({ required: true })
