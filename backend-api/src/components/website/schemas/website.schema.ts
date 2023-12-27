@@ -24,6 +24,9 @@ export class Website extends Document {
 
   @Prop({ default: WebsitePhaseType.Initial, enum: WebsitePhaseType })
   phase: WebsitePhaseType;
+
+  @Prop()
+  expertIds: string[];
 }
 
 export const WebsiteSchema = SchemaFactory.createForClass(Website);
