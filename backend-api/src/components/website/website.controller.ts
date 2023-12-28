@@ -115,4 +115,21 @@ export class WebsiteController {
       replyCreateDto,
     );
   }
+
+  @Get(':websiteId/pattern/:patternId')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Fetch particular pattern details',
+    description: 'Retrieve details of particular pattern of a website',
+  })
+  async fetchPatternDetails(
+    @Param('websiteId') websiteId: string,
+    @Param('patternId') patternId: string,
+  ) {
+    return await this.websiteService.fetchParticularPatternDetails(
+      websiteId,
+      patternId,
+    );
+  }
 }

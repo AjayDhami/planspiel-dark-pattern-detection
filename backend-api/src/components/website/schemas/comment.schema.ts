@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Date, Document } from 'mongoose';
 
-class Reply {
+export class Reply {
   @Prop({ required: true })
   expertId: string;
 
