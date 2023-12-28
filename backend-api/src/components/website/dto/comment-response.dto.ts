@@ -1,6 +1,7 @@
 import { ReplyResponseDto } from './reply-response.dto';
 
 export class CommentResponseDto {
+  id: string;
   websiteId: string;
   patternId: string;
   expertId: string;
