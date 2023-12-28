@@ -48,5 +48,5 @@ try:
 except Exception as e:
     print(f'Error writing to the file: {e}')
 
-# Close browser window
+# Close browser windows
 driver.quit()
