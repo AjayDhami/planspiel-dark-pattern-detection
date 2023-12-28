@@ -76,6 +76,17 @@ export class WebsiteController {
     );
   }
 
+  @Get(':websiteId/pattern')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Fetch all pattern of a website',
+    description: 'Fetch all patterns from a particular website',
+  })
+  async fetchAllPatternsOfWebsite(@Param('websiteId') websiteId: string) {
+    return await this.websiteService.fetchAllPatternsOfWebsite(websiteId);
+  }
+
   @Post(':websiteId/pattern/:patternId/comment')
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
