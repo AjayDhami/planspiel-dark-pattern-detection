@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { SignUpUserDto } from './dto/signup-user.dto';
 import { SigninUserDto } from './dto/signin-user.dto';
@@ -35,10 +43,22 @@ export class UserController {
   @Roles(UserType.Client)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Get User Details',
+    summary: 'Get particular user Details',
     description: 'Retrieve details of a specific user.',
   })
   async fetchUserDetails(@Param('userId') userId: string) {
     return await this.userService.fetchParticularUserDetails(userId);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard)
+  @Roles(UserType.SuperAdmin)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Get all users list',
+    description: 'Fetch all the users details',
+  })
+  async fetchAllUsersByType(@Query('role') role: string) {
+    return await this.userService.fetchUsersByType(role);
   }
 }
