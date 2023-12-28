@@ -1,3 +1,4 @@
+import { Date } from 'mongoose';
 import { CommentResponseDto } from './comment-response.dto';
 
 export class PatternResponseDto {
@@ -9,5 +10,6 @@ export class PatternResponseDto {
   expertName: string;
   description: string;
   detectedUrl: string;
+  createdAt: Date;
   comments: CommentResponseDto[];
 }

@@ -269,6 +269,7 @@ export class WebsiteService {
       expertName: await this.getUserName(pattern.expertId),
       description: pattern.description,
       detectedUrl: pattern.detectedUrl,
+      createdAt: pattern.createdAt,
       comments: commentsRequired
         ? await Promise.all(
             pattern.comments.map((comment) =>
