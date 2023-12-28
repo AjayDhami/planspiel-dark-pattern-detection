@@ -13,6 +13,7 @@ import { ReplyCreateDto } from './dto/reply-create.dto';
 import { PatternResponseDto } from './dto/pattern-response.dto';
 import { CommentResponseDto } from './dto/comment-response.dto';
 import { ReplyResponseDto } from './dto/reply-response.dto';
+import { AssignExpertsDto } from './dto/assign-experts.dto';
 
 @Injectable()
 export class WebsiteService {
@@ -51,6 +52,31 @@ export class WebsiteService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
+  }
+
+  async assignExpertsToWebsite(
+    websiteId: string,
+    assignExpertsDto: AssignExpertsDto,
+  ) {
+    const website = await this.checkWebsiteExists(websiteId);
+    const allExpertIds = [
+      ...assignExpertsDto.expertIds,
+      assignExpertsDto.primaryExpertId,
+    ];
+
+    await Promise.all(
+      allExpertIds.map(async (expertId) => {
+        await this.checkUserExists(expertId);
+      }),
+    );
+
+    website.expertIds = assignExpertsDto.expertIds;
+    website.primaryExpertId = assignExpertsDto.primaryExpertId;
+
+    const updatedWebsite = await website.save();
+    return {
+      message: `Expert successfully assigned to website with id: ${updatedWebsite._id}`,
+    };
   }
 
   async fetchParticularWebsiteDetails(

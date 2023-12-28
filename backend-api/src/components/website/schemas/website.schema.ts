@@ -27,6 +27,9 @@ export class Website extends Document {
 
   @Prop()
   expertIds: string[];
+
+  @Prop()
+  primaryExpertId: string;
 }
 
 export const WebsiteSchema = SchemaFactory.createForClass(Website);

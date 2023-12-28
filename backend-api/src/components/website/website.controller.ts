@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -16,6 +17,7 @@ import { UserType } from 'src/components/user/enum/user-type.enum';
 import { PatternCreateDto } from './dto/pattern-create.dto';
 import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
+import { AssignExpertsDto } from './dto/assign-experts.dto';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -32,6 +34,22 @@ export class WebsiteController {
   })
   async persistWebsiteDetails(@Body() websiteCreateDto: WebsiteCreateDto) {
     return await this.websiteService.persistWebsiteDetails(websiteCreateDto);
+  }
+
+  @Put(':websiteId/assignExperts')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.SuperAdmin)
+  @ApiOperation({
+    summary: 'Assign experts to website',
+  })
+  async assignExperts(
+    @Param('websiteId') websiteId: string,
+    @Body() assignExpertsDto: AssignExpertsDto,
+  ) {
+    return await this.websiteService.assignExpertsToWebsite(
+      websiteId,
+      assignExpertsDto,
+    );
   }
 
   @Get(':websiteId')
