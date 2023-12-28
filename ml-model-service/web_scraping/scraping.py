@@ -35,7 +35,7 @@ filtered_list = [item for item in all_text if item.strip() != '']
 for i in range(len(filtered_list)):
     filtered_list[i] = filtered_list[i].replace('\n', '')
 
-# Remove duplicate elements in order
+# Remove duplicate elements
 filtered_list = list(OrderedSet(filtered_list))
 
 # Store scraped data into a file
