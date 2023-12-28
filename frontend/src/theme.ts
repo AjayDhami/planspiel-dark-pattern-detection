@@ -9,7 +9,7 @@ const themeOptions: ThemeOptions = {
       main: "#f88a26",
     },
     background: {
-      default: "#ffffff",
+      default: "#fbfafd",
     },
     text: {
       primary: "#272838",

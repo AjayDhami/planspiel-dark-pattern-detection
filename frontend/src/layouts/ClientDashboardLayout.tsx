@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Box, Container, CssBaseline } from "@mui/material";
@@ -19,7 +18,11 @@ const ClientDashboardLayout = () => {
       <Container
         component="main"
         maxWidth="xl"
-        sx={{ mt: 4, overflowY: "auto", height: "inherit" }}
+        sx={{
+          my: 1,
+          overflowY: "auto",
+          height: "inherit",
+        }}
       >
         <Outlet />
       </Container>

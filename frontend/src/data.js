@@ -2,19 +2,25 @@ export const websiteDataList = [
   {
     id: "1",
     name: "Website #1",
-    isCertified: true,
+    baseUrl: "http://www.example.com",
+    isCompleted: true,
+    phase: "Finished",
     feedback: [],
   },
   {
     id: "2",
     name: "Website #2",
-    isCertified: false,
+    baseUrl: "http://www.example.com",
+    isCompleted: false,
+    phase: "Initial",
     feedback: [],
   },
   {
     id: "3",
     name: "Website #3",
-    isCertified: false,
+    baseUrl: "http://www.example.com",
+    isCompleted: true,
+    phase: "Feedback",
     feedback: [
       {
         feedback_id: "301",
@@ -30,13 +36,17 @@ export const websiteDataList = [
   {
     id: "4",
     name: "Website #4",
-    isCertified: false,
+    baseUrl: "http://www.example.com",
+    isCompleted: false,
+    phase: "Initial",
     feedback: [],
   },
   {
     id: "5",
     name: "Website #5",
-    isCertified: false,
+    baseUrl: "http://www.example.com",
+    isCompleted: false,
+    phase: "Initial",
     feedback: [],
   },
 ];

@@ -1,70 +1,143 @@
 import {
-  Box,
   Button,
+  Card,
+  CardContent,
   Grid,
   Paper,
   Stack,
   Typography,
   styled,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
+import { Verified as VerifiedIcon } from "@mui/icons-material";
 import WebsiteCard from "../../components/WebsiteCard";
 import { websiteDataList } from "../../data";
-import { useState } from "react";
-import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 
-const BackgroundPaper = styled(Paper)(({ theme }) => ({
+const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
   color: theme.palette.text.secondary,
-  borderRadius: 12,
+  background: theme.palette.background.paper,
+  borderRadius: 16,
 }));
 
 const DashboardPage = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <>
-      <Stack
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        spacing={2}
-        sx={{ py: 4, mb: 2 }}
-      >
-        <Typography variant="h4" component="h4">
-          Welcome to Dark pattern detection application
-        </Typography>
-        <Typography variant="body1" m={2}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur porro
-          accusantium hic molestiae distinctio minima cumque aperiam omnis,
-          sapiente eos nemo quos corrupti ipsum nulla exercitationem unde
-          ducimus illo modi voluptas laboriosam.
-        </Typography>
-        <Button variant="contained" color="primary" onClick={handleOpen}>
-          Certify your Website
-        </Button>
-      </Stack>
-
-      <Typography variant="h5" component="h5" sx={{ mb: 2 }}>
-        Your Websites
-      </Typography>
-
-      <Grid container spacing={2}>
-        {websiteDataList.map((website) => (
-          <Grid item xs={12} md={4} key={website.id}>
-            <WebsiteCard
-              id={website.id}
-              title={website.name}
-              isCertified={website.isCertified}
-              feedback={website.feedback}
-            />
-          </Grid>
-        ))}
+      <Grid container spacing={4} sx={{ mt: -1, mb: 4 }}>
+        <Grid item xs={12} md={3}>
+          <Card sx={{ borderRadius: 4 }}>
+            <CardContent sx={{ p: 3 }}>
+              <Typography color="primary" variant="h6">
+                Total Websites
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                14
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card sx={{ borderRadius: 4 }}>
+            <CardContent sx={{ p: 3 }}>
+              <Typography color="primary" variant="h6">
+                Websites
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                5
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card sx={{ borderRadius: 4 }}>
+            <CardContent sx={{ p: 3 }}>
+              <Typography color="primary" variant="h6">
+                Websites Certified
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                6
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card sx={{ borderRadius: 4 }}>
+            <CardContent sx={{ p: 3 }}>
+              <Typography color="primary" variant="h6">
+                Rejected
+              </Typography>
+              <Typography color="textPrimary" variant="h4">
+                3
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
-
-      <WebsiteOnboardingForm open={open} onClose={handleClose} />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
+          <CustomPaper>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              justifyContent="space-between"
+            >
+              <Typography variant="h5" component="div" color="primary">
+                Your Websites
+              </Typography>
+              <Button variant="text" color="secondary">
+                View all
+              </Button>
+            </Stack>
+            <Grid container spacing={4} sx={{ mt: "-8px" }}>
+              {websiteDataList.map((website) => (
+                <Grid item xs={12} md={4} key={website.id}>
+                  <WebsiteCard
+                    websiteId={website.id}
+                    baseUrl={website.baseUrl}
+                    websiteName={website.name}
+                    isCompleted={website.isCompleted}
+                    phase={website.phase}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </CustomPaper>
+        </Grid>
+        <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>
+          <CustomPaper
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              height: "100%",
+            }}
+          >
+            <Typography variant="h4" color="primary">
+              Certify your websites
+            </Typography>
+            <VerifiedIcon
+              sx={{ m: 4, width: 100, height: 100 }}
+              color="primary"
+            />
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+              facilis aliquam nostrum doloribus provident est neque
+              reprehenderit repellendus ipsum quis id, error aut beatae numquam
+              tempora, cum corporis aspernatur odio excepturi sunt magni alias?
+              Deserunt.
+            </Typography>
+            <Button variant="contained" color="primary">
+              Certify your website
+            </Button>
+          </CustomPaper>
+        </Grid>
+      </Grid>
     </>
   );
 };

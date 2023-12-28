@@ -1,10 +1,18 @@
-import { Box, Button, Paper, Stack, Typography, styled } from "@mui/material";
+import { Button, Paper, Typography, styled } from "@mui/material";
+import {
+  Dangerous as DangerousIcon,
+  HourglassTop as PendingIcon,
+  Verified as VerifiedIcon,
+} from "@mui/icons-material";
 
-type CardProps = {
-  id: string;
-  title: string;
-  isCertified: boolean;
-  feedback: Array<any>;
+type WebsiteCardProps = {
+  websiteId: string;
+  baseUrl: string;
+  websiteName: string;
+  additionalUrls?: string[];
+  description?: string;
+  isCompleted: boolean;
+  phase: string; // phase states: "Initial" | "Automation" | "Manual" | "Feedback" | "Finished"
 };
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
@@ -12,39 +20,51 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   color: theme.palette.text.secondary,
   background: theme.palette.background.paper,
+  borderRadius: 16,
+  textAlign: "center",
+  minHeight: 150,
 }));
 
-const WebsiteCard = ({ id, title, isCertified, feedback }: CardProps) => {
+const WebsiteCard = ({
+  websiteName,
+  baseUrl,
+  isCompleted,
+  phase,
+}: WebsiteCardProps) => {
   return (
-    <CustomPaper elevation={3} style={{ minHeight: "8rem" }}>
-      <Stack spacing={3}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h5" component="span">
-            {title}
-          </Typography>
-          {isCertified && (
-            <Box>
-              <Button size="small" variant="contained" color="success">
-                Download Certificate
-              </Button>
-            </Box>
-          )}
-          {feedback.length > 0 && (
-            <Box>
-              <Button size="small" variant="contained" color="error">
-                View Feedback
-              </Button>
-            </Box>
-          )}
-        </Box>
-        <Typography variant="body1">{title}</Typography>
-      </Stack>
+    <CustomPaper>
+      <Typography variant="h5" component="div">
+        {websiteName}
+      </Typography>
+
+      {isCompleted ? (
+        phase === "Finished" ? (
+          <>
+            <VerifiedIcon
+              style={{ width: "50px", height: "50px" }}
+              color="success"
+            />
+            <Button size="small" variant="contained" color="success" fullWidth>
+              Download Certificate
+            </Button>
+          </>
+        ) : (
+          <>
+            <DangerousIcon
+              style={{ width: "50px", height: "50px" }}
+              color="error"
+            />
+            <Button size="small" variant="contained" color="error" fullWidth>
+              View Feedback
+            </Button>
+          </>
+        )
+      ) : (
+        <PendingIcon
+          style={{ width: "50px", height: "50px" }}
+          color="secondary"
+        />
+      )}
     </CustomPaper>
   );
 };

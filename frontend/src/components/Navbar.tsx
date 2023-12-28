@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   ...theme.typography.body1,
-  background: theme.palette.background.default,
+  background: theme.palette.common.white,
   color: theme.palette.text.primary,
 }));
 
