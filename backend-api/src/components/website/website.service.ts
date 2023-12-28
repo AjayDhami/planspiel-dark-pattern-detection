@@ -290,6 +290,7 @@ export class WebsiteService {
       expertId: comment.expertId,
       expertName: await this.getUserName(comment.expertId),
       content: comment.content,
+      createdAt: comment.createdAt,
       replies: await Promise.all(
         comment.replies.map((reply) => this.convertReplyToDto(reply)),
       ),

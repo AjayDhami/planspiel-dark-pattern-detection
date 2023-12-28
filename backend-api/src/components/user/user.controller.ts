@@ -56,7 +56,7 @@ export class UserController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Get all users list',
-    description: 'Fetch all the users details',
+    description: 'Fetch all the users details by user role(Client, Expert)',
   })
   async fetchAllUsersByType(@Query('role') role: string) {
     return await this.userService.fetchUsersByType(role);
