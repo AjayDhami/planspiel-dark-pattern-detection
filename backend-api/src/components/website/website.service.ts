@@ -20,6 +20,7 @@ import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
 import { PatternPhaseType } from './enum/pattern-phase.enum';
 import { UserResponseDto } from '../user/dto/user-response.dto';
 import { WebsitePhaseType } from './enum/website-phase.enum';
+import { PublishCertificationDto } from './dto/publish-certification.dto';
 
 @Injectable()
 export class WebsiteService {
@@ -337,12 +338,12 @@ export class WebsiteService {
 
   async publishCertifiationDetailsOfWebsite(
     websiteId: string,
-    expertId: string,
+    publishDto: PublishCertificationDto,
   ) {
-    await this.checkUserExists(expertId);
+    await this.checkUserExists(publishDto.expertId);
     const website = await this.checkWebsiteExists(websiteId);
 
-    if (website.primaryExpertId !== expertId) {
+    if (website.primaryExpertId !== publishDto.expertId) {
       throw new HttpException(
         'Expert doesnot have authority to publish the website certification details',
         HttpStatus.BAD_REQUEST,
@@ -368,10 +369,28 @@ export class WebsiteService {
       (pattern) => pattern.isPatternExists,
     );
 
-    website.isDarkPatternFree = anyPatternContainsDarkPattern ? false : true;
+    if (publishDto.isCertified && anyPatternContainsDarkPattern) {
+      throw new HttpException(
+        'Cannot provide certification to website containing dark pattern',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
+    if (
+      !publishDto.isCertified &&
+      (!publishDto.expertFeedback || !publishDto.expertFeedback.trim())
+    ) {
+      throw new HttpException(
+        'Need to provide feedback for website containing dark pattern',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    website.isDarkPatternFree = anyPatternContainsDarkPattern ? false : true;
     website.phase = WebsitePhaseType.Published;
     website.isCompleted = true;
+    website.expertFeedback = publishDto.expertFeedback;
+
     try {
       const updatedWebsite = await website.save();
       return {
@@ -426,6 +445,7 @@ export class WebsiteService {
       isCompleted: website.isCompleted,
       phase: website.phase,
       isDarkPatternFree: website.isDarkPatternFree,
+      expertFeedback: website.expertFeedback,
       expertIds: website.expertIds,
       primaryExpertId: website.primaryExpertId,
     };

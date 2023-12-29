@@ -19,6 +19,7 @@ import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
 import { AssignExpertsDto } from './dto/assign-experts.dto';
 import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
+import { PublishCertificationDto } from './dto/publish-certification.dto';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -200,11 +201,11 @@ export class WebsiteController {
   })
   async publishWebsiteCertification(
     @Param('websiteId') websiteId: string,
-    @Query('expertId') expertId: string,
+    @Body() publishDto: PublishCertificationDto,
   ) {
     return await this.websiteService.publishCertifiationDetailsOfWebsite(
       websiteId,
-      expertId,
+      publishDto,
     );
   }
 }

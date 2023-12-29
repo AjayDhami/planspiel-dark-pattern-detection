@@ -29,6 +29,9 @@ export class Website extends Document {
   isDarkPatternFree: boolean;
 
   @Prop()
+  expertFeedback: string;
+
+  @Prop()
   expertIds: string[];
 
   @Prop()
