@@ -120,7 +120,7 @@ export class WebsiteController {
     return await this.websiteService.fetchAllPatternsOfWebsite(websiteId);
   }
 
-  @Put(':websiteId/pattern/:patternId')
+  @Put('updatePatternPhase')
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
@@ -203,7 +203,7 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Body() publishDto: PublishCertificationDto,
   ) {
-    return await this.websiteService.publishCertifiationDetailsOfWebsite(
+    return await this.websiteService.publishCertificationDetailsOfWebsite(
       websiteId,
       publishDto,
     );

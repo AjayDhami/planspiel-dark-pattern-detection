@@ -201,6 +201,10 @@ export class WebsiteService {
       throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
     }
 
+    if (pattern.patternPhase === PatternPhaseType.Verified) {
+      throw new HttpException('Pattern already verified', HttpStatus.NOT_FOUND);
+    }
+
     const expertVerification = pattern.expertVerifications.find(
       (verification) => verification.expertId === expertId,
     );
@@ -234,6 +238,7 @@ export class WebsiteService {
       );
     }
 
+    pattern.markModified('expertVerifications');
     try {
       await pattern.save();
       return {
@@ -336,12 +341,19 @@ export class WebsiteService {
     }
   }
 
-  async publishCertifiationDetailsOfWebsite(
+  async publishCertificationDetailsOfWebsite(
     websiteId: string,
     publishDto: PublishCertificationDto,
   ) {
     await this.checkUserExists(publishDto.expertId);
     const website = await this.checkWebsiteExists(websiteId);
+
+    if (website.isCompleted === true) {
+      throw new HttpException(
+        'Website is already published!!!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     if (website.primaryExpertId !== publishDto.expertId) {
       throw new HttpException(
@@ -372,6 +384,13 @@ export class WebsiteService {
     if (publishDto.isCertified && anyPatternContainsDarkPattern) {
       throw new HttpException(
         'Cannot provide certification to website containing dark pattern',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (!publishDto.isCertified && !anyPatternContainsDarkPattern) {
+      throw new HttpException(
+        'Should provide certification to website free of dark patterns',
         HttpStatus.BAD_REQUEST,
       );
     }
