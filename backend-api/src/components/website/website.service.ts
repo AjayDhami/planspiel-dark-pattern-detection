@@ -18,6 +18,7 @@ import { UserType } from '../user/enum/user-type.enum';
 import { ExpertVerificationPhase } from './enum/expert-verification-phase.enum';
 import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
 import { PatternPhaseType } from './enum/pattern-phase.enum';
+import { UserResponseDto } from '../user/dto/user-response.dto';
 
 @Injectable()
 export class WebsiteService {
@@ -103,6 +104,38 @@ export class WebsiteService {
         .exec();
     }
     return websites.map((website) => this.convertToWebsiteResponseDto(website));
+  }
+
+  async getWebsitesAssociatedWithClients(userType: string) {
+    console.log('user website details');
+    const users: UserResponseDto[] =
+      await this.userService.fetchUsersByType(userType);
+
+    const usersWithWebsites = await Promise.all(
+      users.map(async (user) => {
+        const websites = await this.websiteModel
+          .find({ userId: user.userId })
+          .exec();
+
+        const formattedWebsites = websites.map((website) => ({
+          websiteId: website.id,
+          baseUrl: website.baseUrl,
+          websiteName: website.websiteName,
+          description: website.description,
+        }));
+
+        return {
+          userId: user.userId,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          role: user.role,
+          websites: formattedWebsites,
+        };
+      }),
+    );
+
+    return usersWithWebsites;
   }
 
   async addPatternInWebsite(

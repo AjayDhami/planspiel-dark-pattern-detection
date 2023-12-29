@@ -70,12 +70,25 @@ export class WebsiteController {
   @ApiOperation({
     summary: 'Get all websites for a user',
     description:
-      'Retrieve details of all websites associated with a specific user.',
+      'Retrieve details of all websites associated with a specific user(Client or Expert).',
   })
   async getAllWebsiteDetailsForParticularUser(@Query('userId') userId: string) {
     return await this.websiteService.getAllWebsiteDetailsForParticularUser(
       userId,
     );
+  }
+
+  @Get(':userType/details')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.SuperAdmin)
+  @ApiOperation({
+    summary: 'Get websites details associated with clients',
+    description: 'Retrieve details of all websites associated with clients',
+  })
+  async getAllWebsitesAssociatedWithClients(
+    @Param('userType') userType: string,
+  ) {
+    return await this.websiteService.getWebsitesAssociatedWithClients(userType);
   }
 
   @Post(':websiteId/pattern')

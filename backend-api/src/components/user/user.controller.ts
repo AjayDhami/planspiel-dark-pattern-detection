@@ -55,7 +55,7 @@ export class UserController {
   @Roles(UserType.SuperAdmin)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Get all users list',
+    summary: 'Get all users list by user role',
     description: 'Fetch all the users details by user role(Client, Expert)',
   })
   async fetchAllUsersByType(@Query('role') role: string) {
