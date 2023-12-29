@@ -404,6 +404,36 @@ export class WebsiteService {
     }
   }
 
+  async fetchKpiForClient(clientId: string) {
+    await this.checkUserExists(clientId);
+    const websites = await this.websiteModel.find({ userId: clientId }).exec();
+
+    const totalWebsites = websites.length;
+
+    const websitesInProgress = websites.filter(
+      (website) => website.phase === WebsitePhaseType.InProgress,
+    ).length;
+
+    const websitesCertified = websites.filter(
+      (website) =>
+        website.phase === WebsitePhaseType.Published &&
+        website.isDarkPatternFree,
+    ).length;
+
+    const websitesRejected = websites.filter(
+      (website) =>
+        website.phase === WebsitePhaseType.Published &&
+        !website.isDarkPatternFree,
+    ).length;
+
+    return {
+      totalWebsites,
+      websitesInProgress,
+      websitesCertified,
+      websitesRejected,
+    };
+  }
+
   private async checkUserExists(userId: string) {
     const existingUser = await this.userService.findUserById(userId);
     if (!existingUser) {

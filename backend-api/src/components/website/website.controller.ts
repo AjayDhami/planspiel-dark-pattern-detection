@@ -208,4 +208,15 @@ export class WebsiteController {
       publishDto,
     );
   }
+
+  @Get('clientKpi/:clientId')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
+  @ApiOperation({
+    summary: 'Fetch KPI for a client',
+    description: 'Retrieve KPI of all websites  associated with a client',
+  })
+  async getKpiForClient(@Param('clientId') clientId: string) {
+    return await this.websiteService.fetchKpiForClient(clientId);
+  }
 }
