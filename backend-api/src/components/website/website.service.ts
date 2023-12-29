@@ -201,6 +201,9 @@ export class WebsiteService {
 
     try {
       await pattern.save();
+      return {
+        message: `Pattern phase updated for pattern with id ${pattern._id}`,
+      };
     } catch (error) {
       console.error('Error saving pattern:', error.message);
       throw new HttpException(
@@ -208,10 +211,6 @@ export class WebsiteService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-
-    return {
-      message: `Pattern phase updated for pattern with id ${patternId}`,
-    };
   }
 
   async addCommentToPattern(
