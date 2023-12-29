@@ -9,4 +9,6 @@ export class WebsiteResponseDto {
   description: string;
   isCompleted: boolean;
   phase: WebsitePhaseType;
+  expertIds: string[];
+  primaryExpertId: string;
 }

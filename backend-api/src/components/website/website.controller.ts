@@ -18,6 +18,7 @@ import { PatternCreateDto } from './dto/pattern-create.dto';
 import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
 import { AssignExpertsDto } from './dto/assign-experts.dto';
+import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -103,6 +104,21 @@ export class WebsiteController {
   })
   async fetchAllPatternsOfWebsite(@Param('websiteId') websiteId: string) {
     return await this.websiteService.fetchAllPatternsOfWebsite(websiteId);
+  }
+
+  @Put(':websiteId/pattern/:patternId')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Update pattern phase',
+    description: 'Update pattern phase of particular pattern',
+  })
+  async updatePatternPhaseByExpert(
+    @Body() updatePatternPhase: UpdatePatternPhase,
+  ) {
+    return await this.websiteService.updatePatternPhaseByExpert(
+      updatePatternPhase,
+    );
   }
 
   @Post(':websiteId/pattern/:patternId/comment')
