@@ -22,8 +22,11 @@ export class Website extends Document {
   @Prop({ default: false })
   isCompleted: boolean;
 
-  @Prop({ default: WebsitePhaseType.Initial, enum: WebsitePhaseType })
+  @Prop({ default: WebsitePhaseType.InProgress, enum: WebsitePhaseType })
   phase: WebsitePhaseType;
+
+  @Prop()
+  isDarkPatternFree: boolean;
 
   @Prop()
   expertIds: string[];

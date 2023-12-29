@@ -19,6 +19,7 @@ import { ExpertVerificationPhase } from './enum/expert-verification-phase.enum';
 import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
 import { PatternPhaseType } from './enum/pattern-phase.enum';
 import { UserResponseDto } from '../user/dto/user-response.dto';
+import { WebsitePhaseType } from './enum/website-phase.enum';
 
 @Injectable()
 export class WebsiteService {
@@ -334,6 +335,56 @@ export class WebsiteService {
     }
   }
 
+  async publishCertifiationDetailsOfWebsite(
+    websiteId: string,
+    expertId: string,
+  ) {
+    await this.checkUserExists(expertId);
+    const website = await this.checkWebsiteExists(websiteId);
+
+    if (website.primaryExpertId !== expertId) {
+      throw new HttpException(
+        'Expert doesnot have authority to publish the website certification details',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const patterns = await this.patternModel
+      .find({ websiteId: websiteId })
+      .exec();
+
+    const isAllPatternsVerified = patterns.every(
+      (pattern) => pattern.patternPhase === PatternPhaseType.Verified,
+    );
+
+    if (!isAllPatternsVerified) {
+      throw new HttpException(
+        'Not all patterns are verified by experts',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const anyPatternContainsDarkPattern = patterns.some(
+      (pattern) => pattern.isPatternExists,
+    );
+
+    website.isDarkPatternFree = anyPatternContainsDarkPattern ? false : true;
+
+    website.phase = WebsitePhaseType.Published;
+    website.isCompleted = true;
+    try {
+      const updatedWebsite = await website.save();
+      return {
+        message: `Certification details successfully published for website with id ${updatedWebsite._id}`,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'Failed to publish webiste certification details',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   private async checkUserExists(userId: string) {
     const existingUser = await this.userService.findUserById(userId);
     if (!existingUser) {
@@ -374,6 +425,7 @@ export class WebsiteService {
       description: website.description,
       isCompleted: website.isCompleted,
       phase: website.phase,
+      isDarkPatternFree: website.isDarkPatternFree,
       expertIds: website.expertIds,
       primaryExpertId: website.primaryExpertId,
     };

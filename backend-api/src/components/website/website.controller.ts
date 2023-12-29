@@ -190,4 +190,21 @@ export class WebsiteController {
       patternId,
     );
   }
+
+  @Put(':websiteId/publish')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Publish certification/feedback for a website',
+    description: 'Publish final feedback or certification for a website',
+  })
+  async publishWebsiteCertification(
+    @Param('websiteId') websiteId: string,
+    @Query('expertId') expertId: string,
+  ) {
+    return await this.websiteService.publishCertifiationDetailsOfWebsite(
+      websiteId,
+      expertId,
+    );
+  }
 }

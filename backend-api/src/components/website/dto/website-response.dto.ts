@@ -9,6 +9,7 @@ export class WebsiteResponseDto {
   description: string;
   isCompleted: boolean;
   phase: WebsitePhaseType;
+  isDarkPatternFree: boolean;
   expertIds: string[];
   primaryExpertId: string;
 }

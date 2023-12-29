@@ -1,7 +1,7 @@
 export enum WebsitePhaseType {
-  Initial = 'Initial',
+  InProgress = 'InProgress',
   Automation = 'Automation',
   Manual = 'Manual',
   Payment = 'Payment',
-  Final = 'Final',
+  Published = 'Published',
 }
