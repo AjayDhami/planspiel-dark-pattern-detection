@@ -4,11 +4,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
+import csv
+import re
 
 
 # Initialize WebDriver
 driver = webdriver.Chrome()
-driver.get("https://v-tenet.vercel.app/")
+url = "https://www.booking.com/"
+driver.get(url)
 
 # Use explicit wait for elements to be present in the DOM
 wait = WebDriverWait(driver, 25)
@@ -21,14 +24,16 @@ soup = BeautifulSoup(data, 'html.parser')
 # Find all div tags
 div_tags = soup.find_all('div')
 
-# Initialize list to store all text content 
 all_text = []
 
-# Traverse through all the div tags and iterate through nested tags inside the div
+# Print id and class attributes in sequence
 for div_tag in div_tags:
+   
+    # Iterate through nested tags inside the div
     for nested_tag in div_tag.find_all(recursive=False):
         text = nested_tag.get_text(strip=True)
         all_text.append(text)
+
 
 # To filter empty list or lines from fetched data
 filtered_list = [item for item in all_text if item.strip() != '']
@@ -38,15 +43,28 @@ for i in range(len(filtered_list)):
 # Remove duplicate elements
 filtered_list = list(OrderedSet(filtered_list))
 
+# To store file with website name defining a regular expression pattern
+pattern = r'www\.(.*?)\.(com|de|co)'
+match = re.search(pattern, url)
+if match:
+    # Extract the text between "www" and ".com", ".de", or ".co"
+    extracted_text = match.group(1)
+    print(extracted_text)
+else:
+    extracted_text = url
+
 # Store scraped data into a file
-output_file_path = 'output.txt'
+output_file_path = "scraped_data/{}.csv".format(extracted_text)
 try:
     with open(output_file_path, 'w', encoding='utf-8') as file:
-        for text in filtered_list:
-            file.write(text + '\n')
+        # Create a CSV writer
+        csv_writer = csv.writer(file)
+        # Write each line of text as a separate row in the CSV file
+        for line in filtered_list:
+            csv_writer.writerow([line])
     print(f'Data has been successfully written to {output_file_path}')
 except Exception as e:
     print(f'Error writing to the file: {e}')
 
-# Close browser windows
+# Close browser window
 driver.quit()
