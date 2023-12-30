@@ -13,6 +13,8 @@ import {
 import { Verified as VerifiedIcon } from "@mui/icons-material";
 import WebsiteCard from "../../components/WebsiteCard";
 import { websiteDataList } from "../../data";
+import { useState } from "react";
+import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,6 +27,8 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 const DashboardPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [onboardingForm, setOnboardingForm] = useState<boolean>(false);
 
   return (
     <>
@@ -45,7 +49,7 @@ const DashboardPage = () => {
           <Card sx={{ borderRadius: 4 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography color="primary" variant="h6">
-                Websites
+                Certification In Progress
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 5
@@ -69,7 +73,7 @@ const DashboardPage = () => {
           <Card sx={{ borderRadius: 4 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography color="primary" variant="h6">
-                Rejected
+                Websites Rejected
               </Typography>
               <Typography color="textPrimary" variant="h4">
                 3
@@ -132,12 +136,22 @@ const DashboardPage = () => {
               tempora, cum corporis aspernatur odio excepturi sunt magni alias?
               Deserunt.
             </Typography>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setOnboardingForm(true)}
+            >
               Certify your website
             </Button>
           </CustomPaper>
         </Grid>
       </Grid>
+
+      <WebsiteOnboardingForm
+        fullScreen={isMobile}
+        open={onboardingForm}
+        onClose={() => setOnboardingForm(false)}
+      />
     </>
   );
 };
