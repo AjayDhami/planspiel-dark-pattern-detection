@@ -22,7 +22,7 @@ export class UserController {
 
   @Post('signup')
   @ApiOperation({
-    summary: 'User Sign Up',
+    summary: 'User Sign Up [For Client/Expert/SuperAdmin]',
     description: 'Register a new user.',
   })
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
@@ -31,7 +31,7 @@ export class UserController {
 
   @Post('signin')
   @ApiOperation({
-    summary: 'User Sign In',
+    summary: 'User Sign In [For Client/Expert/SuperAdmin]',
     description: 'Authenticate and sign in a user.',
   })
   async signIn(@Body() signInUserDto: SigninUserDto) {
@@ -40,10 +40,10 @@ export class UserController {
 
   @Get(':userId')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Client)
+  @Roles(UserType.Client, UserType.Expert, UserType.SuperAdmin)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Get particular user Details',
+    summary: 'Get particular user Details [For Client/Expert/SuperAdmin]',
     description: 'Retrieve details of a specific user.',
   })
   async fetchUserDetails(@Param('userId') userId: string) {
@@ -55,8 +55,8 @@ export class UserController {
   @Roles(UserType.SuperAdmin)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Get all users list by user role',
-    description: 'Fetch all the users details by user role(Client, Expert)',
+    summary: 'Get all users list by user type(role) [For SuperAdmin]',
+    description: 'Fetch all the users details by user type/role',
   })
   async fetchAllUsersByType(@Query('role') role: string) {
     return await this.userService.fetchUsersByType(role);

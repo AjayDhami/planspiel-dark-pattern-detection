@@ -31,7 +31,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Client)
   @ApiOperation({
-    summary: 'Create a new website',
+    summary: 'Create a new website [For Client]',
     description: 'Persist details of a new website for a user.',
   })
   async persistWebsiteDetails(@Body() websiteCreateDto: WebsiteCreateDto) {
@@ -56,9 +56,9 @@ export class WebsiteController {
 
   @Get(':websiteId')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Client)
+  @Roles(UserType.Client, UserType.Expert)
   @ApiOperation({
-    summary: 'Fetch details of a website',
+    summary: 'Fetch details of a website [For Client/Expert]',
     description: 'Retrieve details of a specific website based on its ID.',
   })
   async fetchParticularWebsiteDetails(@Param('websiteId') websiteId: string) {
@@ -67,9 +67,9 @@ export class WebsiteController {
 
   @Get()
   @UseGuards(AuthGuard)
-  @Roles(UserType.Client)
+  @Roles(UserType.Client, UserType.Expert)
   @ApiOperation({
-    summary: 'Get all websites for a user',
+    summary: 'Get all websites for a user [For Client/Expert]',
     description:
       'Retrieve details of all websites associated with a specific user(Client or Expert).',
   })
@@ -96,7 +96,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Add pattern in a website',
+    summary: 'Add pattern in a website [For Expert]',
     description: 'Persist details of a new pattern for a website',
   })
   async addPatternInWebsite(
@@ -113,7 +113,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Fetch all pattern of a website',
+    summary: 'Fetch all pattern of a website [For Expert]',
     description: 'Fetch all patterns from a particular website',
   })
   async fetchAllPatternsOfWebsite(@Param('websiteId') websiteId: string) {
@@ -124,7 +124,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Update pattern phase',
+    summary: 'Update pattern phase [For Expert]',
     description: 'Update pattern phase of particular pattern',
   })
   async updatePatternPhaseByExpert(
@@ -139,7 +139,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Add comment to pattern',
+    summary: 'Add comment to pattern [For Expert]',
     description: 'Persist new comment to a pattern for a website',
   })
   async addCommentToPattern(
@@ -158,7 +158,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Add reply to a comment',
+    summary: 'Add reply to a comment [For Expert]',
     description: 'Persist reply to a comment of a pattern in a website',
   })
   async addReplyToComment(
@@ -179,7 +179,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Fetch particular pattern details',
+    summary: 'Fetch particular pattern details [For Expert]',
     description: 'Retrieve details of particular pattern of a website',
   })
   async fetchPatternDetails(
@@ -196,7 +196,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
-    summary: 'Publish certification/feedback for a website',
+    summary: 'Publish certification/feedback for a website [For Expert]',
     description: 'Publish final feedback or certification for a website',
   })
   async publishWebsiteCertification(
@@ -213,7 +213,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.Client)
   @ApiOperation({
-    summary: 'Fetch KPI for a client',
+    summary: 'Fetch KPI for a client [For Client]',
     description: 'Retrieve KPI of all websites  associated with a client',
   })
   async getKpiForClient(@Param('clientId') clientId: string) {
