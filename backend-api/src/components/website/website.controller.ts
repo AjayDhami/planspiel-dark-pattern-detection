@@ -42,7 +42,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.SuperAdmin)
   @ApiOperation({
-    summary: 'Assign experts to website',
+    summary: 'Assign experts to website [For SuperAdmin]',
   })
   async assignExperts(
     @Param('websiteId') websiteId: string,
@@ -83,7 +83,7 @@ export class WebsiteController {
   @UseGuards(AuthGuard)
   @Roles(UserType.SuperAdmin)
   @ApiOperation({
-    summary: 'Get websites details associated with clients',
+    summary: 'Get websites details associated with clients [For SuperAdmin]',
     description: 'Retrieve details of all websites associated with clients',
   })
   async getAllWebsitesAssociatedWithClients(
