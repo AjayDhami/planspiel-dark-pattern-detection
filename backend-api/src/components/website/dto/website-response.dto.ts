@@ -9,4 +9,8 @@ export class WebsiteResponseDto {
   description: string;
   isCompleted: boolean;
   phase: WebsitePhaseType;
+  isDarkPatternFree: boolean;
+  expertFeedback: string;
+  expertIds: string[];
+  primaryExpertId: string;
 }

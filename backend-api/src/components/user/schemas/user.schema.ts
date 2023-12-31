@@ -27,9 +27,6 @@ export class User extends Document {
 
   @Prop({ required: true })
   role: string;
-
-  @Prop({ default: [] })
-  websiteIds: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

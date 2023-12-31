@@ -22,8 +22,20 @@ export class Website extends Document {
   @Prop({ default: false })
   isCompleted: boolean;
 
-  @Prop({ default: WebsitePhaseType.Initial, enum: WebsitePhaseType })
+  @Prop({ default: WebsitePhaseType.InProgress, enum: WebsitePhaseType })
   phase: WebsitePhaseType;
+
+  @Prop()
+  isDarkPatternFree: boolean;
+
+  @Prop()
+  expertFeedback: string;
+
+  @Prop()
+  expertIds: string[];
+
+  @Prop()
+  primaryExpertId: string;
 }
 
 export const WebsiteSchema = SchemaFactory.createForClass(Website);
