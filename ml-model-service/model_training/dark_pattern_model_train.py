@@ -122,7 +122,7 @@ def predict_dark_pattern(input_text):
             print(f"{dark_pattern_type}: {'Yes' if second_level_prediction[0] == 1 else 'No'}")
 
 
-# Example usage
+# Prediction of dark pattern
 csv_path = "../model_training/dataset.csv"
 dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
 
@@ -130,5 +130,6 @@ filtered_df = read_and_clean_dataset(csv_path)
 train_first_level_model(filtered_df)
 train_second_level_models(filtered_df)
 
+# TODO this input should be dynamic and read content from output of web scraping file
 user_input_text = "Manage Cookies Learn More"
 predict_dark_pattern(user_input_text)
