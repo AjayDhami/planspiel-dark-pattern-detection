@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const credentials: Credentials = {
     email: "alien@yaml.com",
     password: "xcxcxc",
-    role: "Client",
+    role: "Expert",
   };
   const history = useNavigate();
 

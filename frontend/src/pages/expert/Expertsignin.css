@@ -1,0 +1,7 @@
+#secondarydiv{
+    width: 100%;
+    background-repeat: no-repeat;
+    background: linear-gradient(to bottom, rgba(48, 220, 229, 0.984), rgba(55, 223, 190, 0.859)),  url('../../../public/assets/bgimage.svg');
+    background-size: cover;
+    background-position: center;
+  }
