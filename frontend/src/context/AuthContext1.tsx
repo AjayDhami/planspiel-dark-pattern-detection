@@ -23,7 +23,7 @@ interface AuthContextProps {
   setAuthTokens: (tokens: string | null) => void;
   setUser: (user: UserData | null) => void;
   signUpUser: (e: React.FormEvent) => Promise<void>;
-  loginUser: (e: React.FormEvent) => Promise<void>;
+  loginUser: (email: String, password : String, role: String) => Promise<boolean>;
   logoutUser: () => void;
 }
 
@@ -46,31 +46,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
   const history = useNavigate();
 
-  const loginUser = async (e: React.FormEvent) => {
-    const { email, password } = e.target as unknown as {
-      email: HTMLFormElement;
-      password: HTMLFormElement;
-    };
-
-    e.preventDefault();
+  const loginUser = async (email: String, password : String, role: String) => {
     try {
       const response = await axios.post<{ accessToken: string }>(
         `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signin`,
-        { email: email.value, password: password.value, role: credentials.role }
+        { email: email, password: password, role: role }
       );
 
       if (response.status === 201) {
-        console.log(response);
         const token = response.data.accessToken;
-        localStorage.setItem("token", token);
+        localStorage.setItem("authToken", token);
         setAuthTokens(token);
         setUser(jwtDecode(token));
-        console.log(user);
+        localStorage.setItem("userId", jwtDecode(token).sub || '');
+        return true
       } else {
         alert("Something went wrong!");
+        return false
       }
     } catch (error) {
       console.error("Error during login:", error);
+      return false
     }
   };
 
