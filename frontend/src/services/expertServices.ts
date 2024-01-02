@@ -72,11 +72,10 @@ const getPatternsData = async (websiteId: string, token: string): Promise<Servic
   }
 };
 
-const getSpecificPattern = async (id: String, websiteId: String): Promise<Pattern> => {
+const getSpecificPattern = async (id: String, websiteId: String, token: string): Promise<Pattern> => {
   const config = {
     headers: {
-      'Authorization': 'Bearer ACCESS_TOKEN',
-      'ngrok-skip-browser-warning': 'any',
+      'Authorization': `${token}`,
     },
   };
   try {

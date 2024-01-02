@@ -16,6 +16,7 @@ interface WebsiteData {
 const ExpertDashboard : React.FC = () => {
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
     const { websiteId, setWebsiteId } = useExpertContext();
+    const { websiteName, setWebsiteName } = useExpertContext();
     const navigate = useNavigate();
 
     const id  = localStorage.getItem("userId")
@@ -34,9 +35,10 @@ const ExpertDashboard : React.FC = () => {
         getWebsiteData();
     },[])
 
-    const handleClick = (id:string) => {
+    const handleClick = (id:string, websiteName: string) => {
         console.log("Before update - Current websiteId:", websiteId);
         setWebsiteId(id);
+        setWebsiteName(websiteName);
         navigate('/websitedash')
     }
 
@@ -50,7 +52,7 @@ const ExpertDashboard : React.FC = () => {
             {websiteData.map((website, index)=>(
                 <div key={website.websiteId} 
                     className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl hover:border-2 border-blue-300 hover:bg-blue-100 cursor-pointer'
-                    onClick={() => handleClick(website.websiteId)}  
+                    onClick={() => handleClick(website.websiteId, website.websiteName)}  
                 >
                     <div><h2 className='font-bold text-lg'>{website.websiteName}</h2></div>
                 </div>

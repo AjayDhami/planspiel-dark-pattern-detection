@@ -11,16 +11,20 @@ interface ExpertProviderProps {
 interface ExpertContextProps {
     websiteId : string | null;
     setWebsiteId : (websiteId : string | null)=> void;
+    websiteName : string | null;
+    setWebsiteName : (websiteName : string | null)=> void;
 }
 
 const ExpertContext = createContext<ExpertContextProps | undefined>(undefined);
 
 export const ExpertProvider: React.FC<ExpertProviderProps> = ({ children }) => {
     const [websiteId, setWebsiteId] = useState<string | null>(null);
-
+    const [websiteName, setWebsiteName] = useState<string | null>(null);
     const contextData: ExpertContextProps = {
         websiteId,
-        setWebsiteId
+        setWebsiteId,
+        websiteName,
+        setWebsiteName
     };
 
     return(
