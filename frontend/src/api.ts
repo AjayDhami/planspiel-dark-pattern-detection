@@ -1,6 +1,28 @@
-import { WebsiteDetails } from "./types";
+import { UserCredentials, WebsiteDetails } from "./types";
 import api from "./utils/AxiosHelper";
 import { extractUserDetails } from "./utils/DataHelper";
+
+// Function to log in user
+export const loginUser = async (user: UserCredentials) => {
+  try {
+    const response = await api.post(`/user/signin`, user);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to get the KPI data for client's dashboard
+export const getClientDashboardKPIData = async () => {
+  try {
+    const user = extractUserDetails();
+
+    const response = await api.get(`/website/clientKpi/${user?.sub}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // Function to get the user websites
 export const getAllWebsites = async () => {
@@ -10,7 +32,6 @@ export const getAllWebsites = async () => {
     const response = await api.get(`/website?userId=${user?.sub}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching items:", error);
     throw error;
   }
 };
@@ -24,7 +45,6 @@ export const addWebsiteForCertification = async (website: WebsiteDetails) => {
     const response = await api.post(`/website`, data);
     return response.data;
   } catch (error) {
-    console.error("Error fetching items:", error);
     throw error;
   }
 };

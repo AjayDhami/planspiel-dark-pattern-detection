@@ -1,24 +1,36 @@
 import axios, { AxiosError } from "axios";
 
 const BASE_URL = "http://localhost:8080";
-const token = localStorage.getItem("token");
+let redirectCallback: (() => void) | null = null;
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: token,
   },
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = token;
+  }
+  return config;
 });
 
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      console.error("Error occurred: ", error.message);
+      redirectCallback && redirectCallback();
+      throw new Error(error.message);
     }
     return Promise.reject(error);
   }
 );
+
+export const setRedirectCallback = (callback: (() => void) | null) => {
+  redirectCallback = callback;
+};
 
 export default api;

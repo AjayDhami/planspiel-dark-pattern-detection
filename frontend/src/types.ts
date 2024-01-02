@@ -1,3 +1,31 @@
+import React from "react";
+
+export type User = {
+  sub: string;
+  email: string;
+  role: string;
+  exp: number;
+  iat: number;
+};
+
+export interface UserCredentials extends Pick<User, "email" | "role"> {
+  password: string;
+}
+
+export interface AuthContextProps {
+  user: User | null;
+  authTokens: string | null;
+  setAuthTokens: (tokens: string | null) => void;
+  setUser: (user: User | null) => void;
+  signUpUser: (e: React.FormEvent) => Promise<void>;
+  loginUser: (e: React.FormEvent) => Promise<void>;
+  logoutUser: () => void;
+}
+
+export interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
 export type Website = {
   websiteId: string;
   baseUrl: string;

@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { Logout as LogoutIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext1";
+import { useContext } from "react";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   ...theme.typography.body1,
@@ -17,6 +19,8 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <StyledAppBar position="static">
       <Container maxWidth="xl">
@@ -42,7 +46,13 @@ const Navbar = () => {
           <Typography>Hello, Prabudh Mishra</Typography>
 
           <Tooltip title="Sign out" arrow>
-            <IconButton color="secondary" sx={{ mx: 1 }}>
+            <IconButton
+              color="secondary"
+              sx={{ mx: 1 }}
+              onClick={() => {
+                authContext?.logoutUser();
+              }}
+            >
               <LogoutIcon />
             </IconButton>
           </Tooltip>

@@ -14,8 +14,9 @@ import { Verified as VerifiedIcon } from "@mui/icons-material";
 import WebsiteCard from "../../components/WebsiteCard";
 import { useEffect, useState } from "react";
 import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
-import { getAllWebsites } from "../../api";
+import { getAllWebsites, getClientDashboardKPIData } from "../../api";
 import { WebsiteResponse } from "../../types";
+import { toast } from "react-toastify";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,19 +26,52 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   borderRadius: 16,
 }));
 
+type DashboardKPI = {
+  totalWebsites: number;
+  websitesCertified: number;
+  websitesInProgress: number;
+  websitesRejected: number;
+};
+
 const DashboardPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [kpiData, setKpiData] = useState<DashboardKPI | null>(null);
   const [websiteDataList, setWebsiteDataList] = useState<WebsiteResponse[]>([]);
   const [onboardingForm, setOnboardingForm] = useState<boolean>(false);
 
   useEffect(() => {
-    const getWebsiteList = async () => {
-      const websites = await getAllWebsites();
-      setWebsiteDataList(websites);
+    const getWebsiteList = async (): Promise<void> => {
+      try {
+        const websites = await getAllWebsites();
+        setWebsiteDataList(websites);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
+      }
     };
     getWebsiteList();
+  }, []);
+
+  useEffect(() => {
+    const getDashboardKPIData = async (): Promise<void> => {
+      try {
+        const data = await getClientDashboardKPIData();
+        setKpiData(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
+      }
+    };
+
+    getDashboardKPIData();
   }, []);
 
   return (
@@ -50,7 +84,7 @@ const DashboardPage = () => {
                 Total Websites
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                14
+                {kpiData?.totalWebsites}
               </Typography>
             </CardContent>
           </Card>
@@ -62,7 +96,7 @@ const DashboardPage = () => {
                 Certification In Progress
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                5
+                {kpiData?.websitesInProgress}
               </Typography>
             </CardContent>
           </Card>
@@ -74,7 +108,7 @@ const DashboardPage = () => {
                 Websites Certified
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                6
+                {kpiData?.websitesCertified}
               </Typography>
             </CardContent>
           </Card>
@@ -86,7 +120,7 @@ const DashboardPage = () => {
                 Websites Rejected
               </Typography>
               <Typography color="textPrimary" variant="h4">
-                3
+                {kpiData?.websitesRejected}
               </Typography>
             </CardContent>
           </Card>
