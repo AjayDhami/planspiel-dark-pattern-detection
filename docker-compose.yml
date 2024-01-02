@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    environment:
+      - NODE_ENV=docker
+    ports:
+      - '27017:27017'
+
+  backend-api:
+    build:
+      context: ./backend-api
+    ports:
+      - '8088:8088'
+    environment:
+      - NODE_ENV=docker
+    depends_on:
+      - mongodb
