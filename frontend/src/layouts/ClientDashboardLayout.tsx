@@ -1,8 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Box, Container, CssBaseline } from "@mui/material";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext1";
 
 const ClientDashboardLayout = () => {
+  // const { user, authTokens: token } = useContext(AuthContext);
+  // const isAuthenticated = user && token;
+
   return (
     <Box
       sx={{

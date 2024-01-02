@@ -12,9 +12,10 @@ import {
 } from "@mui/material";
 import { Verified as VerifiedIcon } from "@mui/icons-material";
 import WebsiteCard from "../../components/WebsiteCard";
-import { websiteDataList } from "../../data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
+import { getAllWebsites } from "../../api";
+import { WebsiteResponse } from "../../types";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -28,7 +29,16 @@ const DashboardPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const [websiteDataList, setWebsiteDataList] = useState<WebsiteResponse[]>([]);
   const [onboardingForm, setOnboardingForm] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getWebsiteList = async () => {
+      const websites = await getAllWebsites();
+      setWebsiteDataList(websites);
+    };
+    getWebsiteList();
+  }, []);
 
   return (
     <>
@@ -84,7 +94,11 @@ const DashboardPage = () => {
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
-          <CustomPaper>
+          <CustomPaper
+            sx={{
+              height: "100%",
+            }}
+          >
             <Stack
               direction={{ xs: "column", sm: "row" }}
               justifyContent="space-between"
@@ -97,12 +111,13 @@ const DashboardPage = () => {
               </Button>
             </Stack>
             <Grid container spacing={4} sx={{ mt: "-8px" }}>
-              {websiteDataList.map((website) => (
-                <Grid item xs={12} md={4} key={website.id}>
+              {/* slice function to display first 6 items */}
+              {websiteDataList.slice(0, 6).map((website) => (
+                <Grid item xs={12} md={4} key={website.websiteId}>
                   <WebsiteCard
-                    websiteId={website.id}
+                    websiteId={website.websiteId}
                     baseUrl={website.baseUrl}
-                    websiteName={website.name}
+                    websiteName={website.websiteName}
                     isCompleted={website.isCompleted}
                     phase={website.phase}
                   />

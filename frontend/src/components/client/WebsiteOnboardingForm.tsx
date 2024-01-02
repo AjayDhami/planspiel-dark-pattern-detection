@@ -19,13 +19,8 @@ import {
 } from "@mui/icons-material";
 import { Formik, FieldArray, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-type WebsiteDetails = {
-  websiteName: string;
-  baseUrl: string;
-  description: string;
-  additionalUrls: string[];
-};
+import { addWebsiteForCertification } from "../../api";
+import { WebsiteDetails } from "../../types";
 
 const validationSchema = Yup.object().shape({
   websiteName: Yup.string().required("This field is required"),
@@ -43,7 +38,7 @@ const initialValues: WebsiteDetails = {
 
 const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
   const handleSubmit = (values: WebsiteDetails, { resetForm }: any) => {
-    console.log(values);
+    addWebsiteForCertification(values);
     resetForm();
   };
 
@@ -51,6 +46,7 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
     <Dialog
       fullScreen={fullScreen}
       open={open}
+      maxWidth="lg"
       fullWidth
       aria-labelledby="website-onboarding"
       onClose={onClose}
@@ -79,7 +75,7 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
           {({ values, errors }) => (
             <Form noValidate>
               <Grid container spacing={2} sx={{ mt: 0 }}>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <Field
                     as={TextField}
                     label="Website Name"
@@ -93,7 +89,7 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                     className="form-error"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <Field
                     as={TextField}
                     label="Website URL"
@@ -153,36 +149,38 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                         </Stack>
 
                         <Stack direction="column" spacing={1}>
-                          {values.additionalUrls.map((url, index) => (
-                            <Stack direction="row" spacing={2} key={index}>
-                              <Field
-                                as={TextField}
-                                id={`additionalUrls.${index}`}
-                                name={`additionalUrls.${index}`}
-                                fullWidth
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <LinkIcon />
-                                    </InputAdornment>
-                                  ),
-                                }}
-                              />
-                              <ErrorMessage
-                                name={`additionalUrls.${index}`}
-                                component="div"
-                                className="form-error"
-                              />
-                              {values.additionalUrls.length > 1 && (
-                                <IconButton
-                                  type="button"
-                                  onClick={() => remove(index)}
-                                >
-                                  <DeleteIcon />
-                                </IconButton>
-                              )}
-                            </Stack>
-                          ))}
+                          {values.additionalUrls &&
+                            values.additionalUrls.map((url, index) => (
+                              <Stack direction="row" spacing={2} key={index}>
+                                <Field
+                                  as={TextField}
+                                  id={`additionalUrls.${index}`}
+                                  name={`additionalUrls.${index}`}
+                                  fullWidth
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LinkIcon />
+                                      </InputAdornment>
+                                    ),
+                                  }}
+                                />
+                                <ErrorMessage
+                                  name={`additionalUrls.${index}`}
+                                  component="div"
+                                  className="form-error"
+                                />
+                                {values.additionalUrls &&
+                                  values.additionalUrls.length > 1 && (
+                                    <IconButton
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                    >
+                                      <DeleteIcon />
+                                    </IconButton>
+                                  )}
+                              </Stack>
+                            ))}
                         </Stack>
                       </>
                     )}

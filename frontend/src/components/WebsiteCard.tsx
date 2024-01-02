@@ -1,19 +1,10 @@
-import { Button, Paper, Typography, styled } from "@mui/material";
+import { Box, Button, Paper, Tooltip, Typography, styled } from "@mui/material";
 import {
   Dangerous as DangerousIcon,
   HourglassTop as PendingIcon,
   Verified as VerifiedIcon,
 } from "@mui/icons-material";
-
-type WebsiteCardProps = {
-  websiteId: string;
-  baseUrl: string;
-  websiteName: string;
-  additionalUrls?: string[];
-  description?: string;
-  isCompleted: boolean;
-  phase: string; // phase states: "Initial" | "Automation" | "Manual" | "Feedback" | "Finished"
-};
+import { WebsiteCardProps } from "../types";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -21,8 +12,11 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   background: theme.palette.background.paper,
   borderRadius: 16,
-  textAlign: "center",
   minHeight: 150,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  alignItems: "center",
 }));
 
 const WebsiteCard = ({
@@ -40,30 +34,38 @@ const WebsiteCard = ({
       {isCompleted ? (
         phase === "Finished" ? (
           <>
-            <VerifiedIcon
-              style={{ width: "50px", height: "50px" }}
-              color="success"
-            />
+            <Tooltip title="Certification Successful" arrow>
+              <VerifiedIcon
+                style={{ width: "50px", height: "50px" }}
+                color="success"
+              />
+            </Tooltip>
             <Button size="small" variant="contained" color="success" fullWidth>
               Download Certificate
             </Button>
           </>
         ) : (
           <>
-            <DangerousIcon
-              style={{ width: "50px", height: "50px" }}
-              color="error"
-            />
+            <Tooltip title="Certification Failed" arrow>
+              <DangerousIcon
+                style={{ width: "50px", height: "50px" }}
+                color="error"
+              />
+            </Tooltip>
             <Button size="small" variant="contained" color="error" fullWidth>
               View Feedback
             </Button>
           </>
         )
       ) : (
-        <PendingIcon
-          style={{ width: "50px", height: "50px" }}
-          color="secondary"
-        />
+        <Box>
+          <Tooltip title="Website Certification in Progress" arrow>
+            <PendingIcon
+              style={{ width: "50px", height: "50px" }}
+              color="secondary"
+            />
+          </Tooltip>
+        </Box>
       )}
     </CustomPaper>
   );
