@@ -30,7 +30,7 @@ const ExpertDashboard : React.FC = () => {
 
     useEffect(()=>{
         getWebsiteData();
-    },[])
+    })
 
     const handleClick = (id:string) => {
         console.log("Before update - Current websiteId:", websiteId);

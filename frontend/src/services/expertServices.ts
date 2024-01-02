@@ -9,7 +9,6 @@ interface ServiceResponse {
 }
 
 const baseUrl : String = "http://localhost:8080"
-const ACCESS_TOKEN = ""
 
 const signIn = async (email: String, password : String, role: String) => {
   const config = {
