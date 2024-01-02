@@ -54,7 +54,7 @@ const getWebsites = async(id:String, authToken : String) => {
   }
 }
 
-const getPatternsData = async (expertId: string): Promise<ServiceResponse> => {
+const getPatternsData = async (websiteId: string): Promise<ServiceResponse> => {
   const config = {
     headers: {
       'Authorization': 'Bearer ACCESS_TOKEN',
@@ -64,7 +64,7 @@ const getPatternsData = async (expertId: string): Promise<ServiceResponse> => {
 
   try {
     const response: AxiosResponse<ServiceResponse> = await axios.get<ServiceResponse>(
-      `${baseUrl}/website/${expertId}/pattern`,
+      `${baseUrl}/website/${websiteId}/pattern`,
       config
     );
     return response.data;

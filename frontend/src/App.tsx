@@ -10,10 +10,11 @@ import ExpertDashboard from "./pages/expert/ExpertDashboard";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
-
+import { ExpertProvider } from "./context/ExpertContext";
 function App() {
   return (
     <AuthProvider>
+      <ExpertProvider>
       <Routes>
         {/* <!-- Common routes --> */}
         <Route path="/" element={<LandingPage />} />
@@ -30,6 +31,7 @@ function App() {
         </Route>
         <Route path="/expertdashboard" element={<ExpertDashboard/>}/>
       </Routes>
+      </ExpertProvider>
     </AuthProvider>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getWebsites } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
-
+import { useExpertContext } from '../../context/ExpertContext';
 interface WebsiteData {
     baseUrl: string;
     description : string;
@@ -14,6 +14,7 @@ interface WebsiteData {
 
 const ExpertDashboard : React.FC = () => {
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
+    const { websiteId, setWebsiteId } = useExpertContext();
 
     const id  = localStorage.getItem("userId")
     const authToken = localStorage.getItem("authToken")
@@ -30,13 +31,25 @@ const ExpertDashboard : React.FC = () => {
     useEffect(()=>{
         getWebsiteData();
     },[])
+
+    const handleClick = (id:string) => {
+        console.log("Before update - Current websiteId:", websiteId);
+        setWebsiteId(id)
+    }
+
+    useEffect(() => {
+        console.log("Updated websiteId:", websiteId);
+    }, [websiteId]);
   return (
     <>
         <Navbar/>
         <div className='grid md:grid-cols-4 mx-8 my-12'>
             {websiteData.map((website, index)=>(
-                <div key={website.websiteId} className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl'>
-                    <div><h2 className='font-bold text-md'>{website.websiteName}</h2></div>
+                <div key={website.websiteId} 
+                    className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl hover:border-2 border-blue-300 hover:bg-blue-100 cursor-pointer'
+                    onClick={() => handleClick(website.websiteId)}  
+                >
+                    <div><h2 className='font-bold text-lg'>{website.websiteName}</h2></div>
                 </div>
             ))}
         </div>

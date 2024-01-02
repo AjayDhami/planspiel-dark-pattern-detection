@@ -31,11 +31,11 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
-    localStorage.getItem("token") ? localStorage.getItem("token") : null
+    localStorage.getItem("authToken") ? localStorage.getItem("authToken") : null
   );
   const [user, setUser] = useState<UserData | null>(() =>
-    localStorage.getItem("token")
-      ? jwtDecode(localStorage.getItem("token") as string)
+    localStorage.getItem("authToken")
+      ? jwtDecode(localStorage.getItem("authToken") as string)
       : null
   );
   const [loading, setLoading] = useState(true);
@@ -103,7 +103,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
     history("/login");
   };
 
