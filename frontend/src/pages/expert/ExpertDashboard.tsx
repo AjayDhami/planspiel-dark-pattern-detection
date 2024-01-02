@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getWebsites } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
 import { useExpertContext } from '../../context/ExpertContext';
+import { useNavigate } from 'react-router-dom';
 interface WebsiteData {
     baseUrl: string;
     description : string;
@@ -15,6 +16,7 @@ interface WebsiteData {
 const ExpertDashboard : React.FC = () => {
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
     const { websiteId, setWebsiteId } = useExpertContext();
+    const navigate = useNavigate();
 
     const id  = localStorage.getItem("userId")
     const authToken = localStorage.getItem("authToken")
@@ -30,11 +32,12 @@ const ExpertDashboard : React.FC = () => {
 
     useEffect(()=>{
         getWebsiteData();
-    })
+    },[])
 
     const handleClick = (id:string) => {
         console.log("Before update - Current websiteId:", websiteId);
-        setWebsiteId(id)
+        setWebsiteId(id);
+        navigate('/websitedash')
     }
 
     useEffect(() => {

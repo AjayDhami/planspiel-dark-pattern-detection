@@ -53,11 +53,10 @@ const getWebsites = async(id:String, authToken : String) => {
   }
 }
 
-const getPatternsData = async (websiteId: string): Promise<ServiceResponse> => {
+const getPatternsData = async (websiteId: string, token: string): Promise<ServiceResponse> => {
   const config = {
     headers: {
-      'Authorization': 'Bearer ACCESS_TOKEN',
-      'ngrok-skip-browser-warning': 'any',
+      'Authorization': `${token}`,
     },
   };
 

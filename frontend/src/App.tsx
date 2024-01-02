@@ -7,6 +7,7 @@ import WebsiteOnboardingPage from "./pages/client/WebsiteOnboardingPage";
 import WebsiteViewPage from "./pages/client/WebsiteViewPage";
 import ExpertSignin from "./pages/expert/ExpertSignin";
 import ExpertDashboard from "./pages/expert/ExpertDashboard";
+import WebsiteDashboard from "./pages/expert/WebsiteDashboard";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
@@ -30,6 +31,7 @@ function App() {
           <Route path="website/:webId" element={<WebsiteViewPage />} />
         </Route>
         <Route path="/expertdashboard" element={<ExpertDashboard/>}/>
+        <Route path="/websitedash" element={<WebsiteDashboard/>}/>
       </Routes>
       </ExpertProvider>
     </AuthProvider>
