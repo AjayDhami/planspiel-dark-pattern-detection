@@ -83,15 +83,12 @@ export class UserService {
     if (!existingUser) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    const userResponseDto: UserResponseDto = {
-      userId: existingUser._id,
-      firstName: existingUser.firstName,
-      lastName: existingUser.lastName,
-      email: existingUser.email,
-      role: existingUser.role,
-    };
+    return this.convertUserToDto(existingUser);
+  }
 
-    return userResponseDto;
+  async fetchUsersByType(role) {
+    const experts = await this.getUsersByRole(role);
+    return experts.map((expert) => this.convertUserToDto(expert));
   }
 
   async findUserById(userId: string): Promise<User | null> {
@@ -109,5 +106,19 @@ export class UserService {
         { new: true },
       )
       .exec();
+  }
+
+  private async getUsersByRole(role: string) {
+    return await this.userModel.find({ role: role }).exec();
+  }
+
+  private convertUserToDto(user: User): UserResponseDto {
+    return {
+      userId: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+    };
   }
 }
