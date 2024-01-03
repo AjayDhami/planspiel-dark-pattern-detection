@@ -147,7 +147,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     body,
     config
   );
-  return response.data
+  return response.status
 }
 
 export { getPatternsData, getSpecificPattern, CommentPost, replyPost, signIn, getWebsites, patternPost  };

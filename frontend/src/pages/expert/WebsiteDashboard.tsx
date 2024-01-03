@@ -3,6 +3,7 @@ import { useExpertContext } from '../../context/ExpertContext'
 import { getPatternsData } from '../../services/expertServices';
 import Navbar from '../../components/expert/Navbar';
 import PatternCard from '../../components/expert/PatternCard';
+import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 
 interface PatternData {
     patternType: string;
@@ -35,6 +36,7 @@ const WebsiteDashboard = () => {
         expertName: '',
         phase: ''
     });
+    const [isPatternformOpen, setIsPatternformOpen] = useState(false);
 
     const getPatterns = async () => {
         setPatterns([]);
@@ -80,8 +82,12 @@ const WebsiteDashboard = () => {
           ...prevFilters,
           [filterType]: option
         }));
-        // onSelect(option);
     };
+    const openForm = () =>{setIsPatternformOpen(true)}
+    const closeFrom = () =>{
+      setIsPatternformOpen(false);
+      getPatterns();
+    }
   return (
     <>
         <Navbar/>
@@ -91,6 +97,7 @@ const WebsiteDashboard = () => {
             <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
           </div>
         </div>
+        <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
         <div className='mx-24 shadow-xl rounded-2xl bg-white'>
           <div className='flex justify-between items-center pt-8 px-52'>
             <div className='flex justify-between items-center '>
@@ -134,7 +141,7 @@ const WebsiteDashboard = () => {
               </div>  
             </div>
             <div className=''>
-                <button  className=' px-8 py-2 rounded-md mx-5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white'>Add a Pattern</button>
+                <button onClick={openForm} className=' px-8 py-2 rounded-md mx-5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white'>Add a Pattern</button>
                 <button className=' px-8 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 text-white'>Chat</button>
             </div>
           </div>
