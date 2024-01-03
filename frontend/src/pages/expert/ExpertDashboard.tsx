@@ -15,8 +15,6 @@ interface WebsiteData {
 
 const ExpertDashboard : React.FC = () => {
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
-    const { websiteId, setWebsiteId } = useExpertContext();
-    const { websiteName, setWebsiteName } = useExpertContext();
     const navigate = useNavigate();
 
     const id  = localStorage.getItem("userId")
@@ -36,15 +34,11 @@ const ExpertDashboard : React.FC = () => {
     },[])
 
     const handleClick = (id:string, websiteName: string) => {
-        console.log("Before update - Current websiteId:", websiteId);
-        setWebsiteId(id);
-        setWebsiteName(websiteName);
+        sessionStorage.setItem("websiteId", id);
+        sessionStorage.setItem("websiteName", websiteName);
         navigate('/websitedash')
     }
 
-    useEffect(() => {
-        console.log("Updated websiteId:", websiteId);
-    }, [websiteId]);
   return (
     <>
         <Navbar/>
