@@ -5,9 +5,13 @@ import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { swaggerConfig } from './config/swagger.config';
+import * as process from 'process';
 
 async function bootstrap() {
-  dotenv.config();
+  const nodeEnv = process.env.NODE_ENV;
+  const envFilePath = `.env.${nodeEnv}`;
+
+  dotenv.config({ path: envFilePath });
 
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
