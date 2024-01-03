@@ -91,7 +91,7 @@ const WebsiteDashboard = () => {
             <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
           </div>
         </div>
-        <div className='mx-10 shadow-xl roundex-2xl bg-white'>
+        <div className='mx-24 shadow-xl rounded-2xl bg-white'>
           <div className='flex justify-between items-center pt-8 px-52'>
             <div className='flex justify-between items-center '>
               <div className='flex'>

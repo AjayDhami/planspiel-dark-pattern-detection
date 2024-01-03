@@ -129,4 +129,25 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
   
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, signIn, getWebsites  };
+const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string, token : string) =>{
+  const config = {                 
+    headers : {
+        'Authorization':`${token}`,
+        'ngrok-skip-browser-warning': 'any'
+    }
+  }
+  const body = {
+    createdByExpertId : expertId,
+    patternType : patternType,
+    description : description,
+    detectedUrl : detectedUrl
+  }
+  const response: AxiosResponse<Pattern> = await axios.post<Pattern>(
+    `${baseUrl}/website/${websiteId}/pattern`,
+    body,
+    config
+  );
+  return response.data
+}
+
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, signIn, getWebsites, patternPost  };
