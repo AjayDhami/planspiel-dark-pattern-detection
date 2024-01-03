@@ -56,7 +56,7 @@ const WebsiteDashboard = () => {
             setPatternTypes(uniquePatternTypes);
             setExperts(uniqueExperts);
             setPhases(uniquePhases);
-            setFilteredArray(patterns)
+            setFilteredArray(data)
             console.log(data);
         }
     }
