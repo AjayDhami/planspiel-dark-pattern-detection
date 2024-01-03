@@ -14,3 +14,7 @@ body {
   display: flex;
   gap: 1rem;
 }
+
+.css-17slrf3-MuiFormHelperText-root {
+  margin: 3px 0 !important;
+}

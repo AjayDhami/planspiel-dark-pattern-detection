@@ -47,3 +47,10 @@ export interface WebsiteDetails
     Website,
     "websiteName" | "baseUrl" | "description" | "additionalUrls"
   > {}
+
+export interface WebsiteOnboardingFormProps {
+  open: boolean;
+  onClose: () => void;
+  fullScreen?: boolean;
+  onSuccess: () => void;
+}

@@ -17,17 +17,12 @@ import {
   Info as InfoIcon,
   Link as LinkIcon,
 } from "@mui/icons-material";
-import { Formik, FieldArray, Field, Form, ErrorMessage } from "formik";
+import { Formik, FieldArray, Field, Form } from "formik";
 import * as Yup from "yup";
 import { addWebsiteForCertification } from "../../api";
-import { WebsiteDetails } from "../../types";
-
-const validationSchema = Yup.object().shape({
-  websiteName: Yup.string().required("This field is required"),
-  baseUrl: Yup.string().required("This field is required").url("Invalid URL"),
-  description: Yup.string(),
-  additionalUrls: Yup.array().of(Yup.string().url("Invalid URL")),
-});
+import { WebsiteDetails, WebsiteOnboardingFormProps } from "../../types";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const initialValues: WebsiteDetails = {
   websiteName: "",
@@ -36,11 +31,60 @@ const initialValues: WebsiteDetails = {
   additionalUrls: [""],
 };
 
-const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
-  const handleSubmit = (values: WebsiteDetails, { resetForm }: any) => {
-    addWebsiteForCertification(values);
-    resetForm();
+const validationSchema = Yup.object().shape({
+  websiteName: Yup.string().required("This field is required"),
+  baseUrl: Yup.string()
+    .required("This field is required")
+    .url(
+      "Enter the website URL in the correct format (e.g. http://www.example.com)"
+    ),
+  description: Yup.string(),
+  additionalUrls: Yup.array().of(
+    Yup.string().url(
+      "Enter the website URL in the correct format (e.g. http://www.example.com)"
+    )
+  ),
+});
+
+const WebsiteOnboardingForm = ({
+  open,
+  onClose,
+  fullScreen = false,
+  onSuccess,
+}: WebsiteOnboardingFormProps) => {
+  const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
+
+  const handleClose = (
+    event: React.SyntheticEvent<Element, Event>,
+    reason: string
+  ) => {
+    if (reason && reason === "backdropClick" && isFormLoading) return;
+    onClose();
   };
+
+  const handleSubmit = async (values: WebsiteDetails): Promise<void> => {
+    try {
+      setIsFormLoading(true);
+      await addWebsiteForCertification(values);
+      toast.success("Website sent for certification");
+
+      setIsFormLoading(false);
+      onSuccess();
+      onClose();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      setIsFormLoading(false);
+    };
+  }, []);
 
   return (
     <Dialog
@@ -49,10 +93,12 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
       maxWidth="lg"
       fullWidth
       aria-labelledby="website-onboarding"
-      onClose={onClose}
+      onClose={handleClose}
     >
       <DialogTitle>
-        <Typography variant="h5">Add new Website</Typography>
+        <Typography variant="h5" component="span">
+          Add new Website
+        </Typography>
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -62,6 +108,7 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
             top: 12,
             color: (theme) => theme.palette.grey[500],
           }}
+          disabled={isFormLoading}
         >
           <CloseIcon />
         </IconButton>
@@ -72,7 +119,7 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ values, errors }) => (
+          {({ values, errors, touched }) => (
             <Form noValidate>
               <Grid container spacing={2} sx={{ mt: 0 }}>
                 <Grid item xs={12} md={6}>
@@ -82,11 +129,12 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                     name="websiteName"
                     fullWidth
                     required
-                  />
-                  <ErrorMessage
-                    name="websiteName"
-                    component="div"
-                    className="form-error"
+                    error={touched.websiteName && Boolean(errors.websiteName)}
+                    helperText={
+                      touched.websiteName &&
+                      Boolean(errors.websiteName) &&
+                      errors.websiteName
+                    }
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -96,11 +144,12 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                     name="baseUrl"
                     fullWidth
                     required
-                  />
-                  <ErrorMessage
-                    name="baseUrl"
-                    component="div"
-                    className="form-error"
+                    error={touched.baseUrl && Boolean(errors.baseUrl)}
+                    helperText={
+                      touched.baseUrl && Boolean(errors.baseUrl)
+                        ? errors.baseUrl
+                        : "e.g. http://www.example.com"
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -151,7 +200,13 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                         <Stack direction="column" spacing={1}>
                           {values.additionalUrls &&
                             values.additionalUrls.map((url, index) => (
-                              <Stack direction="row" spacing={2} key={index}>
+                              <Stack
+                                direction="row"
+                                spacing={2}
+                                key={index}
+                                alignItems="flex-start"
+                                justifyContent="center"
+                              >
                                 <Field
                                   as={TextField}
                                   id={`additionalUrls.${index}`}
@@ -164,11 +219,14 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                                       </InputAdornment>
                                     ),
                                   }}
-                                />
-                                <ErrorMessage
-                                  name={`additionalUrls.${index}`}
-                                  component="div"
-                                  className="form-error"
+                                  helperText={
+                                    errors.additionalUrls?.[index]
+                                      ? errors.additionalUrls[index]
+                                      : "e.g. http://www.example.com"
+                                  }
+                                  error={Boolean(
+                                    errors.additionalUrls?.[index]
+                                  )}
                                 />
                                 {values.additionalUrls &&
                                   values.additionalUrls.length > 1 && (
@@ -187,7 +245,11 @@ const WebsiteOnboardingForm = ({ open, onClose, fullScreen = false }: any) => {
                   </FieldArray>
                 </Grid>
                 <Grid item xs={12} display="flex" justifyContent="end">
-                  <Button type="submit" variant="contained">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={isFormLoading}
+                  >
                     Add Website
                   </Button>
                 </Grid>

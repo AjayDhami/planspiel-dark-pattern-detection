@@ -41,19 +41,20 @@ const DashboardPage = () => {
   const [websiteDataList, setWebsiteDataList] = useState<WebsiteResponse[]>([]);
   const [onboardingForm, setOnboardingForm] = useState<boolean>(false);
 
-  useEffect(() => {
-    const getWebsiteList = async (): Promise<void> => {
-      try {
-        const websites = await getAllWebsites();
-        setWebsiteDataList(websites);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          toast.error(`Error: ${error.message}`);
-        } else {
-          toast.error("An unknown error occurred.");
-        }
+  const getWebsiteList = async (): Promise<void> => {
+    try {
+      const websites = await getAllWebsites();
+      setWebsiteDataList(websites);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     getWebsiteList();
   }, []);
 
@@ -200,6 +201,7 @@ const DashboardPage = () => {
         fullScreen={isMobile}
         open={onboardingForm}
         onClose={() => setOnboardingForm(false)}
+        onSuccess={getWebsiteList}
       />
     </>
   );
