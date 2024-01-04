@@ -9,12 +9,9 @@ const Comments: React.FC<{ review: Comment, token : string, expertId : string }>
     const [replyClicked , setReplyClicked] = useState(false) 
     const expertName = "Amay Rajvaidya"
     const [replyText,  setReplyText] = useState("")
-    console.log(replyText);
-
       const handleReplySubmit = async() => {
         const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText, token)
-        console.log(replyObj);
-        
+        console.log(replyObj);  
       }
   return (
     <div>
@@ -35,7 +32,7 @@ const Comments: React.FC<{ review: Comment, token : string, expertId : string }>
                         <div className='mx-2 bg-blue-100 border-2 rounded-md p-1 border-blue-300 w-full rounded-2xl'>{review.response}</div>
                         </div>} */}
                     {(replyClicked) ?
-                      <div className='w-80 mt-3 mx-24' key={review.id}>
+                      <div className='w-100 mt-3 mx-24' key={review.id}>
                         <form action="">
                           <textarea 
                             name="description" 

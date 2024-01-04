@@ -138,7 +138,7 @@ const CommentPost = async(patternId : String, websiteId : String, expertId : Str
     body,
     config
   );
-  return response.data;
+  return response.status;
 }
 
 const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String, token : string) => {

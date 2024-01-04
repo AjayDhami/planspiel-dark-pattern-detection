@@ -38,7 +38,8 @@ const WebsiteDashboard = () => {
       patternType: "",
       patternPhase: "",
       websiteId : "",
-    })
+    });
+    const { patternData, setPatternData } = useExpertContext()
 
     const getPatterns = async () => {
         setPatterns([]);
@@ -61,7 +62,6 @@ const WebsiteDashboard = () => {
             setExperts(uniqueExperts);
             setPhases(uniquePhases);
             setFilteredArray(data)
-            console.log(data);
         }
     }
 
@@ -93,8 +93,8 @@ const WebsiteDashboard = () => {
     const openPatternModal = async (id:String) => {
       if(websiteId && token){
         const patternObj  = await getSpecificPattern(id , websiteId, token);
-        console.log(patternObj);
         setPatternDataforModal(patternObj);
+        setPatternData(patternObj);
         setIsPatternModalOpen(true)
       }  
     }
@@ -110,7 +110,7 @@ const WebsiteDashboard = () => {
           </div>
         </div>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
-        <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} patternData={patternDataforModal} expertId={experId ? experId : ""} token={token ? token : ""}/>
+        <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""} token={token ? token : ""}/>
         <div className='mx-24 shadow-xl rounded-2xl bg-white'>
           <div className='flex justify-between items-center pt-8 px-52'>
             <div className='flex justify-between items-center '>

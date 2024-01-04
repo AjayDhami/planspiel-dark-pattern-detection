@@ -38,7 +38,6 @@ export interface PatternData {
 export interface PatternDetailsProps {
     isOpen: boolean;
     onClose: () => void;
-    patternData : PatternData;
     expertId : string;
     token : string
 }
