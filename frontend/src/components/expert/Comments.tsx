@@ -1,17 +1,27 @@
 import React from 'react'
 import { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
-import axios from 'axios';
+import { getSpecificPattern } from '../../services/expertServices';
 import { replyPost, stringAvatar } from "../../services/expertServices"
 import { Reply, Comment } from '../../types';
+import { useExpertContext } from '../../context/ExpertContext';
 
 const Comments: React.FC<{ review: Comment, token : string, expertId : string }> = ({ review, token, expertId }) => {
     const [replyClicked , setReplyClicked] = useState(false) 
+    const { patternData, setPatternData } = useExpertContext();
     const expertName = "Amay Rajvaidya"
     const [replyText,  setReplyText] = useState("")
       const handleReplySubmit = async() => {
         const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText, token)
-        console.log(replyObj);  
+        console.log(replyObj); 
+        if(replyObj === 201){
+          const response = await getSpecificPattern(patternData.id , patternData.websiteId, token);
+          setReplyText("");
+          if(response){
+            setReplyClicked(false)
+            setPatternData(response);
+          }
+        }  
       }
   return (
     <div>
@@ -27,16 +37,13 @@ const Comments: React.FC<{ review: Comment, token : string, expertId : string }>
                         <div className='mx-2 bg-blue-100 border-2 rounded-2xl p-1 border-blue-300 w-full'>{comment.content}</div>
                       </div>
                     ))}
-                    {/* {review.response && <div className="flex items-center mt-2 mx-10 ">
-                        <Avatar {...stringAvatar(expertName)}/>
-                        <div className='mx-2 bg-blue-100 border-2 rounded-md p-1 border-blue-300 w-full rounded-2xl'>{review.response}</div>
-                        </div>} */}
                     {(replyClicked) ?
                       <div className='w-100 mt-3 mx-24' key={review.id}>
                         <form action="">
                           <textarea 
                             name="description" 
                             id="patterndescription"
+                            value={replyText}
                             onChange={(e) => setReplyText(e.target.value)}
                             className='block w-full h-10 rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-blue-300' 
                             placeholder='Reply to the comment'>

@@ -1,30 +1,24 @@
-import React , {useEffect, useState}from 'react'
+import React , { useState}from 'react'
 import Comments from './Comments';
 import { CommentPost } from '../../services/expertServices';
 import { IoMdClose } from "react-icons/io";
-import { PatternData, PatternDetailsProps } from '../../types';
+import {  PatternDetailsProps } from '../../types';
 import { getSpecificPattern } from '../../services/expertServices';
 import { useExpertContext } from '../../context/ExpertContext'
 
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId, token}) => {
   const [commentText,  setCommentText] = useState("")
-  // const [patternObject, setPatternObject] = useState<PatternData>();
+  const [commentTextClicked,  setCommentTextClicked] = useState(false);
   const [editing, setEditing] = useState(false);
   const { patternData, setPatternData } = useExpertContext()
-  // const getPatternsData = async () =>{
-  //   const response = await getSpecificPattern(patternData.id , patternData.websiteId, token);
-  //   console.log(response);
-  // }
-
   const handleCommentSubmit = async() => {
     const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText, token);
     if(commentObj === 201){
       const response = await getSpecificPattern(patternData.id , patternData.websiteId, token);
       setCommentText("");
       if(response){
-        setPatternData(response) 
-        console.log(patternData);
+        setPatternData(response)
       }
     }   
   }
@@ -93,6 +87,24 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   <div className='border-b-2 pb-4'>{patternData.description}</div>
                 </div>
               )}
+                <div className='p-4'>
+                  {/* <h2 className='font-bold text-xl text-blue-500'>Add Comments</h2> */}
+                  <div className='col-span-full mt-2'>
+                    <textarea 
+                      name="description" 
+                      id="patterndescription"
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      onClick={()=> setCommentTextClicked(true)}
+                      className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' 
+                      placeholder='Add a comment'>
+                    </textarea>
+                  </div>
+                  {commentTextClicked ? <div>
+                    <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-500 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
+                    <button className='col-span-1 p-2 rounded-lg hover:bg-blue-500 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
+                  </div> : null}
+                </div>
               <div className='px-4 py-2'>
                 <h2 className='font-bold text-xl text-blue-500'>Comments</h2>
                 <div>
@@ -105,20 +117,6 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                     <Comments review={comment} token={token} expertId={expertId}/> 
                   )))
                 } 
-                  <div>
-                  <h2 className='font-bold text-xl text-blue-500'>Add Comments</h2>
-                  <div className='col-span-full mt-2'>
-                    <textarea 
-                      name="description" 
-                      id="patterndescription"
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                      className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' 
-                      placeholder='Add a comment'>
-                    </textarea>
-                  </div>
-                  <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-500 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
-                </div>
                 </div>
               </div>
               </>
@@ -137,6 +135,23 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   <div>
                     <h2 className='font-bold text-xl text-blue-500'>Comments</h2>
                   </div>
+                  <div>
+                  {/* <h2 className='font-bold text-xl text-blue-500'>Add Comments</h2> */}
+                  <div className='col-span-full mt-2'>
+                    <textarea 
+                      name="description" 
+                      id="patterndescription"
+                      value={commentText}
+                      onClick={()=> setCommentTextClicked(true)}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' 
+                      placeholder='Add a feedback for the dark pattern'>
+                    </textarea>
+                  </div>
+                  {commentTextClicked ? <div>
+                    <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-500 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
+                    <button className='col-span-1 p-2 rounded-lg hover:bg-blue-500 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
+                  </div> : null}</div>
                 <div>
                 {patternData.comments.length === 0 ? (
                   <div className='bg-gray-100 p-4 my-3 rounded-lg'>
@@ -147,20 +162,6 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                     <Comments review={comment} token={token} expertId={expertId}/> 
                   )))
                 } 
-                </div>
-                <div>
-                  <h2 className='font-bold text-xl text-blue-500'>Add Comments</h2>
-                  <div className='col-span-full mt-2'>
-                    <textarea 
-                      name="description" 
-                      id="patterndescription"
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                      className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' 
-                      placeholder='Add a feedback for the dark pattern'>
-                    </textarea>
-                  </div>
-                  <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-500 mt-2' onClick={handleCommentSubmit}>Submit</button>
                 </div>
                 <div className="flex justify-end" >
                   <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-500 mt-2'>Complete Verification</button>

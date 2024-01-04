@@ -156,7 +156,7 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
     body,
     config
   );
-  return response.data
+  return response.status
   
 }
 
