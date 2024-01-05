@@ -3,15 +3,10 @@ import './Expertsignin.css'
 import AuthContext from "../../context/AuthContext1";
 import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-
-interface Credentials {
-    email: string;
-    password: string;
-    role: string;
-}
+import { UserCredentials } from '../../types';
 
 const ExpertSignin = () => {
-    const [credentials, setCredentials] = useState<Credentials>({
+    const [credentials, setCredentials] = useState<UserCredentials>({
         email: "",
         password: "",
         role: "Expert"
@@ -33,7 +28,12 @@ const ExpertSignin = () => {
     }
     const handleSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
-        const loginSuccess = await loginUser(credentials.email, credentials.password, credentials.role);
+        const user = {
+            email: "",
+            password: "",
+            role: ""
+        }
+        const loginSuccess = await loginUser(credentials);
         if (loginSuccess) {
             navigate('/expertdashboard');
           } else {

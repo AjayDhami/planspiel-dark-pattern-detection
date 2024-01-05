@@ -1,31 +1,15 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-interface Credentials {
-  email: string;
-  password: string;
-  role: string;
-}
-
-interface UserData {
-  email : string
-}
-
-interface AuthContextProps {
-  user: UserData | null;
-  authTokens: string | null;
-  setAuthTokens: (tokens: string | null) => void;
-  setUser: (user: UserData | null) => void;
-  signUpUser: (e: React.FormEvent) => Promise<void>;
-  loginUser: (email: String, password : String, role: String) => Promise<boolean>;
-  logoutUser: () => void;
-}
+import {
+  AuthContextProps,
+  AuthProviderProps,
+  User,
+  UserCredentials,
+} from "../types";
+import { loginUser as loginUserAPI } from "../api";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
@@ -33,40 +17,35 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
     localStorage.getItem("authToken") ? localStorage.getItem("authToken") : null
   );
-  const [user, setUser] = useState<UserData | null>(() =>
+  
+  const [user, setUser] = useState<User | null>(() =>
     localStorage.getItem("authToken")
       ? jwtDecode(localStorage.getItem("authToken") as string)
       : null
   );
   const [loading, setLoading] = useState(true);
-  const credentials: Credentials = {
-    email: "alien@yaml.com",
-    password: "xcxcxc",
-    role: "Expert",
-  };
-  const history = useNavigate();
+  const navigate = useNavigate();
 
-  const loginUser = async (email: String, password : String, role: String) => {
+  const loginUser = async (user: UserCredentials): Promise<boolean> => {
     try {
-      const response = await axios.post<{ accessToken: string }>(
-        `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signin`,
-        { email: email, password: password, role: role }
-      );
-
-      if (response.status === 201) {
+      const response = await loginUserAPI(user);
         const token = response.data.accessToken;
         localStorage.setItem("authToken", token);
+        localStorage.setItem("userId", jwtDecode(token).sub || '')
+        
         setAuthTokens(token);
         setUser(jwtDecode(token));
-        localStorage.setItem("userId", jwtDecode(token).sub || '');
-        return true
+
+      return true;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(
+          `User not authenticated. Please check email and password and try again`
+        );
       } else {
-        alert("Something went wrong!");
-        return false
+        toast.error("An unknown error occurred.");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      return false
+      return false;
     }
   };
 
@@ -86,12 +65,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           lastName: lastName.value,
           email: email.value,
           password: password.value,
-          role: credentials.role,
+          role: "Client",
         }
       );
 
       if (response.status === 201) {
-        history("/signin");
+        navigate("/signin");
       } else {
         alert("Something went wrong!");
       }
@@ -104,7 +83,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authToken");
-    history("/login");
+    localStorage.removeItem("userId");
+
+    toast.success("You have been signed out")
+    navigate("/signIn");
   };
 
   const contextData: AuthContextProps = {

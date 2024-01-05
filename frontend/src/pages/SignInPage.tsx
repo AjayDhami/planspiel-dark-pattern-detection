@@ -13,6 +13,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./SignIn.css";
 import AuthContext from "../context/AuthContext1";
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 interface Credentials {
   email: string;
@@ -48,10 +50,11 @@ const defaultTheme = createTheme({
 const logo = require("./images/Logo.png");
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState<Credentials>({
     email: "",
     password: "",
-    role: "Expert"
+    role: "Client"
   });
   const authContext = useContext(AuthContext)
   if(!authContext) {
@@ -65,6 +68,16 @@ export default function SignIn() {
       ...prevCredentials,
       [e.target.name]: e.target.value
     }));
+  }
+
+  const handleSubmit = async (e:React.FormEvent) => {
+    e.preventDefault();
+
+    const loginSuccess = await loginUser(credentials);
+    if (loginSuccess) {
+      toast.success("User Authenticated successfully")
+      navigate('/client/dashboard')
+    }
   }
 
   return (
@@ -96,7 +109,7 @@ export default function SignIn() {
             </div>
             <Box
               component="form"
-              onSubmit={()=> loginUser(credentials.email,credentials.password,credentials.role)}
+              onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 1 }}
             >

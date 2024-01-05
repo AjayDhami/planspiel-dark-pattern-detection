@@ -1,50 +1,72 @@
-import { Box, Button, Paper, Stack, Typography, styled } from "@mui/material";
-
-type CardProps = {
-  id: string;
-  title: string;
-  isCertified: boolean;
-  feedback: Array<any>;
-};
+import { Box, Button, Paper, Tooltip, Typography, styled } from "@mui/material";
+import {
+  Dangerous as DangerousIcon,
+  HourglassTop as PendingIcon,
+  Verified as VerifiedIcon,
+} from "@mui/icons-material";
+import { WebsiteCardProps } from "../types";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   color: theme.palette.text.secondary,
+  background: theme.palette.background.paper,
+  borderRadius: 16,
+  minHeight: 150,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  alignItems: "center",
 }));
 
-const WebsiteCard = ({ id, title, isCertified, feedback }: CardProps) => {
+const WebsiteCard = ({
+  websiteName,
+  baseUrl,
+  isCompleted,
+  phase,
+}: WebsiteCardProps) => {
   return (
-    <CustomPaper elevation={3} style={{ minHeight: "8rem" }}>
-      <Stack spacing={3}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h4" component="span">
-            {title}
-          </Typography>
-          {isCertified && (
-            <Box>
-              <Button size="small" variant="contained" color="success">
-                Download Certificate
-              </Button>
-            </Box>
-          )}
-          {feedback.length > 0 && (
-            <Box>
-              <Button size="small" variant="contained" color="error">
-                View Feedback
-              </Button>
-            </Box>
-          )}
+    <CustomPaper>
+      <Typography variant="h5" component="div">
+        {websiteName}
+      </Typography>
+
+      {isCompleted ? (
+        phase === "Finished" ? (
+          <>
+            <Tooltip title="Certification Successful" arrow>
+              <VerifiedIcon
+                style={{ width: "50px", height: "50px" }}
+                color="success"
+              />
+            </Tooltip>
+            <Button size="small" variant="contained" color="success" fullWidth>
+              Download Certificate
+            </Button>
+          </>
+        ) : (
+          <>
+            <Tooltip title="Certification Failed" arrow>
+              <DangerousIcon
+                style={{ width: "50px", height: "50px" }}
+                color="error"
+              />
+            </Tooltip>
+            <Button size="small" variant="contained" color="error" fullWidth>
+              View Feedback
+            </Button>
+          </>
+        )
+      ) : (
+        <Box>
+          <Tooltip title="Website Certification in Progress" arrow>
+            <PendingIcon
+              style={{ width: "50px", height: "50px" }}
+              color="secondary"
+            />
+          </Tooltip>
         </Box>
-        <Typography variant="body1">{title}</Typography>
-      </Stack>
+      )}
     </CustomPaper>
   );
 };
