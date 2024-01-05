@@ -1,9 +1,25 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Box, Container, CssBaseline } from "@mui/material";
+import withAuth from "../hoc/withAuth";
+import { useContext, useEffect } from "react";
+import { setRedirectCallback } from "../utils/AxiosHelper";
+import AuthContext from "../context/AuthContext1";
 
 const ClientDashboardLayout = () => {
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    setRedirectCallback(() => {
+      console.log("setRedirectCallback executed");
+      authContext?.logoutUser();
+    });
+
+    return () => {
+      setRedirectCallback(null);
+    };
+  }, [authContext]);
+
   return (
     <Box
       sx={{
@@ -12,7 +28,6 @@ const ClientDashboardLayout = () => {
         height: "100vh",
         maxHeight: "100vh",
         overflow: "hidden",
-        backgroundColor: "#FAF9F6",
       }}
     >
       <CssBaseline />
@@ -20,7 +35,11 @@ const ClientDashboardLayout = () => {
       <Container
         component="main"
         maxWidth="xl"
-        sx={{ mt: 4, overflowY: "auto" }}
+        sx={{
+          my: 1,
+          overflowY: "auto",
+          height: "inherit",
+        }}
       >
         <Outlet />
       </Container>
@@ -28,4 +47,4 @@ const ClientDashboardLayout = () => {
   );
 };
 
-export default ClientDashboardLayout;
+export default withAuth(ClientDashboardLayout);

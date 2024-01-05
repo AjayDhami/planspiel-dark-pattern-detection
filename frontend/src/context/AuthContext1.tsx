@@ -1,31 +1,15 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-interface Credentials {
-  email: string;
-  password: string;
-  role: string;
-}
-
-interface UserData {
-  email : string
-}
-
-interface AuthContextProps {
-  user: UserData | null;
-  authTokens: string | null;
-  setAuthTokens: (tokens: string | null) => void;
-  setUser: (user: UserData | null) => void;
-  signUpUser: (e: React.FormEvent) => Promise<void>;
-  loginUser: (e: React.FormEvent) => Promise<void>;
-  logoutUser: () => void;
-}
+import {
+  AuthContextProps,
+  AuthProviderProps,
+  User,
+  UserCredentials,
+} from "../types";
+import { loginUser as loginUserAPI } from "../api";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
@@ -33,44 +17,51 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
     localStorage.getItem("token") ? localStorage.getItem("token") : null
   );
-  const [user, setUser] = useState<UserData | null>(() =>
+  const [user, setUser] = useState<User | null>(() =>
     localStorage.getItem("token")
       ? jwtDecode(localStorage.getItem("token") as string)
       : null
   );
   const [loading, setLoading] = useState(true);
-  const credentials: Credentials = {
+  const credentials: UserCredentials = {
     email: "alien@yaml.com",
     password: "xcxcxc",
     role: "Client",
   };
-  const history = useNavigate();
+  const navigate = useNavigate();
 
-  const loginUser = async (e: React.FormEvent) => {
+  const loginUser = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
     const { email, password } = e.target as unknown as {
       email: HTMLFormElement;
       password: HTMLFormElement;
     };
+    const user = {
+      email: email.value,
+      password: password.value,
+      role: "Client",
+    };
 
-    e.preventDefault();
     try {
-      const response = await axios.post<{ accessToken: string }>(
-        `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signin`,
-        { email: email.value, password: password.value, role: credentials.role }
-      );
-
+      const response = await loginUserAPI(user);
       if (response.status === 201) {
-        console.log(response);
         const token = response.data.accessToken;
         localStorage.setItem("token", token);
+
         setAuthTokens(token);
         setUser(jwtDecode(token));
-        console.log(user);
-      } else {
-        alert("Something went wrong!");
+
+        toast.success("User Logged in successfully");
+        navigate("/client/dashboard");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(
+          `User not authenticated. Please check email and password and try again`
+        );
+      } else {
+        toast.error("An unknown error occurred.");
+      }
     }
   };
 
@@ -95,7 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       );
 
       if (response.status === 201) {
-        history("/signin");
+        navigate("/signin");
       } else {
         alert("Something went wrong!");
       }
@@ -108,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("token");
-    history("/login");
+    navigate("/signin");
   };
 
   const contextData: AuthContextProps = {

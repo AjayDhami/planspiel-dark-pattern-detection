@@ -3,7 +3,6 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import ClientDashboardLayout from "./layouts/ClientDashboardLayout";
 import DashboardPage from "./pages/client/DashboardPage";
-import WebsiteOnboardingPage from "./pages/client/WebsiteOnboardingPage";
 import WebsiteViewPage from "./pages/client/WebsiteViewPage";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
@@ -22,7 +21,6 @@ function App() {
           {/* Redirect to actual dashboard instead of just layout page */}
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="onboarding" element={<WebsiteOnboardingPage />} />
           <Route path="website/:webId" element={<WebsiteViewPage />} />
         </Route>
       </Routes>
