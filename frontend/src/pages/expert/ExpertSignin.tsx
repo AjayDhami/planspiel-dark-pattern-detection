@@ -50,25 +50,25 @@ const ExpertSignin = () => {
                         <form onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="patterntype" className='mb-2 block text-md font-medium text-blue-500'>Enter Email</label>
-                            <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green-300'>
+                            <div className='rounded-md shadow-sm ring-1 ring-inset ring-gray-300'>
                                 <input 
                                     type='text' 
                                     name='email' 
                                     id='patterntype'
                                     onChange={handleChange}
-                                    className='block border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-500 focus:ring-0 sm:text-sm sm:leading-6' 
+                                    className='block border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-500 w-full text-white' 
                                     placeholder="Enter your email"/>
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="patternlink" className='mb-2 block text-md font-medium text-blue-500'>Password</label>
-                            <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green-300'>
+                            <label htmlFor="patternlink" className='my-2 block text-md font-medium text-blue-500'>Password</label>
+                            <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300'>
                                 <input 
                                     type='password' 
                                     name='password' 
                                     id='patternlink'
                                     onChange={handleChange}
-                                    className='block border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-500 focus:ring-0 sm:text-sm sm:leading-6' 
+                                    className='block border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-500 text-white w-full' 
                                     placeholder="Enter your password"/>
                             </div>
                         </div>
