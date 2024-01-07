@@ -9,7 +9,6 @@ import { useExpertContext } from '../../context/ExpertContext';
 const Comments: React.FC<{ review: Comment, token : string, expertId : string }> = ({ review, token, expertId }) => {
     const [replyClicked , setReplyClicked] = useState(false) 
     const { patternData, setPatternData } = useExpertContext();
-    const expertName = "Amay Rajvaidya"
     const [replyText,  setReplyText] = useState("")
       const handleReplySubmit = async() => {
         const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText, token)

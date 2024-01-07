@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId, token}) => {
   const [commentText,  setCommentText] = useState("")
   const [commentTextClicked,  setCommentTextClicked] = useState(false);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [editing, setEditing] = useState(false);
   const { patternData, setPatternData } = useExpertContext()
   const handleCommentSubmit = async() => {

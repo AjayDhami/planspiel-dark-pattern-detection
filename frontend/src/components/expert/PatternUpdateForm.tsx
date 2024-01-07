@@ -6,7 +6,7 @@ interface PatternUpdateProps {
 }
 
 const PatternUpdateForm: React.FC<PatternUpdateProps> = ({ isOpen, onClose }) => {
-    const { patternData, setPatternData } = useExpertContext();
+    const { patternData } = useExpertContext();
     if(!isOpen) return null
   return (
     <div className='space-y-4 px-4'>
@@ -18,7 +18,6 @@ const PatternUpdateForm: React.FC<PatternUpdateProps> = ({ isOpen, onClose }) =>
                         type='text' 
                         name='patterntype' 
                         id='patterntype' 
-                        //onChange={handleChange}
                         className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6' placeholder="Enter Pattern Type"/>
                     </div>
                   </div>
@@ -30,7 +29,6 @@ const PatternUpdateForm: React.FC<PatternUpdateProps> = ({ isOpen, onClose }) =>
                         type='text' 
                         name='patternlink' 
                         id='patternlink'
-                        //onChange={handleChange} 
                         className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6' placeholder="Enter Link where pattern is detected"/>
                     </div>
                   </div>
@@ -40,7 +38,6 @@ const PatternUpdateForm: React.FC<PatternUpdateProps> = ({ isOpen, onClose }) =>
                       value={patternData.description}
                       name="description" 
                       id="patterndescription"
-                      //onChange={handleChange}
                       className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' placeholder='Short description for pattern detection and review'></textarea>
                   </div>
                   <div className='space-x-4 border-b-2 pb-4 flex justify-start'>

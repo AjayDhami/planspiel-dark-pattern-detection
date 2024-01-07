@@ -28,11 +28,6 @@ const ExpertSignin = () => {
     }
     const handleSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
-        const user = {
-            email: "",
-            password: "",
-            role: ""
-        }
         const loginSuccess = await loginUser(credentials);
         if (loginSuccess) {
             navigate('/expertdashboard');

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getWebsites } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
-import { useExpertContext } from '../../context/ExpertContext';
 import { useNavigate } from 'react-router-dom';
 interface WebsiteData {
     baseUrl: string;
