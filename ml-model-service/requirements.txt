@@ -16,3 +16,4 @@ Werkzeug==2.0.1
 selenium==4.16.0
 beautifulsoup4==4.12.2
 ordered-set==4.1.0
+gunicorn==21.2.0
