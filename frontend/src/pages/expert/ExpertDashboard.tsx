@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { getWebsites } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { setRedirectCallback } from "../../utils/AxiosHelper";
+import AuthContext from "../../context/AuthContext1";
+import withAuth from '../../hoc/withAuth';
 interface WebsiteData {
     baseUrl: string;
     description : string;
@@ -13,6 +16,16 @@ interface WebsiteData {
 }
 
 const ExpertDashboard : React.FC = () => {
+    const authContext = useContext(AuthContext);
+    useEffect(() => {
+        setRedirectCallback(() => {
+          authContext?.logoutUser();
+        });
+    
+        return () => {
+          setRedirectCallback(null);
+        };
+    }, [authContext]);
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
     const navigate = useNavigate();
 
@@ -41,7 +54,7 @@ const ExpertDashboard : React.FC = () => {
   return (
     <>
         <Navbar/>
-        <div className='grid md:grid-cols-4 mx-8 my-12'>
+        <div className='grid md:grid-cols-4 mx-8 my-12 bg:white'>
             {websiteData.map((website, index)=>(
                 <div key={website.websiteId} 
                     className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl hover:border-2 border-blue-300 hover:bg-blue-100 cursor-pointer'
@@ -55,4 +68,4 @@ const ExpertDashboard : React.FC = () => {
   )
 }
 
-export default ExpertDashboard
+export default withAuth(ExpertDashboard)

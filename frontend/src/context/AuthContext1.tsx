@@ -84,7 +84,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
-
     toast.success("You have been signed out")
     if(user?.role === "Expert"){navigate("/expertsignin")}
     else{navigate("/signIn")};

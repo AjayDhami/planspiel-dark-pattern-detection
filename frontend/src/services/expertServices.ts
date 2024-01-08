@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import api from "../utils/AxiosHelper";
 
 interface Reply {
   expertId : string;
@@ -76,7 +77,7 @@ const getWebsites = async(id:String, authToken : String) => {
     },
   };
   try {
-    const response = await axios.get(
+    const response = await api.get(
       `${baseUrl}/website?userId=${id}`,
       config
     );
@@ -94,7 +95,7 @@ const getPatternsData = async (websiteId: string, token: string): Promise<Servic
   };
 
   try {
-    const response: AxiosResponse<ServiceResponse> = await axios.get<ServiceResponse>(
+    const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
       `${baseUrl}/website/${websiteId}/pattern`,
       config
     );
@@ -112,7 +113,7 @@ const getSpecificPattern = async (id: String, websiteId: String, token: string):
     },
   };
   try {
-    const response: AxiosResponse<Pattern> = await axios.get<Pattern>(
+    const response: AxiosResponse<Pattern> = await api.get<Pattern>(
       `${baseUrl}/website/${websiteId}/pattern/${id}`,
       config
     );
@@ -133,7 +134,7 @@ const CommentPost = async(patternId : String, websiteId : String, expertId : Str
     expertId : expertId,
     content : commentText
   }
-  const response: AxiosResponse<Pattern> = await axios.post<Pattern>(
+  const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment`,
     body,
     config
@@ -151,7 +152,7 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
     expertId : expertId,
     content : replyText
   }
-  const response: AxiosResponse<Pattern> = await axios.post<Pattern>(
+  const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
     body,
     config
@@ -173,7 +174,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     description : description,
     detectedUrl : detectedUrl
   }
-  const response: AxiosResponse<Pattern> = await axios.post<Pattern>(
+  const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern`,
     body,
     config

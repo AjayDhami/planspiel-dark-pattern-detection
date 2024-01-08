@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useExpertContext } from '../../context/ExpertContext'
 import { getPatternsData, getSpecificPattern } from '../../services/expertServices';
 import Navbar from '../../components/expert/Navbar';
@@ -6,9 +6,22 @@ import PatternCard from '../../components/expert/PatternCard';
 import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 import PatternDetailsComponent from '../../components/expert/PatternDetailsComponent';
 import { PatternData } from '../../types';
+import { setRedirectCallback } from "../../utils/AxiosHelper";
+import AuthContext from "../../context/AuthContext1";
+import withAuth from '../../hoc/withAuth';
 
 
 const WebsiteDashboard = () => {
+    const authContext = useContext(AuthContext);
+    useEffect(() => {
+        setRedirectCallback(() => {
+          authContext?.logoutUser();
+        });
+    
+        return () => {
+          setRedirectCallback(null);
+        };
+    }, [authContext]);
     const websiteId = sessionStorage.getItem("websiteId")
     const websiteName = sessionStorage.getItem("websiteName")
     const [patterns, setPatterns] = useState<any[]>([]);
@@ -158,4 +171,4 @@ const WebsiteDashboard = () => {
   )
 }
 
-export default WebsiteDashboard
+export default withAuth(WebsiteDashboard)

@@ -5,6 +5,10 @@ import { useContext } from "react";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+  const handleClick = () =>{
+    // window.matchMedia('(prefers-color-scheme: dark)').matches
+    document.documentElement.classList.add('dark');
+  }
   return (
     <div className='flex justify-between items-center shadow-xl'>
         <div className='w-14 mx-12 py-6'><img src="/assets/logo.png" alt="logo" /></div>
@@ -13,6 +17,7 @@ const Navbar = () => {
             <h2 className='font-bold text-lg text-blue-500 mr-10'>Profile</h2>
             <h2 className='font-bold text-lg text-blue-500 mr-10 cursor-pointer' onClick={authContext?.logoutUser}>Logout</h2>
             {/* <CgProfile className='text-2xl'/> */}
+            <button onClick={handleClick}>Dark</button>
         </div>
     </div>
   )
