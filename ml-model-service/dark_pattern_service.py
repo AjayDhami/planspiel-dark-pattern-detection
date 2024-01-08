@@ -2,11 +2,13 @@ from model_training.dark_pattern_model_train import predict_website_dark_pattern
 
 
 def create_model():
+    print('Creating Dark Pattern Model')
     create_dark_pattern_detection_model()
     return 'Successfully model created', 200
 
 
 def parse_website_url(website_id, params):
+    print('Parsing website')
     website_urls = params['websiteUrls']
 
     # TODO change implementation of web_scrap method to accept list of website_urls and store their content in given website id
