@@ -45,12 +45,6 @@ interface ServiceResponse {
 const baseUrl : String = "http://localhost:8080"
 
 const signIn = async (email: String, password : String, role: String) => {
-  const config = {
-    headers: {
-      'Authorization': 'Bearer ACCESS_TOKEN',
-      'ngrok-skip-browser-warning': 'any',
-    },
-  };
   const body = {
     email : email,
     password : password,
@@ -61,7 +55,6 @@ const signIn = async (email: String, password : String, role: String) => {
     const response = await axios.post(
       `${baseUrl}/user/signin`,
       body,
-      config
     );
     return response.data.accessToken;
   } catch (error) {
@@ -71,33 +64,17 @@ const signIn = async (email: String, password : String, role: String) => {
 };
 
 const getWebsites = async(id:String, authToken : String) => {
-  const config = {
-    headers: {
-      'Authorization': `${authToken}`
-    },
-  };
   try {
-    const response = await api.get(
-      `${baseUrl}/website?userId=${id}`,
-      config
-    );
+    const response = await api.get(`${baseUrl}/website?userId=${id}`);
     return response.data
   } catch (error) {
-    console.log(error);
   }
 }
 
 const getPatternsData = async (websiteId: string, token: string): Promise<ServiceResponse> => {
-  const config = {
-    headers: {
-      'Authorization': `${token}`,
-    },
-  };
-
   try {
     const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
       `${baseUrl}/website/${websiteId}/pattern`,
-      config
     );
     return response.data;
   } catch (error) {
@@ -107,15 +84,9 @@ const getPatternsData = async (websiteId: string, token: string): Promise<Servic
 };
 
 const getSpecificPattern = async (id: String, websiteId: String, token: string): Promise<Pattern> => {
-  const config = {
-    headers: {
-      'Authorization': `${token}`,
-    },
-  };
   try {
     const response: AxiosResponse<Pattern> = await api.get<Pattern>(
       `${baseUrl}/website/${websiteId}/pattern/${id}`,
-      config
     );
     return response.data;
   } catch (error) {
@@ -125,11 +96,6 @@ const getSpecificPattern = async (id: String, websiteId: String, token: string):
 };
 
 const CommentPost = async(patternId : String, websiteId : String, expertId : String, commentText : String, token : string) => {
-  const config = {
-    headers: {
-      'Authorization': `${token}`,
-    },
-  };
   const body = {
     expertId : expertId,
     content : commentText
@@ -137,17 +103,11 @@ const CommentPost = async(patternId : String, websiteId : String, expertId : Str
   const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment`,
     body,
-    config
   );
   return response.status;
 }
 
 const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String, token : string) => {
-  const config = {
-    headers: {
-      'Authorization': `${token}`,
-    },
-  };
   const body = {
     expertId : expertId,
     content : replyText
@@ -155,19 +115,12 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
   const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
     body,
-    config
   );
   return response.status
   
 }
 
 const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string, token : string) =>{
-  const config = {                 
-    headers : {
-        'Authorization':`${token}`,
-        'ngrok-skip-browser-warning': 'any'
-    }
-  }
   const body = {
     createdByExpertId : expertId,
     patternType : patternType,
@@ -177,7 +130,6 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
   const response: AxiosResponse<Pattern> = await api.post<Pattern>(
     `${baseUrl}/website/${websiteId}/pattern`,
     body,
-    config
   );
   return response.status
 }

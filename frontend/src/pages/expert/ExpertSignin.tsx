@@ -31,9 +31,7 @@ const ExpertSignin = () => {
         const loginSuccess = await loginUser(credentials);
         if (loginSuccess) {
             navigate('/expertdashboard');
-          } else {
-            alert("Login failed. Please check your credentials.");
-          }
+          } 
       }
   return (
         <div className='grid md:grid-cols-4'>

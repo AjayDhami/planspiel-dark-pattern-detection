@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { useExpertContext } from '../../context/ExpertContext'
 import { getPatternsData, getSpecificPattern } from '../../services/expertServices';
 import Navbar from '../../components/expert/Navbar';
@@ -8,7 +8,7 @@ import PatternDetailsComponent from '../../components/expert/PatternDetailsCompo
 import { PatternData } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
-import withAuth from '../../hoc/withAuth';
+import withExpertAuth from '../../hoc/withExpertAuth';
 
 
 const WebsiteDashboard = () => {
@@ -40,7 +40,7 @@ const WebsiteDashboard = () => {
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const { setPatternData } = useExpertContext()
 
-    const getPatterns = async () => {
+    const getPatterns = useCallback( async () => {
         setPatterns([]);
         let data : any = [];
         if(websiteId && token){
@@ -62,11 +62,11 @@ const WebsiteDashboard = () => {
             setPhases(uniquePhases);
             setFilteredArray(data)
         }
-    }
+    },[websiteId, token])
 
     useEffect(()=>{
         getPatterns();
-    },[]);
+    },[getPatterns]);
     useEffect(() => {
         const filteredArray = patterns.filter((item) => {
             return (
@@ -76,7 +76,7 @@ const WebsiteDashboard = () => {
             );
         });
         setFilteredArray(filteredArray);
-    }, [filters]);
+    }, [filters, patterns]);
 
     const handleSelectOption = (filterType : string,option: string) => {
         setFilters(prevFilters => ({
@@ -171,4 +171,4 @@ const WebsiteDashboard = () => {
   )
 }
 
-export default withAuth(WebsiteDashboard)
+export default withExpertAuth(WebsiteDashboard)

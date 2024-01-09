@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { getWebsites } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
-import withAuth from '../../hoc/withAuth';
+import withExpertAuth from '../../hoc/withExpertAuth';
 interface WebsiteData {
     baseUrl: string;
     description : string;
@@ -31,19 +31,18 @@ const ExpertDashboard : React.FC = () => {
 
     const id  = localStorage.getItem("userId")
     const authToken = localStorage.getItem("authToken")
-    const getWebsiteData = async () => {
+    const getWebsiteData = useCallback( async () => {
         setWebsiteData([]);
         if(id && authToken){
             let websites : any = []
             websites = await getWebsites(id, authToken);
-            setWebsiteData(websites)  
-            console.log(websiteData);
+            setWebsiteData(websites) 
         }
-    }
+    },[id,authToken])
 
     useEffect(()=>{
         getWebsiteData();
-    },[])
+    },[getWebsiteData])
 
     const handleClick = (id:string, websiteName: string) => {
         sessionStorage.setItem("websiteId", id);
@@ -68,4 +67,4 @@ const ExpertDashboard : React.FC = () => {
   )
 }
 
-export default withAuth(ExpertDashboard)
+export default withExpertAuth(ExpertDashboard)
