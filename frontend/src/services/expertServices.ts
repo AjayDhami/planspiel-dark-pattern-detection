@@ -77,6 +77,20 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
   return response.status
 }
 
+const postVerification = async(websiteId : string, patternId : string, expertId : string, patternExists : boolean) =>{
+  const body = {
+    websiteId : websiteId,
+    patternId : patternId,
+    expertId : expertId,
+    patternExists : patternExists
+  }
+  const response: AxiosResponse<PatternData> = await api.put<PatternData>(
+    `${baseUrl}/website/updatePatternPhase`,
+    body,
+  );
+  return response.status
+}
+
 function stringToColor(string: string) {
   let hash = 0;
   let i;
@@ -99,4 +113,4 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar  };
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification  };

@@ -3,13 +3,12 @@ import Comments from './Comments';
 import { CommentPost } from '../../services/expertServices';
 import { IoMdClose } from "react-icons/io";
 import {  PatternDetailsProps } from '../../types';
-import { getSpecificPattern } from '../../services/expertServices';
+import { getSpecificPattern, postVerification } from '../../services/expertServices';
 import { useExpertContext } from '../../context/ExpertContext';
 import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from './PatternUpdateForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId, token}) => {
   const [commentText,  setCommentText] = useState("")
@@ -30,6 +29,22 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
       }
     } else{
       toast.error("Error while adding comment, please try again", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }  
+  }
+  const handleVerifySubmit = async(patternExists : boolean) => {
+    const response = await postVerification(patternData.websiteId, patternData.id, expertId, patternExists);
+    if(response === 200){
+      toast.success("Verified Successfully", {
+        position: toast.POSITION.TOP_CENTER
+      });
+      const data = await getSpecificPattern(patternData.id , patternData.websiteId, token);
+      if(data){
+        setPatternData(data)
+      }
+    }else{
+      toast.error("Error while verification, please try again", {
         position: toast.POSITION.TOP_CENTER
       });
     }  
@@ -73,25 +88,37 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   <div className='border-b-2 pb-4'>{patternData.description}</div>
                 </div>
               )}
+                {patternData.expertVerifications.map((verify) => (
+                    verify.expertId === expertId && verify.expertVerificationPhase === "NotVerified" ? (
+                    <>
+                      <button className='bg-red-300 p-2 mr-5' onClick={()=>handleVerifySubmit(true)}>Verify with pattern</button>
+                      <button className='bg-green-300 p-2' onClick={()=>handleVerifySubmit(false)}>Verify but pattern doesn't exist</button>
+                      <div className='p-4'>
+                        </div>
+                    </>
+                    ) : verify.expertId === expertId ? (<h2>
+                      Already Verified : {verify.expertVerificationPhase}
+                    </h2>) : null
+                  ))}
                 <div className='p-4'>
-                  <div className='col-span-full mt-2'>
-                    <textarea 
-                      name="description" 
-                      id="patterndescription"
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                      onClick={()=> setCommentTextClicked(true)}
-                      className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400' 
-                      placeholder='Add a comment'>
-                    </textarea>
-                  </div>
+                <div className='col-span-full mt-2'>
+                  <textarea 
+                    name="description" 
+                    id="patterndescription"
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    onClick={()=> setCommentTextClicked(true)}
+                    className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400' 
+                    placeholder='Add a comment'>
+                  </textarea>
+                </div>
                   {commentTextClicked ? <div>
                     <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-400 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
                     <button className='col-span-1 p-2 rounded-lg hover:bg-gray-200 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
                   </div> : null}
                 </div>
               <div className='px-4 py-2'>
-                <h2 className='font-bold text-xl text-blue-500'>Comments</h2>
+                  <h2 className='font-bold text-xl text-blue-500'>Comments</h2>
                 <div>
                 {patternData.comments.length === 0 ? (
                   <div className='bg-gray-100 p-4 my-3 rounded-lg'>

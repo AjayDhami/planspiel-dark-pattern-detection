@@ -51,7 +51,7 @@ const WebsiteDashboard = () => {
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
             const uniqueExperts = data
-                .map((item : PatternData) => item.expertName)
+                .map((item : PatternData) => `${item.expertName}-${item.createdByExpertId}`)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
             const uniquePhases = data
@@ -59,6 +59,7 @@ const WebsiteDashboard = () => {
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
             setPatternTypes(uniquePatternTypes);
             setExperts(uniqueExperts);
+            console.log(uniqueExperts);
             setPhases(uniquePhases);
             setFilteredArray(data)
         }
@@ -105,6 +106,9 @@ const WebsiteDashboard = () => {
         <div className='flex justify-between py-4 px-24'>
           <div>
             <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
+          </div>
+          <div>
+            <button>Publish</button>
           </div>
         </div>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>

@@ -27,6 +27,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
             const response = await patternPost(websiteId,experId,formData.patterntype, formData.description, formData.patternlink,token );
             console.log(response);  
             if(response === 201){
+                onClose();
                 toast.success("Pattern added successfully", {
                     position: toast.POSITION.TOP_CENTER
                 });
@@ -51,11 +52,12 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                     <h2 className='text-base font-bold leading-7'>Add a Pattern</h2>
                     <div className='grid md:grid-cols-3 space-x-4'>
                         <div className='col-span-1'>
-                            <label htmlFor="patterntype" className='mb-2 block text-md font-medium'>Pattern Type</label>
+                            <label htmlFor="patterntype" className='mb-2 block text-md font-medium'>Pattern Type *</label>
                             <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green-300'>
                                 <input 
                                     type='text' 
-                                    name='patterntype' 
+                                    name='patterntype'
+                                    required 
                                     id='patterntype' 
                                     value={formData.patterntype}
                                     onChange={handleChange}
@@ -63,12 +65,13 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                             </div>
                         </div>
                         <div className='col-span-2'>
-                            <label htmlFor="patternlink" className='mb-2 block text-md font-medium'>Link</label>
+                            <label htmlFor="patternlink" className='mb-2 block text-md font-medium'>Link *</label>
                             <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green-300'>
                                 <input 
                                     type='text' 
                                     name='patternlink' 
                                     id='patternlink'
+                                    required
                                     value={formData.patternlink}
                                     onChange={handleChange} 
                                     className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6' placeholder="Enter Link where pattern is detected"/>
@@ -76,12 +79,13 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         </div>
                     </div>
                     <div className='col-span-full'>
-                        <label htmlFor="patterndescription" className='mb-2 block text-md font-medium'>Description</label>
+                        <label htmlFor="patterndescription" className='mb-2 block text-md font-medium'>Description *</label>
                         <textarea 
                             name="description" 
                             id="patterndescription"
                             value={formData.description}
                             onChange={handleChange}
+                            required
                             className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' placeholder='Short description for pattern detection and review'></textarea>
                     </div>
                     <div className='grid md:grid-cols-3 space-x-7'>
