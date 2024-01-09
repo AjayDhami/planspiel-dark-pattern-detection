@@ -63,7 +63,7 @@ const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
           </Typography>
         </Box>
         <Box>
-        {automation == false && (
+        {automation === false && (
             <Box>
               <Button size="small" variant="contained" color="info">
                 Run Automation
