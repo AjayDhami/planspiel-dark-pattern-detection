@@ -43,8 +43,6 @@ const Navbar = () => {
             />
           </Typography>
 
-          <Typography>Hello, Prabudh Mishra</Typography>
-
           <Tooltip title="Sign out" arrow>
             <IconButton
               color="secondary"
