@@ -10,5 +10,6 @@ venv/
 *.joblib
 trained_models/
 .env
+scraped_data/
 
 __pycache__

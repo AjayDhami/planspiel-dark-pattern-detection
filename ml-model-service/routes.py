@@ -1,4 +1,4 @@
-from api.components.dark_pattern import dark_pattern_controller
+import dark_pattern_controller
 
 
 def register_routes(app):
