@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom";
-import { Box, Button, Grid, Stack } from "@mui/material";
-import React from "react";
+import { Box, Grid } from "@mui/material";
 import ClientCard from "../../components/superAdmin/ClientCard";
-import WebsiteCard from "../../components/superAdmin/WebsiteCard";
 
 
 const clientList = [
@@ -50,18 +47,6 @@ const SuperAdmin = () => {
               automation={client.automation}
               assignTo={client.assignTo}
             />
-            {/* <Grid container spacing={2} style={{ margin: "1rem 0", width: "100%", justifyContent: 'left' }}>
-              {clientList.map((website) => (
-              <Grid item xs={12} md={4} key={website.id}>
-                <WebsiteCard
-                  id={website.id}
-                  website={website.websites}
-                  automation={website.automation}
-                  assignTo={website.assignTo}
-                />
-              </Grid>
-              ))}
-            </Grid> */}
           </Grid>
             ))}
           </Grid>
