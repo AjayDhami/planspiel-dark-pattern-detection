@@ -1,4 +1,5 @@
 import os
+import csv
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -41,7 +42,7 @@ def train_and_evaluate_model(df, target_column, save_filename):
     accuracy = accuracy_score(test_df[target_column], predictions)
 
     # Save the trained model to a file
-    model_folder = os.path.join("trained_models")
+    model_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "trained_models")
     os.makedirs(model_folder, exist_ok=True)
     model_path = os.path.join(model_folder, f'{save_filename.lower().replace(" ", "_")}_model.joblib')
     dump(model, model_path)
@@ -50,7 +51,7 @@ def train_and_evaluate_model(df, target_column, save_filename):
     return accuracy, model
 
 
-def train_first_level_model(df):
+def train_first_level_model(df, dark_pattern_types):
     print(f"\nTraining first level model")
     # Create a boolean mask for Dark Patterns
     dark_pattern_mask = df['Type'].isin(dark_pattern_types)
@@ -66,7 +67,7 @@ def train_first_level_model(df):
     df.drop(columns=['Label'], inplace=True)
 
 
-def train_second_level_models(df):
+def train_second_level_models(df, dark_pattern_types):
     # Filter the original DataFrame to select dataframe containing dark patterns
     dark_patterns_df = df[df['Type'].isin(dark_pattern_types)]
 
@@ -98,38 +99,82 @@ def train_second_level_models(df):
 
 
 def predict_dark_pattern(input_text):
-    print(f"\nInput Text: {input_text}")
+    # print(f"\nInput Text: {input_text}")
+
+    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
 
     # Load and make predictions with the first-level model
-    first_level_model_path = os.path.join("trained_models", "first_level_model.joblib")
+    current_script_path = os.path.dirname(os.path.abspath(__file__))
+    first_level_model_path = os.path.join(current_script_path, "trained_models", "first_level_model.joblib")
     loaded_first_level_model = load(first_level_model_path)
+
+    # Make first level prediction
     first_level_prediction = loaded_first_level_model.predict([input_text])
 
-    print(f"\nFirst-Level Prediction: {'Dark Pattern' if first_level_prediction[0] == 1 else 'Not Dark Pattern'}")
+    # print(f"\nFirst-Level Prediction: {'Dark Pattern' if first_level_prediction[0] == 1 else 'Not Dark Pattern'}")
 
     # Check if it is identified as a Dark Pattern
     if first_level_prediction[0] == 1:
         # Load and make predictions with the second-level models
         for dark_pattern_type in dark_pattern_types:
             # Load the saved second-level model
-            second_level_model_path = os.path.join("trained_models",
+            current_script_path = os.path.dirname(os.path.abspath(__file__))
+            second_level_model_path = os.path.join(current_script_path, "trained_models",
                                                    f'{dark_pattern_type.lower().replace(" ", "_")}_model.joblib')
             loaded_second_level_model = load(second_level_model_path)
 
-            # Make predictions
+            # Make second level prediction
             second_level_prediction = loaded_second_level_model.predict([input_text])
 
-            print(f"{dark_pattern_type}: {'Yes' if second_level_prediction[0] == 1 else 'No'}")
+            if second_level_prediction[0] == 1:
+                # print(f"{dark_pattern_type}: Dark Pattern")
+                return dark_pattern_type
+    else:
+        return "Not Dark Pattern"
 
 
-# Prediction of dark pattern
-csv_path = "../model_training/dataset.csv"
-dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
+def create_dark_pattern_detection_model():
+    current_file_path = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(current_file_path, "dataset.csv")
+    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
 
-filtered_df = read_and_clean_dataset(csv_path)
-train_first_level_model(filtered_df)
-train_second_level_models(filtered_df)
+    filtered_df = read_and_clean_dataset(csv_path)
+    train_first_level_model(filtered_df, dark_pattern_types)
+    train_second_level_models(filtered_df, dark_pattern_types)
 
-# TODO this input should be dynamic and read content from output of web scraping file
-user_input_text = "Manage Cookies Learn More"
-predict_dark_pattern(user_input_text)
+
+def get_csv_file_path(website_id):
+    ml_model_directory = os.path.dirname(os.path.abspath(__file__))
+    scraped_data_directory = os.path.join(ml_model_directory, "scraped_data")
+    csv_file_path = os.path.join(scraped_data_directory, "{}.csv".format(website_id))
+    return csv_file_path
+
+
+def predict_website_dark_pattern_type(website_id):
+    csv_file_path = get_csv_file_path(website_id)
+    dark_patterns ={}
+
+    try:
+        with open(csv_file_path, 'r', encoding='utf-8') as file:
+            csv_reader = csv.reader(file)
+            for row in csv_reader:
+                # print(row)
+                if row:
+                    text_to_predict = row[0]
+                    detected_type = predict_dark_pattern(text_to_predict)
+                    if detected_type != "Not Dark Pattern":
+                        dark_patterns[text_to_predict] = detected_type
+        print(f'Data has been successfully read from {csv_file_path}')
+    except FileNotFoundError:
+        print(f'File not found: {csv_file_path}')
+    except Exception as e:
+        print(f'Error reading the file: {e}')
+
+    return dark_patterns
+    # user_input_text = "Manage Cookies Learn More"
+    # detected_type = predict_dark_pattern(user_input_text)
+    # print(f"{user_input_text}: {detected_type}")
+
+
+# train_dark_pattern_detection_model()
+# predict_website_dark_pattern_type('123')
