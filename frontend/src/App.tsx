@@ -7,6 +7,8 @@ import WebsiteViewPage from "./pages/client/WebsiteViewPage";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
+import SuperAdmin from "./pages/superAdmin/SuperAdmin";
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="website/:webId" element={<WebsiteViewPage />} />
         </Route>
+        <Route path="/superAdmin" element={<SuperAdmin />} />
       </Routes>
     </AuthProvider>
   );
