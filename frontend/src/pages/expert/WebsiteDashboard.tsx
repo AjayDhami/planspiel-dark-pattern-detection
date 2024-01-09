@@ -113,7 +113,6 @@ const WebsiteDashboard = () => {
           <div className='md:col-span-1 shadow-xl rounded-2xl bg-white h-[30rem]'>
             <div className='mx-4 mt-2 space-x-3 py-6 flex justify-center'>
                 <button onClick={openForm} className='px-8 py-2 rounded-md bg-blue-500 text-white'>Add a Pattern</button>
-                {/* <button className=' px-8 py-2 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 text-white'>Chat</button> */}
             </div>
             <div className='mx-8 mt-4 h-80 flex flex-col'>
                 <div className='mx-2'>

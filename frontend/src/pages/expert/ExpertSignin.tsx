@@ -30,7 +30,7 @@ const ExpertSignin = () => {
         e.preventDefault();
         const loginSuccess = await loginUser(credentials);
         if (loginSuccess) {
-            navigate('/expertdashboard');
+            navigate('/expert/dashboard');
           } 
       }
   return (

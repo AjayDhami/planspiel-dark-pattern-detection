@@ -47,7 +47,7 @@ const ExpertDashboard : React.FC = () => {
     const handleClick = (id:string, websiteName: string) => {
         sessionStorage.setItem("websiteId", id);
         sessionStorage.setItem("websiteName", websiteName);
-        navigate('/websitedash')
+        navigate('/expert/website')
     }
 
   return (

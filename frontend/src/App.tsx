@@ -28,8 +28,8 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="website/:webId" element={<WebsiteViewPage />} />
         </Route>
-        <Route path="/expertdashboard" element={<ExpertDashboard/>}/>
-        <Route path="/websitedash" element={<WebsiteDashboard/>}/>
+        <Route path="/expert/dashboard" element={<ExpertDashboard/>}/>
+        <Route path="/expert/website" element={<WebsiteDashboard/>}/>
       </Routes>
       </ExpertProvider>
     </AuthProvider>

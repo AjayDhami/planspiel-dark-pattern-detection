@@ -96,3 +96,8 @@ export interface PatternDetailsProps {
     expertId : string;
     token : string
 }
+
+export interface ServiceResponse {
+  status : number;
+  patterns: PatternData[];
+}
