@@ -14,22 +14,25 @@ const Comments: React.FC<{ review: Comment, expertId : string, isVerified : bool
     const [replyText,  setReplyText] = useState("")
       const handleReplySubmit = async() => {
         setReplyClicked(false)
-        const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText)
-        console.log(replyObj); 
-        if(replyObj === 201){
-          toast.success("Reply added successfully", {
-            position: toast.POSITION.TOP_CENTER
-          });
-          const response = await getSpecificPattern(patternData.id , patternData.websiteId);
-          setReplyText("");
-          if(response){
-            setPatternData(response)
+        try {
+          const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText)
+          if(replyObj === 201){
+            toast.success("Reply added successfully", {
+              position: toast.POSITION.TOP_CENTER
+            });
+            const response = await getSpecificPattern(patternData.id , patternData.websiteId);
+            setReplyText("");
+            if(response){
+              setPatternData(response)
+            }
+          } 
+        } catch (error) {
+          if (error instanceof Error) {
+            toast.error(`Error: ${error.message}`);
+          } else {
+            toast.error("An unknown error occurred.");
           }
-        } else{
-          toast.error("Error while adding reply, please try again", {
-            position: toast.POSITION.TOP_CENTER
-          });
-        }   
+        }  
       }
   return (
     <div>

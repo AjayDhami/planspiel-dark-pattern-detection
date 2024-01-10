@@ -9,6 +9,7 @@ import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from './PatternUpdateForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import withExpertAuth from '../../hoc/withExpertAuth';
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId}) => {
   const [commentText,  setCommentText] = useState("")
@@ -19,37 +20,45 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
   const expertVerificationPhase = patternData.expertVerifications.map((verification)=> verification.expertVerificationPhase);
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
-    const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText);
-    if(commentObj === 201){
-      toast.success("Comment added successfully", {
-        position: toast.POSITION.TOP_CENTER
-      });
-      const response = await getSpecificPattern(patternData.id , patternData.websiteId);
-      setCommentText("");
-      if(response){
-        setPatternData(response)
+    try {
+      const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText);
+      if(commentObj === 201){
+        toast.success("Comment added successfully", {
+          position: toast.POSITION.TOP_CENTER
+        });
+        const response = await getSpecificPattern(patternData.id , patternData.websiteId);
+        setCommentText("");
+        if(response){
+          setPatternData(response)
+        }
       }
-    } else{
-      toast.error("Error while adding comment, please try again", {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }  
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    }
   }
   const handleVerifySubmit = async(patternExists : boolean) => {
-    const response = await postVerification(patternData.websiteId, patternData.id, expertId, patternExists);
-    if(response === 200){
-      toast.success("Verified Successfully", {
-        position: toast.POSITION.TOP_CENTER
-      });
-      const data = await getSpecificPattern(patternData.id , patternData.websiteId);
-      if(data){
-        setPatternData(data)
+    try {
+      const response = await postVerification(patternData.websiteId, patternData.id, expertId, patternExists);
+      if(response === 200){
+        toast.success("Verified Successfully", {
+          position: toast.POSITION.TOP_CENTER
+        });
+        const data = await getSpecificPattern(patternData.id , patternData.websiteId);
+        if(data){
+          setPatternData(data)
+        }
       }
-    }else{
-      toast.error("Error while verification, please try again", {
-        position: toast.POSITION.TOP_CENTER
-      });
-    }  
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    }
   }
   const handleClose = () =>{
     setEditing(false);
@@ -144,4 +153,4 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
   )
 }
 
-export default PatternDetailsComponent
+export default withExpertAuth(PatternDetailsComponent);

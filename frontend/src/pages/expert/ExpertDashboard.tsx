@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
+import { toast } from "react-toastify";
 interface WebsiteData {
     baseUrl: string;
     description : string;
@@ -33,12 +34,20 @@ const ExpertDashboard : React.FC = () => {
     const authToken = localStorage.getItem("authToken")
     const getWebsiteData = useCallback( async () => {
         setWebsiteData([]);
-        if(id && authToken){
-            let websites : any = []
-            websites = await getWebsites(id);
-            const userName = await getUserDetails(id);
-            localStorage.setItem("userName", `${userName.firstName} ${userName.lastName}`)
-            setWebsiteData(websites) 
+        try {
+            if(id && authToken){
+                let websites : any = []
+                websites = await getWebsites(id);
+                const userName = await getUserDetails(id);
+                localStorage.setItem("userName", `${userName.firstName} ${userName.lastName}`)
+                setWebsiteData(websites) 
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(`Error: ${error.message}`);
+              } else {
+                toast.error("An unknown error occurred.");
+            }
         }
     },[id,authToken])
 

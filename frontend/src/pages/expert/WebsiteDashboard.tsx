@@ -9,6 +9,7 @@ import { PatternData } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
+import { toast } from "react-toastify";
 
 
 const WebsiteDashboard = () => {
@@ -39,30 +40,37 @@ const WebsiteDashboard = () => {
     });
     const [isPatternformOpen, setIsPatternformOpen] = useState(false);
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
-    const { patternData, setPatternData } = useExpertContext()
+    const {  setPatternData } = useExpertContext()
 
     const getPatterns = useCallback( async () => {
         setPatterns([]);
         let data : any = [];
         if(websiteId && token){
-            data = await getPatternsData(websiteId);
-            setPatterns(data);
-            const uniquePatternTypes = data
+            try {
+              data = await getPatternsData(websiteId);
+              setPatterns(data);
+              const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
-            const uniqueExperts = data
+              const uniqueExperts = data
                 .map((item : PatternData) => item.expertName)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
-            const uniquePhases = data
+              const uniquePhases = data
                 .map((item : PatternData) => item.patternPhase)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
-            setPatternTypes(uniquePatternTypes);
-            setExperts(uniqueExperts);
-            console.log(uniqueExperts);
-            setPhases(uniquePhases);
-            setFilteredArray(data)
+              setPatternTypes(uniquePatternTypes);
+              setExperts(uniqueExperts);
+              setPhases(uniquePhases);
+              setFilteredArray(data)
+            } catch (error) {
+              if (error instanceof Error) {
+                toast.error(`Error: ${error.message}`);
+              } else {
+                toast.error("An unknown error occurred.");
+              }
+            }
         }
     },[websiteId, token])
 
@@ -92,11 +100,19 @@ const WebsiteDashboard = () => {
       getPatterns();
     };
     const openPatternModal = async (id:String, color:string) => {
-      if(websiteId && token){
-        const patternObj  = await getSpecificPattern(id , websiteId);
-        patternObj.phaseColor = color;
-        setPatternData(patternObj);
-        setIsPatternModalOpen(true)
+      try {
+        if(websiteId && token){
+          const patternObj  = await getSpecificPattern(id , websiteId);
+          patternObj.phaseColor = color;
+          setPatternData(patternObj);
+          setIsPatternModalOpen(true)
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
       }  
     }
     const closePatternModal = () => {setIsPatternModalOpen(false)}
