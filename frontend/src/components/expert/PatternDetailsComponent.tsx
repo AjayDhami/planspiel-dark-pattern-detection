@@ -16,7 +16,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
   const [editing, setEditing] = useState(false);
   const { patternData, setPatternData } = useExpertContext();
   const getBgColorClass = patternData.phaseColor==="#F9C32F" ? "bg-[#F9C32F]" : patternData.phaseColor==="#E6321D" ? "bg-[#E6321D]" : "bg-[#538D3F]" ;
-  console.log(patternData.phaseColor);
+  const expertVerificationPhase = patternData.expertVerifications.map((verification)=> verification.expertVerificationPhase);
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
     const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText);
@@ -106,17 +106,18 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                     </h2>) : null
                   ))}
                 <div className='p-4'>
-                <div className='col-span-full mt-2'>
-                  <textarea 
-                    name="description" 
-                    id="patterndescription"
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                    onClick={()=> setCommentTextClicked(true)}
-                    className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400' 
-                    placeholder='Add a comment'>
-                  </textarea>
-                </div>
+                  {expertVerificationPhase.includes("NotVerified") ? 
+                  <div className='col-span-full mt-2'>
+                    <textarea 
+                      name="description" 
+                      id="patterndescription"
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      onClick={()=> setCommentTextClicked(true)}
+                      className='block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400' 
+                      placeholder='Add a comment'>
+                    </textarea>
+                  </div> : null}
                   {commentTextClicked ? <div>
                     <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-400 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
                     <button className='col-span-1 p-2 rounded-lg hover:bg-gray-200 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
