@@ -3,13 +3,14 @@ import Comments from './Comments';
 import { CommentPost } from '../../services/expertServices';
 import { IoMdClose } from "react-icons/io";
 import {  PatternDetailsProps } from '../../types';
-import { getSpecificPattern, postVerification } from '../../services/expertServices';
+import { getSpecificPattern, postVerification, stringAvatar } from '../../services/expertServices';
 import { useExpertContext } from '../../context/ExpertContext';
 import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from './PatternUpdateForm';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import withExpertAuth from '../../hoc/withExpertAuth';
+import Avatar from '@mui/material/Avatar';
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId}) => {
   const [commentText,  setCommentText] = useState("")
@@ -18,6 +19,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
   const { patternData, setPatternData } = useExpertContext();
   const getBgColorClass = patternData.phaseColor==="#F9C32F" ? "bg-[#F9C32F]" : patternData.phaseColor==="#E6321D" ? "bg-[#E6321D]" : "bg-[#538D3F]" ;
   const expertVerificationPhase = patternData.expertVerifications.map((verification)=> verification.expertVerificationPhase);
+  const expertName = localStorage.getItem("userName")
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
     try {
@@ -116,7 +118,8 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   ))}
                 <div className='p-4'>
                   {expertVerificationPhase.includes("NotVerified") ? 
-                  <div className='col-span-full mt-2'>
+                  <div className='col-span-full mt-2 flex items-center'>
+                    <Avatar {...stringAvatar(expertName ? expertName : "")} className='mr-2'/>
                     <textarea 
                       name="description" 
                       id="patterndescription"
@@ -127,7 +130,8 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                       placeholder='Add a comment'>
                     </textarea>
                   </div> : null}
-                  {commentTextClicked ? <div>
+                  {commentTextClicked ? 
+                  <div>
                     <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-400 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
                     <button className='col-span-1 p-2 rounded-lg hover:bg-gray-200 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
                   </div> : null}
@@ -148,7 +152,6 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
               </div>
               </>
         </div>
-        <ToastContainer/>
     </div>
   )
 }

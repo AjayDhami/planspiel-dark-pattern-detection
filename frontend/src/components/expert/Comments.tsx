@@ -12,6 +12,7 @@ const Comments: React.FC<{ review: Comment, expertId : string, isVerified : bool
     const [replyClicked , setReplyClicked] = useState(false) 
     const { patternData, setPatternData } = useExpertContext();
     const [replyText,  setReplyText] = useState("")
+    const expertName = localStorage.getItem("userName")
       const handleReplySubmit = async() => {
         setReplyClicked(false)
         try {
@@ -49,18 +50,19 @@ const Comments: React.FC<{ review: Comment, expertId : string, isVerified : bool
                       </div>
                     ))}
                     {(replyClicked) ?
-                      <div className='w-100 mt-3 mx-24' key={review.id}>
-                        <form action="">
+                      <div className='w-100 mt-3 ml-12' key={review.id}>
+                        <div className="flex items-center">
+                          <Avatar {...stringAvatar(expertName ? expertName : "")}/>
                           <textarea 
-                            name="description" 
-                            id="patterndescription"
-                            value={replyText}
-                            onChange={(e) => setReplyText(e.target.value)}
-                            className='block w-full h-10 rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-blue-300' 
-                            placeholder='Reply to the comment'>
+                              name="description" 
+                              id="patterndescription"
+                              value={replyText}
+                              onChange={(e) => setReplyText(e.target.value)}
+                              className='mx-2 w-full block h-10 rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-blue-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-blue-300' 
+                              placeholder='Reply to the comment'>
                           </textarea>
-                        </form>
-                        <button className='px-2 py-1 bg-blue-300 rounded-md my-2' onClick={handleReplySubmit}>Submit</button>
+                        </div>
+                        <button className='px-2 py-1 bg-blue-300 rounded-md my-2 ml-12' onClick={handleReplySubmit}>Submit</button>
                         <button className='px-2 py-1 bg-blue-300 rounded-md my-2 mx-2' onClick={() => setReplyClicked(false)}>Cancel</button>
                       </div>    
                     : isVerified ? <div className='flex justify-end mr-5 cursor-pointer italic text-blue-400' onClick={()=> setReplyClicked(true)}><p>Add Reply</p></div> : null}
