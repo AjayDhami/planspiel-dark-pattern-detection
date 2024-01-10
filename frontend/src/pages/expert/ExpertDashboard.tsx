@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react'
-import { getWebsites } from '../../services/expertServices'
+import { getWebsites, getUserDetails } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
@@ -36,6 +36,8 @@ const ExpertDashboard : React.FC = () => {
         if(id && authToken){
             let websites : any = []
             websites = await getWebsites(id);
+            const userName = await getUserDetails(id);
+            localStorage.setItem("userName", `${userName.firstName} ${userName.lastName}`)
             setWebsiteData(websites) 
         }
     },[id,authToken])

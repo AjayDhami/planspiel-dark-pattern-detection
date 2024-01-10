@@ -8,7 +8,8 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL_CLIENT
 
 const getUserDetails = async(id:String) => {
   try {
-    const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    const response = await api.get(`${baseUrl}/user/${id}`);
+    console.log(response);
     return response.data
   } catch (error) {
   }
@@ -121,4 +122,4 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification  };
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails  };

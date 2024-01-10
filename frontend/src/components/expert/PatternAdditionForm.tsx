@@ -24,7 +24,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     const handleSubmit = async(e:React.FormEvent) => {
         e.preventDefault();
         if(websiteId && experId && token){
-            const response = await patternPost(websiteId,experId,formData.patterntype, formData.description, formData.patternlink,token );
+            const response = await patternPost(websiteId,experId,formData.patterntype, formData.description, formData.patternlink );
             console.log(response);  
             if(response === 201){
                 onClose();
