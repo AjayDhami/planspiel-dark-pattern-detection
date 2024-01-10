@@ -44,14 +44,14 @@ const WebsiteDashboard = () => {
         setPatterns([]);
         let data : any = [];
         if(websiteId && token){
-            data = await getPatternsData(websiteId, token);
+            data = await getPatternsData(websiteId);
             setPatterns(data);
             const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
             const uniqueExperts = data
-                .map((item : PatternData) => `${item.expertName}-${item.createdByExpertId}`)
+                .map((item : PatternData) => item.expertName)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
 
             const uniquePhases = data
@@ -92,7 +92,7 @@ const WebsiteDashboard = () => {
     };
     const openPatternModal = async (id:String) => {
       if(websiteId && token){
-        const patternObj  = await getSpecificPattern(id , websiteId, token);
+        const patternObj  = await getSpecificPattern(id , websiteId);
         setPatternData(patternObj);
         setIsPatternModalOpen(true)
       }  
@@ -112,7 +112,7 @@ const WebsiteDashboard = () => {
           </div>
         </div>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
-        <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""} token={token ? token : ""}/>
+        <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <div className='mx-24 h-screen grid md:grid-cols-4 gap-4'>
           <div className='md:col-span-1 shadow-xl rounded-2xl bg-white h-[30rem]'>
             <div className='mx-4 mt-2 space-x-3 py-6 flex justify-center'>

@@ -94,7 +94,6 @@ export interface PatternDetailsProps {
     isOpen: boolean;
     onClose: () => void;
     expertId : string;
-    token : string
 }
 
 export interface ServiceResponse {

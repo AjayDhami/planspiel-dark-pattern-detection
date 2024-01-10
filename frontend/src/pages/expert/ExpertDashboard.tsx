@@ -35,7 +35,7 @@ const ExpertDashboard : React.FC = () => {
         setWebsiteData([]);
         if(id && authToken){
             let websites : any = []
-            websites = await getWebsites(id, authToken);
+            websites = await getWebsites(id);
             setWebsiteData(websites) 
         }
     },[id,authToken])

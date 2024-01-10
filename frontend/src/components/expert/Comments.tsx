@@ -8,19 +8,19 @@ import { useExpertContext } from '../../context/ExpertContext';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Comments: React.FC<{ review: Comment, token : string, expertId : string }> = ({ review, token, expertId }) => {
+const Comments: React.FC<{ review: Comment, expertId : string }> = ({ review, expertId }) => {
     const [replyClicked , setReplyClicked] = useState(false) 
     const { patternData, setPatternData } = useExpertContext();
     const [replyText,  setReplyText] = useState("")
       const handleReplySubmit = async() => {
         setReplyClicked(false)
-        const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText, token)
+        const replyObj = await replyPost(review.id, review.websiteId, review.patternId, expertId, replyText)
         console.log(replyObj); 
         if(replyObj === 201){
           toast.success("Reply added successfully", {
             position: toast.POSITION.TOP_CENTER
           });
-          const response = await getSpecificPattern(patternData.id , patternData.websiteId, token);
+          const response = await getSpecificPattern(patternData.id , patternData.websiteId);
           setReplyText("");
           if(response){
             setPatternData(response)

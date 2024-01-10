@@ -10,19 +10,19 @@ import PatternUpdateForm from './PatternUpdateForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId, token}) => {
+const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId}) => {
   const [commentText,  setCommentText] = useState("")
   const [commentTextClicked,  setCommentTextClicked] = useState(false);
   const [editing, setEditing] = useState(false);
   const { patternData, setPatternData } = useExpertContext()
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
-    const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText, token);
+    const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText);
     if(commentObj === 201){
       toast.success("Comment added successfully", {
         position: toast.POSITION.TOP_CENTER
       });
-      const response = await getSpecificPattern(patternData.id , patternData.websiteId, token);
+      const response = await getSpecificPattern(patternData.id , patternData.websiteId);
       setCommentText("");
       if(response){
         setPatternData(response)
@@ -39,7 +39,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
       toast.success("Verified Successfully", {
         position: toast.POSITION.TOP_CENTER
       });
-      const data = await getSpecificPattern(patternData.id , patternData.websiteId, token);
+      const data = await getSpecificPattern(patternData.id , patternData.websiteId);
       if(data){
         setPatternData(data)
       }
@@ -126,7 +126,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   </div>
                 ) :
                   (patternData.comments.map((comment)=>(
-                    <Comments review={comment} token={token} expertId={expertId}/> 
+                    <Comments review={comment} expertId={expertId}/> 
                   )))
                 } 
                 </div>

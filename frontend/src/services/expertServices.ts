@@ -6,7 +6,7 @@ import { PatternData, ServiceResponse} from "../types"
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL_CLIENT
 
-const getWebsites = async(id:String, authToken : String) => {
+const getUserDetails = async(id:String) => {
   try {
     const response = await api.get(`${baseUrl}/website?userId=${id}`);
     return response.data
@@ -14,7 +14,15 @@ const getWebsites = async(id:String, authToken : String) => {
   }
 }
 
-const getPatternsData = async (websiteId: string, token: string): Promise<ServiceResponse> => {
+const getWebsites = async(id:String) => {
+  try {
+    const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    return response.data
+  } catch (error) {
+  }
+}
+
+const getPatternsData = async (websiteId: string): Promise<ServiceResponse> => {
   try {
     const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
       `${baseUrl}/website/${websiteId}/pattern`,
@@ -26,7 +34,7 @@ const getPatternsData = async (websiteId: string, token: string): Promise<Servic
   }
 };
 
-const getSpecificPattern = async (id: String, websiteId: String, token: string): Promise<PatternData> => {
+const getSpecificPattern = async (id: String, websiteId: String): Promise<PatternData> => {
   try {
     const response: AxiosResponse<PatternData> = await api.get<PatternData>(
       `${baseUrl}/website/${websiteId}/pattern/${id}`,
@@ -38,7 +46,7 @@ const getSpecificPattern = async (id: String, websiteId: String, token: string):
   }
 };
 
-const CommentPost = async(patternId : String, websiteId : String, expertId : String, commentText : String, token : string) => {
+const CommentPost = async(patternId : String, websiteId : String, expertId : String, commentText : String) => {
   const body = {
     expertId : expertId,
     content : commentText
@@ -50,7 +58,7 @@ const CommentPost = async(patternId : String, websiteId : String, expertId : Str
   return response.status;
 }
 
-const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String, token : string) => {
+const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String) => {
   const body = {
     expertId : expertId,
     content : replyText
@@ -63,7 +71,7 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
   
 }
 
-const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string, token : string) =>{
+const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string) =>{
   const body = {
     createdByExpertId : expertId,
     patternType : patternType,
