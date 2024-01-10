@@ -8,7 +8,7 @@ import { useExpertContext } from '../../context/ExpertContext';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Comments: React.FC<{ review: Comment, expertId : string }> = ({ review, expertId }) => {
+const Comments: React.FC<{ review: Comment, expertId : string, isVerified : boolean }> = ({ review, expertId, isVerified }) => {
     const [replyClicked , setReplyClicked] = useState(false) 
     const { patternData, setPatternData } = useExpertContext();
     const [replyText,  setReplyText] = useState("")
@@ -60,7 +60,7 @@ const Comments: React.FC<{ review: Comment, expertId : string }> = ({ review, ex
                         <button className='px-2 py-1 bg-blue-300 rounded-md my-2' onClick={handleReplySubmit}>Submit</button>
                         <button className='px-2 py-1 bg-blue-300 rounded-md my-2 mx-2' onClick={() => setReplyClicked(false)}>Cancel</button>
                       </div>    
-                    : <div className='flex justify-end mr-5 cursor-pointer italic text-blue-400' onClick={()=> setReplyClicked(true)}><p>Add Reply</p></div>}
+                    : isVerified ? <div className='flex justify-end mr-5 cursor-pointer italic text-blue-400' onClick={()=> setReplyClicked(true)}><p>Add Reply</p></div> : null}
                 </div>
             </div>
     </div>

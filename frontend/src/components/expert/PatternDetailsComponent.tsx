@@ -132,7 +132,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   </div>
                 ) :
                   (patternData.comments.map((comment)=>(
-                    <Comments review={comment} expertId={expertId}/> 
+                    <Comments review={comment} expertId={expertId} isVerified={expertVerificationPhase.includes("NotVerified") ? true : false}/> 
                   )))
                 } 
                 </div>
