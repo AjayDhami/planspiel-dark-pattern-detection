@@ -27,6 +27,7 @@ const WebsiteDashboard = () => {
     const [patterns, setPatterns] = useState<any[]>([]);
     const [filteredArray, setFilteredArray] = useState<any[]>([]);
     const experId = localStorage.getItem("userId");
+    const expertName = localStorage.getItem("userName");
     const token = localStorage.getItem("authToken");
     const [patternTypes, setPatternTypes] = useState([])
     const [experts, setExperts] = useState([])
@@ -125,9 +126,9 @@ const WebsiteDashboard = () => {
                     className='p-2 bg-transparent border-2 rounded-md w-60'
                     onChange={(e) => handleSelectOption('expertName', e.target.value)}
                     >
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     {experts.map((expert)=>(
-                        <option value={expert}>{expert}</option>
+                        expert === expertName ? <option value={expert}>You</option> : <option value={expert}>{expert}</option>
                     ))}
                   </select>
                 </div>
@@ -137,7 +138,7 @@ const WebsiteDashboard = () => {
                     className='p-2 bg-transparent border-2 rounded-md w-60'
                     onChange={(e) => handleSelectOption('patternType', e.target.value)}
                     >
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     {patternTypes.map((type)=>(
                         <option value={type}>{type}</option>
                     ))}
@@ -149,7 +150,7 @@ const WebsiteDashboard = () => {
                     className='p-2 bg-transparent border-2 rounded-md w-60'
                     onChange={(e) => handleSelectOption('phase', e.target.value)}
                     >
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     {phases.map((phase)=>(
                         <option value={phase}>{phase}</option>
                     ))}
