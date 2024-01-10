@@ -89,6 +89,7 @@ export interface PatternData {
       patternType: string;
       patternPhase: string;
       websiteId : string;
+      phaseColor : string ;
 }
 export interface PatternDetailsProps {
     isOpen: boolean;

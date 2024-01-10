@@ -14,7 +14,9 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
   const [commentText,  setCommentText] = useState("")
   const [commentTextClicked,  setCommentTextClicked] = useState(false);
   const [editing, setEditing] = useState(false);
-  const { patternData, setPatternData } = useExpertContext()
+  const { patternData, setPatternData } = useExpertContext();
+  const getBgColorClass = patternData.phaseColor==="#F9C32F" ? "bg-[#F9C32F]" : patternData.phaseColor==="#E6321D" ? "bg-[#E6321D]" : "bg-[#538D3F]" ;
+  console.log(patternData.phaseColor);
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
     const commentObj = await CommentPost(patternData.id, patternData.websiteId, expertId, commentText);
@@ -73,7 +75,10 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
               ) : (
                 <div className='space-y-4 px-4 pt-2'>
                   <div className='flex justify-between items-center'>
-                    <div className='font-bold text-2xl text-blue-500'>{patternData.patternType} </div>
+                    <div className='flex items-center'>
+                      <h2 className='font-bold text-2xl text-blue-500 mr-5'>{patternData.patternType}</h2>
+                      <div className={`text-white p-2 rounded-2xl ${getBgColorClass}`}>{patternData.patternPhase}</div>
+                    </div>
                       {patternData.createdByExpertId===expertId ? 
                         <div className='flex items-center text-md '>
                           <h2 className='text-gray-500 italic font-serif text-gray-400 mr-2'>Added By - you</h2>
