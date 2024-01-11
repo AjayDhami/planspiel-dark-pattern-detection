@@ -1,6 +1,5 @@
 import React from 'react'
 import { postVerification, getSpecificPattern } from '../../services/expertServices';
-import { useContext, useState } from 'react';
 import { useExpertContext } from '../../context/ExpertContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

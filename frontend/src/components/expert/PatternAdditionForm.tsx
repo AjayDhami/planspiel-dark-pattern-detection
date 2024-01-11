@@ -2,11 +2,8 @@ import React, {useState} from 'react'
 import { patternPost } from '../../services/expertServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PatternAdditionFormProps } from '../../types';
 
-interface PatternAdditionFormProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
 
 const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
     const websiteId = sessionStorage.getItem("websiteId");
