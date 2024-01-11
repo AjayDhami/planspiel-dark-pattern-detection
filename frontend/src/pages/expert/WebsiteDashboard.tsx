@@ -116,7 +116,10 @@ const WebsiteDashboard = () => {
         }
       }  
     }
-    const closePatternModal = () => {setIsPatternModalOpen(false)}
+    const closePatternModal = () => {
+      setIsPatternModalOpen(false);
+      getPatterns();
+    }
 
   return (
     <>

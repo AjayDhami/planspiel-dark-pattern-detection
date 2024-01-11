@@ -1,9 +1,9 @@
 import React , { useState}from 'react'
 import Comments from './Comments';
-import { CommentPost } from '../../services/expertServices';
 import { IoMdClose } from "react-icons/io";
 import {  PatternDetailsProps } from '../../types';
-import { getSpecificPattern, postVerification, stringAvatar } from '../../services/expertServices';
+import ConfirmVerifyModal from './ConfirmVerifyModal';
+import { getSpecificPattern, postVerification, stringAvatar, CommentPost } from '../../services/expertServices';
 import { useExpertContext } from '../../context/ExpertContext';
 import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from './PatternUpdateForm';
@@ -13,13 +13,15 @@ import withExpertAuth from '../../hoc/withExpertAuth';
 import Avatar from '@mui/material/Avatar';
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose, expertId}) => {
-  const [commentText,  setCommentText] = useState("")
-  const [commentTextClicked,  setCommentTextClicked] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const [commentText,  setCommentText] = useState<string>("")
+  const [commentTextClicked,  setCommentTextClicked] = useState<boolean>(false);
+  const [isPatternExist, setIsPatternExist] = useState<boolean>(false)
+  const [editing, setEditing] = useState<boolean>(false);
   const { patternData, setPatternData } = useExpertContext();
   const getBgColorClass = patternData.phaseColor==="#F9C32F" ? "bg-[#F9C32F]" : patternData.phaseColor==="#E6321D" ? "bg-[#E6321D]" : "bg-[#538D3F]" ;
   const expertVerificationPhase = patternData.expertVerifications.map((verification)=> verification.expertVerificationPhase);
   const expertName = localStorage.getItem("userName")
+  const [verifyClicked, setVerifyClicked] = useState<boolean>(false)
   const handleCommentSubmit = async() => {
     setCommentTextClicked(false);
     try {
@@ -42,30 +44,17 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
       }
     }
   }
-  const handleVerifySubmit = async(patternExists : boolean) => {
-    try {
-      const response = await postVerification(patternData.websiteId, patternData.id, expertId, patternExists);
-      if(response === 200){
-        toast.success("Verified Successfully", {
-          position: toast.POSITION.TOP_CENTER
-        });
-        const data = await getSpecificPattern(patternData.id , patternData.websiteId);
-        if(data){
-          setPatternData(data)
-        }
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
-    }
-  }
   const handleClose = () =>{
     setEditing(false);
     setCommentTextClicked(false);
     onClose();
+  }
+  const verifyOpen = (patternExist:boolean) => {
+    setIsPatternExist(patternExist)
+    setVerifyClicked(true)
+  }
+  const verifyClose = () => {
+    setVerifyClicked(false)
   }
   const onCloseEdit = () => {
     setEditing(false)
@@ -76,6 +65,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
         <div className='bg-white px-4 py-2 rounded-lg relative z-30 w-3/5 h-4/5 overflow-y-scroll'>
               <>
+              <ConfirmVerifyModal isOpen={verifyClicked} onClose={verifyClose} expertId={expertId} patternExists={isPatternExist}/>
               <div className='flex justify-end'>
                   <IoMdClose onClick={handleClose} className='hover:bg-blue-200 rounded-lg p-2 text-4xl'/>
               </div>
@@ -107,8 +97,8 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                 {patternData.expertVerifications.map((verify) => (
                     verify.expertId === expertId && verify.expertVerificationPhase === "NotVerified" ? 
                     <div className='px-4 py-3 bg-gray-100 mx-4'>
-                      <button className='bg-red-300 p-2 mr-5 shadow-xl rounded-xl' onClick={()=>handleVerifySubmit(true)}>Verify with pattern</button>
-                      <button className='bg-green-300 p-2 shadow-xl rounded-xl' onClick={()=>handleVerifySubmit(false)}>Verify but pattern doesn't exist</button>
+                      <button className='bg-red-300 p-2 mr-5 shadow-xl rounded-xl' onClick={()=>verifyOpen(true)}>Verify with pattern</button>
+                      <button className='bg-green-300 p-2 shadow-xl rounded-xl' onClick={()=>verifyOpen(false)}>Verify but pattern doesn't exist</button>
                     </div>
                     : verify.expertId === expertId ? 
                       <div className='px-4 py-2 bg-gray-100 mx-4 italic font-serif text-gray-500'><h2>Already Verified : {verify.expertVerificationPhase}</h2></div>

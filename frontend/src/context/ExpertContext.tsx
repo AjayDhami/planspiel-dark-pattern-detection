@@ -36,7 +36,8 @@ export const ExpertProvider: React.FC<ExpertProviderProps> = ({ children }) => {
         patternType: "",
         patternPhase: "",
         websiteId : "",
-        phaseColor : ""
+        phaseColor : "",
+        isPatternExists : false
     });
     const contextData: ExpertContextProps = {
         websiteId,

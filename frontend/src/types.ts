@@ -89,12 +89,20 @@ export interface PatternData {
       patternType: string;
       patternPhase: string;
       websiteId : string;
-      phaseColor : string ;
+      phaseColor : string;
+      isPatternExists : boolean;
 }
 export interface PatternDetailsProps {
     isOpen: boolean;
     onClose: () => void;
     expertId : string;
+}
+
+export interface VerifyPatternProps {
+    isOpen : boolean,
+    onClose : ()=>void,
+    patternExists : boolean,
+    expertId : string
 }
 
 export interface ServiceResponse {
