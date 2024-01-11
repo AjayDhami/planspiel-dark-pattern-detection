@@ -92,7 +92,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                     </div>
                       {patternData.createdByExpertId===expertId ? 
                         <div className='flex items-center text-md '>
-                          <h2 className='text-gray-500 italic font-serif text-gray-400 mr-2'>Added By - you</h2>
+                          <h2 className='italic font-serif text-gray-500 mr-2'>Added By - you</h2>
                           <div><LiaEdit className='hover:bg-blue-200 rounded-lg p-2 text-4xl' onClick={()=>setEditing(true)}/></div>
                         </div> : 
                         <div className='flex items-center text-md '>
@@ -105,20 +105,18 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                 </div>
               )}
                 {patternData.expertVerifications.map((verify) => (
-                    verify.expertId === expertId && verify.expertVerificationPhase === "NotVerified" ? (
-                    <>
-                      <button className='bg-red-300 p-2 mr-5' onClick={()=>handleVerifySubmit(true)}>Verify with pattern</button>
-                      <button className='bg-green-300 p-2' onClick={()=>handleVerifySubmit(false)}>Verify but pattern doesn't exist</button>
-                      <div className='p-4'>
-                        </div>
-                    </>
-                    ) : verify.expertId === expertId ? (<h2>
-                      Already Verified : {verify.expertVerificationPhase}
-                    </h2>) : null
+                    verify.expertId === expertId && verify.expertVerificationPhase === "NotVerified" ? 
+                    <div className='px-4 py-3 bg-gray-100 mx-4'>
+                      <button className='bg-red-300 p-2 mr-5 shadow-xl rounded-xl' onClick={()=>handleVerifySubmit(true)}>Verify with pattern</button>
+                      <button className='bg-green-300 p-2 shadow-xl rounded-xl' onClick={()=>handleVerifySubmit(false)}>Verify but pattern doesn't exist</button>
+                    </div>
+                    : verify.expertId === expertId ? 
+                      <div className='px-4 py-2 bg-gray-100 mx-4 italic font-serif text-gray-500'><h2>Already Verified : {verify.expertVerificationPhase}</h2></div>
+                    : null
                   ))}
-                <div className='p-4'>
+                <div>
                   {expertVerificationPhase.includes("NotVerified") ? 
-                  <div className='col-span-full mt-2 flex items-center'>
+                  <div className='col-span-full mt-2 px-4 pt-4 pb-2 flex items-center'>
                     <Avatar {...stringAvatar(expertName ? expertName : "")} className='mr-2'/>
                     <textarea 
                       name="description" 
@@ -131,7 +129,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                     </textarea>
                   </div> : null}
                   {commentTextClicked ? 
-                  <div>
+                  <div className='px-4'>
                     <button className='col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-400 mt-2' onClick={handleCommentSubmit}>Add Comment</button>
                     <button className='col-span-1 p-2 rounded-lg hover:bg-gray-200 mt-2 mx-2' onClick={()=> setCommentTextClicked(false)}>Cancel</button>
                   </div> : null}

@@ -9,7 +9,6 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL_CLIENT
 const getUserDetails = async(id:String) => {
   try {
     const response = await api.get(`${baseUrl}/user/${id}`);
-    console.log(response);
     return response.data
   } catch (error) {
   }
@@ -18,6 +17,7 @@ const getUserDetails = async(id:String) => {
 const getWebsites = async(id:String) => {
   try {
     const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    console.log(response);
     return response.data
   } catch (error) {
   }
