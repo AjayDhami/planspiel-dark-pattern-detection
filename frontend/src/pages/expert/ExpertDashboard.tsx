@@ -38,8 +38,6 @@ const ExpertDashboard : React.FC = () => {
             if(id && authToken){
                 let websites : any = []
                 websites = await getWebsites(id);
-                const userName = await getUserDetails(id);
-                localStorage.setItem("userName", `${userName.firstName} ${userName.lastName}`)
                 setWebsiteData(websites) 
             }
         } catch (error) {
