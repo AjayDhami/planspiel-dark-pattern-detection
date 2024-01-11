@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 import { UserService } from 'src/components/user/user.service';
 import { WebsiteResponseDto } from './dto/website-response.dto';
 import { PatternCreateDto } from './dto/pattern-create.dto';
-import { Pattern } from './schemas/pattern.schema';
+import { Pattern, Verification } from './schemas/pattern.schema';
 import { Comment, Reply } from './schemas/comment.schema';
 import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
@@ -21,6 +21,7 @@ import { PatternPhaseType } from './enum/pattern-phase.enum';
 import { UserResponseDto } from '../user/dto/user-response.dto';
 import { WebsitePhaseType } from './enum/website-phase.enum';
 import { PublishCertificationDto } from './dto/publish-certification.dto';
+import { ExpertVerificationDto } from './dto/expert-verification.dto';
 
 @Injectable()
 export class WebsiteService {
@@ -515,7 +516,11 @@ export class WebsiteService {
       isPatternExists: pattern.isPatternExists,
       createdByExpertId: pattern.createdByExpertId,
       expertName: await this.getUserName(pattern.createdByExpertId),
-      expertVerifications: pattern.expertVerifications,
+      expertVerifications: await Promise.all(
+        pattern.expertVerifications.map((verification) =>
+          this.convertVerificationsToDto(verification),
+        ),
+      ),
       createdAt: pattern.createdAt,
       comments: commentsRequired
         ? await Promise.all(
@@ -524,6 +529,16 @@ export class WebsiteService {
             ),
           )
         : [],
+    };
+  }
+
+  private async convertVerificationsToDto(
+    verification: Verification,
+  ): Promise<ExpertVerificationDto> {
+    return {
+      expertId: verification.expertId,
+      expertName: await this.getUserName(verification.expertId),
+      expertVerificationPhase: verification.expertVerificationPhase,
     };
   }
 
