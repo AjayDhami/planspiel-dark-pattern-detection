@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Stack, styled, Typography } from "@mui/material";
 import React from "react";
-import WebsiteCard from "../superAdmin/WebsiteCard";
+import WebsiteCard from "../../components/SuperAdmin/WebsiteCard";
 
 const clientList = [
   {
