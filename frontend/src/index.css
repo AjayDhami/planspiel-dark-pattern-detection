@@ -15,7 +15,6 @@ body {
   gap: 1rem;
 }
 
-p.MuiFormHelperText-root.Mui-error,
-.css-17slrf3-MuiFormHelperText-root {
+p.MuiFormHelperText-root.Mui-error {
   margin: 3px 0 0 !important;
 }

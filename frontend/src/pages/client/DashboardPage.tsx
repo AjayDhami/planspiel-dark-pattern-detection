@@ -141,9 +141,11 @@ const DashboardPage = () => {
               <Typography variant="h5" component="div" color="primary">
                 Your Websites
               </Typography>
-              <Button variant="text" color="secondary">
-                View all
-              </Button>
+              {websiteDataList.length > 6 && (
+                <Button variant="text" color="secondary">
+                  View all
+                </Button>
+              )}
             </Stack>
             <Grid container spacing={4} sx={{ mt: "-8px" }}>
               {/* slice function to display first 6 items */}
@@ -173,7 +175,7 @@ const DashboardPage = () => {
             }}
           >
             <Typography variant="h4" color="primary">
-              Certify your websites
+              Certify your website
             </Typography>
             <VerifiedIcon
               sx={{ m: 4, width: 100, height: 100 }}
