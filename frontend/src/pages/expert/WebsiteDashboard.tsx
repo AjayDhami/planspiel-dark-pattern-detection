@@ -78,17 +78,18 @@ const WebsiteDashboard = () => {
         getPatterns();
     },[getPatterns]);
     useEffect(() => {
-        const filteredArray = patterns.filter((item) => {
+        const filtered = patterns.filter((item) => {
             return (
                 (!filters.patternType || item.patternType === filters.patternType) &&
                 (!filters.expertName || item.expertName.includes(filters.expertName)) &&
                 (!filters.phase || item.patternPhase === filters.phase)
             );
         });
-        setFilteredArray(filteredArray);
+        setFilteredArray(filtered);
     }, [filters, patterns]);
 
     const handleSelectOption = (filterType : string,option: string) => {
+        setFilteredArray([]);
         setFilters(prevFilters => ({
           ...prevFilters,
           [filterType]: option
