@@ -23,6 +23,15 @@ const getWebsites = async(id:String) => {
   }
 }
 
+const getSpecificWebsite = async(id:string) => {
+  try {
+    const response = await api.get(`${baseUrl}/website/${id}`);
+    console.log(response);
+    return response.data
+  } catch (error) {
+  }
+}
+
 const getPatternsData = async (websiteId: string): Promise<ServiceResponse> => {
   try {
     const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
@@ -122,4 +131,4 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails  };
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite  };

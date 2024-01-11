@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { useExpertContext } from '../../context/ExpertContext'
-import { getPatternsData, getSpecificPattern } from '../../services/expertServices';
+import { getPatternsData, getSpecificPattern, getSpecificWebsite } from '../../services/expertServices';
 import Navbar from '../../components/expert/Navbar';
 import PatternCard from '../../components/expert/PatternCard';
 import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 import PatternDetailsComponent from '../../components/expert/PatternDetailsComponent';
-import { PatternData } from '../../types';
+import { PatternData, WebsiteData } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
+import { Tooltip} from '@mui/material';
 
 
 const WebsiteDashboard = () => {
@@ -18,29 +19,31 @@ const WebsiteDashboard = () => {
         setRedirectCallback(() => {
           authContext?.logoutUser();
         });
-    
         return () => {
           setRedirectCallback(null);
         };
     }, [authContext]);
     const websiteId = sessionStorage.getItem("websiteId")
-    const websiteName = sessionStorage.getItem("websiteName")
+    const websiteName = sessionStorage.getItem("websiteName");
+    const { websiteData, setWebsiteData } = useExpertContext();
     const [patterns, setPatterns] = useState<any[]>([]);
     const [filteredArray, setFilteredArray] = useState<any[]>([]);
     const experId = localStorage.getItem("userId");
     const expertName = localStorage.getItem("userName");
     const token = localStorage.getItem("authToken");
-    const [patternTypes, setPatternTypes] = useState([])
-    const [experts, setExperts] = useState([])
-    const [phases, setPhases] = useState([])
+    const [patternTypes, setPatternTypes] = useState<any[]>([])
+    const [experts, setExperts] = useState<any[]>([])
+    const [phases, setPhases] = useState<any[]>([])
     const [filters, setFilters] = useState({
         patternType: '',
         expertName: '',
         phase: ''
     });
+    const [isPublishBtnDisabled, setIsPublishBtnDisabled] = useState<boolean>(true);
     const [isPatternformOpen, setIsPatternformOpen] = useState(false);
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
-    const {  setPatternData } = useExpertContext()
+    const {  setPatternData } = useExpertContext();
+    const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-blue-500"
 
     const getPatterns = useCallback( async () => {
         setPatterns([]);
@@ -48,7 +51,11 @@ const WebsiteDashboard = () => {
         if(websiteId && token){
             try {
               data = await getPatternsData(websiteId);
+              setWebsiteData(await getSpecificWebsite(websiteId));
               setPatterns(data);
+              const allPatternPhases = data.map((item : PatternData)=>item.isPatternExists);
+              console.log(allPatternPhases);
+              allPatternPhases.includes(false) ? setIsPublishBtnDisabled(true) : setIsPublishBtnDisabled(false);
               const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
@@ -130,7 +137,11 @@ const WebsiteDashboard = () => {
             <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
           </div>
           <div>
-            <button>Publish</button>
+            {websiteData.primaryExpertId === experId ? 
+              <Tooltip title={isPublishBtnDisabled ? "The patterns verification is incomplete" : "Publish all the patterns"} arrow>
+                <button className={`${bgForPublishBtn} p-2 rounded-lg`} disabled={isPublishBtnDisabled}>Publish</button>
+              </Tooltip> 
+            : null}
           </div>
         </div>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
