@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import ClientCard from "../../components/SuperAdmin/ClientCard";
+import ClientCard from "../../components/superAdmin/ClientCard";
 
 
 const clientList = [

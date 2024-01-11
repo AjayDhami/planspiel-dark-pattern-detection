@@ -16,7 +16,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
+// to display website list for a particular client
 const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
 
     const [open, setOpen] = useState(false);

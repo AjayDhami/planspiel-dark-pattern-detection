@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Stack, styled, Typography } from "@mui/material";
 import React from "react";
-import WebsiteCard from "../../components/SuperAdmin/WebsiteCard";
+import WebsiteCard from "../superAdmin/WebsiteCard";
 
 const clientList = [
   {
@@ -50,6 +50,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+// to display sequence of clients along with websites list of each client
 const ClientCard = ({ id, name, websites, automation, assignTo }: CardProps) => {
   return (
     <Box>
