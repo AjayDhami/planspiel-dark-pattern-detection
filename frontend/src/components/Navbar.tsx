@@ -1,16 +1,8 @@
-import {
-  AppBar,
-  Container,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  Typography,
-  styled,
-} from "@mui/material";
-import { Logout as LogoutIcon } from "@mui/icons-material";
+import { AppBar, Container, Toolbar, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext1";
 import { useContext } from "react";
+import AccountMenu from "./client/AccountMenu";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   ...theme.typography.body1,
@@ -20,6 +12,8 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+
+  const handleLogout = () => authContext?.logoutUser();
 
   return (
     <StyledAppBar position="static">
@@ -43,17 +37,7 @@ const Navbar = () => {
             />
           </Typography>
 
-          <Tooltip title="Sign out" arrow>
-            <IconButton
-              color="secondary"
-              sx={{ mx: 1 }}
-              onClick={() => {
-                authContext?.logoutUser();
-              }}
-            >
-              <LogoutIcon />
-            </IconButton>
-          </Tooltip>
+          <AccountMenu onLogout={handleLogout} />
         </Toolbar>
       </Container>
     </StyledAppBar>

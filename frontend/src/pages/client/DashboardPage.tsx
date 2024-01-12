@@ -15,7 +15,7 @@ import WebsiteCard from "../../components/WebsiteCard";
 import { useEffect, useState } from "react";
 import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 import { getAllWebsites, getClientDashboardKPIData } from "../../api";
-import { WebsiteResponse } from "../../types";
+import { DashboardKPI, WebsiteResponse } from "../../types";
 import { toast } from "react-toastify";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
@@ -25,13 +25,6 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   background: theme.palette.background.paper,
   borderRadius: 16,
 }));
-
-type DashboardKPI = {
-  totalWebsites: number;
-  websitesCertified: number;
-  websitesInProgress: number;
-  websitesRejected: number;
-};
 
 const DashboardPage = () => {
   const theme = useTheme();
@@ -54,24 +47,29 @@ const DashboardPage = () => {
     }
   };
 
+  const getDashboardKPIData = async (): Promise<void> => {
+    try {
+      const data = await getClientDashboardKPIData();
+      setKpiData(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    }
+  };
+
+  const handleOnboardingSuccess = (): void => {
+    getWebsiteList();
+    getDashboardKPIData();
+  };
+
   useEffect(() => {
     getWebsiteList();
   }, []);
 
   useEffect(() => {
-    const getDashboardKPIData = async (): Promise<void> => {
-      try {
-        const data = await getClientDashboardKPIData();
-        setKpiData(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          toast.error(`Error: ${error.message}`);
-        } else {
-          toast.error("An unknown error occurred.");
-        }
-      }
-    };
-
     getDashboardKPIData();
   }, []);
 
@@ -203,7 +201,7 @@ const DashboardPage = () => {
         fullScreen={isMobile}
         open={onboardingForm}
         onClose={() => setOnboardingForm(false)}
-        onSuccess={getWebsiteList}
+        onSuccess={handleOnboardingSuccess}
       />
     </>
   );
