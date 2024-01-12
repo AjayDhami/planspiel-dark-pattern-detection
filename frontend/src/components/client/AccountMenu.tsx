@@ -11,14 +11,41 @@ import {
   Menu,
   MenuItem,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import React from "react";
+import { AccountMenuProps } from "../../types";
+import { createAvatarStyle } from "../../utils/DataHelper";
 
-type AccountMenuProps = {
-  onLogout: () => void;
+const menuPaperStyles = {
+  elevation: 0,
+  sx: {
+    overflow: "visible",
+    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+    mt: 1.5,
+    minWidth: 220,
+    "& .MuiAvatar-root": {
+      width: 32,
+      height: 32,
+      ml: -0.5,
+      mr: 1,
+    },
+    "&::before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      transform: "translateY(-50%) rotate(45deg)",
+      zIndex: 0,
+    },
+  },
 };
 
-const AccountMenu = ({ onLogout }: AccountMenuProps) => {
+const AccountMenu = ({ onProfile, onLogout }: AccountMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,7 +66,7 @@ const AccountMenu = ({ onLogout }: AccountMenuProps) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar>M</Avatar>
+            <Avatar {...createAvatarStyle("Prabudh Mishra")} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -50,44 +77,21 @@ const AccountMenu = ({ onLogout }: AccountMenuProps) => {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        slotProps={{
-          paper: {
-            elevation: 0,
-            sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              mt: 1.5,
-              width: 220,
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&::before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
-            },
-          },
-        }}
+        slotProps={{ paper: menuPaperStyles }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
+        <Typography variant="body1" sx={{ p: 2, fontWeight: 600 }}>
+          Welcome, Prabudh Mishra
+        </Typography>
+        <Divider />
+        {/* TODO: Open after implementing Profile page */}
+        {/* <MenuItem onClick={onProfile}>
           <ListItemIcon>
             <AccountBoxIcon color="secondary" />
           </ListItemIcon>
           Profile
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <LogoutIcon color="secondary" />

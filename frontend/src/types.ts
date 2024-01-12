@@ -108,3 +108,8 @@ export interface ServiceResponse {
   status: number;
   patterns: PatternData[];
 }
+
+export interface AccountMenuProps {
+  onProfile: () => void;
+  onLogout: () => void;
+}
