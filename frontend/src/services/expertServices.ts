@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData, ServiceResponse} from "../types"
+import { PatternData} from "../types"
 
 
 
@@ -36,15 +36,21 @@ const getPatternsData = async (websiteId: string) => {
     const response = await api.get(
       `${baseUrl}/website/${websiteId}/pattern`,
     );
-    response.data.map((pattern :PatternData)=>{
+    response.data.forEach((pattern : PatternData) => {
       if(pattern.patternPhase === "InProgress"){
         pattern.phaseColor = "#F9C32F"
+        pattern.phaseText = "In Progress"
+        pattern.hoverText = "Awaiting Verification from experts"
       }
       else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === true){
         pattern.phaseColor = "#E6321D"
+        pattern.phaseText = "Verified"
+        pattern.hoverText = "Verified but dark pattern exists"
       }
       else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === false){
         pattern.phaseColor = "#538D3F"
+        pattern.phaseText = "Verified"
+        pattern.hoverText = "Verified and dark pattern free"
       }
     });
     return response.data;
@@ -61,12 +67,18 @@ const getSpecificPattern = async (id: String, websiteId: String): Promise<Patter
     );
     if(response.data.patternPhase === "InProgress"){
       response.data.phaseColor = "#F9C32F"
+      response.data.phaseText = "In Progress"
+      response.data.hoverText = "Awaiting Verification from experts"
     }
     else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === true){
       response.data.phaseColor = "#E6321D"
+      response.data.phaseText = "Verified"
+      response.data.hoverText = "Verified but dark pattern exists"
     }
     else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === false){
       response.data.phaseColor = "#538D3F"
+      response.data.phaseText = "Verified"
+      response.data.hoverText = "Verified and dark pattern free"
     }
     return response.data;
   } catch (error) {

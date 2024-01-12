@@ -3,7 +3,7 @@ import Comments from './Comments';
 import { IoMdClose } from "react-icons/io";
 import {  PatternDetailsProps } from '../../types';
 import ConfirmVerifyModal from './ConfirmVerifyModal';
-import { getSpecificPattern, postVerification, stringAvatar, CommentPost } from '../../services/expertServices';
+import { getSpecificPattern, stringAvatar, CommentPost } from '../../services/expertServices';
 import { useExpertContext } from '../../context/ExpertContext';
 import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from './PatternUpdateForm';
@@ -78,7 +78,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                   <div className='flex justify-between items-center'>
                     <div className='flex items-center'>
                       <h2 className='font-bold text-2xl text-blue-500 mr-5'>{patternData.patternType}</h2>
-                      <div className={`text-white p-2 rounded-2xl ${getBgColorClass}`}>{patternData.patternPhase}</div>
+                      <div className={`text-white p-2 rounded-2xl ${getBgColorClass}`}>{patternData.phaseText}</div>
                     </div>
                       {patternData.createdByExpertId===expertId ? 
                         <div className='flex items-center text-md '>

@@ -36,6 +36,8 @@ export const ExpertProvider: React.FC<ExpertProviderProps> = ({ children }) => {
         patternPhase: "",
         websiteId : "",
         phaseColor : "",
+        phaseText : "",
+        hoverText : "",
         isPatternExists : false
     });
     const [websiteData, setWebsiteData] = useState<WebsiteData>({
