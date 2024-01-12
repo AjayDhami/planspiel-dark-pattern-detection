@@ -17,7 +17,6 @@ const getUserDetails = async(id:String) => {
 const getWebsites = async(id:String) => {
   try {
     const response = await api.get(`${baseUrl}/website?userId=${id}`);
-    console.log(response);
     return response.data
   } catch (error) {
   }
@@ -32,11 +31,22 @@ const getSpecificWebsite = async(id:string) => {
   }
 }
 
-const getPatternsData = async (websiteId: string): Promise<ServiceResponse> => {
+const getPatternsData = async (websiteId: string) => {
   try {
-    const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
+    const response = await api.get(
       `${baseUrl}/website/${websiteId}/pattern`,
     );
+    response.data.map((pattern :PatternData)=>{
+      if(pattern.patternPhase === "InProgress"){
+        pattern.phaseColor = "#F9C32F"
+      }
+      else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === true){
+        pattern.phaseColor = "#E6321D"
+      }
+      else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === false){
+        pattern.phaseColor = "#538D3F"
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching patterns', error);
@@ -49,6 +59,15 @@ const getSpecificPattern = async (id: String, websiteId: String): Promise<Patter
     const response: AxiosResponse<PatternData> = await api.get<PatternData>(
       `${baseUrl}/website/${websiteId}/pattern/${id}`,
     );
+    if(response.data.patternPhase === "InProgress"){
+      response.data.phaseColor = "#F9C32F"
+    }
+    else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === true){
+      response.data.phaseColor = "#E6321D"
+    }
+    else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === false){
+      response.data.phaseColor = "#538D3F"
+    }
     return response.data;
   } catch (error) {
     console.error('Error fetching pattern details', error);
