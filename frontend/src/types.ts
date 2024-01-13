@@ -74,7 +74,8 @@ export interface Comment {
   
 export interface verification {
     expertId: string;
-    expertVerificationPhase: string
+    expertVerificationPhase: string;
+    expertName : string;
   }
 export interface PatternData {
       comments : Comment[];

@@ -91,19 +91,31 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                       }
                   </div>
                   <div>detected at : {patternData.detectedUrl}</div>
-                  <div className='border-b-2 pb-4'>{patternData.description}</div>
+                  <div className='border-b-2 p-4 bg-gray-100 rounded-lg'>
+                    <h2 className='font-bold'>Description</h2>
+                    <p>{patternData.description}</p>
+                  </div>
                 </div>
               )}
-                {patternData.expertVerifications.map((verify) => (
+                <h2 className='px-4 py-2 text-xl text-blue-500 font-bold'>Verification</h2>
+                <div className='grid grid-cols-2 gap-4 mx-4'>
+                  {patternData.expertVerifications.map((verify) => (
                     verify.expertId === expertId && verify.expertVerificationPhase === "NotVerified" ? 
-                    <div className='px-4 py-3 bg-gray-100 mx-4'>
-                      <button className='bg-red-300 p-2 mr-5 shadow-xl rounded-xl' onClick={()=>verifyOpen(true)}>Verify with pattern</button>
-                      <button className='bg-green-300 p-2 shadow-xl rounded-xl' onClick={()=>verifyOpen(false)}>Verify but pattern doesn't exist</button>
+                    <div className='px-4 py-3 flex justify-center col-span-1 bg-gray-100 rounded-lg border-b-2'>
+                      <button className='border-2 bg-white hover:bg-red-300 p-2 mr-5 rounded-xl' onClick={()=>verifyOpen(true)}>Verify with pattern</button>
+                      <button className='border-2 bg-white hover:bg-green-300 p-2 rounded-xl' onClick={()=>verifyOpen(false)}>Verify without pattern</button>
                     </div>
                     : verify.expertId === expertId ? 
-                      <div className='px-4 py-2 bg-gray-100 mx-4 italic font-serif text-gray-500'><h2>Already Verified : {verify.expertVerificationPhase}</h2></div>
+                      <div className='px-4 py-3 italic font-serif bg-gray-100 flex justify-center col-span-1 rounded-lg border-b-2'><h2>Already Verified : {verify.expertVerificationPhase}</h2></div>
                     : null
                   ))}
+                  <div className='col-span-1 bg-gray-100 rounded-lg border-b-2 p-3'>
+                  {patternData.expertVerifications.map((verify)=>(
+                    verify.expertId !== expertId ? 
+                    <div className='italic font-serif flex justify-center'>{verify.expertName} :   {verify.expertVerificationPhase}</div> : null
+                  ))}
+                  </div>
+                </div>
                 <div>
                   {expertVerificationPhase.includes("NotVerified") ? 
                   <div className='col-span-full mt-2 px-4 pt-4 pb-2 flex items-center'>
