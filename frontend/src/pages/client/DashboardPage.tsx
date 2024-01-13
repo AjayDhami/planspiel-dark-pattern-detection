@@ -1,8 +1,5 @@
 import {
-  Box,
   Button,
-  Card,
-  CardContent,
   Grid,
   Paper,
   Stack,
@@ -11,13 +8,19 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Verified as VerifiedIcon } from "@mui/icons-material";
+import {
+  ErrorOutline as ErrorOutlineIcon,
+  HourglassTop as HourglassTopIcon,
+  Menu as MenuIcon,
+  Verified as VerifiedIcon,
+} from "@mui/icons-material";
 import WebsiteCard from "../../components/WebsiteCard";
 import { useEffect, useState } from "react";
 import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 import { getAllWebsites, getClientDashboardKPIData } from "../../api";
 import { DashboardKPI, WebsiteResponse } from "../../types";
 import { toast } from "react-toastify";
+import { KpiCard } from "../../components/client/CustomCards";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -27,11 +30,18 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   borderRadius: 16,
 }));
 
+const initialKpiData = {
+  totalWebsites: "",
+  websitesCertified: "",
+  websitesInProgress: "",
+  websitesRejected: "",
+};
+
 const DashboardPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [kpiData, setKpiData] = useState<DashboardKPI | null>(null);
+  const [kpiData, setKpiData] = useState<DashboardKPI>(initialKpiData);
   const [websiteDataList, setWebsiteDataList] = useState<WebsiteResponse[]>([]);
   const [onboardingForm, setOnboardingForm] = useState<boolean>(false);
 
@@ -76,73 +86,41 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Grid container spacing={3}>
-        <Grid item>
-          <div className="card css-9ed8bs">
-            <Box sx={{ p: "18px" }}>
-              <Grid container direction="column">
-                <Grid item>
-                  <Typography variant="h5">$6000</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">Total Earning</Typography>
-                </Grid>
-              </Grid>
-            </Box>
-          </div>
+      <Grid container spacing={3} sx={{ mb: 3 }}>
+        <Grid item xs={12} sm={6} md={3}>
+          <KpiCard
+            title={kpiData.totalWebsites}
+            subtitle="Total Websites"
+            color="primary"
+            icon={<MenuIcon />}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <KpiCard
+            title={kpiData.websitesInProgress}
+            subtitle="Certification In Progress"
+            color="secondary"
+            icon={<HourglassTopIcon />}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <KpiCard
+            title={kpiData.websitesCertified}
+            subtitle="Websites Certified"
+            color="success"
+            icon={<VerifiedIcon />}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <KpiCard
+            title={kpiData.websitesRejected}
+            subtitle="Websites Rejected"
+            color="error"
+            icon={<ErrorOutlineIcon />}
+          />
         </Grid>
       </Grid>
 
-      <Grid container spacing={4} sx={{ mt: -1, mb: 4 }}>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ borderRadius: 4 }}>
-            <CardContent sx={{ p: 3 }}>
-              <Typography color="primary" variant="h6">
-                Total Websites
-              </Typography>
-              <Typography color="textPrimary" variant="h4">
-                {kpiData?.totalWebsites}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ borderRadius: 4 }}>
-            <CardContent sx={{ p: 3 }}>
-              <Typography color="primary" variant="h6">
-                Certification In Progress
-              </Typography>
-              <Typography color="textPrimary" variant="h4">
-                {kpiData?.websitesInProgress}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ borderRadius: 4 }}>
-            <CardContent sx={{ p: 3 }}>
-              <Typography color="primary" variant="h6">
-                Websites Certified
-              </Typography>
-              <Typography color="textPrimary" variant="h4">
-                {kpiData?.websitesCertified}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ borderRadius: 4 }}>
-            <CardContent sx={{ p: 3 }}>
-              <Typography color="primary" variant="h6">
-                Websites Rejected
-              </Typography>
-              <Typography color="textPrimary" variant="h4">
-                {kpiData?.websitesRejected}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
       <Grid container spacing={2}>
         <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
           <CustomPaper

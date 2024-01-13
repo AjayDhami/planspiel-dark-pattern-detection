@@ -26,7 +26,7 @@ const ClientDashboardLayout = () => {
       <Navbar />
       <Box
         component="main"
-        sx={{ px: 2, backgroundColor: "rgb(238, 242, 246)" }}
+        sx={{ px: 2, backgroundColor: "rgb(238, 242, 246)", mt: 3 }}
       >
         <Outlet />
       </Box>

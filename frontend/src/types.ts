@@ -37,10 +37,10 @@ export type Website = {
 };
 
 export interface DashboardKPI {
-  totalWebsites: number;
-  websitesCertified: number;
-  websitesInProgress: number;
-  websitesRejected: number;
+  totalWebsites: string;
+  websitesCertified: string;
+  websitesInProgress: string;
+  websitesRejected: string;
 }
 
 export interface WebsiteResponse extends Website {
@@ -112,4 +112,11 @@ export interface ServiceResponse {
 export interface AccountMenuProps {
   onProfile: () => void;
   onLogout: () => void;
+}
+
+export interface KpiCardProps {
+  color: string;
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
 }
