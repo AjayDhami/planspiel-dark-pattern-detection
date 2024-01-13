@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -75,6 +76,23 @@ const DashboardPage = () => {
 
   return (
     <>
+      <Grid container spacing={3}>
+        <Grid item>
+          <div className="card css-9ed8bs">
+            <Box sx={{ p: "18px" }}>
+              <Grid container direction="column">
+                <Grid item>
+                  <Typography variant="h5">$6000</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1">Total Earning</Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </div>
+        </Grid>
+      </Grid>
+
       <Grid container spacing={4} sx={{ mt: -1, mb: 4 }}>
         <Grid item xs={12} md={3}>
           <Card sx={{ borderRadius: 4 }}>

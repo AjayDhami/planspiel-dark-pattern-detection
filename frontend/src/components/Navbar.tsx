@@ -19,7 +19,7 @@ const Navbar = () => {
   const handleLogout = () => authContext?.logoutUser();
 
   return (
-    <StyledNavBar position="static">
+    <StyledNavBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar>
           <Link
