@@ -175,7 +175,7 @@ export default function SignIn() {
                     </Grid>
                     <Grid item xs={12} sm={12} sx={{ mt: 1, textAlign: "end" }}>
                       <Link href="/signup" variant="subtitle1">
-                        Already have an account? Sign Up
+                        New User? Sign Up
                       </Link>
                     </Grid>
                   </Grid>
