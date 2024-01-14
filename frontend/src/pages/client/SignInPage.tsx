@@ -9,19 +9,13 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useContext } from "react";
 import { styled } from "@mui/system";
-import AuthContext from "../context/AuthContext1";
+import AuthContext from "../../context/AuthContext1";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { UserCredentials } from "../types";
+import { UserCredentials } from "../../types";
 
-interface Credentials {
-  email: string;
-  password: string;
-  role: string;
-}
 const StyledTextField = styled(TextField)({
   "& label": {
     color: "white",
@@ -58,47 +52,14 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("This field is required"),
 });
 export default function SignIn() {
-  // const navigate = useNavigate();
-  // const [credentials, setCredentials] = useState<Credentials>({
-  //   email: "",
-  //   password: "",
-  //   role: "Client",
-  // });
-  // const authContext = useContext(AuthContext);
-  // if (!authContext) {
-  //   //console.log("not context");
-  //   return null;
-  // }
-  // const { loginUser } = authContext;
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setCredentials((prevCredentials) => ({
-  //     ...prevCredentials,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  // const loginSuccess = await loginUser(credentials);
-  // if (loginSuccess) {
-  //   toast.success("User Authenticated successfully");
-  //   navigate("/client/dashboard");
-  // }
-  // };
-
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   if (!authContext) {
-    //console.log("not context");
     return null;
   }
   const { loginUser } = authContext;
 
   const handleSubmit = async (values: UserCredentials): Promise<void> => {
-    console.log(values);
-    console.log("loginUser", loginUser);
     const loginSuccess = await loginUser(values);
     if (loginSuccess) {
       toast.success("User Authenticated successfully");
@@ -214,16 +175,8 @@ export default function SignIn() {
                         Sign In
                       </Button>
                     </Grid>
-                    <Grid item>
-                      <Link
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          alignItems: "flex-end",
-                        }}
-                        href="/signup"
-                        variant="subtitle1"
-                      >
+                    <Grid item xs={12} sm={12} sx={{ mt: 1, textAlign: "end" }}>
+                      <Link href="/signup" variant="subtitle1">
                         Already have an account? Sign Up
                       </Link>
                     </Grid>
@@ -231,70 +184,6 @@ export default function SignIn() {
                 </Form>
               )}
             </Formik>
-            {/* <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <Grid container spacing={4}>
-                <Grid item xs={12} sm={12}>
-                  <h4 style={{ color: "#ffa500" }}>Email:</h4>
-                  <StyledTextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={handleChange}
-                    sx={{
-                      input: {
-                        backgroundColor: "Transparent ",
-                        color: "white",
-                      },
-                      label: { color: "white" },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <h4 style={{ color: "#ffa500" }}>Password:</h4>
-                  <StyledTextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={handleChange}
-                    sx={{
-                      input: {
-                        backgroundColor: "Transparent ",
-                        color: "white",
-                      },
-                      label: { color: "white" },
-                    }}
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 4, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid sx={{ mt: 2 }} container justifyContent="flex-end">
-                <Link href="/signup" variant="subtitle1">
-                  Already have an account? Sign Up
-                </Link>
-              </Grid>
-            </Box> */}
           </Box>
         </Grid>
         <Grid
