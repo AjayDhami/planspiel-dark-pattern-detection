@@ -6,15 +6,7 @@ import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
-interface WebsiteData {
-    baseUrl: string;
-    description : string;
-    websiteName: string;
-    phase : string;
-    websiteId : string;
-    isCompleted : boolean;
-    expertIds : [string];
-}
+import { WebsiteData } from '../../types';
 
 const ExpertDashboard : React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -65,10 +57,20 @@ const ExpertDashboard : React.FC = () => {
         <div className='grid md:grid-cols-4 mx-8 my-12 bg:white'>
             {websiteData.map((website, index)=>(
                 <div key={website.websiteId} 
-                    className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl hover:border-2 border-blue-300 hover:bg-blue-100 cursor-pointer'
-                    onClick={() => handleClick(website.websiteId, website.websiteName)}  
+                    className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl border-blue-300 cursor-pointer'  
                 >
-                    <div><h2 className='font-bold text-lg'>{website.websiteName}</h2></div>
+                    <div>
+                        <div className="flex justify-between items-center">
+                            <h2 className='font-bold text-xl text-blue-500'>{website.websiteName}</h2>
+                            <div className={`p-2 rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
+                        </div>
+                        <p>{website.baseUrl}</p>
+                        <button 
+                            className='w-full my-4 py-1 px-2 border-2 border-blue-500 rounded-xl font-bold hover:bg-blue-300'
+                                onClick={() => handleClick(website.websiteId, website.websiteName)}
+                            >Go To Website
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>

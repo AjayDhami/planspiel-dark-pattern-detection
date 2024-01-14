@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData} from "../types"
+import { PatternData, WebsiteData} from "../types"
 
 
 
@@ -17,6 +17,12 @@ const getUserDetails = async(id:String) => {
 const getWebsites = async(id:String) => {
   try {
     const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    response.data.forEach((website : WebsiteData)=>{
+      if(website.phase === "InProgress"){
+        website.phaseColor = "bg-[#F9C32F]"
+        website.phaseText = "In Progress"
+      }
+    })
     return response.data
   } catch (error) {
   }

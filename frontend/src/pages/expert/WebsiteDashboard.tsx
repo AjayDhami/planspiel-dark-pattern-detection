@@ -174,7 +174,7 @@ const WebsiteDashboard = () => {
                 {/* {websiteData.expertIds.map((expert)=>(
                   expert === websiteData.primaryExpertId ? <div className='font-italic'>{expert} - Primary</div> : <div className=' font-italic'>{expert}</div>
                 ))} */}
-                <div className='flex items-center my-2'><Avatar {...stringAvatar("Expert First")} className='mx-2'/>Expert First<span className='text-gray-400 italic'> - Primary</span></div>
+                <div className='flex items-center my-2 z-0'><Avatar {...stringAvatar("Expert First")} className='mx-2 z-0'/>Expert First<span className='text-gray-400 italic'> - Primary</span></div>
                 <div className='flex items-center my-2'><Avatar {...stringAvatar("Expert Second")} className='mx-2'/>Expert Second</div>
                 <div className='flex items-center my-2'><Avatar {...stringAvatar("Expert Third")} className='mx-2'/>Expert Third</div>
               </div>
