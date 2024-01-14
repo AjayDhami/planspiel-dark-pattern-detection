@@ -45,13 +45,27 @@ const WebsiteDashboard = () => {
     const {  setPatternData } = useExpertContext();
     const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-blue-500"
 
+    const getWebsiteData = useCallback(async ()=> {
+      if(websiteId){
+        try {
+          const webData = await getSpecificWebsite(websiteId)
+          setWebsiteData(webData)
+        } catch (error) {
+          if (error instanceof Error) {
+            toast.error(`Error: ${error.message}`);
+          } else {
+            toast.error("An unknown error occurred.");
+          }
+        }
+      }
+    },[websiteId]) 
+
     const getPatterns = useCallback( async () => {
         setPatterns([]);
         let data : any = [];
         if(websiteId && token){
             try {
               data = await getPatternsData(websiteId);
-              setWebsiteData(await getSpecificWebsite(websiteId));
               setPatterns(data);
               const allPatternPhases = data.map((item : PatternData)=>item.isPatternExists);
               console.log(allPatternPhases);
@@ -70,7 +84,6 @@ const WebsiteDashboard = () => {
               setPatternTypes(uniquePatternTypes);
               setExperts(uniqueExperts);
               setPhases(uniquePhases);
-              setFilteredArray(data)
             } catch (error) {
               if (error instanceof Error) {
                 toast.error(`Error: ${error.message}`);
@@ -83,24 +96,31 @@ const WebsiteDashboard = () => {
 
     useEffect(()=>{
         getPatterns();
-    },[getPatterns]);
+        getWebsiteData();
+    },[getPatterns, getWebsiteData]);
+
+    const filterArray = useCallback(() => {
+      setFilteredArray([]);
+      const filtered = patterns.filter((item) => {
+        return (
+            (!filters.patternType || item.patternType === filters.patternType) &&
+            (!filters.expertName || item.expertName.includes(filters.expertName)) &&
+            (!filters.phase || item.patternPhase === filters.phase)
+        );
+      });
+      setFilteredArray(filtered);
+    },[filters, patterns])
+
     useEffect(() => {
-        const filtered = patterns.filter((item) => {
-            return (
-                (!filters.patternType || item.patternType === filters.patternType) &&
-                (!filters.expertName || item.expertName.includes(filters.expertName)) &&
-                (!filters.phase || item.patternPhase === filters.phase)
-            );
-        });
-        setFilteredArray(filtered);
-    }, [filters, patterns]);
+        filterArray();
+    }, [filterArray]);
 
     const handleSelectOption = (filterType : string,option: string) => {
-        setFilteredArray([]);
-        setFilters(prevFilters => ({
-          ...prevFilters,
-          [filterType]: option
-        }));
+      setFilteredArray([]);
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        [filterType]: option
+      }));
     };
     const openForm = () =>{setIsPatternformOpen(true)}
     const closeFrom = () =>{

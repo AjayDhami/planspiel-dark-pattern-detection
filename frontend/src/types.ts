@@ -137,7 +137,7 @@ export interface VerifyPatternProps {
     isOpen : boolean,
     onClose : ()=>void,
     patternExists : boolean,
-    expertId : string
+    expertId : string;
 }
 
 export interface ServiceResponse {
