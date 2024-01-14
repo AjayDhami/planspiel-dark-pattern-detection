@@ -11,6 +11,8 @@ import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
 import { Avatar, Tooltip} from '@mui/material';
+import LoadingPatternCard from '../../components/expert/LoadingPatternCard';
+import LoadingCards from '../../components/expert/LoadingCards';
 
 
 const WebsiteDashboard = () => {
@@ -43,7 +45,9 @@ const WebsiteDashboard = () => {
     const [isPatternformOpen, setIsPatternformOpen] = useState(false);
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const {  setPatternData } = useExpertContext();
-    const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-blue-500"
+    const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-blue-500";
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
 
     const getWebsiteData = useCallback(async ()=> {
       if(websiteId){
@@ -84,6 +88,8 @@ const WebsiteDashboard = () => {
               setPatternTypes(uniquePatternTypes);
               setExperts(uniqueExperts);
               setPhases(uniquePhases);
+              setIsLoading(false);
+              setIsCardLoading(false);
             } catch (error) {
               if (error instanceof Error) {
                 toast.error(`Error: ${error.message}`);
@@ -125,6 +131,7 @@ const WebsiteDashboard = () => {
     const openForm = () =>{setIsPatternformOpen(true)}
     const closeFrom = () =>{
       setIsPatternformOpen(false);
+      setIsCardLoading(true);
       getPatterns();
     };
     const openPatternModal = async (id:String) => {
@@ -144,12 +151,14 @@ const WebsiteDashboard = () => {
     }
     const closePatternModal = () => {
       setIsPatternModalOpen(false);
+      setIsCardLoading(true);
       getPatterns();
     }
 
   return (
     <>
         <Navbar/>
+        {isLoading ? <LoadingPatternCard/> :
         <>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
@@ -224,12 +233,14 @@ const WebsiteDashboard = () => {
                 <button onClick={openForm} className='px-8 py-2 rounded-md bg-blue-500 text-white'>Add a Pattern</button>
               </div>
               </div>
-            {filteredArray.map((pattern : PatternData,index)=>(
+            {!isCardLoading ? 
+            filteredArray.map((pattern : PatternData,index)=>(
               <PatternCard patternData={pattern} loggedInExpert = {experId ? experId : ""} openModal = {()=> openPatternModal(pattern.id)}/>
-            ))}
+            )) : <LoadingCards/>
+            }
           </div>
         </div>
-        </>
+        </>}
     </>
   )
 }
