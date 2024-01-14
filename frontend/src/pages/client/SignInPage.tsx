@@ -72,7 +72,7 @@ export default function SignIn() {
       <Grid
         container
         component="main"
-        sx={{ height: "auto", backgroundColor: "#131f42" }}
+        sx={{ height: "100dvh", backgroundColor: "#131f42" }}
       >
         <CssBaseline />
         <Grid
@@ -80,12 +80,12 @@ export default function SignIn() {
           xs={12}
           sm={12}
           md={4}
-          sx={{ borderRight: "thick double #ffa500" }}
+          sx={{ borderRight: { sx: "none", md: "thick double #ffa500" } }}
         >
           <Box
             sx={{
-              my: 8,
-              mx: 6,
+              my: { xs: 2, md: 7 },
+              mx: { xs: 5, md: 6 },
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -103,18 +103,16 @@ export default function SignIn() {
                 }}
               />
             </Link>
-            <div>
-              <Typography
-                component="h1"
-                variant="h5"
-                sx={{
-                  color: "white",
-                  padding: "2rem",
-                }}
-              >
-                Sign In To the Client portal
-              </Typography>
-            </div>
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{
+                color: "white",
+                padding: "2rem",
+              }}
+            >
+              Sign In To the Client portal
+            </Typography>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -195,7 +193,7 @@ export default function SignIn() {
             display: { xs: "none", sm: "none", md: "flex" },
             backgroundImage: ` url(${process.env.PUBLIC_URL}/assets/signIn.svg)`,
             width: "100%",
-            height: "100dvh",
+            height: "auto",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
