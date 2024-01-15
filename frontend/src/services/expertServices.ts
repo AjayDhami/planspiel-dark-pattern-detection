@@ -3,12 +3,9 @@ import api from "../utils/AxiosHelper";
 import { PatternData, WebsiteData} from "../types"
 
 
-
-const baseUrl = process.env.REACT_APP_API_BASE_URL_CLIENT
-
 const getUserDetails = async(id:String) => {
   try {
-    const response = await api.get(`${baseUrl}/user/${id}`);
+    const response = await api.get(`/user/${id}`);
     return response.data
   } catch (error) {
   }
@@ -16,7 +13,7 @@ const getUserDetails = async(id:String) => {
 
 const getWebsites = async(id:String) => {
   try {
-    const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    const response = await api.get(`/website?userId=${id}`);
     response.data.forEach((website : WebsiteData)=>{
       if(website.phase === "InProgress"){
         website.phaseColor = "bg-[#F9C32F]"
@@ -30,7 +27,7 @@ const getWebsites = async(id:String) => {
 
 const getSpecificWebsite = async(id:string) => {
   try {
-    const response = await api.get(`${baseUrl}/website/${id}`);
+    const response = await api.get(`/website/${id}`);
     console.log(response);
     return response.data
   } catch (error) {
@@ -40,7 +37,7 @@ const getSpecificWebsite = async(id:string) => {
 const getPatternsData = async (websiteId: string) => {
   try {
     const response = await api.get(
-      `${baseUrl}/website/${websiteId}/pattern`,
+      `/website/${websiteId}/pattern`,
     );
     response.data.forEach((pattern : PatternData) => {
       if(pattern.patternPhase === "InProgress"){
@@ -69,7 +66,7 @@ const getPatternsData = async (websiteId: string) => {
 const getSpecificPattern = async (id: String, websiteId: String): Promise<PatternData> => {
   try {
     const response: AxiosResponse<PatternData> = await api.get<PatternData>(
-      `${baseUrl}/website/${websiteId}/pattern/${id}`,
+      `/website/${websiteId}/pattern/${id}`,
     );
     if(response.data.patternPhase === "InProgress"){
       response.data.phaseColor = "#F9C32F"
@@ -99,7 +96,7 @@ const CommentPost = async(patternId : String, websiteId : String, expertId : Str
     content : commentText
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment`,
+    `/website/${websiteId}/pattern/${patternId}/comment`,
     body,
   );
   return response.status;
@@ -111,7 +108,7 @@ const replyPost = async(commentId : String, websiteId : String, patternId : Stri
     content : replyText
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
+    `/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
     body,
   );
   return response.status
@@ -126,7 +123,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     detectedUrl : detectedUrl
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern`,
+    `/website/${websiteId}/pattern`,
     body,
   );
   return response.status
@@ -140,7 +137,7 @@ const postVerification = async(websiteId : string, patternId : string, expertId 
     patternExists : patternExists
   }
   const response: AxiosResponse<PatternData> = await api.put<PatternData>(
-    `${baseUrl}/website/updatePatternPhase`,
+    `/website/updatePatternPhase`,
     body,
   );
   return response.status
