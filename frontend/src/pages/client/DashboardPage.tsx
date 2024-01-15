@@ -4,7 +4,6 @@ import {
   Paper,
   Stack,
   Typography,
-  styled,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -20,9 +19,12 @@ import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm
 import { getAllWebsites, getClientDashboardKPIData } from "../../api";
 import { DashboardKPI, WebsiteResponse } from "../../types";
 import { toast } from "react-toastify";
-import { KpiCard } from "../../components/client/CustomCards";
+import {
+  KpiCard,
+  WebsiteDashboardCard,
+} from "../../components/client/CustomCards";
 
-const initialKpiData = {
+const initialKpiData: DashboardKPI = {
   totalWebsites: "",
   websitesCertified: "",
   websitesInProgress: "",
@@ -70,9 +72,6 @@ const DashboardPage = () => {
 
   useEffect(() => {
     getWebsiteList();
-  }, []);
-
-  useEffect(() => {
     getDashboardKPIData();
   }, []);
 
@@ -140,7 +139,27 @@ const DashboardPage = () => {
               )}
             </Stack>
 
-            <Grid container spacing={4} sx={{ mt: "-8px" }}>
+            <Grid
+              container
+              spacing={3}
+              justifyContent="space-around"
+              alignItems="center"
+              padding={2}
+            >
+              {websiteDataList.slice(0, 6).map((website) => (
+                <Grid item xs={12} md={6} key={website.websiteId}>
+                  <WebsiteDashboardCard
+                    websiteId={website.websiteId}
+                    baseUrl={website.baseUrl}
+                    websiteName={website.websiteName}
+                    isCompleted={website.isCompleted}
+                    phase={website.phase}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+
+            {/* <Grid container spacing={4} sx={{ mt: "-8px" }}>
               {websiteDataList.slice(0, 6).map((website) => (
                 <Grid item xs={12} md={4} key={website.websiteId}>
                   <WebsiteCard
@@ -152,7 +171,7 @@ const DashboardPage = () => {
                   />
                 </Grid>
               ))}
-            </Grid>
+            </Grid> */}
           </Paper>
         </Grid>
         <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>
