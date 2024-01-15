@@ -45,7 +45,7 @@ const WebsiteDashboard = () => {
     const [isPatternformOpen, setIsPatternformOpen] = useState(false);
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const {  setPatternData } = useExpertContext();
-    const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-blue-500";
+    const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-green-500";
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
 
@@ -71,9 +71,9 @@ const WebsiteDashboard = () => {
             try {
               data = await getPatternsData(websiteId);
               setPatterns(data);
-              const allPatternPhases = data.map((item : PatternData)=>item.isPatternExists);
-              console.log(allPatternPhases);
-              allPatternPhases.includes(false) ? setIsPublishBtnDisabled(true) : setIsPublishBtnDisabled(false);
+              const patternPhases = data.map((item : PatternData)=>item.patternPhase);
+              console.log(patternPhases);
+              patternPhases.includes("InProgress") ? setIsPublishBtnDisabled(true) : setIsPublishBtnDisabled(false);
               const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
@@ -168,7 +168,7 @@ const WebsiteDashboard = () => {
               <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
               {websiteData.primaryExpertId === experId ? 
                 <Tooltip title={isPublishBtnDisabled ? "The patterns verification is incomplete" : "Publish all the patterns"} arrow>
-                  <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg`} disabled={isPublishBtnDisabled}>Publish</button>
+                  <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} disabled={isPublishBtnDisabled}>Publish</button>
                 </Tooltip> 
               : null}
             </div>

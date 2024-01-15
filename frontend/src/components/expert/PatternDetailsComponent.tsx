@@ -90,7 +90,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({isOpen, onClose
                         </div>
                       }
                   </div>
-                  <div>detected at : {patternData.detectedUrl}</div>
+                  <div>Detected at : {patternData.detectedUrl}</div>
                   <div className='border-b-2 p-4 bg-gray-100 rounded-lg'>
                     <h2 className='font-bold'>Description</h2>
                     <p>{patternData.description}</p>
