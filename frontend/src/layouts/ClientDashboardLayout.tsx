@@ -26,7 +26,16 @@ const ClientDashboardLayout = () => {
       <Navbar />
       <Box
         component="main"
-        sx={{ px: 2, backgroundColor: "rgb(238, 242, 246)", mt: 3 }}
+        sx={{
+          p: 4,
+          height: {
+            sm: "auto",
+            lg: `calc(100vh - 64px)`,
+          },
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: (theme) => theme.palette.grey[300],
+        }}
       >
         <Outlet />
       </Box>

@@ -62,7 +62,7 @@ const SignInPage = () => {
 
   const handleSubmit = async (values: UserCredentials): Promise<void> => {
     try {
-      const isUserLogged = authContext?.loginUser(values);
+      const isUserLogged = await authContext?.loginUser(values);
       if (isUserLogged) {
         toast.success("User Authenticated successfully");
         navigate("/client/dashboard");

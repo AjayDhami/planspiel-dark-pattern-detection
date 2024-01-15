@@ -22,14 +22,6 @@ import { DashboardKPI, WebsiteResponse } from "../../types";
 import { toast } from "react-toastify";
 import { KpiCard } from "../../components/client/CustomCards";
 
-const CustomPaper = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  color: theme.palette.text.secondary,
-  background: theme.palette.background.paper,
-  borderRadius: 16,
-}));
-
 const initialKpiData = {
   totalWebsites: "",
   websitesCertified: "",
@@ -121,28 +113,34 @@ const DashboardPage = () => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
-          <CustomPaper
+      <Grid flex={1} container spacing={2}>
+        <Grid item xs={12} md={7}>
+          <Paper
+            elevation={0}
             sx={{
+              padding: (theme) => theme.spacing(2),
+              color: (theme) => theme.palette.text.secondary,
+              background: (theme) => theme.palette.background.paper,
+              borderRadius: 2,
               height: "100%",
             }}
           >
             <Stack
               direction={{ xs: "column", sm: "row" }}
               justifyContent="space-between"
+              alignItems="center"
             >
-              <Typography variant="h5" component="div" color="primary">
+              <Typography variant="h5" component="span" color="primary">
                 Your Websites
               </Typography>
               {websiteDataList.length > 6 && (
-                <Button variant="text" color="secondary">
+                <Button variant="text" color="secondary" size="small">
                   View all
                 </Button>
               )}
             </Stack>
+
             <Grid container spacing={4} sx={{ mt: "-8px" }}>
-              {/* slice function to display first 6 items */}
               {websiteDataList.slice(0, 6).map((website) => (
                 <Grid item xs={12} md={4} key={website.websiteId}>
                   <WebsiteCard
@@ -155,11 +153,16 @@ const DashboardPage = () => {
                 </Grid>
               ))}
             </Grid>
-          </CustomPaper>
+          </Paper>
         </Grid>
         <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>
-          <CustomPaper
+          <Paper
+            elevation={0}
             sx={{
+              padding: (theme) => theme.spacing(2),
+              color: (theme) => theme.palette.text.secondary,
+              background: (theme) => theme.palette.background.paper,
+              borderRadius: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -189,7 +192,7 @@ const DashboardPage = () => {
             >
               Certify your website
             </Button>
-          </CustomPaper>
+          </Paper>
         </Grid>
       </Grid>
 
