@@ -91,7 +91,7 @@ export class WebsiteService {
     websiteId: string,
   ): Promise<WebsiteResponseDto> {
     const existingWebsite = await this.checkWebsiteExists(websiteId);
-    return this.convertToWebsiteResponseDto(existingWebsite);
+    return await this.convertToWebsiteResponseDto(existingWebsite);
   }
 
   async getAllWebsiteDetailsForParticularUser(userId: string) {
@@ -106,7 +106,10 @@ export class WebsiteService {
         })
         .exec();
     }
-    return websites.map((website) => this.convertToWebsiteResponseDto(website));
+    const websiteDetailsPromises = websites.map(async (website) => {
+      return await this.convertToWebsiteResponseDto(website);
+    });
+    return Promise.all(websiteDetailsPromises);
   }
 
   async getWebsitesAssociatedWithClients(userType: string) {
@@ -506,7 +509,6 @@ export class WebsiteService {
       phase: website.phase,
       isDarkPatternFree: website.isDarkPatternFree,
       expertFeedback: website.expertFeedback,
-      expertIds: website.expertIds,
       expertDetails: expertDetails,
       primaryExpertId: website.primaryExpertId,
       primaryExpertName: await this.getUserName(website.primaryExpertId),
