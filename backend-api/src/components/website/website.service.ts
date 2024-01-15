@@ -212,7 +212,7 @@ export class WebsiteService {
 
     if (!expertVerification) {
       throw new HttpException(
-        'Expert not assinged to given website',
+        'Expert not assigned to given website',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -418,7 +418,7 @@ export class WebsiteService {
       };
     } catch (error) {
       throw new HttpException(
-        'Failed to publish webiste certification details',
+        'Failed to publish website certification details',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -484,7 +484,17 @@ export class WebsiteService {
     }
   }
 
-  private convertToWebsiteResponseDto(website: Website): WebsiteResponseDto {
+  private async convertToWebsiteResponseDto(
+    website: Website,
+  ): Promise<WebsiteResponseDto> {
+    const expertDetailsPromises = website.expertIds.map(async (expertId) => {
+      return {
+        id: expertId,
+        name: await this.getUserName(expertId),
+      };
+    });
+
+    const expertDetails = await Promise.all(expertDetailsPromises);
     return {
       websiteId: website._id,
       baseUrl: website.baseUrl,
@@ -497,7 +507,9 @@ export class WebsiteService {
       isDarkPatternFree: website.isDarkPatternFree,
       expertFeedback: website.expertFeedback,
       expertIds: website.expertIds,
+      expertDetails: expertDetails,
       primaryExpertId: website.primaryExpertId,
+      primaryExpertName: await this.getUserName(website.primaryExpertId),
     };
   }
 

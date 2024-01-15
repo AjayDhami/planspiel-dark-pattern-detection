@@ -12,5 +12,12 @@ export class WebsiteResponseDto {
   isDarkPatternFree: boolean;
   expertFeedback: string;
   expertIds: string[];
+  expertDetails: ExpertDetailsDto[];
   primaryExpertId: string;
+  primaryExpertName: string;
+}
+
+export class ExpertDetailsDto {
+  id: string;
+  name: string;
 }
