@@ -13,7 +13,6 @@ import {
   Menu as MenuIcon,
   Verified as VerifiedIcon,
 } from "@mui/icons-material";
-import WebsiteCard from "../../components/WebsiteCard";
 import { useEffect, useState } from "react";
 import WebsiteOnboardingForm from "../../components/client/WebsiteOnboardingForm";
 import { getAllWebsites, getClientDashboardKPIData } from "../../api";
@@ -158,20 +157,6 @@ const DashboardPage = () => {
                 </Grid>
               ))}
             </Grid>
-
-            {/* <Grid container spacing={4} sx={{ mt: "-8px" }}>
-              {websiteDataList.slice(0, 6).map((website) => (
-                <Grid item xs={12} md={4} key={website.websiteId}>
-                  <WebsiteCard
-                    websiteId={website.websiteId}
-                    baseUrl={website.baseUrl}
-                    websiteName={website.websiteName}
-                    isCompleted={website.isCompleted}
-                    phase={website.phase}
-                  />
-                </Grid>
-              ))}
-            </Grid> */}
           </Paper>
         </Grid>
         <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>

@@ -15,22 +15,22 @@ function App() {
   return (
     <AuthProvider>
       <ExpertProvider>
-      <Routes>
-        {/* <!-- Common routes --> */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/expertsignin" element={<ExpertSignin/>}/>
-        {/* <!-- Client Dashboard routes --> */}
-        <Route path="/client" element={<ClientDashboardLayout />}>
-          {/* Redirect to actual dashboard instead of just layout page */}
-          <Route index element={<Navigate to="dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="website/:webId" element={<WebsiteViewPage />} />
-        </Route>
-        <Route path="/expert/dashboard" element={<ExpertDashboard/>}/>
-        <Route path="/expert/website" element={<WebsiteDashboard/>}/>
-      </Routes>
+        <Routes>
+          {/* <!-- Common routes --> */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/expertsignin" element={<ExpertSignin />} />
+          {/* <!-- Client Dashboard routes --> */}
+          <Route path="/client" element={<ClientDashboardLayout />}>
+            {/* Redirect to actual dashboard instead of just layout page */}
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="your-websites" element={<WebsiteViewPage />} />
+          </Route>
+          <Route path="/expert/dashboard" element={<ExpertDashboard />} />
+          <Route path="/expert/website" element={<WebsiteDashboard />} />
+        </Routes>
       </ExpertProvider>
     </AuthProvider>
   );

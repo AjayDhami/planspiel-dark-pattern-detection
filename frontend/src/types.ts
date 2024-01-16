@@ -1,11 +1,11 @@
 import React from "react";
 
 export type User = {
-  sub: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
-  exp: number;
-  iat: number;
 };
 
 export interface UserCredentials extends Pick<User, "email" | "role"> {
@@ -13,10 +13,10 @@ export interface UserCredentials extends Pick<User, "email" | "role"> {
 }
 
 export interface AuthContextProps {
-  user: User | null;
+  user: User;
   authTokens: string | null;
   setAuthTokens: (tokens: string | null) => void;
-  setUser: (user: User | null) => void;
+  setUser: (user: User) => void;
   signUpUser: (e: React.FormEvent) => Promise<void>;
   loginUser: (user: UserCredentials) => Promise<boolean>;
   logoutUser: () => void;

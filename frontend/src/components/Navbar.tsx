@@ -51,38 +51,6 @@ const Navbar = () => {
       </Container>
     </StyledNavBar>
   );
-  //   <StyledAppBar position="static">
-  //     <Container maxWidth="xl">
-  //       <Toolbar
-  //         disableGutters
-  //         sx={{
-  //           display: "flex",
-  //           justifyContent: "space-between",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         <Typography
-  //           variant="h6"
-  //           component={Link}
-  //           to="/client/dashboard"
-  //           noWrap
-  //         >
-  //           <img
-  //             src="/assets/logo.png"
-  //             alt="Logo"
-  //             style={{
-  //               height: 60,
-  //               marginTop: "0.5rem",
-  //               marginBottom: "0.25rem",
-  //             }}
-  //           />
-  //         </Typography>
-
-  //         <AccountMenu onProfile={handleProfile} onLogout={handleLogout} />
-  //       </Toolbar>
-  //     </Container>
-  //   </StyledAppBar>
-  // );
 };
 
 export default Navbar;

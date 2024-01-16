@@ -24,6 +24,17 @@ export const getClientDashboardKPIData = async () => {
   }
 };
 
+export const getUserDetails = async () => {
+  try {
+    const user = extractUserDetails();
+
+    const response = await api.get(`/user/${user?.sub}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Function to get the user websites
 export const getAllWebsites = async () => {
   try {

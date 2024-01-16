@@ -13,9 +13,10 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { AccountMenuProps } from "../../types";
 import { createAvatarStyle } from "../../utils/DataHelper";
+import AuthContext from "../../context/AuthContext1";
 
 const menuPaperStyles = {
   elevation: 0,
@@ -46,11 +47,18 @@ const menuPaperStyles = {
 };
 
 const AccountMenu = ({ onProfile, onLogout }: AccountMenuProps) => {
+  const authContext = useContext(AuthContext);
+  const userName = authContext?.user
+    ? `${authContext?.user.firstName} ${authContext?.user.lastName}`
+    : "User";
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -66,7 +74,7 @@ const AccountMenu = ({ onProfile, onLogout }: AccountMenuProps) => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar {...createAvatarStyle("Prabudh Mishra")} />
+            <Avatar {...createAvatarStyle(userName)} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -82,7 +90,7 @@ const AccountMenu = ({ onProfile, onLogout }: AccountMenuProps) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <Typography variant="body1" sx={{ p: 2, fontWeight: 600 }}>
-          Welcome, Prabudh Mishra
+          Welcome, {userName}
         </Typography>
         <Divider />
         {/* TODO: Open after implementing Profile page */}
