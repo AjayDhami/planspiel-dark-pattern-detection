@@ -1,51 +1,41 @@
 import { Box, Grid } from "@mui/material";
 import ClientCard from "../../components/superAdmin/ClientCard";
+import {ClientsDetails, getClientsDetails} from "../../services/superAdminServices"
+import { useEffect, useState } from "react";
 
-
-const clientList = [
-  {
-    id: "1",
-    name: "Borealis",
-    websites: 'https://www.flipkey.com/',
-    automation: false,
-    assignTo: [],
-  },
-  {
-    id: "2",
-    name: "J&J",
-    websites: 'https://www.britishairways.com/',
-    automation: true,
-    assignTo: ['Drashti', 'Ajay', 'Amay'],
-  },
-  {
-    id: "3",
-    name: "Bayer",
-    websites: 'https://www.tripping.com/',
-    automation: false,
-    assignTo: [],
-  },
-  {
-    id: "4",
-    name: "J&J",
-    websites: 'https://www.britishairways.com/',
-    automation: true,
-    assignTo: ['Drashti', 'Ajay', 'Amay'],
-  },
-
-];
 
 const SuperAdmin = () => {
+
+  const [clientDataList, setClientDataList] = useState<ClientsDetails[]>([]);
+
+  const getClientsDataList = async (): Promise<void> => {
+    try {
+      const clientsData = await getClientsDetails();
+      setClientDataList(clientsData);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(`Error: ${error.message}`);
+      } else {
+        console.log("An unknown error occurred.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    getClientsDataList();
+  }, []);
+
     return (
       <Box>
         <Grid container spacing={3} style={{ margin: "1rem 0", width: "100%", justifyContent: 'center' }}>
-        {clientList.map((client) => (
-          <Grid item xs={12} md={10} key={client.id}>
+        {clientDataList.map((client) => (
+          <Grid item xs={12} md={10} key={client.userId}>
             <ClientCard
-              id={client.id}
-              name={client.name}
-              websites={client.websites}
-              automation={client.automation}
-              assignTo={client.assignTo}
+              id={client.userId}
+              name={client.firstName}
+              websites={client.firstName}
+              automation= {true}
+              assignTo={["Drashti"]}
             />
           </Grid>
             ))}

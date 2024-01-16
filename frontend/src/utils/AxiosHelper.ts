@@ -6,6 +6,7 @@ let redirectCallback: (() => void) | null = null;
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
+    "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTlkNjQxNjFmYWViMGUyNjg0MzQ1NmQiLCJlbWFpbCI6ImFqYXlAZ21haWwuY29tIiwicm9sZSI6IlN1cGVyQWRtaW4iLCJpYXQiOjE3MDU0MTU2MzcsImV4cCI6MTcwNTQxOTIzN30.9MQUwym2zqgdWEeRCRFHmtx845go-YeO6_sCI74-aYQ`,
     "Content-Type": "application/json",
   },
 });
