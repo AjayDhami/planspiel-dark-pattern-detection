@@ -62,6 +62,7 @@ const WebsiteDashboard = () => {
           }
         }
       }
+      // eslint-disable-next-line
     },[websiteId]) 
 
     const getPatterns = useCallback( async () => {
