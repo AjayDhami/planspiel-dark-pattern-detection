@@ -15,45 +15,28 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
-    localStorage.getItem("token") ? localStorage.getItem("token") : null
+    localStorage.getItem("authToken") ? localStorage.getItem("authToken") : null
   );
+  
   const [user, setUser] = useState<User | null>(() =>
-    localStorage.getItem("token")
-      ? jwtDecode(localStorage.getItem("token") as string)
+    localStorage.getItem("authToken")
+      ? jwtDecode(localStorage.getItem("authToken") as string)
       : null
   );
   const [loading, setLoading] = useState(true);
-  const credentials: UserCredentials = {
-    email: "alien@yaml.com",
-    password: "xcxcxc",
-    role: "Client",
-  };
   const navigate = useNavigate();
 
-  const loginUser = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    const { email, password } = e.target as unknown as {
-      email: HTMLFormElement;
-      password: HTMLFormElement;
-    };
-    const user = {
-      email: email.value,
-      password: password.value,
-      role: "Client",
-    };
-
+  const loginUser = async (user: UserCredentials): Promise<boolean> => {
     try {
       const response = await loginUserAPI(user);
-      if (response.status === 201) {
         const token = response.data.accessToken;
-        localStorage.setItem("token", token);
-
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("userId", jwtDecode(token).sub || '')
+        
         setAuthTokens(token);
         setUser(jwtDecode(token));
 
-        toast.success("User Logged in successfully");
-        navigate("/client/dashboard");
-      }
+      return true;
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(
@@ -62,6 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       } else {
         toast.error("An unknown error occurred.");
       }
+      return false;
     }
   };
 
@@ -81,7 +65,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           lastName: lastName.value,
           email: email.value,
           password: password.value,
-          role: credentials.role,
+          role: "Client",
         }
       );
 
@@ -98,8 +82,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
-    localStorage.removeItem("token");
-    navigate("/signin");
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    toast.success("You have been signed out")
+    if(user?.role === "Expert"){navigate("/expertsignin")}
+    else{navigate("/signIn")};
   };
 
   const contextData: AuthContextProps = {

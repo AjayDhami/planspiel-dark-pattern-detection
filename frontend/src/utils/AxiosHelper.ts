@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const BASE_URL = process.env.API_BASE_URL_CLIENT || "http://localhost:8080";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL_CLIENT;
 let redirectCallback: (() => void) | null = null;
 
 const api = axios.create({
@@ -12,7 +12,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
   if (token) {
     config.headers.Authorization = token;
   }

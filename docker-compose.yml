@@ -17,3 +17,9 @@ services:
       - NODE_ENV=docker
     depends_on:
       - mongodb
+
+  ml-model-service:
+    build:
+      context: ./ml-model-service
+    ports:
+      - '5001:5001'
