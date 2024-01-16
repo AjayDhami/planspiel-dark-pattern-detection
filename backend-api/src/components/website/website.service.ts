@@ -96,7 +96,7 @@ export class WebsiteService {
 
   async getAllWebsiteDetailsForParticularUser(userId: string) {
     const user = await this.checkUserExists(userId);
-    let websites;
+    let websites: Website[];
     if (user.role === UserType.Client) {
       websites = await this.websiteModel.find({ userId }).exec();
     } else if (user.role === UserType.Expert) {
@@ -106,7 +106,7 @@ export class WebsiteService {
         })
         .exec();
     }
-    const websiteDetailsPromises = websites.map(async (website) => {
+    const websiteDetailsPromises = websites.map(async (website: Website) => {
       return await this.convertToWebsiteResponseDto(website);
     });
     return Promise.all(websiteDetailsPromises);
@@ -117,7 +117,7 @@ export class WebsiteService {
     const users: UserResponseDto[] =
       await this.userService.fetchUsersByType(userType);
 
-    const usersWithWebsites = await Promise.all(
+    return await Promise.all(
       users.map(async (user) => {
         const websites = await this.websiteModel
           .find({ userId: user.userId })
@@ -140,8 +140,6 @@ export class WebsiteService {
         };
       }),
     );
-
-    return usersWithWebsites;
   }
 
   async addPatternInWebsite(
@@ -409,7 +407,7 @@ export class WebsiteService {
       );
     }
 
-    website.isDarkPatternFree = anyPatternContainsDarkPattern ? false : true;
+    website.isDarkPatternFree = !anyPatternContainsDarkPattern;
     website.phase = WebsitePhaseType.Published;
     website.isCompleted = true;
     website.expertFeedback = publishDto.expertFeedback;
@@ -511,7 +509,6 @@ export class WebsiteService {
       expertFeedback: website.expertFeedback,
       expertDetails: expertDetails,
       primaryExpertId: website.primaryExpertId,
-      primaryExpertName: await this.getUserName(website.primaryExpertId),
     };
   }
 

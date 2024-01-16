@@ -13,7 +13,6 @@ export class WebsiteResponseDto {
   expertFeedback: string;
   expertDetails: ExpertDetailsDto[];
   primaryExpertId: string;
-  primaryExpertName: string;
 }
 
 export class ExpertDetailsDto {
