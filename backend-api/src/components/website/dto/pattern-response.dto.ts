@@ -1,6 +1,6 @@
 import { Date } from 'mongoose';
 import { CommentResponseDto } from './comment-response.dto';
-import { Verification } from '../schemas/pattern.schema';
+import { ExpertVerificationDto } from './expert-verification.dto';
 
 export class PatternResponseDto {
   id: string;
@@ -15,5 +15,5 @@ export class PatternResponseDto {
   patternPhase: string;
   isPatternExists: boolean;
   comments: CommentResponseDto[];
-  expertVerifications: Verification[];
+  expertVerifications: ExpertVerificationDto[];
 }

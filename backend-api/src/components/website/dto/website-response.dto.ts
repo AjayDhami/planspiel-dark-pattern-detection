@@ -11,6 +11,11 @@ export class WebsiteResponseDto {
   phase: WebsitePhaseType;
   isDarkPatternFree: boolean;
   expertFeedback: string;
-  expertIds: string[];
+  expertDetails: ExpertDetailsDto[];
   primaryExpertId: string;
+}
+
+export class ExpertDetailsDto {
+  id: string;
+  name: string;
 }

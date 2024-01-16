@@ -4,6 +4,7 @@ import AuthContext from "../../context/AuthContext1";
 import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { UserCredentials } from '../../types';
+import { getUserDetails } from '../../services/expertServices';
 
 const ExpertSignin = () => {
     const [credentials, setCredentials] = useState<UserCredentials>({
@@ -30,6 +31,9 @@ const ExpertSignin = () => {
         e.preventDefault();
         const loginSuccess = await loginUser(credentials);
         if (loginSuccess) {
+            const userId = localStorage.getItem("userId");
+            const userName = await getUserDetails(userId ? userId : "");
+            localStorage.setItem("userName", `${userName.firstName} ${userName.lastName}`)
             navigate('/expert/dashboard');
           } 
       }
