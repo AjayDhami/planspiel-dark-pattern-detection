@@ -16,6 +16,10 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+interface WebsiteState {
+  step: number;
+}
+
 // to display website list for a particular client
 const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
 
@@ -26,8 +30,29 @@ const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
         Amay: true,
       });
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    // websiteState 1 is for Running automation, 2 for filtering dark patterns and 3 for assigning to experts
+    const [websiteState, setWebsiteState] = useState<WebsiteState>({
+      step: 1,
+    });
+
+    const handleRunAutomationClick = () => {
+      setWebsiteState({
+        ...websiteState,
+        step: 2,
+      });
+    };
+
+    const handleCheckDarkPatternsClick = () => {
+      setWebsiteState({
+        ...websiteState,
+        step: 3,
+      });
+    };
+
+    const handleAssignToClick = () => {
+      // logic for the Assign to button 
+      setOpen(true);
+      console.log('Assigning to...');
     };
 
     const handleClose = () => {
@@ -63,20 +88,23 @@ const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
           </Typography>
         </Box>
         <Box>
-        {automation === false && (
-            <Box>
-              <Button size="small" variant="contained" color="info">
-                Run Automation
-              </Button>
-            </Box>
-          )}
-          {automation && (
-            <Box>
-              <Button size="small" variant="contained" color="warning" onClick={handleClickOpen}>
-                Assign To
-              </Button>
-            </Box>
-          )}
+          {websiteState.step === 1 && (
+          <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
+            Run Automation
+          </Button>
+        )}
+
+        {websiteState.step === 2 && (
+          <Button variant="contained" color="secondary" onClick={handleCheckDarkPatternsClick}>
+            Check Dark Patterns
+          </Button>
+        )}
+
+        {websiteState.step === 3 && (
+          <Button variant="contained" color="success" onClick={handleAssignToClick}>
+            Assign To
+          </Button>
+        )}
         </Box>
       </Stack>
 
