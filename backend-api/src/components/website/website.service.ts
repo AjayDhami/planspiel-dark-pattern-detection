@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 import { UserService } from 'src/components/user/user.service';
 import { WebsiteResponseDto } from './dto/website-response.dto';
 import { PatternCreateDto } from './dto/pattern-create.dto';
-import { Pattern } from './schemas/pattern.schema';
+import { Pattern, Verification } from './schemas/pattern.schema';
 import { Comment, Reply } from './schemas/comment.schema';
 import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
@@ -21,6 +21,7 @@ import { PatternPhaseType } from './enum/pattern-phase.enum';
 import { UserResponseDto } from '../user/dto/user-response.dto';
 import { WebsitePhaseType } from './enum/website-phase.enum';
 import { PublishCertificationDto } from './dto/publish-certification.dto';
+import { ExpertVerificationDto } from './dto/expert-verification.dto';
 
 @Injectable()
 export class WebsiteService {
@@ -90,12 +91,12 @@ export class WebsiteService {
     websiteId: string,
   ): Promise<WebsiteResponseDto> {
     const existingWebsite = await this.checkWebsiteExists(websiteId);
-    return this.convertToWebsiteResponseDto(existingWebsite);
+    return await this.convertToWebsiteResponseDto(existingWebsite);
   }
 
   async getAllWebsiteDetailsForParticularUser(userId: string) {
     const user = await this.checkUserExists(userId);
-    let websites;
+    let websites: Website[];
     if (user.role === UserType.Client) {
       websites = await this.websiteModel.find({ userId }).exec();
     } else if (user.role === UserType.Expert) {
@@ -105,7 +106,10 @@ export class WebsiteService {
         })
         .exec();
     }
-    return websites.map((website) => this.convertToWebsiteResponseDto(website));
+    const websiteDetailsPromises = websites.map(async (website: Website) => {
+      return await this.convertToWebsiteResponseDto(website);
+    });
+    return Promise.all(websiteDetailsPromises);
   }
 
   async getWebsitesAssociatedWithClients(userType: string) {
@@ -113,7 +117,7 @@ export class WebsiteService {
     const users: UserResponseDto[] =
       await this.userService.fetchUsersByType(userType);
 
-    const usersWithWebsites = await Promise.all(
+    return await Promise.all(
       users.map(async (user) => {
         const websites = await this.websiteModel
           .find({ userId: user.userId })
@@ -136,8 +140,6 @@ export class WebsiteService {
         };
       }),
     );
-
-    return usersWithWebsites;
   }
 
   async addPatternInWebsite(
@@ -211,7 +213,7 @@ export class WebsiteService {
 
     if (!expertVerification) {
       throw new HttpException(
-        'Expert not assinged to given website',
+        'Expert not assigned to given website',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -405,7 +407,7 @@ export class WebsiteService {
       );
     }
 
-    website.isDarkPatternFree = anyPatternContainsDarkPattern ? false : true;
+    website.isDarkPatternFree = !anyPatternContainsDarkPattern;
     website.phase = WebsitePhaseType.Published;
     website.isCompleted = true;
     website.expertFeedback = publishDto.expertFeedback;
@@ -417,7 +419,7 @@ export class WebsiteService {
       };
     } catch (error) {
       throw new HttpException(
-        'Failed to publish webiste certification details',
+        'Failed to publish website certification details',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -483,7 +485,17 @@ export class WebsiteService {
     }
   }
 
-  private convertToWebsiteResponseDto(website: Website): WebsiteResponseDto {
+  private async convertToWebsiteResponseDto(
+    website: Website,
+  ): Promise<WebsiteResponseDto> {
+    const expertDetailsPromises = website.expertIds.map(async (expertId) => {
+      return {
+        id: expertId,
+        name: await this.getUserName(expertId),
+      };
+    });
+
+    const expertDetails = await Promise.all(expertDetailsPromises);
     return {
       websiteId: website._id,
       baseUrl: website.baseUrl,
@@ -495,7 +507,7 @@ export class WebsiteService {
       phase: website.phase,
       isDarkPatternFree: website.isDarkPatternFree,
       expertFeedback: website.expertFeedback,
-      expertIds: website.expertIds,
+      expertDetails: expertDetails,
       primaryExpertId: website.primaryExpertId,
     };
   }
@@ -515,7 +527,11 @@ export class WebsiteService {
       isPatternExists: pattern.isPatternExists,
       createdByExpertId: pattern.createdByExpertId,
       expertName: await this.getUserName(pattern.createdByExpertId),
-      expertVerifications: pattern.expertVerifications,
+      expertVerifications: await Promise.all(
+        pattern.expertVerifications.map((verification) =>
+          this.convertVerificationsToDto(verification),
+        ),
+      ),
       createdAt: pattern.createdAt,
       comments: commentsRequired
         ? await Promise.all(
@@ -524,6 +540,16 @@ export class WebsiteService {
             ),
           )
         : [],
+    };
+  }
+
+  private async convertVerificationsToDto(
+    verification: Verification,
+  ): Promise<ExpertVerificationDto> {
+    return {
+      expertId: verification.expertId,
+      expertName: await this.getUserName(verification.expertId),
+      expertVerificationPhase: verification.expertVerificationPhase,
     };
   }
 
