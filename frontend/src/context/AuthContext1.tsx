@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { BASE_SERVER_URL } from "../utils/constatnt";
 import axios from "axios";
 import {
   AuthContextProps,
@@ -62,7 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     e.preventDefault();
     try {
       const response = await axios.post<{ accessToken: string }>(
-        `${process.env.REACT_APP_API_BASE_URL_CLIENT}/user/signup`,
+        `${BASE_SERVER_URL}/user/signup`,
         {
           firstName: firstName.value,
           lastName: lastName.value,
