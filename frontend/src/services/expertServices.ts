@@ -1,24 +1,61 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData, ServiceResponse} from "../types"
+import { PatternData, WebsiteData} from "../types"
 
 
-
-const baseUrl = process.env.REACT_APP_API_BASE_URL_CLIENT
-
-const getWebsites = async(id:String, authToken : String) => {
+const getUserDetails = async(id:String) => {
   try {
-    const response = await api.get(`${baseUrl}/website?userId=${id}`);
+    const response = await api.get(`/user/${id}`);
     return response.data
   } catch (error) {
   }
 }
 
-const getPatternsData = async (websiteId: string, token: string): Promise<ServiceResponse> => {
+const getWebsites = async(id:String) => {
   try {
-    const response: AxiosResponse<ServiceResponse> = await api.get<ServiceResponse>(
-      `${baseUrl}/website/${websiteId}/pattern`,
+    const response = await api.get(`/website?userId=${id}`);
+    response.data.forEach((website : WebsiteData)=>{
+      if(website.phase === "InProgress"){
+        website.phaseColor = "bg-[#F9C32F]"
+        website.phaseText = "In Progress"
+      }
+    })
+    return response.data
+  } catch (error) {
+  }
+}
+
+const getSpecificWebsite = async(id:string) => {
+  try {
+    const response = await api.get(`/website/${id}`);
+    console.log(response);
+    return response.data
+  } catch (error) {
+  }
+}
+
+const getPatternsData = async (websiteId: string) => {
+  try {
+    const response = await api.get(
+      `/website/${websiteId}/pattern`,
     );
+    response.data.forEach((pattern : PatternData) => {
+      if(pattern.patternPhase === "InProgress"){
+        pattern.phaseColor = "#F9C32F"
+        pattern.phaseText = "In Progress"
+        pattern.hoverText = "Awaiting Verification from experts"
+      }
+      else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === true){
+        pattern.phaseColor = "#E6321D"
+        pattern.phaseText = "Verified"
+        pattern.hoverText = "Verified but dark pattern exists"
+      }
+      else if(pattern.patternPhase === "Verified" && pattern.isPatternExists === false){
+        pattern.phaseColor = "#538D3F"
+        pattern.phaseText = "Verified"
+        pattern.hoverText = "Verified and dark pattern free"
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching patterns', error);
@@ -26,11 +63,26 @@ const getPatternsData = async (websiteId: string, token: string): Promise<Servic
   }
 };
 
-const getSpecificPattern = async (id: String, websiteId: String, token: string): Promise<PatternData> => {
+const getSpecificPattern = async (id: String, websiteId: String): Promise<PatternData> => {
   try {
     const response: AxiosResponse<PatternData> = await api.get<PatternData>(
-      `${baseUrl}/website/${websiteId}/pattern/${id}`,
+      `/website/${websiteId}/pattern/${id}`,
     );
+    if(response.data.patternPhase === "InProgress"){
+      response.data.phaseColor = "#F9C32F"
+      response.data.phaseText = "In Progress"
+      response.data.hoverText = "Awaiting Verification from experts"
+    }
+    else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === true){
+      response.data.phaseColor = "#E6321D"
+      response.data.phaseText = "Verified"
+      response.data.hoverText = "Verified but dark pattern exists"
+    }
+    else if(response.data.patternPhase === "Verified" && response.data.isPatternExists === false){
+      response.data.phaseColor = "#538D3F"
+      response.data.phaseText = "Verified"
+      response.data.hoverText = "Verified and dark pattern free"
+    }
     return response.data;
   } catch (error) {
     console.error('Error fetching pattern details', error);
@@ -38,32 +90,32 @@ const getSpecificPattern = async (id: String, websiteId: String, token: string):
   }
 };
 
-const CommentPost = async(patternId : String, websiteId : String, expertId : String, commentText : String, token : string) => {
+const CommentPost = async(patternId : String, websiteId : String, expertId : String, commentText : String) => {
   const body = {
     expertId : expertId,
     content : commentText
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment`,
+    `/website/${websiteId}/pattern/${patternId}/comment`,
     body,
   );
   return response.status;
 }
 
-const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String, token : string) => {
+const replyPost = async(commentId : String, websiteId : String, patternId : String, expertId : String, replyText : String) => {
   const body = {
     expertId : expertId,
     content : replyText
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
+    `/website/${websiteId}/pattern/${patternId}/comment/${commentId}/reply`,
     body,
   );
   return response.status
   
 }
 
-const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string, token : string) =>{
+const patternPost = async(websiteId : string, expertId : string, patternType : string, description : string, detectedUrl : string) =>{
   const body = {
     createdByExpertId : expertId,
     patternType : patternType,
@@ -71,7 +123,21 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     detectedUrl : detectedUrl
   }
   const response: AxiosResponse<PatternData> = await api.post<PatternData>(
-    `${baseUrl}/website/${websiteId}/pattern`,
+    `/website/${websiteId}/pattern`,
+    body,
+  );
+  return response.status
+}
+
+const postVerification = async(websiteId : string, patternId : string, expertId : string, patternExists : boolean) =>{
+  const body = {
+    websiteId : websiteId,
+    patternId : patternId,
+    expertId : expertId,
+    patternExists : patternExists
+  }
+  const response: AxiosResponse<PatternData> = await api.put<PatternData>(
+    `/website/updatePatternPhase`,
     body,
   );
   return response.status
@@ -99,4 +165,4 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar  };
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite  };

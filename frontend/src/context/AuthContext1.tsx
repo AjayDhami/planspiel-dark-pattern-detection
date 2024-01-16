@@ -88,6 +88,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
 
     toast.success("You have been signed out");
 
