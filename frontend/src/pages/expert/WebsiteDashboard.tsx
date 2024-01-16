@@ -180,12 +180,9 @@ const WebsiteDashboard = () => {
               </div>
               <div className='w-full rounded-lg mt-2 p-2'>
                 <h2 className='font-bold'>Experts</h2>
-                {/* {websiteData.expertIds.map((expert)=>(
-                  expert === websiteData.primaryExpertId ? <div className='font-italic'>{expert} - Primary</div> : <div className=' font-italic'>{expert}</div>
-                ))} */}
-                <div className='flex items-center my-2 z-0'><Avatar {...stringAvatar("Expert First")} className='mx-2 z-0'/>Expert First<span className='text-gray-400 italic'> - Primary</span></div>
-                <div className='flex items-center my-2'><Avatar {...stringAvatar("Expert Second")} className='mx-2'/>Expert Second</div>
-                <div className='flex items-center my-2'><Avatar {...stringAvatar("Expert Third")} className='mx-2'/>Expert Third</div>
+                {websiteData.expertDetails.map((expert)=>(
+                  expert.id === websiteData.primaryExpertId ? <div className='flex items-center my-2 z-0'><Avatar {...stringAvatar(expert.name)} className='mx-2 z-0'/>{expert.name}<span className='text-gray-400 italic'> - Primary</span></div> : <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}</div>
+                ))}
               </div>
             </div>
           </div>

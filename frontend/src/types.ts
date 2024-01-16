@@ -96,6 +96,10 @@ export interface PatternData {
       isPatternExists : boolean;
 }
 
+export interface expertData {
+  id: string;
+  name: string;
+}
 export interface WebsiteData {
   baseUrl: string;
   description : string;
@@ -103,7 +107,7 @@ export interface WebsiteData {
   phase : string;
   websiteId : string;
   isCompleted : boolean;
-  expertIds : [];
+  expertDetails : expertData[];
   userId : string;
   additionalUrls : [];
   primaryExpertId : string;
