@@ -159,3 +159,12 @@ export type AdminCardProps = {
   role: string;
   websites: WebsiteDetails[];
 };
+
+export type AdminExperts = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: WebsiteDetails[];
+};

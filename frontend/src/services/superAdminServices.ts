@@ -19,7 +19,6 @@ export type Websites = {
 export const getClientsDetails = async() => {
     try {
       const response = await api.get(`/website/Client/details`);
-      console.log(response.data)
       return response.data
     } catch (error) {
         console.error('Error is --', error);
@@ -27,4 +26,27 @@ export const getClientsDetails = async() => {
       }
   }
 
+export const getExpertsDetails = async() => {
+  try {
+    const response = await api.get('/website/Expert/details');
+    return response.data
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+}
+
+export const assignExperts = async(id: string, expertIds: string[], primaryExpertId: string) => {
+  const body = {
+    expertIds: expertIds,
+    primaryExpertId: primaryExpertId
+  };
+  try {
+    const response = await api.put(`website/${id}/assignExperts`, body);
+    return response.status;
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+}
   
