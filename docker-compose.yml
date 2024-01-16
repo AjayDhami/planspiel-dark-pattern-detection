@@ -1,12 +1,14 @@
 version: '3.8'
 
 services:
-  mongodb:
+  mongo:
     image: mongo:latest
-    environment:
-      - NODE_ENV=docker
     ports:
       - '27017:27017'
+    networks:
+      - dark_pattern_network
+    volumes:
+      - mongo-data:/data/db
 
   backend-api:
     build:
@@ -16,20 +18,32 @@ services:
     environment:
       - NODE_ENV=docker
     depends_on:
-      - mongodb
+      - mongo
+    networks:
+      - dark_pattern_network
 
   ml-model-service:
     build:
       context: ./ml-model-service
     ports:
       - '5001:5001'
+    networks:
+      - dark_pattern_network
 
   frontend:
     build:
       context: ./frontend
     ports:
       - '3000:3000'
-    environment:
-      - REACT_APP_API_BASE_URL_CLIENT=http://backend-api:8088
     depends_on:
       - backend-api
+    networks:
+      - dark_pattern_network
+
+networks:
+  dark_pattern_network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
