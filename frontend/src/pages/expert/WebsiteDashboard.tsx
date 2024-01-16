@@ -164,7 +164,7 @@ const WebsiteDashboard = () => {
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <div className='mx-24 h-screen grid md:grid-cols-3 gap-4 mt-8'>
-          <div className='md:col-span-1 shadow-xl rounded-2xl bg-white h-fit py-6 px-4'>
+          <div className='md:col-span-1 shadow-xl rounded-2xl bg-white h-fit py-6 px-4 z-[-10]'>
             <div className='flex justify-between items-center'>
               <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
               {websiteData.primaryExpertId === experId ? 
@@ -182,7 +182,7 @@ const WebsiteDashboard = () => {
               <div className='w-full rounded-lg mt-2 p-2'>
                 <h2 className='font-bold'>Experts</h2>
                 {websiteData.expertDetails.map((expert)=>(
-                  expert.id === websiteData.primaryExpertId ? <div className='flex items-center my-2 z-0'><Avatar {...stringAvatar(expert.name)} className='mx-2 z-0'/>{expert.name}<span className='text-gray-400 italic'> - Primary</span></div> : <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}</div>
+                  expert.id === websiteData.primaryExpertId ? <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}<span className='text-gray-400 italic'> - Primary</span></div> : <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}</div>
                 ))}
               </div>
             </div>
