@@ -22,6 +22,7 @@ import {
   KpiCard,
   WebsiteDashboardCard,
 } from "../../components/client/CustomCards";
+import { useNavigate } from "react-router-dom";
 
 const initialKpiData: DashboardKPI = {
   totalWebsites: "",
@@ -31,6 +32,8 @@ const initialKpiData: DashboardKPI = {
 };
 
 const DashboardPage = () => {
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -116,7 +119,10 @@ const DashboardPage = () => {
           <Paper
             elevation={0}
             sx={{
-              padding: (theme) => theme.spacing(2),
+              padding: (theme) => ({
+                xs: theme.spacing(0),
+                md: theme.spacing(2),
+              }),
               color: (theme) => theme.palette.text.secondary,
               background: (theme) => theme.palette.background.paper,
               borderRadius: 2,
@@ -132,7 +138,12 @@ const DashboardPage = () => {
                 Your Websites
               </Typography>
               {websiteDataList.length > 6 && (
-                <Button variant="text" color="secondary" size="small">
+                <Button
+                  variant="text"
+                  color="secondary"
+                  size="small"
+                  onClick={() => navigate("/client/websites")}
+                >
                   View all
                 </Button>
               )}
@@ -147,13 +158,7 @@ const DashboardPage = () => {
             >
               {websiteDataList.slice(0, 6).map((website) => (
                 <Grid item xs={12} md={6} key={website.websiteId}>
-                  <WebsiteDashboardCard
-                    websiteId={website.websiteId}
-                    baseUrl={website.baseUrl}
-                    websiteName={website.websiteName}
-                    isCompleted={website.isCompleted}
-                    phase={website.phase}
-                  />
+                  <WebsiteDashboardCard {...website} />
                 </Grid>
               ))}
             </Grid>

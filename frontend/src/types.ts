@@ -33,7 +33,8 @@ export type Website = {
   additionalUrls?: string[];
   description?: string;
   isCompleted: boolean;
-  phase: string; // phase states: "Initial" | "Automation" | "Manual" | "Feedback" | "Finished"
+  phase: string;
+  expertDetails?: any[];
 };
 
 export interface DashboardKPI {

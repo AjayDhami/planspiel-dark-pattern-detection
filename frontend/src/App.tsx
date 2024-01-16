@@ -3,7 +3,7 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import ClientDashboardLayout from "./layouts/ClientDashboardLayout";
 import DashboardPage from "./pages/client/DashboardPage";
-import WebsiteViewPage from "./pages/client/WebsiteViewPage";
+import WebsiteViewPage from "./pages/client/WebsitesPage";
 import ExpertSignin from "./pages/expert/ExpertSignin";
 import ExpertDashboard from "./pages/expert/ExpertDashboard";
 import WebsiteDashboard from "./pages/expert/WebsiteDashboard";
@@ -26,7 +26,7 @@ function App() {
             {/* Redirect to actual dashboard instead of just layout page */}
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="your-websites" element={<WebsiteViewPage />} />
+            <Route path="websites" element={<WebsiteViewPage />} />
           </Route>
           <Route path="/expert/dashboard" element={<ExpertDashboard />} />
           <Route path="/expert/website" element={<WebsiteDashboard />} />

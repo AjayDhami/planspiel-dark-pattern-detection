@@ -27,14 +27,18 @@ const ClientDashboardLayout = () => {
       <Box
         component="main"
         sx={{
-          p: 4,
+          padding: {
+            xs: 2,
+            md: 4,
+          },
           height: {
-            sm: "auto",
-            lg: `calc(100vh - 64px)`,
+            xs: "auto",
+            md: `calc(100vh - 64px)`,
           },
           display: "flex",
           flexDirection: "column",
           backgroundColor: (theme) => theme.palette.grey[300],
+          overflow: "auto",
         }}
       >
         <Outlet />
