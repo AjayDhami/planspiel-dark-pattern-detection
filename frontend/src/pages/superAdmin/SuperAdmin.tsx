@@ -3,7 +3,6 @@ import ClientCard from "../../components/superAdmin/ClientCard";
 import {ClientsDetails, getClientsDetails} from "../../services/superAdminServices"
 import { useEffect, useState } from "react";
 
-
 const SuperAdmin = () => {
 
   const [clientDataList, setClientDataList] = useState<ClientsDetails[]>([]);
@@ -31,12 +30,10 @@ const SuperAdmin = () => {
         {clientDataList.map((client) => (
           <Grid item xs={12} md={10} key={client.userId}>
             <ClientCard
-              id={client.userId}
-              name={client.firstName}
-              websites={client.firstName}
-              automation= {true}
-              assignTo={["Drashti"]}
-            />
+              userId={client.userId}
+              firstName={client.firstName}
+              lastName={client.lastName}
+              websites={client.websites} email={""} role={""}            />
           </Grid>
             ))}
           </Grid>

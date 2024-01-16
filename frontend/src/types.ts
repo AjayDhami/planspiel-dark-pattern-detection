@@ -143,3 +143,19 @@ export interface ServiceResponse {
   status : number;
   patterns: PatternData[];
 }
+
+export type AdminWebsiteDetails = {
+  websiteId?: string;
+  baseUrl?: string;
+  websiteName?: string;
+  description?: string;
+}
+
+export type AdminCardProps = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: WebsiteDetails[];
+};

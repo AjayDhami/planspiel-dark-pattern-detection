@@ -1,13 +1,6 @@
 import { Box, Button, Paper, Stack, Typography, styled, Dialog, DialogTitle, DialogContent, DialogActions, Link, FormControl, FormControlLabel, FormGroup, Switch } from "@mui/material";
 import React, { useState } from "react";
-
-type CardProps = {
-  id: string;
-  website: string;
-  automation: boolean;
-  assignTo: Array<any>;
-  children?: React.ReactNode;
-};
+import { AdminWebsiteDetails } from "../../types";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,7 +14,7 @@ interface WebsiteState {
 }
 
 // to display website list for a particular client
-const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
+const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, websiteName, description}) => {
 
     const [open, setOpen] = useState(false);
     const [state, setState] = React.useState({
@@ -84,7 +77,10 @@ const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
           }}
         >
           <Typography variant="subtitle1" component="span">
-            {website}
+            {websiteName}
+          </Typography>
+          <Typography variant="body1" component="span">
+            {baseUrl}
           </Typography>
         </Box>
         <Box>
@@ -111,7 +107,8 @@ const WebsiteCard = ({ id, website, automation, assignTo }: CardProps) => {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-            Assigning: <Link href='{website}'>{website}</Link>
+            Assigning {websiteName} 
+            <Link href={baseUrl}>{baseUrl}</Link>
         </DialogTitle>
         <DialogContent>
           {/* Add content for the popup here */}
