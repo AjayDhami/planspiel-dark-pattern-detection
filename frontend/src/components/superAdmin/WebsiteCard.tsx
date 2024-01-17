@@ -33,6 +33,10 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
       }
     };
 
+    const handleRunAutomationClick = async () => {
+      
+    }
+
     const handleClose = () => {
         setExpertIds([]);
         setOpen(false);
@@ -78,6 +82,11 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
         <Box>
           <Button variant="contained" color="success" onClick={handleAssignToClick}>
             Assign To
+          </Button>
+        </Box>
+        <Box>
+          <Button variant="contained" color="success" onClick={handleRunAutomationClick}>
+            Run Automation
           </Button>
         </Box>
       </Stack>

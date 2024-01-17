@@ -49,4 +49,11 @@ export const assignExperts = async(id: string, expertIds: string[], primaryExper
     throw error;
   }
 }
-  
+
+export const runAutomation = async() => {
+  try {
+    const response = await api.
+  } catch (error) {
+    
+  }
+}
