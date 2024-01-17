@@ -1,8 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { BASE_SERVER_URL } from "../utils/constatnt";
-import axios from "axios";
 import {
   AuthContextProps,
   AuthProviderProps,
@@ -55,9 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user: UserRegistrationCredentials
   ): Promise<boolean> => {
     try {
-      const response = await registerUser(user);
-
-     // console.log("Signup ", response);
+      await registerUser(user);
 
       return true;
     } catch (error: unknown) {
