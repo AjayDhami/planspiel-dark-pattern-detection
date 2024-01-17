@@ -30,6 +30,7 @@ export type Website = {
   websiteId: string;
   baseUrl: string;
   websiteName: string;
+  userId: string;
   additionalUrls?: string[];
   description?: string;
   isCompleted: boolean;
@@ -44,9 +45,7 @@ export interface DashboardKPI {
   websitesRejected: string;
 }
 
-export interface WebsiteResponse extends Website {
-  userId: string;
-}
+export interface WebsiteResponse extends Website {}
 
 export interface WebsiteCardProps extends Website {}
 

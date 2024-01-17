@@ -188,11 +188,11 @@ const DashboardPage = () => {
               color="primary"
             />
             <Typography variant="body1" sx={{ mb: 2 }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              facilis aliquam nostrum doloribus provident est neque
-              reprehenderit repellendus ipsum quis id, error aut beatae numquam
-              tempora, cum corporis aspernatur odio excepturi sunt magni alias?
-              Deserunt.
+              Ensure the integrity of your website by leveraging the power of
+              our AI technology and a team of dedicated experts who specialize
+              in detecting dark patterns. With our comprehensive certification
+              process, we provide a secure and transparent digital experience
+              for your audience.
             </Typography>
             <Button
               variant="contained"

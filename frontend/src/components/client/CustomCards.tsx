@@ -4,8 +4,9 @@ import {
   HourglassTop as PendingIcon,
   Verified as VerifiedIcon,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useState } from "react";
 import { KpiCardProps, WebsiteCardProps } from "../../types";
+import WebsiteDetailsModal from "./WebsiteDetailsModal";
 
 const kpiCardPalettes = {
   primary: {
@@ -112,71 +113,85 @@ export const KpiCard = ({ color, title, subtitle, icon }: KpiCardProps) => {
 };
 
 export const WebsiteDashboardCard = ({
+  websiteId,
   websiteName,
   isCompleted,
   phase,
 }: WebsiteCardProps) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const onClose = () => setOpen(false);
+
   return (
-    <Paper
-      elevation={2}
-      sx={{
-        padding: "18px",
-        borderRadius: "8px",
-        boxShadow: (theme) =>
-          `0px 2px 2px ${
-            isCompleted && phase === "Finished"
-              ? theme.palette.success.main
-              : isCompleted && phase === "Feedback"
-              ? theme.palette.error.main
-              : theme.palette.secondary.main
-          }`,
-        border: (theme) =>
-          `1px solid ${
-            isCompleted && phase === "Finished"
-              ? theme.palette.success.main
-              : isCompleted && phase === "Feedback"
-              ? theme.palette.error.main
-              : theme.palette.secondary.main
-          }`,
-      }}
-    >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Tooltip title={websiteName} arrow>
-          <Typography noWrap variant="subtitle1">
-            {websiteName}
-          </Typography>
-        </Tooltip>
-        {isCompleted && phase === "Finished" && (
-          <Grid item>
-            <Tooltip title="Certification Successful" arrow>
-              <VerifiedIcon
-                style={{ width: "50px", height: "50px" }}
-                color="success"
-              />
-            </Tooltip>
-          </Grid>
-        )}
-        {isCompleted && phase === "Feedback" && (
-          <Grid item>
-            <Tooltip title="Certification Failed" arrow>
-              <DangerousIcon
-                style={{ width: "50px", height: "50px" }}
-                color="error"
-              />
-            </Tooltip>
-          </Grid>
-        )}
-        {!isCompleted && (
-          <Grid item>
-            <Tooltip title="Website Certification in Progress" arrow>
-              <PendingIcon
-                style={{ width: "50px", height: "50px" }}
-                color="secondary"
-              />
-            </Tooltip>
-          </Grid>
-        )}
-      </Box>
-    </Paper>
+    <>
+      <Paper
+        elevation={2}
+        sx={{
+          padding: "18px",
+          borderRadius: "8px",
+          boxShadow: (theme) =>
+            `0px 2px 2px ${
+              isCompleted && phase === "Finished"
+                ? theme.palette.success.main
+                : isCompleted && phase === "Feedback"
+                ? theme.palette.error.main
+                : theme.palette.secondary.main
+            }`,
+          border: (theme) =>
+            `1px solid ${
+              isCompleted && phase === "Finished"
+                ? theme.palette.success.main
+                : isCompleted && phase === "Feedback"
+                ? theme.palette.error.main
+                : theme.palette.secondary.main
+            }`,
+          cursor: "pointer",
+        }}
+        onClick={() => setOpen(true)}
+      >
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Tooltip title={websiteName} arrow>
+            <Typography noWrap variant="subtitle1">
+              {websiteName}
+            </Typography>
+          </Tooltip>
+          {isCompleted && phase === "Finished" && (
+            <Grid item>
+              <Tooltip title="Certification Successful" arrow>
+                <VerifiedIcon
+                  style={{ width: "50px", height: "50px" }}
+                  color="success"
+                />
+              </Tooltip>
+            </Grid>
+          )}
+          {isCompleted && phase === "Feedback" && (
+            <Grid item>
+              <Tooltip title="Certification Failed" arrow>
+                <DangerousIcon
+                  style={{ width: "50px", height: "50px" }}
+                  color="error"
+                />
+              </Tooltip>
+            </Grid>
+          )}
+          {!isCompleted && (
+            <Grid item>
+              <Tooltip title="Website Certification in Progress" arrow>
+                <PendingIcon
+                  style={{ width: "50px", height: "50px" }}
+                  color="secondary"
+                />
+              </Tooltip>
+            </Grid>
+          )}
+        </Box>
+      </Paper>
+
+      <WebsiteDetailsModal
+        websiteId={websiteId}
+        open={open}
+        onClose={onClose}
+      />
+    </>
   );
 };

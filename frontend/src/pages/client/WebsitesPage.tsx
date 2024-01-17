@@ -1,5 +1,4 @@
 import {
-  Chip,
   Grid,
   Paper,
   Table,
@@ -17,6 +16,7 @@ import { WebsiteResponse } from "../../types";
 import { getAllWebsites } from "../../api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import PhaseBadge from "../../components/client/PhaseBadge";
 
 interface CommonHeadCellProps {
   label: string;
@@ -58,29 +58,6 @@ const HeadCell = ({
       )}
     </TableCell>
   );
-};
-
-const PhaseCell = ({ phase }: { phase: string }) => {
-  switch (phase) {
-    case "Initial":
-      return <Chip label="Certification Requested" color="primary" />;
-    case "InProgress":
-      return (
-        <Chip
-          label="Certification in Progress"
-          color="secondary"
-          style={{ color: "#fff" }}
-        />
-      );
-    case "Feedback":
-      return <Chip label="Website Rejected" color="error" />;
-    case "Finished":
-      return (
-        <Chip label="Website Certified" color="success" variant="outlined" />
-      );
-    default:
-      return <Chip label={phase} />;
-  }
 };
 
 const WebsiteViewPage = () => {
@@ -185,7 +162,7 @@ const WebsiteViewPage = () => {
                         </Link>
                       </TableCell>
                       <TableCell>
-                        <PhaseCell phase={row.phase} />
+                        <PhaseBadge phase={row.phase} />
                       </TableCell>
                     </TableRow>
                   ))}
