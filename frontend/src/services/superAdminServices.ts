@@ -1,4 +1,6 @@
+import axios from 'axios';
 import api from '../utils/AxiosHelper';
+// import { BASE_ML_URL } from '../utils/constatnt';
 
 export type ClientsDetails = {
    userId: string;
@@ -50,10 +52,15 @@ export const assignExperts = async(id: string, expertIds: string[], primaryExper
   }
 }
 
-export const runAutomation = async() => {
-  try {
-    const response = await api.
-  } catch (error) {
-    
-  }
-}
+// export const runAutomation = async(id: string, websiteUrl: string) => {
+//   const body = {
+//     websiteUrl: websiteUrl
+//   };
+//   try {
+//     const response = await axios.post(`${BASE_ML_URL}/darkPattern/${id}`, body);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error is --', error);
+//     throw error;
+//   }
+// }
