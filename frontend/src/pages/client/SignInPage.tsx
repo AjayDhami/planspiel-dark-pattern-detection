@@ -82,7 +82,7 @@ export default function SignIn() {
           sm={12}
           md={4}
           sx={{
-            backgroundImage: `linear-gradient(to bottom,rgb(0,15,45) 30%,rgb(0, 5, 14))`,
+            backgroundImage: `linear-gradient(to right,rgb(0,15,45) 30%,rgb(0, 5, 14))`,
           }}
         >
           <Box

@@ -2,17 +2,17 @@ import { UserCredentials, UserRegistrationCredentials, WebsiteDetails } from "./
 import api from "./utils/AxiosHelper";
 import { extractUserDetails } from "./utils/DataHelper";
 
-// Function to register user
+// Function to Register User
 export const registerUser = async (user: UserRegistrationCredentials) => {
   try {
     const response = await api.post("/user/signup", user);
     return response;
   } catch (error) {
-    throw error;
+    throw  error;
   }
 };
 
-// Function to log in user
+// Function to Log in User
 export const loginUser = async (user: UserCredentials) => {
   try {
     const response = await api.post(`/user/signin`, user);

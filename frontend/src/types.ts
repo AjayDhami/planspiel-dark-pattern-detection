@@ -7,11 +7,11 @@ export type User = {
   exp: number;
   iat: number;
 };
-
+///Login
 export interface UserCredentials extends Pick<User, "email" | "role"> {
   password: string;
 }
-
+/// Registration 
 export interface UserRegistrationCredentials {
   firstName: string;
   lastName: string;

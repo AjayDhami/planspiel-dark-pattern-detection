@@ -78,7 +78,7 @@ export default function SignUp() {
   ): Promise<void> => {
     const signupSuccess = await signUpUser(values);
     if (signupSuccess) {
-      toast.success("Tour Account has been created. Please login to continue.");
+      toast.success("Your Account has been created. Please login to continue.");
       navigate("/signin");
     }
   };

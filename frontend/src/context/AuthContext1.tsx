@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await registerUser(user);
 
-      console.log("signUpUserTwo >>>>>> ", response);
+      console.log("Signup ", response);
 
       return true;
     } catch (error: unknown) {
