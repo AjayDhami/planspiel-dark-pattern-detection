@@ -82,7 +82,8 @@ export interface Comment {
   
 export interface verification {
     expertId: string;
-    expertVerificationPhase: string
+    expertVerificationPhase: string;
+    expertName : string;
   }
 export interface PatternData {
       comments : Comment[];
@@ -97,12 +98,53 @@ export interface PatternData {
       patternType: string;
       patternPhase: string;
       websiteId : string;
+      phaseColor : string;
+      phaseText : string;
+      hoverText : string;
+      isPatternExists : boolean;
 }
+
+export interface expertData {
+  id: string;
+  name: string;
+}
+export interface WebsiteData {
+  baseUrl: string;
+  description : string;
+  websiteName: string;
+  phase : string;
+  websiteId : string;
+  isCompleted : boolean;
+  expertDetails : expertData[];
+  userId : string;
+  additionalUrls : [];
+  primaryExpertId : string;
+  phaseColor : string;
+  phaseText : string;
+}
+
+export interface PatternCardProps {
+  loggedInExpert: string;
+  openModal : () => void;
+  patternData : PatternData;
+}
+
+export interface PatternAdditionFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export interface PatternDetailsProps {
     isOpen: boolean;
     onClose: () => void;
     expertId : string;
-    token : string
+}
+
+export interface VerifyPatternProps {
+    isOpen : boolean,
+    onClose : ()=>void,
+    patternExists : boolean,
+    expertId : string;
 }
 
 export interface ServiceResponse {

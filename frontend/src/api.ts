@@ -8,7 +8,7 @@ export const registerUser = async (user: UserRegistrationCredentials) => {
     const response = await api.post("/user/signup", user);
     return response;
   } catch (error) {
-    throw  error;
+    throw error;
   }
 };
 

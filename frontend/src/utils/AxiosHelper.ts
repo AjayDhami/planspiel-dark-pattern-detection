@@ -1,10 +1,10 @@
 import axios, { AxiosError } from "axios";
+import { BASE_SERVER_URL } from "./constatnt";
 
-const BASE_URL = process.env.API_BASE_URL_CLIENT || "http://localhost:8080";
 let redirectCallback: (() => void) | null = null;
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_SERVER_URL,
   headers: {
     "Content-Type": "application/json",
   },
