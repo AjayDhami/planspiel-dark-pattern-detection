@@ -1,58 +1,63 @@
-# Getting Started with Create React App
+# V-Tenet Dark Pattern Detection Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the V-Tenet Dark Pattern Detection Frontend! The Frontend part for this project is created using [React](https://reactjs.org/), a popular JavaScript library for building user interfaces with [MUI](https://mui.com/) and [TailwindCSS](https://tailwindcss.com/) for creating mobile-friendly, interactive user interfaces.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Follow these steps to set up the project on your local machine:
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Before you begin, make sure you have the following installed on your system:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js: [Download and Install Node.js](https://nodejs.org/)
+- npm (Node Package Manager): npm is included with Node.js installation.
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository to your local machine:
 
-### `npm run build`
+   ```bash
+   git clone https://gitlab.hrz.tu-chemnitz.de/vsr/edu/planspiel/WS2324/v-tenet.git
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Change into project's Frontend Directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   cd frontend
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install Project Dependencies
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Environment Variables
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the project, you need to set up environment variables. Create a .env file in the root of the frontend folder and add the following variables:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```env
+REACT_APP_API_BASE_URL_CLIENT = https://api.example.com
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Replace `https://api.example.com` with the base URL of your API and your_api_key with the actual API key required for authentication.
 
-## Learn More
+You can even refer to the `sample.env` file and replace the contents with actual values
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Running the Application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once you have completed the installation and set up the environment variables, you can start the development server:
 
+```bash
+npm start
+```
 
-Steps to setup context and authentication services in frontend
+This command will start the development server, and you can view your React app by navigating to http://localhost:3000 in your web browser.
 
-Install all dependencies
-### npm install
+## Stay in Touch
 
-start frontend
-### npm start
+Feel free to reach out to the developers for any questions or feedback. Here are some ways to stay in touch:
 
-create a .env file in frontend directory
-check sample.env to add the backend host
+- Website: [V-Tenet](https://v-tenet.vercel.app/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/v-tenet/)
