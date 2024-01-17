@@ -252,7 +252,7 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12} sm={12} sx={{ mt: 2 }}>
                       <Button type="submit" fullWidth variant="contained">
-                        Sign In
+                        Sign Up
                       </Button>
                     </Grid>
                     <Grid item xs={12} sm={12} sx={{ mt: 1, textAlign: "end" }}>
