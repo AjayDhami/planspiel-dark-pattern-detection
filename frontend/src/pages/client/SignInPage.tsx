@@ -72,15 +72,18 @@ export default function SignIn() {
       <Grid
         container
         component="main"
-        sx={{ height: "100dvh", backgroundColor: "#131f42" }}
+        sx={{
+          height: "100dvh",
+        }}
       >
-        <CssBaseline />
         <Grid
           item
           xs={12}
           sm={12}
           md={4}
-          sx={{ borderRight: { sx: "none", md: "thick double #ffa500" } }}
+          sx={{
+            backgroundImage: `linear-gradient(to bottom,rgb(0,15,45) 30%,rgb(0, 5, 14))`,
+          }}
         >
           <Box
             sx={{
