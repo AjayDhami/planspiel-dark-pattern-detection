@@ -1,5 +1,6 @@
 import {
   Grid,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -8,15 +9,20 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { OpenInNew as OpenInNewIcon } from "@mui/icons-material";
+import {
+  OpenInNew as OpenInNewIcon,
+  Tv as ViewIcon,
+} from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { WebsiteResponse } from "../../types";
 import { getAllWebsites } from "../../api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import PhaseBadge from "../../components/client/PhaseBadge";
+import WebsiteDetailsModal from "../../components/client/WebsiteDetailsModal";
 
 interface CommonHeadCellProps {
   label: string;
@@ -64,6 +70,17 @@ const WebsiteViewPage = () => {
   const [websites, setWebsites] = useState<WebsiteResponse[]>([]);
   const [orderBy, setOrderBy] = useState<keyof WebsiteResponse>("websiteId");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const [selectedWebsite, setSelectedWebsite] = useState<string | undefined>(
+    undefined
+  );
+  const [openDetails, setOpenDetails] = useState<boolean>(false);
+
+  const onOpenDetails = (webId: string): void => {
+    setSelectedWebsite(webId);
+    setOpenDetails(true);
+  };
+
+  const onCloseDetails = (): void => setOpenDetails(false);
 
   const handleRequestSort = (property: keyof WebsiteResponse) => {
     const isAsc = orderBy === property && order === "asc";
@@ -145,6 +162,7 @@ const WebsiteViewPage = () => {
                       order={order}
                       onRequestSort={handleRequestSort}
                     />
+                    <HeadCell label="" />
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -164,6 +182,15 @@ const WebsiteViewPage = () => {
                       <TableCell>
                         <PhaseBadge phase={row.phase} />
                       </TableCell>
+                      <TableCell>
+                        <Tooltip title="View Details" arrow>
+                          <IconButton
+                            onClick={() => onOpenDetails(row.websiteId)}
+                          >
+                            <ViewIcon color="secondary" />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -172,6 +199,12 @@ const WebsiteViewPage = () => {
           </Grid>
         </Grid>
       </Paper>
+
+      <WebsiteDetailsModal
+        websiteId={selectedWebsite}
+        open={openDetails}
+        onClose={onCloseDetails}
+      />
     </>
   );
 };

@@ -11,6 +11,8 @@ import {
   Skeleton,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import {
   Close as CloseIcon,
@@ -20,7 +22,7 @@ import { Link } from "react-router-dom";
 import PhaseBadge from "./PhaseBadge";
 
 type WebsiteDetailsModalProps = {
-  websiteId: string;
+  websiteId?: string;
   open: boolean;
   onClose: () => void;
 };
@@ -30,6 +32,9 @@ const WebsiteDetailsModal = ({
   open,
   onClose,
 }: WebsiteDetailsModalProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [website, setWebsite] = useState<Website | null>(null);
 
   const fetchWebsiteDetails = async (webId: string): Promise<void> => {
@@ -46,7 +51,7 @@ const WebsiteDetailsModal = ({
   };
 
   useEffect(() => {
-    if (open) fetchWebsiteDetails(websiteId);
+    if (open && websiteId) fetchWebsiteDetails(websiteId);
 
     return () => {
       setWebsite(null);
@@ -56,6 +61,7 @@ const WebsiteDetailsModal = ({
   return (
     <Dialog
       open={open}
+      fullScreen={isMobile}
       maxWidth="md"
       fullWidth
       aria-labelledby="website-details"
@@ -85,11 +91,11 @@ const WebsiteDetailsModal = ({
       <DialogContent>
         <Stack direction="column" gap={2}>
           <Grid container>
-            <Grid item xs={12} sm={2}>
-              Website ID
+            <Grid item xs={12} sm={3}>
+              <Typography variant="subtitle1">Website ID</Typography>
             </Grid>
-            <Grid item xs={12} sm={10}>
-              <Typography variant="subtitle1">
+            <Grid item xs={12} sm={9}>
+              <Typography variant="body1">
                 {website === null ? (
                   <Skeleton animation="wave" />
                 ) : (
@@ -99,11 +105,11 @@ const WebsiteDetailsModal = ({
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={12} sm={2}>
-              Website URL
+            <Grid item xs={12} sm={3}>
+              <Typography variant="subtitle1">Website URL</Typography>
             </Grid>
-            <Grid item xs={12} sm={10}>
-              <Typography variant="subtitle1" color="primary">
+            <Grid item xs={12} sm={9}>
+              <Typography variant="body1" color="primary">
                 {website === null ? (
                   <Skeleton animation="wave" />
                 ) : (
@@ -116,17 +122,17 @@ const WebsiteDetailsModal = ({
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={12} sm={2}>
-              Additional URLs
+            <Grid item xs={12} sm={3}>
+              <Typography variant="subtitle1">Additional URLs</Typography>
             </Grid>
-            <Grid item xs={12} sm={10}>
+            <Grid item xs={12} sm={9}>
               {website === null ? (
                 <Skeleton variant="rectangular" animation="wave" height={100} />
               ) : website.additionalUrls?.length ? (
                 <Stack>
                   {website.additionalUrls.map((url, index) => (
                     <Typography
-                      variant="subtitle1"
+                      variant="body1"
                       component="span"
                       color="primary"
                       key={index}
@@ -139,31 +145,33 @@ const WebsiteDetailsModal = ({
                   ))}
                 </Stack>
               ) : (
-                <Typography variant="subtitle1" component="span">
+                <Typography variant="body1" component="span">
                   No additional URLs
                 </Typography>
               )}
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={12} sm={2}>
-              Description
+            <Grid item xs={12} sm={3}>
+              <Typography variant="subtitle1">Description</Typography>
             </Grid>
-            <Grid item xs={12} sm={10}>
-              <Typography variant="subtitle1">
+            <Grid item xs={12} sm={9}>
+              <Typography variant="body1">
                 {website === null ? (
                   <Skeleton animation="wave" />
-                ) : (
+                ) : website.description ? (
                   website.description
+                ) : (
+                  "No Description Provided"
                 )}
               </Typography>
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={12} sm={2}>
-              Website Status
+            <Grid item xs={12} sm={3}>
+              <Typography variant="subtitle1">Website Status</Typography>
             </Grid>
-            <Grid item xs={12} sm={10}>
+            <Grid item xs={12} sm={9}>
               {website === null ? (
                 <Skeleton animation="wave" />
               ) : (
