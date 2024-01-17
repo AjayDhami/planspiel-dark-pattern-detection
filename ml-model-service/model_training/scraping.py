@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
-import csv
+import pandas as pd
 import os
 
 
@@ -47,16 +47,12 @@ def web_scrap(url, website_id):
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
+    df = pd.DataFrame({"Text": filtered_list})
     output_file_path = os.path.join(output_directory, "{}.csv".format(website_id))
 
     try:
-        with open(output_file_path, 'w', encoding='utf-8') as file:
-            # Create a CSV writer
-            csv_writer = csv.writer(file)
-            # Write each line of text as a separate row in the CSV file
-            # TODO use regex to save only certain text
-            for line in filtered_list:
-                csv_writer.writerow([line])
+        df.to_csv(output_file_path, index=False, encoding='utf-8')
+        # TODO use regex to save only certain text
         print(f'Data has been successfully written to {output_file_path}')
     except Exception as e:
         print(f'Error writing to the file: {e}')
