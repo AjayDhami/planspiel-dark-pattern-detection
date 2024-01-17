@@ -1,30 +1,30 @@
 .landingpage-navbar {
   height: 20vh;
+}
 
-  .wrapper {
-    max-width: 1366px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-  }
+.wrapper {
+  max-width: 1366px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
 
-  .navbar-btn:hover {
-    background-image: linear-gradient(
-      to left,
-      rgba(2, 24, 77, 0.984),
-      rgba(3, 47, 129, 0.859)
-    );
-    border: 0.1rem solid rgba(2, 24, 77, 0.984);
-    color: #e1eef3;
-  }
-  .navbar-btn {
-    margin-right: 16px;
-    font-size: 1rem;
-    background-image: linear-gradient(rgb(212, 46, 4), rgb(220, 148, 14));
-    border: 0.1rem solid rgb(220, 148, 14);
-    color: #e1eef3;
-    border-radius: 1rem;
-  }
+.navbar-btn:hover {
+  background-image: linear-gradient(
+    to left,
+    rgba(2, 24, 77, 0.984),
+    rgba(3, 47, 129, 0.859)
+  );
+  border: 0.1rem solid rgba(2, 24, 77, 0.984);
+  color: #e1eef3;
+}
+.navbar-btn {
+  margin-right: 16px;
+  font-size: 1rem;
+  background-image: linear-gradient(rgb(212, 46, 4), rgb(220, 148, 14));
+  border: 0.1rem solid rgb(220, 148, 14);
+  color: #e1eef3;
+  border-radius: 1rem;
 }
