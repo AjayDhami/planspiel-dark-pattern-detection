@@ -2,6 +2,7 @@ import { Box, Button, Paper, Stack, Typography, styled, Dialog, DialogTitle, Dia
 import React, { useEffect, useState } from "react";
 import { AdminWebsiteDetails, AdminExperts } from "../../types";
 import { assignExperts, getExpertsDetails, runAutomation } from "../../services/superAdminServices";
+import DarkPatternListModal from "./DarkPatternListModal";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -17,6 +18,8 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     const [experts, setExperts] = useState([]);
     const [expertIds, setExpertIds] = useState<string[]>([]);
     const [primaryExpertId, setPrimaryExpertId] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [patterns, setPatterns] = useState([]);
 
     useEffect(() => {
       console.log(primaryExpertId);
@@ -36,14 +39,18 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     const handleRunAutomationClick = async () => {
       const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
       if(resp) {
-        console.log(resp);
-        
+        setIsModalOpen(true);
+        setPatterns(resp);
       }
     }
 
     const handleClose = () => {
         setExpertIds([]);
         setOpen(false);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
     };
 
     const handleSubmit = async() => {
@@ -68,10 +75,10 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
   return (
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
-        
+        <DarkPatternListModal onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns}/>
         <Box
           sx={{
-            display: "flex",
+            display: "block",
             justifyContent: "space-between",
             alignItems: "center",
           }}
@@ -82,16 +89,14 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
           <Typography variant="body1" component="span">
             {baseUrl}
           </Typography>
-        </Box>
-        <Box>
+          <Box>
           <Button variant="contained" color="success" onClick={handleAssignToClick}>
             Assign To
           </Button>
-        </Box>
-        <Box>
           <Button variant="contained" color="success" onClick={handleRunAutomationClick}>
             Run Automation
           </Button>
+          </Box>
         </Box>
       </Stack>
 
