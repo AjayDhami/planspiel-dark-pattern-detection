@@ -7,9 +7,17 @@ export type User = {
   email: string;
   role: string;
 };
-
+///Login
 export interface UserCredentials extends Pick<User, "email" | "role"> {
   password: string;
+}
+/// Registration
+export interface UserRegistrationCredentials {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 export interface AuthContextProps {
@@ -17,7 +25,7 @@ export interface AuthContextProps {
   authTokens: string | null;
   setAuthTokens: (tokens: string | null) => void;
   setUser: (user: User) => void;
-  signUpUser: (e: React.FormEvent) => Promise<void>;
+  signUpUser: (user: UserRegistrationCredentials) => Promise<boolean>;
   loginUser: (user: UserCredentials) => Promise<boolean>;
   logoutUser: () => void;
 }

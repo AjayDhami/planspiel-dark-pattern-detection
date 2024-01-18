@@ -1,15 +1,18 @@
 import { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { BASE_SERVER_URL } from "../utils/constatnt";
-import axios from "axios";
 import {
   AuthContextProps,
   AuthProviderProps,
   User,
   UserCredentials,
+  UserRegistrationCredentials,
 } from "../types";
-import { getUserDetails, loginUser as loginUserAPI } from "../api";
+import {
+  getUserDetails,
+  loginUser as loginUserAPI,
+  registerUser,
+} from "../api";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -53,33 +56,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const signUpUser = async (e: React.FormEvent) => {
-    const { firstName, lastName, email, password } = e.target as unknown as {
-      firstName: HTMLFormElement;
-      lastName: HTMLFormElement;
-      email: HTMLFormElement;
-      password: HTMLFormElement;
-    };
-    e.preventDefault();
+  const signUpUser = async (
+    user: UserRegistrationCredentials
+  ): Promise<boolean> => {
     try {
-      const response = await axios.post<{ accessToken: string }>(
-        `${BASE_SERVER_URL}/user/signup`,
-        {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          password: password.value,
-          role: "Client",
-        }
-      );
+      await registerUser(user);
 
-      if (response.status === 201) {
-        navigate("/signin");
+      return true;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
       } else {
-        alert("Something went wrong!");
+        toast.error("An unknown error occurred.");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
+      return false;
     }
   };
 
