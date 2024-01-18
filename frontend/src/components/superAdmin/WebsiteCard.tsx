@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Stack, Typography, styled, Dialog, DialogTitle, DialogContent, DialogActions, Link, FormControl, FormControlLabel, FormGroup, Switch, InputLabel, Select, MenuItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { AdminWebsiteDetails, AdminExperts } from "../../types";
-import { assignExperts, getExpertsDetails } from "../../services/superAdminServices";
+import { assignExperts, getExpertsDetails, runAutomation } from "../../services/superAdminServices";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -33,13 +33,13 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
       }
     };
 
-    // const handleRunAutomationClick = async () => {
-    //   const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
-    //   if(resp) {
-    //     console.log(resp);
+    const handleRunAutomationClick = async () => {
+      const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
+      if(resp) {
+        console.log(resp);
         
-    //   }
-    // }
+      }
+    }
 
     const handleClose = () => {
         setExpertIds([]);
@@ -88,11 +88,11 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
             Assign To
           </Button>
         </Box>
-        {/* <Box>
+        <Box>
           <Button variant="contained" color="success" onClick={handleRunAutomationClick}>
             Run Automation
           </Button>
-        </Box> */}
+        </Box>
       </Stack>
 
 
