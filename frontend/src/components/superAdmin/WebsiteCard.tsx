@@ -20,6 +20,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     const [primaryExpertId, setPrimaryExpertId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
+    const [websiteUrl, setWebsiteUrl] = useState("");
 
     useEffect(() => {
       console.log(primaryExpertId);
@@ -41,6 +42,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
       if(resp) {
         setIsModalOpen(true);
         setPatterns(resp);
+        setWebsiteUrl(baseUrl? baseUrl: "");
       }
     }
 
@@ -75,7 +77,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
   return (
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
-        <DarkPatternListModal onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns}/>
+        <DarkPatternListModal onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
         <Box
           sx={{
             display: "block",

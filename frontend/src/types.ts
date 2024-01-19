@@ -197,6 +197,26 @@ export type AdminExperts = {
   websites: WebsiteDetails[];
 };
 
+ 
+export interface AdminPatterns {
+  createdByExpertId: string;
+  patternType: string;
+  description: string;
+  detectedUrl: string;
+}
+
+export interface AdminPatternResponse {
+text: string;
+patternType: string;
+}
+
+export interface AdminDarkPatternListProp {
+  onClose: () => void;
+  isOpen: boolean;
+  patterns: AdminPatternResponse[];
+  websiteUrl: string;
+} 
+
 export interface AccountMenuProps {
   onProfile: () => void;
   onLogout: () => void;
