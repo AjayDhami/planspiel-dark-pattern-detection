@@ -34,12 +34,34 @@ export const getClientDashboardKPIData = async () => {
   }
 };
 
+// Function to get user details
+export const getUserDetails = async () => {
+  try {
+    const user = extractUserDetails();
+
+    const response = await api.get(`/user/${user?.sub}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Function to get the user websites
 export const getAllWebsites = async () => {
   try {
     const user = extractUserDetails();
 
     const response = await api.get(`/website?userId=${user?.sub}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to get Website details through website Id
+export const getWebsite = async (websiteId: string) => {
+  try {
+    const response = await api.get(`/website/${websiteId}`);
     return response.data;
   } catch (error) {
     throw error;

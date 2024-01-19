@@ -23,6 +23,7 @@ import { addWebsiteForCertification } from "../../api";
 import { WebsiteDetails, WebsiteOnboardingFormProps } from "../../types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { sanitizeStringArray } from "../../utils/DataHelper";
 
 const initialValues: WebsiteDetails = {
   websiteName: "",
@@ -65,7 +66,13 @@ const WebsiteOnboardingForm = ({
   const handleSubmit = async (values: WebsiteDetails): Promise<void> => {
     try {
       setIsFormLoading(true);
+
+      const sanitizedAdditionalUrls = values.additionalUrls
+        ? sanitizeStringArray(values.additionalUrls)
+        : [];
+      values.additionalUrls = sanitizedAdditionalUrls;
       await addWebsiteForCertification(values);
+
       toast.success("Website sent for certification");
 
       setIsFormLoading(false);
