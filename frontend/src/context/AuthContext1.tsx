@@ -8,33 +8,40 @@ import {
   UserCredentials,
   UserRegistrationCredentials,
 } from "../types";
-import { loginUser as loginUserAPI, registerUser } from "../api";
+import {
+  getUserDetails,
+  loginUser as loginUserAPI,
+  registerUser,
+} from "../api";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
+const initialUserDetails: User = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+};
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const navigate = useNavigate();
+
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
     localStorage.getItem("authToken") ? localStorage.getItem("authToken") : null
   );
-
-  const [user, setUser] = useState<User | null>(() =>
-    localStorage.getItem("authToken")
-      ? jwtDecode(localStorage.getItem("authToken") as string)
-      : null
-  );
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [user, setUser] = useState<User>(initialUserDetails);
 
   const loginUser = async (user: UserCredentials): Promise<boolean> => {
     try {
       const response = await loginUserAPI(user);
       const token = response.data.accessToken;
+
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", jwtDecode(token).sub || "");
 
       setAuthTokens(token);
-      setUser(jwtDecode(token));
 
       return true;
     } catch (error: unknown) {
@@ -68,15 +75,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logoutUser = () => {
     setAuthTokens(null);
-    setUser(null);
+    setUser(initialUserDetails);
+
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
+
     toast.success("You have been signed out");
+
     if (user?.role === "Expert") {
       navigate("/expertsignin");
     } else {
       navigate("/signIn");
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      const fetchedUser = await getUserDetails();
+      setUser(fetchedUser);
+    } catch (error) {
+      console.log("error >>>> ", error);
     }
   };
 
@@ -91,16 +110,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    if (authTokens) {
-      setUser(jwtDecode(authTokens));
-    }
-    setLoading(false);
-  }, [authTokens, loading]);
+    if (authTokens) fetchUser();
+  }, [authTokens]);
 
   return (
-    <AuthContext.Provider value={contextData}>
-      {loading ? null : children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
 };
 
