@@ -54,19 +54,6 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 14,
-            top: 12,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon/>
-        </IconButton>
-
         <DialogTitle>
             List of Dark Patterns
         </DialogTitle>
