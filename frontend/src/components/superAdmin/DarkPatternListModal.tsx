@@ -1,7 +1,5 @@
-import { Dialog, DialogTitle, FormControl, InputLabel, Select, MenuItem, DialogContent, FormGroup, FormControlLabel, Switch, DialogActions, Button, IconButton } from '@mui/material';
+import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, IconButton } from '@mui/material';
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { AdminExperts } from '../../types';
 import {
     Close as CloseIcon,
   } from "@mui/icons-material";
