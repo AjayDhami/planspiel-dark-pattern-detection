@@ -1,7 +1,7 @@
 import { Box, Button, Paper, Stack, Typography, styled, Dialog, DialogTitle, DialogContent, DialogActions, Link, FormControl, FormControlLabel, FormGroup, Switch, InputLabel, Select, MenuItem } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { AdminWebsiteDetails, AdminExperts } from "../../types";
-import { assignExperts, getExpertsDetails, runAutomation } from "../../services/superAdminServices";
+import { assignExperts, checkPrimaryExpert, getExpertsDetails, runAutomation } from "../../services/superAdminServices";
 import DarkPatternListModal from "./DarkPatternListModal";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
@@ -28,18 +28,19 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     }, [primaryExpertId])
 
     useEffect(() => {
-      const checkAssign = async () => {
-        try {
-          const response = false;
-          if (response) {
-            setShouldShowAssignButton(true);
-          }
-        } catch (error) {
-          console.error('Error--', error);
-        }
-      };
       checkAssign();
     }, []);
+
+    const checkAssign = async () => {
+      try {
+        const response = await checkPrimaryExpert(websiteId? websiteId: "");
+        if (response) {
+          setShouldShowAssignButton(true);
+        }
+      } catch (error) {
+        console.error('Error--', error);
+      }
+    };
 
     const handleAssignToClick = async () => {
       setOpen(true);
