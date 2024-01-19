@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import withAuth from "../hoc/withAuth";
 import { useContext, useEffect } from "react";
 import { setRedirectCallback } from "../utils/AxiosHelper";
@@ -21,28 +21,28 @@ const ClientDashboardLayout = () => {
   }, [authContext]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        maxHeight: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <Box sx={{ position: "relative" }}>
       <CssBaseline />
-      <Navbar></Navbar>
-      <Container
+      <Navbar />
+      <Box
         component="main"
-        maxWidth="xl"
         sx={{
-          my: 1,
-          overflowY: "auto",
-          height: "inherit",
+          padding: {
+            xs: 2,
+            md: 4,
+          },
+          height: {
+            xs: "auto",
+            md: `calc(100vh - 64px)`,
+          },
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: (theme) => theme.palette.grey[300],
+          overflow: "auto",
         }}
       >
         <Outlet />
-      </Container>
+      </Box>
     </Box>
   );
 };
