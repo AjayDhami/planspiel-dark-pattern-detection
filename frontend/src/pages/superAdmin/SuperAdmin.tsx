@@ -41,16 +41,19 @@ const SuperAdmin: React.FC = () => {
       <Box>
         <Grid container spacing={3} style={{ margin: "1rem 0", width: "100%", justifyContent: 'center' }}>
         {clientDataList.map((client) => (
-          <Grid item xs={12} md={10} key={client.userId}>
-            {
+          <>
+          {
               client.websites.length > 0 && (
+                <Grid item xs={12} md={10} key={client.userId}>
               <ClientCard
                 userId={client.userId}
                 firstName={client.firstName}
                 lastName={client.lastName}
-                websites={client.websites} email={""} role={""} />)
+                websites={client.websites} email={""} role={""} />
+                </Grid>
+                )
             }
-          </Grid>
+          </>
             ))}
           </Grid>
       </Box>
