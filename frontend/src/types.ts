@@ -196,3 +196,15 @@ export type AdminExperts = {
   role: string;
   websites: WebsiteDetails[];
 };
+
+export interface AccountMenuProps {
+  onProfile: () => void;
+  onLogout: () => void;
+}
+
+export interface KpiCardProps {
+  color: string;
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+}

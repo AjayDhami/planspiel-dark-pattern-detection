@@ -16,7 +16,7 @@ def parse_website_url(website_id, params):
     web_scrap(website_url, website_id)
 
     dark_patterns = predict_website_dark_pattern_type(website_id)
-    dark_patterns = [{'Text': key, 'PatternType': value} for key, value in dark_patterns.items()]
+    dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
 
     # for text, pattern_type in dark_patterns.items():
     #     print(f"{text}: {pattern_type}")
