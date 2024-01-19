@@ -12,7 +12,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display website list for a particular client
-const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, websiteName, description}) => {
+const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, websiteName}) => {
 
     const [open, setOpen] = useState(false);
     const [experts, setExperts] = useState([]);
@@ -77,7 +77,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
   return (
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
-        <DarkPatternListModal onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
+        <DarkPatternListModal websiteId={websiteId? websiteId:""} onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
         <Box
           sx={{
             display: "block",

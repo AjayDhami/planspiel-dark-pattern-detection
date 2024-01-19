@@ -212,6 +212,7 @@ patternType: string;
 
 export interface AdminDarkPatternListProp {
   onClose: () => void;
+  websiteId: string;
   isOpen: boolean;
   patterns: AdminPatternResponse[];
   websiteUrl: string;

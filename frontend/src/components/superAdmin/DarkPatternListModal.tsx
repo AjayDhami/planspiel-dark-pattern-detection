@@ -1,11 +1,12 @@
 import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, IconButton, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { AdminDarkPatternListProp, AdminPatterns } from '../../types';
+import { sendFilteredPatterns } from '../../services/superAdminServices';
 import {
     Close as CloseIcon,
   } from "@mui/icons-material";
 
-const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({onClose, isOpen, patterns, websiteUrl}) => {
+const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, onClose, isOpen, patterns, websiteUrl}) => {
 
   const [darkPatternList, setDarkPatternList] = useState<AdminPatterns[]>([]);
   const expertId = localStorage.getItem("userId");
@@ -38,8 +39,15 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({onClose, isOp
     });
   };
 
-  const handleSubmit = () => {
-    console.log(darkPatternList);   
+  const handleSubmit = async() => {
+    console.log(darkPatternList);  
+    try {
+      const resp = sendFilteredPatterns(websiteId, darkPatternList);
+      console.log(resp);
+    } catch (error) {
+      console.error('Error is --', error);
+      throw error;
+    }
   };
 
   if(!isOpen) return null;

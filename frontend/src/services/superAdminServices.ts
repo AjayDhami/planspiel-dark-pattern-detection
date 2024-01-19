@@ -1,6 +1,7 @@
 import axios from 'axios';
 import api from '../utils/AxiosHelper';
 import { BASE_ML_URL } from '../utils/constatnt';
+import { AdminPatterns } from '../types';
 
 export type ClientsDetails = {
    userId: string;
@@ -63,4 +64,19 @@ export const runAutomation = async(id: string, websiteUrl: string) => {
     console.error('Error is --', error);
     throw error;
   }
+}
+
+export const sendFilteredPatterns = async(websiteId:string, patternList: AdminPatterns[]) => {
+  const body = {
+    patternList
+  };
+
+  try {
+    const response = await api.put(`/website/${websiteId}/automatedPatterns`, body);
+    return response.status
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+  
 }
