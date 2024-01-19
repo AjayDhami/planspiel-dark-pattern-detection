@@ -122,7 +122,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     description : description,
     detectedUrl : detectedUrl
   }
-  const response: AxiosResponse<PatternData> = await api.post<PatternData>(
+  const response: AxiosResponse<PatternData> = await api.put<PatternData>(
     `/website/${websiteId}/pattern`,
     body,
   );
