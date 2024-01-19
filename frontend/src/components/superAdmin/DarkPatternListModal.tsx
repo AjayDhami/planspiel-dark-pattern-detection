@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, IconButton, Button } from '@mui/material';
+import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { AdminDarkPatternListProp, AdminPatterns } from '../../types';
 import { sendFilteredPatterns } from '../../services/superAdminServices';
