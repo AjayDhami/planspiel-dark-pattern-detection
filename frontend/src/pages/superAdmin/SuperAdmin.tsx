@@ -1,10 +1,22 @@
 import { Box, Grid } from "@mui/material";
 import ClientCard from "../../components/superAdmin/ClientCard";
 import {ClientsDetails, getClientsDetails} from "../../services/superAdminServices"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
+import { setRedirectCallback } from "../../utils/AxiosHelper";
+import AuthContext from "../../context/AuthContext1";
 
 const SuperAdmin: React.FC = () => {
+  const authContext = useContext(AuthContext);
+  useEffect(() => {
+      setRedirectCallback(() => {
+        authContext?.logoutUser();
+      });
+  
+      return () => {
+        setRedirectCallback(null);
+      };
+  }, [authContext]);
 
   const [clientDataList, setClientDataList] = useState<ClientsDetails[]>([]);
 
