@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import ClientCard from "../../components/superAdmin/ClientCard";
 import {ClientsDetails, getClientsDetails} from "../../services/superAdminServices"
 import { useEffect, useState } from "react";
+import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
 
 const SuperAdmin = () => {
 
@@ -42,4 +43,4 @@ const SuperAdmin = () => {
     );
   };
   
-export default SuperAdmin;
+export default withSuperAdminAuth(SuperAdmin);
