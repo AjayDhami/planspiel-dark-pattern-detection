@@ -42,8 +42,10 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
   const handleSubmit = async() => {
     console.log(darkPatternList);  
     try {
-      const resp = sendFilteredPatterns(websiteId, darkPatternList);
-      console.log(resp);
+      const resp = await sendFilteredPatterns(websiteId, darkPatternList);
+      if(resp === 200) {
+        onClose();
+      };
     } catch (error) {
       console.error('Error is --', error);
       throw error;

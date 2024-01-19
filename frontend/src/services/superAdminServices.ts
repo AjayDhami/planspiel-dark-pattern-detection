@@ -67,10 +67,6 @@ export const runAutomation = async(id: string, websiteUrl: string) => {
 }
 
 export const sendFilteredPatterns = async(websiteId:string, patternList: AdminPatterns[]) => {
-  // const body = {
-  //   patternList
-  // };
-
   try {
     const response = await api.put(`/website/${websiteId}/automatedPatterns`, patternList);
     return response.status
