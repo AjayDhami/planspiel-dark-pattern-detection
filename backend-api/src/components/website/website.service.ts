@@ -113,7 +113,6 @@ export class WebsiteService {
   }
 
   async getWebsitesAssociatedWithClients(userType: string) {
-    console.log('user website details');
     const users: UserResponseDto[] =
       await this.userService.fetchUsersByType(userType);
 
@@ -185,7 +184,6 @@ export class WebsiteService {
     websiteId: string,
     patternCreateDtos: PatternCreateDto[],
   ) {
-    console.log(websiteId, patternCreateDtos);
     const website = await this.checkWebsiteExists(websiteId);
     const expertIds = patternCreateDtos.map(
       (patternCreateDto) => patternCreateDto.createdByExpertId,
@@ -307,7 +305,6 @@ export class WebsiteService {
         message: `Pattern phase updated for pattern with id ${pattern._id}`,
       };
     } catch (error) {
-      console.error('Error saving pattern:', error.message);
       throw new HttpException(
         'Failed to update pattern phase',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -395,7 +392,6 @@ export class WebsiteService {
       }
       return this.convertPatternToDto(pattern, true);
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         'Failed to fetch pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
