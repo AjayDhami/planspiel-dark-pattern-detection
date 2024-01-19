@@ -21,19 +21,31 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
     const [websiteUrl, setWebsiteUrl] = useState("");
+    const [shouldShowAssignButton, setShouldShowAssignButton] = useState<boolean>(false);
 
     useEffect(() => {
       console.log(primaryExpertId);
     }, [primaryExpertId])
 
+    useEffect(() => {
+      const checkAssign = async () => {
+        try {
+          const response = false;
+          if (response) {
+            setShouldShowAssignButton(true);
+          }
+        } catch (error) {
+          console.error('Error--', error);
+        }
+      };
+      checkAssign();
+    }, []);
+
     const handleAssignToClick = async () => {
-      // logic for the Assign to button 
       setOpen(true);
       const resp = await getExpertsDetails();
       if(resp) {
         setExperts(resp)
-        console.log(resp); 
-
       }
     };
 
@@ -56,7 +68,6 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     };
 
     const handleSubmit = async() => {
-        // Perform any actions you want on confirmation (e.g., submit form)
         const updatedExpertIds = [...expertIds, primaryExpertId];
         const resp = await assignExperts(websiteId? websiteId: "", updatedExpertIds, primaryExpertId? primaryExpertId: "");
         if(resp === 200) {
@@ -92,12 +103,17 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
             {baseUrl}
           </Typography>
           <Box>
-          <Button variant="contained" color="success" onClick={handleAssignToClick}>
-            Assign To
-          </Button>
-          <Button variant="contained" color="success" onClick={handleRunAutomationClick}>
-            Run Automation
-          </Button>
+          <div>
+            {shouldShowAssignButton ? (
+              <Button variant="contained" color="success" onClick={handleAssignToClick}>
+                Assign To
+              </Button>
+            ) : (
+              <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
+                Run Automation
+              </Button>
+            )}
+          </div>
           </Box>
         </Box>
       </Stack>
