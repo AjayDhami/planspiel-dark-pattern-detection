@@ -103,7 +103,13 @@ def web_scrap(url, website_id):
         pattern = re.compile('[a-zA-Z]')
         filtered_strings = [s for s in strings if pattern.search(s)]
         return filtered_strings
+    
+
+    def remove_numbers(input_str):
+        return re.sub(r'\d', '', input_str)
+
     filtered_list = filter_alphabets(filtered_list)
+    filtered_list = [remove_numbers(item) for item in filtered_list]
 
     current_script_path = os.path.dirname(os.path.abspath(__file__))
     output_directory = os.path.join(current_script_path, "scraped_data")
