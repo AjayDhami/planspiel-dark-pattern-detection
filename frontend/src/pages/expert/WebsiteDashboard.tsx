@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { useExpertContext } from '../../context/ExpertContext'
-import { getPatternsData, getSpecificPattern, getSpecificWebsite, stringAvatar } from '../../services/expertServices';
+import { getPatternsData, getSpecificPattern, getSpecificWebsite, stringAvatar , publishWebsite} from '../../services/expertServices';
 import Navbar from '../../components/expert/Navbar';
 import PatternCard from '../../components/expert/PatternCard';
 import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 import PatternDetailsComponent from '../../components/expert/PatternDetailsComponent';
-import { PatternData } from '../../types';
+import { PatternData, publishObj } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
-import { Avatar, Tooltip} from '@mui/material';
+import { Avatar} from '@mui/material';
 import LoadingPatternCard from '../../components/expert/LoadingPatternCard';
 import LoadingCards from '../../components/expert/LoadingCards';
 
@@ -41,10 +41,12 @@ const WebsiteDashboard = () => {
         expertName: '',
         phase: ''
     });
-    const [isPublishBtnDisabled, setIsPublishBtnDisabled] = useState<boolean>(true);
+    const [isPublishBtnDisabled, setIsPublishBtnDisabled] = useState<boolean>(false);
     const [isPatternformOpen, setIsPatternformOpen] = useState(false);
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const {  setPatternData } = useExpertContext();
+    const [zindex, setZindex ] = useState(false)
+    const z_index = zindex ? "z-[-10]" : "z-[0]"
     const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-green-500";
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
@@ -53,7 +55,9 @@ const WebsiteDashboard = () => {
       if(websiteId){
         try {
           const webData = await getSpecificWebsite(websiteId)
-          setWebsiteData(webData)
+          if(webData){
+            setWebsiteData(webData)
+          }
         } catch (error) {
           if (error instanceof Error) {
             toast.error(`Error: ${error.message}`);
@@ -74,7 +78,7 @@ const WebsiteDashboard = () => {
               setPatterns(data);
               const patternPhases = data.map((item : PatternData)=>item.patternPhase);
               console.log(patternPhases);
-              patternPhases.includes("InProgress") ? setIsPublishBtnDisabled(true) : setIsPublishBtnDisabled(false);
+              !patternPhases.includes("InProgress") ? setIsPublishBtnDisabled(false) : setIsPublishBtnDisabled(true);
               const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
                 .filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
@@ -129,13 +133,18 @@ const WebsiteDashboard = () => {
         [filterType]: option
       }));
     };
-    const openForm = () =>{setIsPatternformOpen(true)}
+    const openForm = () =>{
+      setIsPatternformOpen(true);
+      setZindex(true)
+    }
     const closeFrom = () =>{
       setIsPatternformOpen(false);
       setIsCardLoading(true);
       getPatterns();
+      setZindex(false)
     };
     const openPatternModal = async (id:String) => {
+      setZindex(true)
       try {
         if(websiteId && token){
           const patternObj  = await getSpecificPattern(id , websiteId);
@@ -151,9 +160,30 @@ const WebsiteDashboard = () => {
       }  
     }
     const closePatternModal = () => {
+      setZindex(false)
       setIsPatternModalOpen(false);
       setIsCardLoading(true);
       getPatterns();
+    }
+
+    const handlePublish = async() => {
+      console.log("btn clicked");
+      
+      const contsinsDarkPattern = patterns.some((pattern:PatternData)=>
+        pattern.isPatternExists
+      )
+      const publishObj:publishObj = {
+        expertId: experId?experId:"",
+        isCertified: !contsinsDarkPattern,
+        expertFeedback : "Expert Feedback"
+      }
+      try {
+        const resp = await publishWebsite(websiteId?websiteId:"", publishObj )
+        console.log(resp);
+        
+      } catch (error) {
+        
+      }
     }
 
   return (
@@ -164,14 +194,12 @@ const WebsiteDashboard = () => {
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <div className='mx-24 h-screen grid md:grid-cols-3 gap-4 mt-8'>
-          <div className='md:col-span-1 shadow-xl rounded-2xl bg-white h-fit py-6 px-4 z-[-10]'>
+          <div className={`md:col-span-1 shadow-xl rounded-2xl bg-white h-fit py-6 px-4 ${z_index}`}>
             <div className='flex justify-between items-center'>
               <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
-              {websiteData.primaryExpertId === experId ? 
-                <Tooltip title={isPublishBtnDisabled ? "The patterns verification is incomplete" : "Publish all the patterns"} arrow>
-                  <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} disabled={isPublishBtnDisabled}>Publish</button>
-                </Tooltip> 
-              : null}
+              {websiteData.primaryExpertId === experId && websiteData.phase==="InProgress" ? 
+                (!isPublishBtnDisabled ? <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} onClick={handlePublish}>Publish</button> : <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} >Publish</button> )  
+              : <p>{websiteData.phaseText}</p>}
             </div>
             <div className='text-lg px-2'>{websiteData.baseUrl}</div>
             <div className='mt-3'>
@@ -228,7 +256,7 @@ const WebsiteDashboard = () => {
                 </div>  
               </div>
               <div className='mx-2'>
-                <button onClick={openForm} className='px-8 py-2 rounded-md bg-blue-500 text-white'>Add a Pattern</button>
+                {websiteData.phase === "InProgress" ? <button onClick={openForm} className='px-8 py-2 rounded-md bg-blue-500 text-white'>Add a Pattern</button> : null}
               </div>
               </div>
             {!isCardLoading ? 

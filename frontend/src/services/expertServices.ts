@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData, WebsiteData} from "../types"
+import { PatternData, WebsiteData, publishObj} from "../types"
 
 
 const getUserDetails = async(id:String) => {
@@ -18,6 +18,17 @@ const getWebsites = async(id:String) => {
       if(website.phase === "InProgress"){
         website.phaseColor = "bg-[#F9C32F]"
         website.phaseText = "In Progress"
+        website.hoverText = "In Progress"
+      }
+      else if(website.phase==="Published" && website.isDarkPatternFree === false){
+        website.phaseColor = "bg-[#E6321D]"
+        website.phaseText = "Published"
+        website.hoverText = "Published without certification"
+      }
+      else if(website.phase==="Published" && website.isDarkPatternFree === true){
+        website.phaseColor = "bg-[#E6321D]"
+        website.phaseText = "Published"
+        website.hoverText = "Published with certification"
       }
     })
     return response.data
@@ -27,8 +38,12 @@ const getWebsites = async(id:String) => {
 
 const getSpecificWebsite = async(id:string) => {
   try {
-    const response = await api.get(`/website/${id}`);
-    console.log(response);
+    const response: AxiosResponse<WebsiteData> = await api.get<WebsiteData>(`/website/${id}`);
+    if(response.data.phase==="Published" && response.data.isDarkPatternFree===true){
+      response.data.phaseText = "Published with certification"
+    }else if(response.data.phase==="Published" && response.data.isDarkPatternFree===false){
+      response.data.phaseText = "Published without certification"
+    }
     return response.data
   } catch (error) {
   }
@@ -165,4 +180,13 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite  };
+const publishWebsite = async(websiteId:string, publishObj:publishObj) =>{
+  try {
+    const response = await api.put(`/website/${websiteId}/publish`, publishObj)
+    return response.status;
+  } catch (error) {
+    
+  }
+}
+
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite};

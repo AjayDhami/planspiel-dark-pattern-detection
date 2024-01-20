@@ -7,6 +7,7 @@ import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
 import { WebsiteData } from '../../types';
+import { Tooltip } from '@mui/material';
 
 const ExpertDashboard : React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -54,7 +55,7 @@ const ExpertDashboard : React.FC = () => {
   return (
     <>
         <Navbar/>
-        <div className='grid md:grid-cols-4 mx-8 my-12 bg:white'>
+        <div className='grid md:grid-cols-3 mx-8 my-12 bg:white'>
             {websiteData.map((website, index)=>(
                 <div key={website.websiteId} 
                     className='p-3 my-3 mx-4 shadow-md bg-white rounded-xl border-blue-300 cursor-pointer'  
@@ -62,7 +63,9 @@ const ExpertDashboard : React.FC = () => {
                     <div>
                         <div className="flex justify-between items-center">
                             <h2 className='font-bold text-xl text-blue-500'>{website.websiteName}</h2>
-                            <div className={`p-2 rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
+                            <Tooltip title={website.hoverText} arrow>
+                                <div className={`p-2 rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
+                            </Tooltip>
                         </div>
                         <p>{website.baseUrl}</p>
                         <button 

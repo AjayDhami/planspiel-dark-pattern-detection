@@ -47,12 +47,14 @@ export const ExpertProvider: React.FC<ExpertProviderProps> = ({ children }) => {
         phase : "",
         websiteId : "",
         isCompleted : false,
+        isDarkPatternFree : false,
         expertDetails : [],
         userId : "",
         additionalUrls : [],
         primaryExpertId : "",
         phaseColor : "",
         phaseText : "",
+        hoverText : "",
     })
     const contextData: ExpertContextProps = {
         websiteId,

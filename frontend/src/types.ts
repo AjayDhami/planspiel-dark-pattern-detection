@@ -46,6 +46,7 @@ export type Website = {
   expertDetails?: any[];
 };
 
+
 export interface DashboardKPI {
   totalWebsites: string;
   websitesCertified: string;
@@ -111,6 +112,11 @@ export interface PatternData {
   isPatternExists: boolean;
 }
 
+export interface publishObj {
+  expertId: string,
+  isCertified: boolean,
+  expertFeedback : string
+}
 export interface expertData {
   id: string;
   name: string;
@@ -122,12 +128,14 @@ export interface WebsiteData {
   phase: string;
   websiteId: string;
   isCompleted: boolean;
+  isDarkPatternFree : boolean
   expertDetails: expertData[];
   userId: string;
   additionalUrls: [];
   primaryExpertId: string;
   phaseColor: string;
   phaseText: string;
+  hoverText : string;
 }
 
 export interface PatternCardProps {
