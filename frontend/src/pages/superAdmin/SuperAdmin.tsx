@@ -57,7 +57,6 @@ const SuperAdmin: React.FC = () => {
             ))}
           </Grid>
       </Box>
-      
     );
   };
   

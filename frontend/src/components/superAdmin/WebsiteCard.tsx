@@ -156,7 +156,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
             </FormControl>
         </DialogContent>
         <DialogActions>
-            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+            <Button variant="contained" onClick={handleSubmit}>Assign</Button>
             <Button variant="outlined" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

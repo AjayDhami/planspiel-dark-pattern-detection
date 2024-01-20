@@ -1,11 +1,14 @@
-import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, Button } from '@mui/material';
+import { Dialog, DialogTitle, FormControl, FormGroup, FormControlLabel, Switch, Button, DialogContent } from '@mui/material';
 import React, { useState } from 'react';
 import { AdminDarkPatternListProp, AdminPatterns } from '../../types';
 import { sendFilteredPatterns } from '../../services/superAdminServices';
+import AssignExpert from './AssignExpert';
 
 const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, onClose, isOpen, patterns, websiteUrl}) => {
 
   const [darkPatternList, setDarkPatternList] = useState<AdminPatterns[]>([]);
+  const [assignExpert, setAssignExpert] = useState(true);
+
   const expertId = localStorage.getItem("userId");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +44,8 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
     try {
       const resp = await sendFilteredPatterns(websiteId, darkPatternList);
       if(resp === 200) {
-        onClose();
+        // onClose();
+        setAssignExpert(false);
       };
     } catch (error) {
       console.error('Error is --', error);
@@ -54,9 +58,11 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
   return (
     <Dialog open={isOpen} onClose={onClose}>
         <DialogTitle>
-            List of Dark Patterns
+          {assignExpert ? 'List of Dark Patterns' : 'Assign Experts'} 
         </DialogTitle>
-        <FormControl component="fieldset" variant="standard">
+        <DialogContent>
+          {assignExpert ? (
+              <FormControl component="fieldset" variant="standard">
                 <FormGroup>
                   {patterns.map((pattern) => (
                     <>
@@ -76,7 +82,12 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
                   Submit
                 </Button>
                 </FormGroup>
-          </FormControl>
+              </FormControl>
+          ) : (
+            <AssignExpert/>
+             )}
+         </DialogContent>   
+        
     </Dialog>
   );
 }
