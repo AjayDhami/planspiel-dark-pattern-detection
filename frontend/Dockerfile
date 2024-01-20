@@ -1,5 +1,5 @@
 # Base node runtime image
-FROM node:18.12.1
+FROM node:18-alpine
 
 # Setting working directory to /app inside the container
 WORKDIR /app
