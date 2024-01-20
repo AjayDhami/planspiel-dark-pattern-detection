@@ -105,20 +105,20 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
           </Typography>
           <Box>
           <div>
-            {/* {showAutomationButton ? (
-              <Button variant="contained" color="success" onClick={handleAssignToClick}>
-                Assign To
+            {showAutomationButton ? (
+              <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
+                Run Automation
               </Button>
             ) : (
+              <Button variant="outlined" color="success">
+                Assigned
+              </Button>
+            )}
+            {/* {showAutomationButton && (
               <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
                 Run Automation
               </Button>
             )} */}
-            {showAutomationButton && (
-              <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
-                Run Automation
-              </Button>
-            )}
           </div>
           </Box>
         </Box>
