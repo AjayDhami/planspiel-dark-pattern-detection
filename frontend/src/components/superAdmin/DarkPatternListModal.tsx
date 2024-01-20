@@ -4,11 +4,10 @@ import { AdminDarkPatternListProp, AdminPatterns } from '../../types';
 import { sendFilteredPatterns } from '../../services/superAdminServices';
 import AssignExpert from './AssignExpert';
 
-const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, onClose, isOpen, patterns, websiteUrl}) => {
+const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, websiteName, onClose, isOpen, patterns, websiteUrl}) => {
 
   const [darkPatternList, setDarkPatternList] = useState<AdminPatterns[]>([]);
   const [assignExpert, setAssignExpert] = useState(true);
-
   const expertId = localStorage.getItem("userId");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +83,7 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, o
                 </FormGroup>
               </FormControl>
           ) : (
-            <AssignExpert/>
+            <AssignExpert onClose={onClose} websiteId={websiteId} websiteName={websiteName} websiteUrl={websiteUrl} />
              )}
          </DialogContent>   
         

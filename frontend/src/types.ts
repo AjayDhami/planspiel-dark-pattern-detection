@@ -213,10 +213,18 @@ patternType: string;
 export interface AdminDarkPatternListProp {
   onClose: () => void;
   websiteId: string;
+  websiteName: string;
   isOpen: boolean;
   patterns: AdminPatternResponse[];
   websiteUrl: string;
 } 
+
+export interface AdminAssignProps {
+  onClose: () => void;
+  websiteId: string;
+  websiteName: string;
+  websiteUrl: string;
+}
 
 export interface AccountMenuProps {
   onProfile: () => void;

@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
+import DarkPatternListModal from "../../components/superAdmin/DarkPatternListModal";
 
 const SuperAdmin: React.FC = () => {
   const authContext = useContext(AuthContext);
@@ -51,7 +52,7 @@ const SuperAdmin: React.FC = () => {
                 lastName={client.lastName}
                 websites={client.websites} email={""} role={""} />
                 </Grid>
-                )
+              )
             }
           </>
             ))}
