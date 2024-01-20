@@ -74,7 +74,6 @@ export const sendFilteredPatterns = async(websiteId:string, patternList: AdminPa
     console.error('Error is --', error);
     throw error;
   }
-  
 }
 
 export const checkPrimaryExpert = async(websiteId:string) => {
@@ -82,8 +81,8 @@ export const checkPrimaryExpert = async(websiteId:string) => {
     const response = await api.get(`/website/${websiteId}`);
     console.log(response.data);
     if(response.data.expertDetails.length === 0) {
-      return false;
-    } else { return true; } 
+      return true;
+    } else { return false; } 
   } catch (error) {
     console.error('Error is --', error);
     throw error;

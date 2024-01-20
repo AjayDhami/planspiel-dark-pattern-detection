@@ -21,7 +21,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
     const [websiteUrl, setWebsiteUrl] = useState("");
-    const [shouldShowAssignButton, setShouldShowAssignButton] = useState<boolean>(false);
+    const [showAutomationButton, setShowAutomationButton] = useState<boolean>(false);
 
     useEffect(() => {
       console.log(primaryExpertId);
@@ -35,7 +35,7 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
       try {
         const response = await checkPrimaryExpert(websiteId? websiteId: "");
         if (response) {
-          setShouldShowAssignButton(true);
+          setShowAutomationButton(true);
         }
       } catch (error) {
         console.error('Error--', error);
@@ -105,11 +105,16 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
           </Typography>
           <Box>
           <div>
-            {shouldShowAssignButton ? (
+            {/* {showAutomationButton ? (
               <Button variant="contained" color="success" onClick={handleAssignToClick}>
                 Assign To
               </Button>
             ) : (
+              <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
+                Run Automation
+              </Button>
+            )} */}
+            {showAutomationButton && (
               <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
                 Run Automation
               </Button>
