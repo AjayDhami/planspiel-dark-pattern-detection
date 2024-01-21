@@ -56,7 +56,9 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-        <DialogTitle>
+        <DialogTitle sx={{
+          marginLeft: "27%",
+        }}>
           {assignExpert ? 'List of Dark Patterns' : 'Assign Experts'} 
         </DialogTitle>
         <DialogContent>
@@ -65,6 +67,7 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
                 <FormGroup>
                   {patterns.map((pattern) => (
                     <>
+                    {pattern.text!=='Text' &&
                       <FormControlLabel 
                         key={pattern.text}
                         sx={{
@@ -75,7 +78,8 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
                       }
                       label={pattern.text+"  :  "+pattern.patternType}
                       />
-                    </> 
+                    }
+                  </> 
                   ))}
                 <Button onClick={handleSubmit}>
                   Submit

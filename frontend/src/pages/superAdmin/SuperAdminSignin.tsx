@@ -3,6 +3,7 @@ import { UserCredentials } from '../../types';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext1';
 import { useNavigate } from 'react-router-dom';
+import { Grid, Paper, Typography, TextField, Button } from '@mui/material';
 
 
 const SuperAdminSignin = () => {
@@ -40,19 +41,50 @@ const SuperAdminSignin = () => {
     }
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
-            Enter Email:
-        </label>
-        <input name="email" type="email" placeholder='Enter Email' onChange={handleChange}/> 
-        <label htmlFor="password">
-            Enter Password:
-        </label>
-        <input name="password" type="password" placeholder='Enter Password' onChange={handleChange}/>
-        <button type='submit'>Submit</button>
-        </form> 
-    </div>
+    <Grid container sx={{
+        width: "100%",
+        height: "screen",
+        marginTop: "10%",
+        justifyContent: "center"
+    }}>
+      <Grid item>
+        <Paper elevation={3} sx={{
+        padding: "20px",
+        alignItems: "center",
+      }}>
+          <Typography variant="h5" gutterBottom sx={{
+            paddingLeft: "27%",
+          }}>
+            Login Super Admin
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              name="email"
+              type="email"
+              label="Enter Email"
+              placeholder="Enter Email"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              name="password"
+              type="password"
+              label="Enter Password"
+              placeholder="Enter Password"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Submit
+            </Button>
+          </form>
+        </Paper>
+      </Grid>
+    </Grid>
   )
 }
 

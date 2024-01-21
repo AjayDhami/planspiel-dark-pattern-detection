@@ -77,7 +77,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
                 Run Automation
               </Button>
             ) : (
-              <Button variant="outlined" color="success">
+              <Button variant="outlined" color="success" disabled>
                 Assigned
               </Button>
             )}

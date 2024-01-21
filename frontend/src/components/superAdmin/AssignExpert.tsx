@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {AdminExperts, AdminAssignProps } from '../../types';
-import { Button, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, InputLabel, Link, MenuItem, Select, Switch} from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, InputLabel, Link, MenuItem, Select, Switch, Typography} from '@mui/material';
 import { assignExperts, getClientsDetails, getExpertsDetails } from '../../services/superAdminServices';
 import { useAdminContext } from '../../context/AdminContext';
 
@@ -54,8 +54,12 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
 
   return (
     <>
-       <DialogTitle>
-            Assigning {websiteName} 
+       <DialogTitle sx={{
+        display: "flex",
+        alignItems: "center",
+        fontSize: "20px"
+       }}>
+            <Typography sx={{ marginRight: "5px" }}>{websiteName}</Typography>
             <Link href={websiteUrl}>{websiteUrl}</Link>
         </DialogTitle>
           <FormControl fullWidth>
