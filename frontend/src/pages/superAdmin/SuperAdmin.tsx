@@ -6,6 +6,7 @@ import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import { useAdminContext } from "../../context/AdminContext";
+import Navbar from "../../components/Navbar";
 
 const SuperAdmin: React.FC = () => {
   const authContext = useContext(AuthContext);
@@ -41,6 +42,7 @@ const SuperAdmin: React.FC = () => {
 
     return (
       <Box>
+        <Navbar/>
         <Grid container spacing={3} style={{ margin: "1rem 0", width: "100%", justifyContent: 'center' }}>
         {clientDetails.map((client) => (
           <>

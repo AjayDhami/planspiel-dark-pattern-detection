@@ -68,9 +68,10 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
             {baseUrl}
           </Typography>
           
-          <Box>
+          <Box sx={{
+            marginTop: "10px",
+          }}>
           <div>
-          <div></div>
             {showAutomationButton ? (
               <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
                 Run Automation
