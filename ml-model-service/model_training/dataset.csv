@@ -1,383 +1,382 @@
-Link,Type,Text
+Link,Type,Text,Label,,,,,,,,,,,,,,,,,
 https://www.expedia.com/,Not Dark Pattern,"By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. 
-Cookies Settings      Reject All       Accept All Cookies"
-https://www.expedia.com/,Fake Urgency,"Save 10% or more on over 100,000 hotels with Member Prices. Also, members save up to 30% when you add a hotel to a flight"
-https://www.expedia.com/,Fake Urgency,You have good taste! Book now before someone else grabs it!
-https://www.expedia.com/,Fake Scarcity,We have 5 left at 15% off at
-https://www.expedia.com/,Fake Scarcity,We have 5 left at
-https://de.hotels.com/,Not Dark Pattern,"You can cancel free of charge until December 10th, 2023 at 6:00 a.m"
-https://de.hotels.com/,Not Dark Pattern,"If you change or cancel this booking after December 10, 2023, at 06:00 (Central European Standard Time, property local time), you will be charged a 90% fee."
-https://de.hotels.com/,Not Dark Pattern,Payments for no-shows or early check-outs cannot be refunded.
-https://de.hotels.com/,Not Dark Pattern,Fully refundable if your plans change
-https://de.hotels.com/,Fake Urgency,This price may increase if you book later.
-https://de.hotels.com/,Fake Urgency,This is the cheapest room in the Hotel Am Schloss Koepenick Berlin by Golden Tulip on our website! Secure and book now quickly.
-https://de.hotels.com/,Fake Urgency,This is the cheapest room at the B&B Hotel Berlin City-West on our website! Secure and book now quickly.
-https://de.hotels.com/,Fake Scarcity,We still have 5 rooms.
-https://www.agoda.com/ ,Not Dark Pattern,Traveling internationally? Get updated information on COVID-19 travel guidance and restrictions.
-https://www.agoda.com/ ,Not Dark Pattern,"Free cancellation before December 26, 2023"
-https://www.agoda.com/ ,Not Dark Pattern,"Pay nothing until December 24, 2023"
+Cookies Settings      Reject All       Accept All Cookies",1,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Urgency,"Save 10% or more on over 100,000 hotels with Member Prices. Also, members save up to 30% when you add a hotel to a flight",0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Urgency,You have good taste! Book now before someone else grabs it!,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Scarcity,We have 5 left at 15% off at,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Scarcity,We have 5 left at,0,,,,,,,,,,,,,,,,Not Dark Pattern,125
+https://de.hotels.com/,Not Dark Pattern,"You can cancel free of charge until December 10th, 2023 at 6:00 a.m",1,,,,,,,,,,,,,,,,Misdirection,64
+https://de.hotels.com/,Not Dark Pattern,"If you change or cancel this booking after December 10, 2023, at 06:00 (Central European Standard Time, property local time), you will be charged a 90% fee.",1,,,,,,,,,,,,,,,,Fake Urgency,37
+https://de.hotels.com/,Not Dark Pattern,Payments for no-shows or early check-outs cannot be refunded.,1,,,,,,,,,,,,,,,,Fake Scarcity,28
+https://de.hotels.com/,Not Dark Pattern,Fully refundable if your plans change,1,,,,,,,,,,,,,,,,Fake Social Proof,24
+https://de.hotels.com/,Fake Urgency,This price may increase if you book later.,0,,,,,,,,,,,,,,,,,
+https://de.hotels.com/,Fake Urgency,This is the cheapest room in the Hotel Am Schloss Koepenick Berlin by Golden Tulip on our website! Secure and book now quickly.,0,,,,,,,,,,,,,,,,,
+https://de.hotels.com/,Fake Urgency,This is the cheapest room at the B&B Hotel Berlin City-West on our website! Secure and book now quickly.,0,,,,,,,,,,,,,,,,,
+https://de.hotels.com/,Fake Scarcity,We still have 5 rooms.,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Not Dark Pattern,Traveling internationally? Get updated information on COVID-19 travel guidance and restrictions.,1,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Not Dark Pattern,"Free cancellation before December 26, 2023",1,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Not Dark Pattern,"Pay nothing until December 24, 2023",1,,,,,,,,,,,,,,,,,
 https://www.agoda.com/ ,Not Dark Pattern,"Manage Cookie Preference 
 By clicking ""Accept,"" you consent that Agoda and its trusted partners collect information about you via cookies and similar technologies (pages visited on the Site and searches you performed, other websites visited), in order to improve your experience on our Site, display interest-based advertisements, and understand how you interact with our Site. You can update your choices by visiting your privacy settings, where you can also learn about our use of cookies and related technologies. 
 Cookie Policy 
-Manage Preference     Decline     Accept"
-https://www.agoda.com/ ,Fake Urgency,"Dear valued customer, get up to 7% OFF with this coupon! Offer expires 2023-12-10  7:43 PM"
-https://www.agoda.com/ ,Fake Scarcity,We only have 1 left at this price!
-https://www.agoda.com/ ,Fake Scarcity,We have limited availability
-https://www.agoda.com/ ,Fake Scarcity,Only 1 left
-https://www.agoda.com/ ,Fake Scarcity,Hurry up! 1 room type has already sold out for your dates!
-https://www.agoda.com/ ,Fake Scarcity,Our last room!
-https://www.agoda.com/ ,Fake Social Proof,Liked! Last booked 6 hours ago for various dates
-https://www.agoda.com/ ,Fake Social Proof,CHEAPEST PRICE YOU'VE SEEN!
-https://www.agoda.com/ ,Fake Social Proof,Highly Reviewed by Families
-https://www.agoda.com/ ,Fake Social Proof,Highly Reviewed by Individuals
-https://www.agoda.com/ ,Fake Social Proof,Users are booking a place in Munich every 2 minutes on Agoda.com
-https://www.agoda.com/ ,Fake Social Proof,Your dates are popular among travelers
-https://www.tripadvisor.com/ ,Not Dark Pattern,"Places to see, ways to wander, and signature experiences."
+Manage Preference     Decline     Accept",1,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Urgency,"Dear valued customer, get up to 7% OFF with this coupon! Offer expires 2023-12-10  7:43 PM",0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Scarcity,We only have 1 left at this price!,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Scarcity,We have limited availability,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Scarcity,Only 1 left,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Scarcity,Hurry up! 1 room type has already sold out for your dates!,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Scarcity,Our last room!,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,Liked! Last booked 6 hours ago for various dates,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,CHEAPEST PRICE YOU'VE SEEN!,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,Highly Reviewed by Families,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,Highly Reviewed by Individuals,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,Users are booking a place in Munich every 2 minutes on Agoda.com,0,,,,,,,,,,,,,,,,,
+https://www.agoda.com/ ,Fake Social Proof,Your dates are popular among travelers,0,,,,,,,,,,,,,,,,,
+https://www.tripadvisor.com/ ,Not Dark Pattern,"Places to see, ways to wander, and signature experiences.",1,,,,,,,,,,,,,,,,,
 https://www.tripadvisor.com/ ,Misdirection,"We Care About Your PrivacyWe and our 306 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.Privacy and Cookies Statement  
-I Accept   Show Purposes"
-https://www.tripadvisor.com/ ,Fake Social Proof,Find out why travelers like you are raving about Newfoundland
-https://www.skyscanner.de/,Not Dark Pattern,Prices checked daily. Fares may change due to availability at time of booking.
+I Accept   Show Purposes",0,,,,,,,,,,,,,,,,,
+https://www.tripadvisor.com/ ,Fake Social Proof,Find out why travelers like you are raving about Newfoundland,0,,,,,,,,,,,,,,,,,
+https://www.skyscanner.de/,Not Dark Pattern,Prices checked daily. Fares may change due to availability at time of booking.,1,,,,,,,,,,,,,,,,,
 https://www.skyscanner.de/,Misdirection,"We respect your privacy
 To provide you with a more personalized experience, we (and third parties we work with) collect information about how and why you use Skyscanner. This allows us to remember your details, show you relevant advertising and improve our services. You can find out more in our Cookie Policy .
 Please select ""OK"" to accept all cookies or ""Cookie Preferences"" to adjust your settings to reject all or some non-essential cookies. 
-Ok   Cookie Preference"
-https://www.momondo.de/,Not Dark Pattern,Baggage fees may be estimated and vary depending on the booking website.View baggage size and weight restrictions.
-https://www.momondo.de/,Not Dark Pattern,Tariff and baggage fees apply to the entire trip.
-https://www.momondo.de/,Fake Social Proof,We are proud to have received a grade of 1.5 (“good”) in the DtGV flight price search engine test
-https://www.momondo.de/,Fake Social Proof,Recommended by experts
-https://www.airbnb.com/,Not Dark Pattern,You won't be charged yet. 
-https://www.airbnb.com/,Not Dark Pattern,Price per night includes VAT and all applicable fees.
-https://www.airbnb.com/,Not Dark Pattern,Total trip price includes VAT and all applicable fees.
-https://www.airbnb.com/,Not Dark Pattern,Pay in full
-https://www.airbnb.com/,Not Dark Pattern,"Pay part now, part later with Airbnb"
-https://www.airbnb.com/,Not Dark Pattern,Pay in 3 payments with Klarna
-https://www.airbnb.com/,Fake Urgency,Only 21 hours left to book.The host will stop accepting bookings for your dates soon.
-https://www.vrbo.com/,Misdirection,One Key is here! Book and earn rewards on vacation rentals in the app. Scan the QR code
-https://www.vrbo.com/,Misdirection,"Earn OneKeyCash to use when you book your next getaway on Vrbo, Expedia, and Hotels.com"
+Ok   Cookie Preference",0,,,,,,,,,,,,,,,,,
+https://www.momondo.de/,Not Dark Pattern,Baggage fees may be estimated and vary depending on the booking website.View baggage size and weight restrictions.,1,,,,,,,,,,,,,,,,,
+https://www.momondo.de/,Not Dark Pattern,Tariff and baggage fees apply to the entire trip.,1,,,,,,,,,,,,,,,,,
+https://www.momondo.de/,Fake Social Proof,We are proud to have received a grade of 1.5 (“good”) in the DtGV flight price search engine test,0,,,,,,,,,,,,,,,,,
+https://www.momondo.de/,Fake Social Proof,Recommended by experts,0,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,You won't be charged yet. ,1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,Price per night includes VAT and all applicable fees.,1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,Total trip price includes VAT and all applicable fees.,1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,Pay in full,1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,"Pay part now, part later with Airbnb",1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Not Dark Pattern,Pay in 3 payments with Klarna,1,,,,,,,,,,,,,,,,,
+https://www.airbnb.com/,Fake Urgency,Only 21 hours left to book.The host will stop accepting bookings for your dates soon.,0,,,,,,,,,,,,,,,,,
+https://www.vrbo.com/,Misdirection,One Key is here! Book and earn rewards on vacation rentals in the app. Scan the QR code,0,,,,,,,,,,,,,,,,,
+https://www.vrbo.com/,Misdirection,"Earn OneKeyCash to use when you book your next getaway on Vrbo, Expedia, and Hotels.com",0,,,,,,,,,,,,,,,,,
 https://www.flixbus.de/,Not Dark Pattern,"Information about the GDL strike from December 7th.
-FlixBuses and FlixTrains will operate as usual, and tickets are still available on most FlixBus routes."
-https://www.flixbus.de/,Not Dark Pattern,Cheap long-distance bus trips from €4.99
-https://shop.flixbus.de/,Not Dark Pattern,Prices may have changed! Please refresh the page to see the most current prices.
+FlixBuses and FlixTrains will operate as usual, and tickets are still available on most FlixBus routes.",1,,,,,,,,,,,,,,,,,
+https://www.flixbus.de/,Not Dark Pattern,Cheap long-distance bus trips from €4.99,1,,,,,,,,,,,,,,,,,
+https://shop.flixbus.de/,Not Dark Pattern,Prices may have changed! Please refresh the page to see the most current prices.,1,,,,,,,,,,,,,,,,,
 https://www.flixbus.ch/ ,Not Dark Pattern,"Privacy settings
 This site uses third-party website tracking technologies to provide and continually improve its services and to display advertising according to users' interests.
 Data protection, imprint, Cookie settings
-Refuse    Accept and close"
-https://shop.flixbus.de/,Fake Scarcity,There are only 2 places left!
-https://shop.flixbus.de/,Fake Scarcity,There is only 1 spot left!
-https://www.cruisecritic.co.uk/,Not Dark Pattern,We're sorry no itineraries matched your search. Please update your search criteria and try again.
+Refuse    Accept and close",1,,,,,,,,,,,,,,,,,
+https://shop.flixbus.de/,Fake Scarcity,There are only 2 places left!,0,,,,,,,,,,,,,,,,,
+https://shop.flixbus.de/,Fake Scarcity,There is only 1 spot left!,0,,,,,,,,,,,,,,,,,
+https://www.cruisecritic.co.uk/,Not Dark Pattern,We're sorry no itineraries matched your search. Please update your search criteria and try again.,1,,,,,,,,,,,,,,,,,
 https://www.cruisecritic.co.uk/,Misdirection,"We Value Your Privacy
 We and our trusted third-party partners use cookies and other technologies to enhance site security, to improve and personalise your experience, as well as delivering tailored ads both on our own and other sites. For additional details view our Privacy and Cookies Statement. 
-OK    Manage Settings"
+OK    Manage Settings",0,,,,,,,,,,,,,,,,,
 https://www.cruisecritic.co.uk/,Misdirection,"Get the Top 15 Deals of the Week
-Get the latest cruise news, insider tips and top deals in your inbox."
-https://www.viator.com/,Not Dark Pattern,Reserve Now & Pay Later-Secure your spot while staying flexible
-https://www.viator.com/,Not Dark Pattern,"Free cancellation before 9:00 PM (local time) on Dec 11, 2023"
-https://www.viator.com/,Not Dark Pattern,"Free cancellation before 9:00 PM on Dec 11, 2023 (local time)"
-https://www.viator.com/,Not Dark Pattern,Free cancellation up to 24 hours before the experience starts (local time)
+Get the latest cruise news, insider tips and top deals in your inbox.",0,,,,,,,,,,,,,,,,,
+https://www.viator.com/,Not Dark Pattern,Reserve Now & Pay Later-Secure your spot while staying flexible,1,,,,,,,,,,,,,,,,,
+https://www.viator.com/,Not Dark Pattern,"Free cancellation before 9:00 PM (local time) on Dec 11, 2023",1,,,,,,,,,,,,,,,,,
+https://www.viator.com/,Not Dark Pattern,"Free cancellation before 9:00 PM on Dec 11, 2023 (local time)",1,,,,,,,,,,,,,,,,,
+https://www.viator.com/,Not Dark Pattern,Free cancellation up to 24 hours before the experience starts (local time),1,,,,,,,,,,,,,,,,,
 https://www.viator.com/,Misdirection,"We Value Your Privacy
 We and our trusted third-party partners use cookies and other technologies to enhance site security, to improve and personalise your experience, as well as delivering tailored ads both on our own and other sites. For additional details view our Privacy and Cookies Statement.
-OK Manage Settings"
-https://www.viator.com/,Fake Scarcity,Likely to Sell Out
-https://www.getyourguide.com/,Not Dark Pattern,You can reserve now & pay later with this activity option.
-https://www.getyourguide.com/,Not Dark Pattern,Reserve now & pay later to book your spot and pay nothing today
+OK Manage Settings",0,,,,,,,,,,,,,,,,,
+https://www.viator.com/,Fake Scarcity,Likely to Sell Out,0,,,,,,,,,,,,,,,,,
+https://www.getyourguide.com/,Not Dark Pattern,You can reserve now & pay later with this activity option.,1,,,,,,,,,,,,,,,,,
+https://www.getyourguide.com/,Not Dark Pattern,Reserve now & pay later to book your spot and pay nothing today,1,,,,,,,,,,,,,,,,,
 https://www.getyourguide.com/,Not Dark Pattern,"Reserve now & pay later
 
-Keep your travel plans flexible — book your spot and pay nothing today."
-https://www.getyourguide.com/,Not Dark Pattern,Cancel up to 24 hours in advance for a full refund
+Keep your travel plans flexible — book your spot and pay nothing today.",1,,,,,,,,,,,,,,,,,
+https://www.getyourguide.com/,Not Dark Pattern,Cancel up to 24 hours in advance for a full refund,1,,,,,,,,,,,,,,,,,
 https://www.getyourguide.com/,Misdirection,"Let’s give you the best experience possible. 
 GetYourGuide uses cookies and other innovative tech to deliver an incredible and more personalized experience. Analytical technologies give us insights on site usage to improve our services. Marketing technologies (from GetYourGuide.com and trusted partners) help us advertise our services more relevantly. By clicking “Let’s go” you allow us to enable these technologies. If you choose to keep them off, the basic functionality may degrade your experience. Preferences can be changed at any time with future effect. For more information, see ourprivacy policy.
-Let's go, Change preferences"
-https://www.getyourguide.com/,Fake Urgency,Likely to Sell Out
-https://www.kiwi.com/en/,Not Dark Pattern,"To avoid boarding complications, enter all names and surnames exactly as they appear in your passport/ID."
+Let's go, Change preferences",0,,,,,,,,,,,,,,,,,
+https://www.getyourguide.com/,Fake Urgency,Likely to Sell Out,0,,,,,,,,,,,,,,,,,
+https://www.kiwi.com/en/,Not Dark Pattern,"To avoid boarding complications, enter all names and surnames exactly as they appear in your passport/ID.",1,,,,,,,,,,,,,,,,,
 https://www.kiwi.com/en/,Not Dark Pattern,"Set up price alerts
 
-Receive alerts when the prices for this route change."
+Receive alerts when the prices for this route change.",1,,,,,,,,,,,,,,,,,
 https://www.kiwi.com/en/,Not Dark Pattern,"Your privacy, your choice 
 We use cookies and other technologies to process your personal data following our Privacy Policy. If you accept, we'll also use your data for performance, analytics, marketing, and advertising purposes described in the customization below. You can always withdraw your consent in your privacy settings. 
-Customize   Reject all   Accept"
+Customize   Reject all   Accept",1,,,,,,,,,,,,,,,,,
 https://www.kiwi.com/en/,Misdirection,"Your Dubai stopover 
 Flying via Dubai? Check out all the best things to do to get a bonus trip out of this incredible city. 
-Read more"
-https://www.priceline.com/,Not Dark Pattern,Free cancellation within 87 hours of booking
+Read more",0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/,Not Dark Pattern,Free cancellation within 87 hours of booking,1,,,,,,,,,,,,,,,,,
 https://www.priceline.com/,Misdirection,"Priceline uses necessary cookies to enable core functionality such as security, network management, and accessibility. These cookies are required for site functionality and cannot be switched off. We'd also like to set optional cookies to provide you with a more streamlined and personalized experience. Optional cookies will not be enabled until you click on, ""Accept All Cookies"" or by adjusting your cookie settings in the Preference Center. For more information on how we use cookies, please see our Privacy & Cookies Policy    
-Preference Center     Accept All Cookies"
+Preference Center     Accept All Cookies",0,,,,,,,,,,,,,,,,,
 https://www.priceline.com/,Misdirection,"Priceline Phone Deals
 Book with an agent for great rates!
 Call now!
-1 (855) 940-4266"
-https://www.priceline.com/,Fake Urgency,"Season of Savings: Save 15% or more on thousands of hotels! Plus, enter for a chance to win $500. Terms apply. Learn More "
-https://www.priceline.com/,Fake Urgency,EXPRESS DEAL.  Save $271!  That's 29% off the retail price
+1 (855) 940-4266",0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/,Fake Urgency,"Season of Savings: Save 15% or more on thousands of hotels! Plus, enter for a chance to win $500. Terms apply. Learn More ",0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/,Fake Urgency,EXPRESS DEAL.  Save $271!  That's 29% off the retail price,0,,,,,,,,,,,,,,,,,
 https://www.priceline.com/,Fake Social Proof,"BUDGET FRIENDLY
-We choose the flight, you save 29%"
+We choose the flight, you save 29%",0,,,,,,,,,,,,,,,,,
 https://www.priceline.com/,Fake Urgency,"Save $271.04 on this Express Deal!With savings this big, most airlines won't give us the flight details until after you book.  
-Learn more"
-https://www.cheapoair.com/,Not Dark Pattern,"We have found flights that match your searched date, but not your searched airport. You can view these flights below in the Nearby Airports tab.The flights displayed below may be on different dates and/or for different airports."
-https://www.cheapoair.com/,Not Dark Pattern,This is an alternate date and nearby airport itinerary
-https://www.cheapoair.com/,Not Dark Pattern,This is a train service. Operated by DEUTSCHE BAHN
-https://www.cheapoair.com/,Not Dark Pattern,This flight is on an alternate date and from a nearby airport. Please verify the dates and airport.
-https://www.cheapoair.com/,Not Dark Pattern,Please make your payment within the next 20 minutes to keep this session active.
+Learn more",0,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Not Dark Pattern,"We have found flights that match your searched date, but not your searched airport. You can view these flights below in the Nearby Airports tab.The flights displayed below may be on different dates and/or for different airports.",1,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Not Dark Pattern,This is an alternate date and nearby airport itinerary,1,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Not Dark Pattern,This is a train service. Operated by DEUTSCHE BAHN,1,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Not Dark Pattern,This flight is on an alternate date and from a nearby airport. Please verify the dates and airport.,1,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Not Dark Pattern,Please make your payment within the next 20 minutes to keep this session active.,1,,,,,,,,,,,,,,,,,
 https://www.cheapoair.com/,Misdirection,"Looking for last-minute deals? Just give us a call to get phone-only deals!
-Call us at1-646-738-4820and get assistance 24/7."
+Call us at1-646-738-4820and get assistance 24/7.",0,,,,,,,,,,,,,,,,,
 https://www.cheapoair.com/,Misdirection,"Let Us Help You Book!
 Speak with a travel expert and get assistance 24/7
-1-646-738-4820"
-https://www.cheapoair.com/,Misdirection,Unlock great savings with our cheap Flight and Hotel packages!
+1-646-738-4820",0,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Misdirection,Unlock great savings with our cheap Flight and Hotel packages!,0,,,,,,,,,,,,,,,,,
 https://www.cheapoair.com/,Misdirection,"Get Fare Alerts!
-Be the first to know when fares drop for the route AOC - Altenburg to CDG - Paris"
+Be the first to know when fares drop for the route AOC - Altenburg to CDG - Paris",0,,,,,,,,,,,,,,,,,
 https://www.cheapoair.com/,Misdirection,"Get qualified help from experts
 Find great deals and destinations for your dream vacation!
 24-hour window cancellation policy.
 Instant booking confirmation.
 1-646-738-4820
-Available 24/7"
-https://www.cheapoair.com/,Misdirection,Go ahead and upgrade to get a better value.
-https://www.onetravel.com/,Not Dark Pattern,This is a nearby airport itinerary
+Available 24/7",0,,,,,,,,,,,,,,,,,
+https://www.cheapoair.com/,Misdirection,Go ahead and upgrade to get a better value.,0,,,,,,,,,,,,,,,,,
+https://www.onetravel.com/,Not Dark Pattern,This is a nearby airport itinerary,1,,,,,,,,,,,,,,,,,
 https://www.onetravel.com/,Misdirection,"Let Us Help You Book!
 Speak with a travel expert and get assistance 24/7
-1-646-738-4832"
+1-646-738-4832",0,,,,,,,,,,,,,,,,,
 https://www.onetravel.com/,Misdirection,"Looking for last-minute deals? Just give us a call to get phone-only deals!
-Call us at1-646-738-4832and get assistance 24/7."
+Call us at1-646-738-4832and get assistance 24/7.",0,,,,,,,,,,,,,,,,,
 https://www.onetravel.com/,Misdirection,"Need help booking? Our agents are Ready!
-Call us 24/7 at 1-845-664-6189"
+Call us 24/7 at 1-845-664-6189",0,,,,,,,,,,,,,,,,,
 https://www.onetravel.com/,Misdirection,"Sign Up and Save Up to $15 off◊
-our fees on selected regions with a promo code!"
-https://www.onetravel.com/,Misdirection,Unlock great savings with our cheap Flight and Hotel packages!
-https://www.onetravel.com/,Misdirection,Go ahead and upgrade to get a better value.
-,,
+our fees on selected regions with a promo code!",0,,,,,,,,,,,,,,,,,
+https://www.onetravel.com/,Misdirection,Unlock great savings with our cheap Flight and Hotel packages!,0,,,,,,,,,,,,,,,,,
+https://www.onetravel.com/,Misdirection,Go ahead and upgrade to get a better value.,0,,,,,,,,,,,,,,,,,
 https://www.trivago.com/,Misdirection,"Let’s talk cookies! We and our trusted third-party partners use cookies and other data and tech to analyze, enhance, and personalize your experience on and off trivago. Click anywhere or “OK” to consent and continue enjoying trivago. Manage your data in your cookie settings. 
-Settings      Ok"
-https://www.hoteltonight.com/,Not Dark Pattern,"Before travel, please review local travel advisories in effect. Many locations allow bookings only by essential lodgers."
+Settings      Ok",0,,,,,,,,,,,,,,,,,
+https://www.hoteltonight.com/,Not Dark Pattern,"Before travel, please review local travel advisories in effect. Many locations allow bookings only by essential lodgers.",1,,,,,,,,,,,,,,,,,
 https://www.hoteltonight.com/,Misdirection,"Your PrivacyWe use cookies and similar technologies to help personalise content, tailor and measure ads, and provide a better experience. By clicking OK or turning an option on in Cookie Preferences, you agree to this, as outlined in our Cookie Policy. To change preferences or withdraw consent, please update your Cookie Preferences.        
-Cookies Preferences      Ok"
-https://www.orbitz.com/,Not Dark Pattern,We are sold out
-https://www.orbitz.com/,Not Dark Pattern,Non-Refundable
-https://www.orbitz.com/,Not Dark Pattern,"Fully Refundable Reserve now, pay later"
-https://www.orbitz.com/,Not Dark Pattern,"Reserve now, pay later"
-https://www.orbitz.com/,Not Dark Pattern,Reserve without credit card
-https://www.orbitz.com/,Misdirection,Insider Price available
+Cookies Preferences      Ok",0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Not Dark Pattern,We are sold out,1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Not Dark Pattern,Non-Refundable,1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Not Dark Pattern,"Fully Refundable Reserve now, pay later",1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Not Dark Pattern,"Reserve now, pay later",1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Not Dark Pattern,Reserve without credit card,1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Misdirection,Insider Price available,0,,,,,,,,,,,,,,,,,
 https://www.orbitz.com/,Not Dark Pattern,"By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.
-Cookies Settings    Reject All    Accept All Cookies"
-https://www.orbitz.com/,Fake Urgency,You have good taste! Book now before someone else grabs it!
-https://www.orbitz.com/,Fake Urgency,Save up to 20% on select hotels plus earn extra Orbucks when you book in the app
-https://www.orbitz.com/,Fake Scarcity,We have 3 left at 20% off at
-https://www.orbitz.com/,Fake Scarcity,We have 7 left at 5% off at
-https://www.orbitz.com/,Fake Scarcity,We have 1 left at
-https://www.orbitz.com/,Fake Scarcity,We have 5 left at
-https://www.orbitz.com/,Fake Social Proof,Popular among travelers
-https://www.orbitz.com/,Fake Social Proof,You've picked a winner! This hotel is rated 9.6/10.
-https://www.nationalcar.de/de/startseite.html,Not Dark Pattern,The total cost may vary depending on mileage limits.
-https://www.nationalcar.de/de/startseite.html,Not Dark Pattern,There are several National stations available at this airport. Enter your flight details now so we can better assist you upon your arrival.
+Cookies Settings    Reject All    Accept All Cookies",1,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Urgency,You have good taste! Book now before someone else grabs it!,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Urgency,Save up to 20% on select hotels plus earn extra Orbucks when you book in the app,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Scarcity,We have 3 left at 20% off at,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Scarcity,We have 7 left at 5% off at,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Scarcity,We have 1 left at,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Scarcity,We have 5 left at,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Social Proof,Popular among travelers,0,,,,,,,,,,,,,,,,,
+https://www.orbitz.com/,Fake Social Proof,You've picked a winner! This hotel is rated 9.6/10.,0,,,,,,,,,,,,,,,,,
+https://www.nationalcar.de/de/startseite.html,Not Dark Pattern,The total cost may vary depending on mileage limits.,1,,,,,,,,,,,,,,,,,
+https://www.nationalcar.de/de/startseite.html,Not Dark Pattern,There are several National stations available at this airport. Enter your flight details now so we can better assist you upon your arrival.,1,,,,,,,,,,,,,,,,,
 https://www.nationalcar.de/de/startseite.html,Not Dark Pattern,"We and our vendors use cookies to improve your on-site experience, analyze site performance, and provide a personalized experience & ads tailored to your interest. Please click “ACCEPT” to tell us you are OK with this use or click here to change your settings at any time.More Information 
-Manage Your Settings       REJECT     ACCEPT"
-https://www.alamo.de/de/startseite.html,Not Dark Pattern,Help us stay informed about the current status of your flight in the event of a delay.
-https://www.alamo.de/de/startseite.html,Not Dark Pattern,I have theTerms and conditions for advance paymentsread and accept them *
-https://www.alamo.de/de/startseite.html,Not Dark Pattern,"Your rental covers 4928 kilometers , with a cost of €0.37 per additional kilometer"
-https://www.alamo.de/de/startseite.html,Not Dark Pattern,"The limitation of liability is automatically applied to your tariff. For your convenience, we have put together some package options for you below. Alternatively, you can select individual extras here."
-https://www.alamo.de/de/startseite.html,Not Dark Pattern,LEARN MORE ABOUT PAYING IN ADVANCE OR PAYING AFTER RENTAL
+Manage Your Settings       REJECT     ACCEPT",1,,,,,,,,,,,,,,,,,
+https://www.alamo.de/de/startseite.html,Not Dark Pattern,Help us stay informed about the current status of your flight in the event of a delay.,1,,,,,,,,,,,,,,,,,
+https://www.alamo.de/de/startseite.html,Not Dark Pattern,I have theTerms and conditions for advance paymentsread and accept them *,1,,,,,,,,,,,,,,,,,
+https://www.alamo.de/de/startseite.html,Not Dark Pattern,"Your rental covers 4928 kilometers , with a cost of €0.37 per additional kilometer",1,,,,,,,,,,,,,,,,,
+https://www.alamo.de/de/startseite.html,Not Dark Pattern,"The limitation of liability is automatically applied to your tariff. For your convenience, we have put together some package options for you below. Alternatively, you can select individual extras here.",1,,,,,,,,,,,,,,,,,
+https://www.alamo.de/de/startseite.html,Not Dark Pattern,LEARN MORE ABOUT PAYING IN ADVANCE OR PAYING AFTER RENTAL,1,,,,,,,,,,,,,,,,,
 https://www.alamo.de/de/startseite.html,Not Dark Pattern,"We and our third parties use cookies to improve your website experience, analyze site performance and deliver a personalized experience and advertising tailored to your interests. If you click on «ACCEPT», you inform us that you agree to this use. You can adjust your settings at any time by clicking here. More information 
-Cookie settings         Refuse         Assume"
-https://www.autoeurope.de/,Not Dark Pattern,Complete flexibility - Cancel at any time for €19.27  
+Cookie settings         Refuse         Assume",1,,,,,,,,,,,,,,,,,
+https://www.autoeurope.de/,Not Dark Pattern,Complete flexibility - Cancel at any time for €19.27  ,1,,,,,,,,,,,,,,,,,
 https://www.autoeurope.de/,Not Dark Pattern,"Before we continue...
 Press & Hold to confirm you are
-a human (and not a bot)."
+a human (and not a bot).",1,,,,,,,,,,,,,,,,,
 https://www.autoeurope.de/,Not Dark Pattern,"This website utilizes technologies such as cookies to enable essential site functionality, as well as for analytics, personalization, and targeted advertising purposes. You may change your settings at any time or accept the default settings. You may close this banner to continue with only essential cookies. Privacy Policy 
-MANAGE PREFERENCES     ACCEPT ALL   REJECT ALL"
+MANAGE PREFERENCES     ACCEPT ALL   REJECT ALL",1,,,,,,,,,,,,,,,,,
 https://www.autoeurope.de/,Misdirection,"Only the best for our members!
-As an Auto Europe member, you benefit from exclusive car rental discounts worldwide. Register here or create an account and book now and save!"
-https://www.rentalcars.com/,Not Dark Pattern,"Your choice can affect the rental terms (e.g. security deposit), so please check out `Important info"
-https://www.rentalcars.com/,Not Dark Pattern,Price includes winterisation fee
-https://www.rentalcars.com/,Not Dark Pattern,Winter tyres included
-https://www.rentalcars.com/,Not Dark Pattern,You'll get a full refund if you cancel at least 48 hours before pick-up.
-https://www.rentalcars.com/,Not Dark Pattern,Free cancellation up to 48 hours before pick-up
-https://www.rentalcars.com/,Not Dark Pattern,Free cancellation
+As an Auto Europe member, you benefit from exclusive car rental discounts worldwide. Register here or create an account and book now and save!",0,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,"Your choice can affect the rental terms (e.g. security deposit), so please check out `Important info",1,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,Price includes winterisation fee,1,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,Winter tyres included,1,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,You'll get a full refund if you cancel at least 48 hours before pick-up.,1,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,Free cancellation up to 48 hours before pick-up,1,,,,,,,,,,,,,,,,,
+https://www.rentalcars.com/,Not Dark Pattern,Free cancellation,1,,,,,,,,,,,,,,,,,
 https://www.rentalcars.com/,Not Dark Pattern,"Manage cookie preferencesBy clicking “Accept”, you agree to the use of analytical cookies (used to gain insights into website usage in order to improve our website and services) and tracking cookies (both from Rentalcars.com and also from other trustworthy partners). The latter help us determine which products we show you on our site and elsewhere, measure the number of visitors to our websites and enable you to like or share on social media. By clicking here you can edit your consent and find out more about the cookies we use.
-Refuse    Accept"
+Refuse    Accept",1,,,,,,,,,,,,,,,,,
 https://www.rentalcars.com/,Misdirection,"This car is costing you just €84.26 – a real bargain…
-At that time of year, the average SUV at Berlin Downtown - Friedrichstrasse costs €180.14!"
-https://holidaylettings.co.uk/,Not Dark Pattern,100% refund within 24 hours after booking. See Policies & House Rules
+At that time of year, the average SUV at Berlin Downtown - Friedrichstrasse costs €180.14!",0,,,,,,,,,,,,,,,,,
+https://holidaylettings.co.uk/,Not Dark Pattern,100% refund within 24 hours after booking. See Policies & House Rules,1,,,,,,,,,,,,,,,,,
 https://holidaylettings.co.uk/,Not Dark Pattern,"Book with confidence.
-Pay by card or PayPal, through the Holiday Lettings website, to be covered by Payment Protection. Never pay by bank or wire transfer."
-https://holidaylettings.co.uk/,Not Dark Pattern,View rate breakdown
+Pay by card or PayPal, through the Holiday Lettings website, to be covered by Payment Protection. Never pay by bank or wire transfer.",1,,,,,,,,,,,,,,,,,
+https://holidaylettings.co.uk/,Not Dark Pattern,View rate breakdown,1,,,,,,,,,,,,,,,,,
 https://holidaylettings.co.uk/,Not Dark Pattern,"Total for 15 nights €1,983
-Includes fees, taxes, and refundable deposit"
+Includes fees, taxes, and refundable deposit",1,,,,,,,,,,,,,,,,,
 https://holidaylettings.co.uk/,Misdirection,"We Value Your Privacy We and our trusted third-party partners use cookies and other technologies to enhance site security, to improve and personalise your experience, as well as delivering tailored ads both on our own and other sites. For additional details view our Privacy and Cookies Statement. 
-Ok     Manage settings"
-https://www.tripping.com/,Not Dark Pattern,Safe booking Safe and encrypted transfer of your payment data
-https://www.tripping.com/,Not Dark Pattern,"Includes all essentials Pool, WiFi, Kitchen and more"
-https://www.tripping.com/,Not Dark Pattern,You won't be charged yet
-https://www.tripping.com/,Misdirection,"We hope you like cookies  Cookies Settings, Ok "
-https://www.tripping.com/,Fake Urgency,Great timing!  Prices might go up during high season
-https://www.tripping.com/,Fake Social Proof,Smart savings €54 cheaper per night than similar homes nearby
-https://www.wimdu.com/,Not Dark Pattern,"By clicking 'Agree & continue' you are agreeing to our Terms and Conditions, Privacy Policy, and to receive booking-related texts. Standard messaging rates may apply."
-https://www.wimdu.com/,Not Dark Pattern,"Partial refund if you cancel byDec 14, 2023"
-https://www.wimdu.com/,Not Dark Pattern,Partially refundable
-https://www.wimdu.com/,Not Dark Pattern,"Total includes fees, not tax"
+Ok     Manage settings",0,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Not Dark Pattern,Safe booking Safe and encrypted transfer of your payment data,1,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Not Dark Pattern,"Includes all essentials Pool, WiFi, Kitchen and more",1,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Not Dark Pattern,You won't be charged yet,1,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Misdirection,"We hope you like cookies  Cookies Settings, Ok ",0,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Fake Urgency,Great timing!  Prices might go up during high season,0,,,,,,,,,,,,,,,,,
+https://www.tripping.com/,Fake Social Proof,Smart savings €54 cheaper per night than similar homes nearby,0,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Not Dark Pattern,"By clicking 'Agree & continue' you are agreeing to our Terms and Conditions, Privacy Policy, and to receive booking-related texts. Standard messaging rates may apply.",1,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Not Dark Pattern,"Partial refund if you cancel byDec 14, 2023",1,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Not Dark Pattern,Partially refundable,1,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Not Dark Pattern,"Total includes fees, not tax",1,,,,,,,,,,,,,,,,,
 https://www.wimdu.com/,Not Dark Pattern,"Receive exclusive offers, inspirational stories, and travel regulation updates
-Become a subscriber and receive great tips on travel planning!"
-https://www.wimdu.com/,Misdirection,"We hope you like cookies  Cookies Settings, Ok "
+Become a subscriber and receive great tips on travel planning!",1,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Misdirection,"We hope you like cookies  Cookies Settings, Ok ",0,,,,,,,,,,,,,,,,,
 https://www.wimdu.com/,Misdirection,"Earn OneKeyCash each time you stay at a place that feels like home
-Sign in"
-https://www.wimdu.com/,Fake Urgency,Act fast! Price and availability may change.
-https://www.omio.com/,Not Dark Pattern,Total(taxes included). €83.90
-https://www.omio.com/,Not Dark Pattern,Your data is safe with us. Want to know more about how we use it? Click here.
+Sign in",0,,,,,,,,,,,,,,,,,
+https://www.wimdu.com/,Fake Urgency,Act fast! Price and availability may change.,0,,,,,,,,,,,,,,,,,
+https://www.omio.com/,Not Dark Pattern,Total(taxes included). €83.90,1,,,,,,,,,,,,,,,,,
+https://www.omio.com/,Not Dark Pattern,Your data is safe with us. Want to know more about how we use it? Click here.,1,,,,,,,,,,,,,,,,,
 https://www.omio.com/,Not Dark Pattern,"Quick sign up
-Skip filling in all your details by signing up through Facebook or Google"
-https://www.omio.com/,Not Dark Pattern,This ticket can be shown on your smartphone or tablet with no printing required.
-https://www.omio.com/,Not Dark Pattern,This is a non-refundable fee.
+Skip filling in all your details by signing up through Facebook or Google",1,,,,,,,,,,,,,,,,,
+https://www.omio.com/,Not Dark Pattern,This ticket can be shown on your smartphone or tablet with no printing required.,1,,,,,,,,,,,,,,,,,
+https://www.omio.com/,Not Dark Pattern,This is a non-refundable fee.,1,,,,,,,,,,,,,,,,,
 https://www.omio.com/,Not Dark Pattern,"Fare terms
 Super Saver Fare Europe
 Ticket is valid for both selected train and any local transport (such as RE, RB, S-Bahn) for the same route, and within the validity period indicated in the ticket.
-This ticket cannot be refunded or exchanged."
-https://www.omio.com/,Not Dark Pattern,Prices include taxes and may change depending on availability. Any additional fees can be reviewed before payment. The total price will be finalized once the purchase is completed.
+This ticket cannot be refunded or exchanged.",1,,,,,,,,,,,,,,,,,
+https://www.omio.com/,Not Dark Pattern,Prices include taxes and may change depending on availability. Any additional fees can be reviewed before payment. The total price will be finalized once the purchase is completed.,1,,,,,,,,,,,,,,,,,
 https://www.omio.com/,Misdirection,"How we use cookies Like most websites, we use cookies to make sure our site works seamlessly for you by improving and customizing your experience with us. By choosing “Accept all,” you agree to the storing of all cookies on your device and cookies being used for personalized advertising. This helps us analyze site usage and assists our marketing efforts. You can easily manage your cookies in “Settings”. Find more information by reading our privacy policy. 
-Accept all    Manage settings"
-https://www.royalcaribbean.com/,Not Dark Pattern,"We’ve taken you to the website. We noticed you currently are in Choose another country or region to browse and shop for cruise deals local to you."""
+Accept all    Manage settings",0,,,,,,,,,,,,,,,,,
+https://www.royalcaribbean.com/,Not Dark Pattern,"We’ve taken you to the website. We noticed you currently are in Choose another country or region to browse and shop for cruise deals local to you.""",1,,,,,,,,,,,,,,,,,
 https://www.royalcaribbean.com/,Misdirection,"Cookie NoticeBy clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. Show more 
-Cookies Settings      Accept All Cookies"
-https://www.royalcaribbean.com/,Misdirection,"Track sailings on your Watchlist     Get updated on sailings that interest you when they're on your watchlist    Got it, thanks"
+Cookies Settings      Accept All Cookies",0,,,,,,,,,,,,,,,,,
+https://www.royalcaribbean.com/,Misdirection,"Track sailings on your Watchlist     Get updated on sailings that interest you when they're on your watchlist    Got it, thanks",0,,,,,,,,,,,,,,,,,
 https://www.royalcaribbean.com/,Fake Urgency,"These are the deals you’ve snagged so far:
 
 30% off every cruise
-Flash Sale Instant Savings"
-https://www.princess.com/en-int,Not Dark Pattern,"*Pricing is per person, double occupancy; EUR.  Taxes, Fees & Port Expenses additional: €86"
+Flash Sale Instant Savings",0,,,,,,,,,,,,,,,,,
+https://www.princess.com/en-int,Not Dark Pattern,"*Pricing is per person, double occupancy; EUR.  Taxes, Fees & Port Expenses additional: €86",1,,,,,,,,,,,,,,,,,
 https://www.princess.com/en-int,Misdirection,"We use cookies, pixel tags and other technologies to collect information you provide as well as information about your interactions with our site to enhance user experience. We also share information about your use of our site with our social media, advertising and analytics partners. By using this site, you consent to our use of these tracking tools in accordance with our Privacy Policy and you accept our Terms of service 
-Cookie Settings      Accept All Cookies"
+Cookie Settings      Accept All Cookies",0,,,,,,,,,,,,,,,,,
 https://www.princess.com/en-int,Fake Urgency,"Interior from*
 Was  € 171
-Now  € 114"
+Now  € 114",0,,,,,,,,,,,,,,,,,
 https://www.goldstar.com/,Misdirection,"This website uses cookies. We need your consent to set cookies on your device. 
-Manage cookies     Agree to all"
+Manage cookies     Agree to all",0,,,,,,,,,,,,,,,,,
 https://www.goldstar.com/,Fake Urgency,"From $28
-Save 56%"
-https://www.thefork.com/,Not Dark Pattern,Available from Jan 5 to Jan 16
+Save 56%",0,,,,,,,,,,,,,,,,,
+https://www.thefork.com/,Not Dark Pattern,Available from Jan 5 to Jan 16,1,,,,,,,,,,,,,,,,,
 https://www.thefork.com/,Misdirection,"TheFork values your Privacy We and our trusted third-party partners use cookies and similar technologies to improve and personalize your experience, to enhance site security and deliver ads tailored to you on other sites. For additional details, see our Privacy and Cookies Statement.
-PREFERENCES     ACCEPT"
-https://www.klook.com/de/,Not Dark Pattern,"Explore all of Germany with a rail pass, valid for up to 15 consecutive or non-consecutive days"
-https://www.klook.com/de/,Not Dark Pattern,Show content in original language With Google Translate translated
-https://www.klook.com/de/,Not Dark Pattern,"AI translated information on this page. In the event of contradictions, the content of the original language takes precedence."
+PREFERENCES     ACCEPT",0,,,,,,,,,,,,,,,,,
+https://www.klook.com/de/,Not Dark Pattern,"Explore all of Germany with a rail pass, valid for up to 15 consecutive or non-consecutive days",1,,,,,,,,,,,,,,,,,
+https://www.klook.com/de/,Not Dark Pattern,Show content in original language With Google Translate translated,1,,,,,,,,,,,,,,,,,
+https://www.klook.com/de/,Not Dark Pattern,"AI translated information on this page. In the event of contradictions, the content of the original language takes precedence.",1,,,,,,,,,,,,,,,,,
 https://www.klook.com/de/,Misdirection,"We attach great importance to protecting your privacy This website uses cookies and similar technologies to provide services, improve functionality and personalize content. You can accept cookies or go to ""Manage settings"" to find out more about the cookies we use and manage your consent. You can also view our  cookie policy.
-Accept all      Manage Settings"
+Accept all      Manage Settings",0,,,,,,,,,,,,,,,,,
 https://www.klook.com/de/,Misdirection,"Get 5% discount on your 1st app booking
 Book better with the app. Use promo code “BetterOnApp” to save!
-Get a magic link sent to your email"
-https://www.klook.com/de/,Fake Scarcity,"[Limited Offer!]: Save more than 70 EUR on Europe rail passes, Europe trains, car rental, private airport transfer and more with !"
+Get a magic link sent to your email",0,,,,,,,,,,,,,,,,,
+https://www.klook.com/de/,Fake Scarcity,"[Limited Offer!]: Save more than 70 EUR on Europe rail passes, Europe trains, car rental, private airport transfer and more with !",0,,,,,,,,,,,,,,,,,
 https://www.tourradar.com/,Not Dark Pattern,"Price Breakdown
 Base price
 1 Traveller x €2.555,00.   €2.555,00
-Discount                           - €580,00"
-https://www.tourradar.com/,Not Dark Pattern,Please note: Traveller details should match information on passport
-https://www.tourradar.com/,Not Dark Pattern,Book once and share the cost with split payments. Learn More
-https://www.tourradar.com/,Not Dark Pattern,"Pay over time with smaller, interest-free instalments. Learn More"
+Discount                           - €580,00",1,,,,,,,,,,,,,,,,,
+https://www.tourradar.com/,Not Dark Pattern,Please note: Traveller details should match information on passport,1,,,,,,,,,,,,,,,,,
+https://www.tourradar.com/,Not Dark Pattern,Book once and share the cost with split payments. Learn More,1,,,,,,,,,,,,,,,,,
+https://www.tourradar.com/,Not Dark Pattern,"Pay over time with smaller, interest-free instalments. Learn More",1,,,,,,,,,,,,,,,,,
 https://www.tourradar.com/,Not Dark Pattern,"Looks like you are in Germany.
 Switch to the German site for relevant language and currency?
-Switch to German     Stay here"
+Switch to German     Stay here",1,,,,,,,,,,,,,,,,,
 https://www.tourradar.com/,Misdirection,"Cookie Preferences By clicking “Accept All Cookies” you agree with the use of analytical and tracking cookies. We use cookies to analyze traffic and provide you with personalized content and ads. For more information: View Cookie Policy
-Accept all Cookies     Cookie Preference"
+Accept all Cookies     Cookie Preference",0,,,,,,,,,,,,,,,,,
 https://www.tourradar.com/,Fake Urgency,"From €2.555
 €1.835
-You save €720"
+You save €720",0,,,,,,,,,,,,,,,,,
 https://www.tourradar.com/,Fake Urgency,"Hurry, deals only available for a limited time!
-Ends on 14 Dec, 2023"
-https://www.tourradar.com/,Fake Urgency,Almost Sold Out
-https://www.tourradar.com/,Fake Urgency/ Fake Scarcity,Last chance! Only 3 spaces left and yours is reserved for the next 10 minutes
+Ends on 14 Dec, 2023",0,,,,,,,,,,,,,,,,,
+https://www.tourradar.com/,Fake Urgency,Almost Sold Out,0,,,,,,,,,,,,,,,,,
+https://www.tourradar.com/,Fake Urgency/ Fake Scarcity,Last chance! Only 3 spaces left and yours is reserved for the next 10 minutes,0,,,,,,,,,,,,,,,,,
 https://www.citypass.com/,Misdirection,"Cookies improve your experienceBy clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. You can manage your cookie settings or exercise your rights related to cookies through our Cookies Settings. For more information, please refer to ourPrivacy Policy 
-Cookies Settings        Accept"
-https://www.citypass.com/,Fake Urgency,Save 44% at 5 top Atlanta attractions.
-https://www.booking.com/,Fake Urgency,"Book before 29 Nov 2023, stay anytime before the end of 2024"
-https://www.booking.com/,Not Dark Pattern,Twin Room with Shared Bathroom
-https://www.booking.com/,Fake Urgency,Offer ends in 7 days
-https://www.booking.com/,Fake Urgency,"Don't forget to leave a review, you have 25 days left"
-https://www.booking.com/,Not Dark Pattern,Free cancellation
-https://www.booking.com/,Not Dark Pattern,Includes taxes and charges
-https://www.booking.com/,Not Dark Pattern,No prepayment needed – pay at the property
-https://www.booking.com/,Not Dark Pattern,Pay in advance
-https://www.booking.com/,Fake Scarcity/ Urgency,72% of places to stay are unavailable for your dates on our site.
-https://www.booking.com/,Fake Scarcity/ Urgency,Limited supply in Berlin for your dates: 4 two-star hotels like this are already unavailable on our site
-https://www.booking.com/,Not Dark Pattern,Guest reviews
-https://www.booking.com/,Not Dark Pattern,See availability
-https://www.booking.com/,Not Dark Pattern,436 properties found
-https://www.booking.com/,Not Dark Pattern,Breakfast included
-https://www.booking.com/,Not Dark Pattern,I'll reserve
-https://www.booking.com/,Not Dark Pattern,The total baggage included in the price
-https://www.booking.com/,Not Dark Pattern,Metro access
-https://flights.booking.com/,Not Dark Pattern,Extra baggage
-https://flights.booking.com/,Not Dark Pattern,No hidden fees – track your price at every step
-https://flights.booking.com/,Misdirection,Protect yourself from the unexpected.
-https://www.booking.com/,Fake Urgency,Last minute hotels near you
-https://flights.booking.com/,Misdirection,Travel Protection covers flight costs and more.
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Urgency,It only takes 2 minutes
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Urgency,Confirmation is immediate
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity,Only 6 rooms left on our site
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity,Limited supply 
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity/ Urgency,4 hotels like this are already unavailable on our site
-https://www.booking.com/,Fake Scarcity,Limited supply for your dates
-https://www.booking.com/,Not Dark Pattern,Popular amenities
-https://www.expedia.com/,Fake Urgency,You can now save 30% or more with Member Prices until Nov 29.
-https://www.expedia.com/,Not Dark Pattern,"Save 10% or more on over 100,000 hotels worldwide when you're signed in"
-https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam,Fake Scarcity,We have 1 left at 20% off at
-https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam,Fake Scarcity,We have 7 left at
-https://www.expedia.com/,Fake Scarcity,We have 1 left
-https://www.expedia.com/,Not Dark Pattern,"Reserve now, pay later"
-https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam%2C%20North%20Holland%2C%20Netherlands&endDate=2023-12-10&guestRating=ANY&regionId=378&selected=17809421&semdtl=&sort=RECOMMENDED&startDate=2023-12-08&theme=&useRewards=false&userIntent=,Fake Urgency,Fully refundable before Dec 7
-https://www.travelstart.com/flights/results,Fake Scarcity,Only 5 Seats left at this price!
-https://hotel.travelstart.com/go/threeboutiquehoteloranjezicht/,Fake Urgency,Stay for 3 nights and only pay for 2 nights between 01 May 2024 and 31 Aug 2024.
-https://www.tripadvisor.com/Hotels-g187399-Dresden_Saxony-Hotels.html,Fake Social Proof,1 Best Value of 369 places to stay in Dresden
-https://www.cruisecritic.co.uk/cruise-deals/,Fake Urgency,Last-Minute Deal
-https://www.viator.com/Dresden/d22375-ttd,Fake Urgency/ Fake Scarcity,Likely to Sell Out
-https://www.viator.com/tours/Dresden/Best-of-Bohemian-and-Saxon-Switzerland-Day-Trip-from-Dresden-Winter-Tour/d22375-63545P5,Fake Social Proof,Lowest Price Guarantee
-https://www.priceline.com/relax/in/5000354851/from/20231206/to/20231207/rooms/1/adults/2,Fake Urgency,We only have a few rooms left at €223
-https://www.priceline.com/relax/in/5000354851/from/20231206/to/20231207/rooms/1/adults/2,Fake Urgency,Express Deal
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,1 person is looking at this hotel
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,Guests give this property an excellent rating of 8.7/10 
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,Guests rate the cleanliness 9.4/10
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency,1 left at this price for this room on our site
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency/ Fake Scarcity,This property is in high demand - book available rooms while you can.
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency,Limited time offer 
-https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,This guest had positive things to say about the property and rated it as very good
-https://www.priceline.com/,Fake Scarcity,1 seat left at this price
-https://www.priceline.com/,Fake Urgency,Limited time savings
-https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Urgency,Limited time offer
-https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Social Proof,Top Booked
-https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Social Proof,Top Booked Hotel
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Social Proof,Couples particularly like the location — they rated it 8.5 for a two-person trip.
-https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Social Proof,"Great facilities! Review score, 9.5"
-https://www.booking.com/attractions/searchresults/de/hannover.html,Fake Social Proof,Popular with groups
-https://www.flugladen.de/,Misdirection,Airline ticket protection
-https://www.flugladen.de/,Misdirection,Rental car
-https://www.flugladen.de/,Misdirection,"FIND YOUR PERFECT CAR ""Compare the best car rental offers Car rental in"
-https://www.flugladen.de/,Misdirection,Choose your service package
-https://www.flugladen.de/,Misdirection,Choose the right service package now as this cannot be changed later!
-https://www.flugladen.de/,Misdirection,Service for compensation for flight delays
-https://www.flugladen.de/,Confirmshaming,"No thank you, I do not want to benefit from this service"
-https://www.flugladen.de/,Confirmshaming,"No thanks, I'll take the risk."
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Fake Scarcity,Only 4 places left!
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Fake Scarcity,Only 1 spots left!
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Make your trip safe by choosing our service packages
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Travel agency service
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,"For a safer journey, upgrade now"
-https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Airline bankruptcy protection Get money back for your tickets if the airline goes bankrupt.
-https://www.booking.com/,Fake Scarcity,93% of places to stay are unavailable for your dates on our site.
-https://www.expedia.de/,Confirmshaming,Do you want to complete the booking without selecting seats?
-https://www.expedia.de/,Misdirection,Are you sure you don't want to choose a seat? Your fare allows you to choose your seat for a fee.
-https://www.expedia.de/,Misdirection,Add travel protection
-https://www.expedia.de/,Misdirection,"Yes, I would like travel cancellation insurance"
-https://www.expedia.de/,Misdirection,"Yes, I would like travel protection"
-https://www.expedia.de/,Confirmshaming,"No, I do not need travel protection for my trip worth €225.49."
-https://www.expedia.de/,Misdirection,Members save even more: Receive up to 15% off select accommodation and 11% off rental cars when booking this flight
-https://www.expedia.de/,Misdirection,Your trip is not covered by travel insurance.
-https://www.qatarairways.com/,Fake Scarcity,2 seats left
+Cookies Settings        Accept",0,,,,,,,,,,,,,,,,,
+https://www.citypass.com/,Fake Urgency,Save 44% at 5 top Atlanta attractions.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Urgency,"Book before 29 Nov 2023, stay anytime before the end of 2024",0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Twin Room with Shared Bathroom,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Urgency,Offer ends in 7 days,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Urgency,"Don't forget to leave a review, you have 25 days left",0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Free cancellation,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Includes taxes and charges,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,No prepayment needed – pay at the property,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Pay in advance,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Scarcity/ Urgency,72% of places to stay are unavailable for your dates on our site.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Scarcity/ Urgency,Limited supply in Berlin for your dates: 4 two-star hotels like this are already unavailable on our site,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Guest reviews,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,See availability,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,436 properties found,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Breakfast included,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,I'll reserve,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,The total baggage included in the price,1,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Metro access,1,,,,,,,,,,,,,,,,,
+https://flights.booking.com/,Not Dark Pattern,Extra baggage,1,,,,,,,,,,,,,,,,,
+https://flights.booking.com/,Not Dark Pattern,No hidden fees – track your price at every step,1,,,,,,,,,,,,,,,,,
+https://flights.booking.com/,Misdirection,Protect yourself from the unexpected.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Urgency,Last minute hotels near you,0,,,,,,,,,,,,,,,,,
+https://flights.booking.com/,Misdirection,Travel Protection covers flight costs and more.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Urgency,It only takes 2 minutes,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Urgency,Confirmation is immediate,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity,Only 6 rooms left on our site,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity,Limited supply ,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Scarcity/ Urgency,4 hotels like this are already unavailable on our site,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Scarcity,Limited supply for your dates,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Not Dark Pattern,Popular amenities,1,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Urgency,You can now save 30% or more with Member Prices until Nov 29.,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Not Dark Pattern,"Save 10% or more on over 100,000 hotels worldwide when you're signed in",1,,,,,,,,,,,,,,,,,
+https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam,Fake Scarcity,We have 1 left at 20% off at,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam,Fake Scarcity,We have 7 left at,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Fake Scarcity,We have 1 left,0,,,,,,,,,,,,,,,,,
+https://www.expedia.com/,Not Dark Pattern,"Reserve now, pay later",1,,,,,,,,,,,,,,,,,
+https://www.expedia.com/Hotel-Search?adults=&children=&destination=Amsterdam%2C%20North%20Holland%2C%20Netherlands&endDate=2023-12-10&guestRating=ANY&regionId=378&selected=17809421&semdtl=&sort=RECOMMENDED&startDate=2023-12-08&theme=&useRewards=false&userIntent=,Fake Urgency,Fully refundable before Dec 7,0,,,,,,,,,,,,,,,,,
+https://www.travelstart.com/flights/results,Fake Scarcity,Only 5 Seats left at this price!,0,,,,,,,,,,,,,,,,,
+https://hotel.travelstart.com/go/threeboutiquehoteloranjezicht/,Fake Urgency,Stay for 3 nights and only pay for 2 nights between 01 May 2024 and 31 Aug 2024.,0,,,,,,,,,,,,,,,,,
+https://www.tripadvisor.com/Hotels-g187399-Dresden_Saxony-Hotels.html,Fake Social Proof,1 Best Value of 369 places to stay in Dresden,0,,,,,,,,,,,,,,,,,
+https://www.cruisecritic.co.uk/cruise-deals/,Fake Urgency,Last-Minute Deal,0,,,,,,,,,,,,,,,,,
+https://www.viator.com/Dresden/d22375-ttd,Fake Urgency/ Fake Scarcity,Likely to Sell Out,0,,,,,,,,,,,,,,,,,
+https://www.viator.com/tours/Dresden/Best-of-Bohemian-and-Saxon-Switzerland-Day-Trip-from-Dresden-Winter-Tour/d22375-63545P5,Fake Social Proof,Lowest Price Guarantee,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/in/5000354851/from/20231206/to/20231207/rooms/1/adults/2,Fake Urgency,We only have a few rooms left at €223,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/in/5000354851/from/20231206/to/20231207/rooms/1/adults/2,Fake Urgency,Express Deal,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,1 person is looking at this hotel,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,Guests give this property an excellent rating of 8.7/10 ,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,Guests rate the cleanliness 9.4/10,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency,1 left at this price for this room on our site,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency/ Fake Scarcity,This property is in high demand - book available rooms while you can.,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Urgency,Limited time offer ,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/at/162592603/from/20231206/to/20231207/rooms/1?pclnId=2963B481212C1476DBEFAD93E1ABC15F806C59D48D232A892D5E969D12225D39BEE97B162572192988B7DBE3706974E4F83AF60272557BEEEC09B27037D028A2F71F34DA5F679688DE32424FB9D2CC10B7E2B68DD59C89157D4C2A21AF073D30E5321504DB664F36&gid=5349&cityId=5000354851&cur=EUR&backlink-id=6xufupr5y7j&qdp=210,Fake Social Proof,This guest had positive things to say about the property and rated it as very good,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/,Fake Scarcity,1 seat left at this price,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/,Fake Urgency,Limited time savings,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Urgency,Limited time offer,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Social Proof,Top Booked,0,,,,,,,,,,,,,,,,,
+https://www.priceline.com/relax/in/3000016152/from/20240116/to/20240123/rooms/1/,Fake Social Proof,Top Booked Hotel,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Social Proof,Couples particularly like the location — they rated it 8.5 for a two-person trip.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/hotel/de/alexxanders-boardinghouse-restaurant.en-gb.html,Fake Social Proof,"Great facilities! Review score, 9.5",0,,,,,,,,,,,,,,,,,
+https://www.booking.com/attractions/searchresults/de/hannover.html,Fake Social Proof,Popular with groups,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,Airline ticket protection,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,Rental car,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,"FIND YOUR PERFECT CAR ""Compare the best car rental offers Car rental in",0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,Choose your service package,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,Choose the right service package now as this cannot be changed later!,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Misdirection,Service for compensation for flight delays,0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Confirmshaming,"No thank you, I do not want to benefit from this service",0,,,,,,,,,,,,,,,,,
+https://www.flugladen.de/,Confirmshaming,"No thanks, I'll take the risk.",0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Fake Scarcity,Only 4 places left!,0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Fake Scarcity,Only 1 spots left!,0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Make your trip safe by choosing our service packages,0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Travel agency service,0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,"For a safer journey, upgrade now",0,,,,,,,,,,,,,,,,,
+https://4.flysmarter.de/flug/Schritt-1/6119920354,Misdirection,Airline bankruptcy protection Get money back for your tickets if the airline goes bankrupt.,0,,,,,,,,,,,,,,,,,
+https://www.booking.com/,Fake Scarcity,93% of places to stay are unavailable for your dates on our site.,0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Confirmshaming,Do you want to complete the booking without selecting seats?,0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,Are you sure you don't want to choose a seat? Your fare allows you to choose your seat for a fee.,0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,Add travel protection,0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,"Yes, I would like travel cancellation insurance",0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,"Yes, I would like travel protection",0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Confirmshaming,"No, I do not need travel protection for my trip worth €225.49.",0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,Members save even more: Receive up to 15% off select accommodation and 11% off rental cars when booking this flight,0,,,,,,,,,,,,,,,,,
+https://www.expedia.de/,Misdirection,Your trip is not covered by travel insurance.,0,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Fake Scarcity,2 seats left,0,,,,,,,,,,,,,,,,,
 https://www.qatarairways.com/,Misdirection,"You can collect 7,483 Avios
-Log in above or join Privilege Club in the next step to enjoy your Avios and many more exclusive benefits."
-https://www.qatarairways.com/,Misdirection,Enjoy an online-exclusive discount of up to 20% and relax at one of our luxurious lounges
-https://www.qatarairways.com/,Misdirection,complement your journey with a wide range of world-class services.
-https://www.qatarairways.com/,Misdirection,Travel with peace of mind with
-https://www.qatarairways.com/,Not Dark Pattern,Benefits and fees per adult passenger
-https://www.qatarairways.com/,Not Dark Pattern,Cancel at anytime without fees
-https://www.qatarairways.com/,Not Dark Pattern,Checked baggage: 35 kg
-https://www.qatarairways.com/,Not Dark Pattern,The information provided above will be processed according
-https://www.qatarairways.com/,Not Dark Pattern,Tell us where we should send your booking confirmation to.
-https://flight.easemytrip.co.uk/,Not Dark Pattern,Your ticket will be sent to this email address
-https://flight.easemytrip.co.uk/,Not Dark Pattern,2 Pcs per passenger Check-in Baggage included for your selected flight on the sector
-https://flight.easemytrip.co.uk/,Not Dark Pattern,NON-REFUNDABLE
-https://www.easemytrip.co.uk/hotels,Not Dark Pattern,Booking is non refundable
-https://www.easemytrip.co.uk/hotels,Not Dark Pattern,Based on 711 reviews
+Log in above or join Privilege Club in the next step to enjoy your Avios and many more exclusive benefits.",0,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Misdirection,Enjoy an online-exclusive discount of up to 20% and relax at one of our luxurious lounges,0,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Misdirection,complement your journey with a wide range of world-class services.,0,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Misdirection,Travel with peace of mind with,0,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Not Dark Pattern,Benefits and fees per adult passenger,1,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Not Dark Pattern,Cancel at anytime without fees,1,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Not Dark Pattern,Checked baggage: 35 kg,1,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Not Dark Pattern,The information provided above will be processed according,1,,,,,,,,,,,,,,,,,
+https://www.qatarairways.com/,Not Dark Pattern,Tell us where we should send your booking confirmation to.,1,,,,,,,,,,,,,,,,,
+https://flight.easemytrip.co.uk/,Not Dark Pattern,Your ticket will be sent to this email address,1,,,,,,,,,,,,,,,,,
+https://flight.easemytrip.co.uk/,Not Dark Pattern,2 Pcs per passenger Check-in Baggage included for your selected flight on the sector,1,,,,,,,,,,,,,,,,,
+https://flight.easemytrip.co.uk/,Not Dark Pattern,NON-REFUNDABLE,1,,,,,,,,,,,,,,,,,
+https://www.easemytrip.co.uk/hotels,Not Dark Pattern,Booking is non refundable,1,,,,,,,,,,,,,,,,,
+https://www.easemytrip.co.uk/hotels,Not Dark Pattern,Based on 711 reviews,1,,,,,,,,,,,,,,,,,

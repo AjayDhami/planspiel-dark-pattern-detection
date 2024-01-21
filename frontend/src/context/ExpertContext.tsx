@@ -3,7 +3,7 @@ import { PatternData, WebsiteData } from "../types"
 
 interface ExpertProviderProps {
     children: ReactNode,
-  }
+}
 
 
 interface ExpertContextProps {

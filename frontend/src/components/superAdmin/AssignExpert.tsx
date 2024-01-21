@@ -45,7 +45,6 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
       };
 
     const handleAssignToClick = async () => {
-        // setOpen(true);
         const resp = await getExpertsDetails();
         if(resp) {
           setExperts(resp)
