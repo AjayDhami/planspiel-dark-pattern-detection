@@ -50,7 +50,7 @@ const initialValues: UserCredentials = {
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Please enter a valid email")
+    .email("Please enter proper email format. ex: user@example.com")
     .required("This field is required"),
   password: Yup.string().required("This field is required"),
 });
@@ -128,23 +128,17 @@ const SignInPage = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        {touched.email && Boolean(errors.email) ? (
-                          <Typography
-                            variant="subtitle1"
-                            component="h4"
-                            color="error"
-                          >
-                            Email
-                          </Typography>
-                        ) : (
-                          <Typography
-                            variant="subtitle1"
-                            component="h4"
-                            color="#ffa500"
-                          >
-                            Email
-                          </Typography>
-                        )}
+                        <Typography
+                          variant="subtitle1"
+                          component="h4"
+                          color={
+                            touched.email && Boolean(errors.email)
+                              ? "error"
+                              : "#ffa500"
+                          }
+                        >
+                          Email
+                        </Typography>
                         <Field
                           as={StyledTextField}
                           name="email"
@@ -163,23 +157,17 @@ const SignInPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        {touched.password && Boolean(errors.password) ? (
-                          <Typography
-                            variant="subtitle1"
-                            component="h4"
-                            color="error"
-                          >
-                            Password
-                          </Typography>
-                        ) : (
-                          <Typography
-                            variant="subtitle1"
-                            component="h4"
-                            color="#ffa500"
-                          >
-                            Password
-                          </Typography>
-                        )}
+                        <Typography
+                          variant="subtitle1"
+                          component="h4"
+                          color={
+                            touched.password && Boolean(errors.password)
+                              ? "error"
+                              : "#ffa500"
+                          }
+                        >
+                          Password
+                        </Typography>
                         <Field
                           as={StyledTextField}
                           name="password"
