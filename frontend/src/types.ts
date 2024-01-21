@@ -226,6 +226,23 @@ export interface AdminAssignProps {
   websiteUrl: string;
 }
 
+export type AdminClientsDetails = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: AdminWebsites[];
+  isExpertAssigned: boolean;
+ };
+
+export type AdminWebsites = {
+    websiteId: string;
+    baseUrl: string;
+    websiteName: string;
+    description: string;
+ };
+
 export interface AccountMenuProps {
   onProfile: () => void;
   onLogout: () => void;

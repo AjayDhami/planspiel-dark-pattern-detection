@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import {AdminExperts, AdminAssignProps } from '../../types';
 import { Button, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, InputLabel, Link, MenuItem, Select, Switch} from '@mui/material';
-import { assignExperts, getExpertsDetails } from '../../services/superAdminServices';
+import { assignExperts, getClientsDetails, getExpertsDetails } from '../../services/superAdminServices';
+import { useAdminContext } from '../../context/AdminContext';
 
 const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteName, websiteUrl}) => {
 
-    // const [open, setOpen] = useState(false);
     const [expertIds, setExpertIds] = useState<string[]>([]);
     const [experts, setExperts] = useState([]);
     const [primaryExpertId, setPrimaryExpertId] = useState("");
+    const {setClientDetails} = useAdminContext();
     
     useEffect(() => {
         handleAssignToClick();
       }, []);
 
-    const handleClose = () => {
-        setExpertIds([]);
-        onClose();
-    };
-
     const handleSubmit = async() => {
         const updatedExpertIds = [...expertIds, primaryExpertId];
         const resp = await assignExperts(websiteId? websiteId: "", updatedExpertIds, primaryExpertId? primaryExpertId: "");
         if(resp === 200) {
-            onClose();
+          try {
+            const clientsData = await getClientsDetails();
+            setClientDetails(clientsData);            
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              console.log(`Error: ${error.message}`);
+            } else {
+              console.log("An unknown error occurred.");
+            }
+          }
+          onClose();
         }
       };
 
@@ -66,7 +72,6 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
             </Select>
           </FormControl>
         <DialogContent>
-          {/* Add content for the popup here */}
             <FormControl component="fieldset" variant="standard">
                 <FormGroup>
                   {experts.map((expert: AdminExperts) => (
@@ -83,8 +88,7 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
             </FormControl>
         </DialogContent>
         <DialogActions>
-            <Button variant="contained" onClick={handleSubmit}>Assign</Button>
-            <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" onClick={handleSubmit}>Assign</Button>
         </DialogActions>
     </>
   );

@@ -1,11 +1,11 @@
 import { Box, Grid } from "@mui/material";
 import ClientCard from "../../components/superAdmin/ClientCard";
-import {ClientsDetails, getClientsDetails} from "../../services/superAdminServices"
-import React, { useContext, useEffect, useState } from "react";
+import {getClientsDetails} from "../../services/superAdminServices"
+import React, { useContext, useEffect } from "react";
 import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
-import DarkPatternListModal from "../../components/superAdmin/DarkPatternListModal";
+import { useAdminContext } from "../../context/AdminContext";
 
 const SuperAdmin: React.FC = () => {
   const authContext = useContext(AuthContext);
@@ -19,12 +19,12 @@ const SuperAdmin: React.FC = () => {
       };
   }, [authContext]);
 
-  const [clientDataList, setClientDataList] = useState<ClientsDetails[]>([]);
+  const {clientDetails, setClientDetails} = useAdminContext();
 
   const getClientsDataList = async (): Promise<void> => {
     try {
       const clientsData = await getClientsDetails();
-      setClientDataList(clientsData);
+      setClientDetails(clientsData);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(`Error: ${error.message}`);
@@ -35,13 +35,14 @@ const SuperAdmin: React.FC = () => {
   };
 
   useEffect(() => {
-    getClientsDataList();
+    getClientsDataList();    
+    //  eslint-disable-next-line
   }, []);
 
     return (
       <Box>
         <Grid container spacing={3} style={{ margin: "1rem 0", width: "100%", justifyContent: 'center' }}>
-        {clientDataList.map((client) => (
+        {clientDetails.map((client) => (
           <>
           {
               client.websites.length > 0 && (
@@ -50,7 +51,10 @@ const SuperAdmin: React.FC = () => {
                 userId={client.userId}
                 firstName={client.firstName}
                 lastName={client.lastName}
-                websites={client.websites} email={""} role={""} />
+                websites={client.websites} 
+                email={client.email}
+                role={client.role} 
+                isExpertAssigned={client.isExpertAssigned}/>
                 </Grid>
               )
             }

@@ -1,7 +1,7 @@
 import { Box, Grid, Paper, Stack, styled, Typography } from "@mui/material";
 import React from "react";
 import WebsiteCard from "../superAdmin/WebsiteCard";
-import { AdminCardProps, AdminWebsiteDetails } from "../../types";
+import { AdminClientsDetails, AdminWebsites } from "../../types";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -11,7 +11,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display sequence of clients along with websites list of each client
-const ClientCard: React.FC<AdminCardProps> = ({userId, firstName, lastName, websites}) => {
+const ClientCard: React.FC<AdminClientsDetails> = ({firstName, lastName, websites}) => {
   return (
     <Box>
       <CustomPaper elevation={3} style={{ minHeight: "8rem" }} sx={{ backgroundColor: '#f0f0f0' }}>
@@ -30,7 +30,7 @@ const ClientCard: React.FC<AdminCardProps> = ({userId, firstName, lastName, webs
       </Stack>
       
       <Grid container spacing={2} style={{ margin: "1rem 0", width: "100%", justifyContent: 'left' }}>
-          {websites.map((website: AdminWebsiteDetails)   => (
+          {websites.map((website: AdminWebsites)   => (
             <Grid item xs={12} md={4} key={website.websiteId}>
               <WebsiteCard
                 websiteId={website.websiteId}

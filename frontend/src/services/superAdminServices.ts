@@ -3,22 +3,6 @@ import api from '../utils/AxiosHelper';
 import { BASE_ML_URL } from '../utils/constatnt';
 import { AdminPatterns } from '../types';
 
-export type ClientsDetails = {
-   userId: string;
-   firstName: string;
-   lastName: string;
-   email: string;
-   role: string;
-   websites: Websites[];
-  };
-
-export type Websites = {
-    websiteId: string;
-    baseUrl: string;
-    websiteName: string;
-    description?: string;
-  };
-
 export const getClientsDetails = async() => {
     try {
       const response = await api.get(`/website/Client/details`);
@@ -79,7 +63,6 @@ export const sendFilteredPatterns = async(websiteId:string, patternList: AdminPa
 export const checkPrimaryExpert = async(websiteId:string) => {
   try {
     const response = await api.get(`/website/${websiteId}`);
-    console.log(response.data);
     if(response.data.expertDetails.length === 0) {
       return true;
     } else { return false; } 

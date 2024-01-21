@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Stack, Typography, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { AdminWebsiteDetails } from "../../types";
+import { AdminWebsites } from "../../types";
 import { checkPrimaryExpert, runAutomation } from "../../services/superAdminServices";
 import DarkPatternListModal from "./DarkPatternListModal";
 
@@ -12,16 +12,12 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display website list for a particular client
-const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, websiteName}) => {
+const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName}) => {
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [showAutomationButton, setShowAutomationButton] = useState<boolean>(false);
-
-    useEffect(() => {
-      checkAssign();
-    }, []);
 
     const checkAssign = async () => {
       try {
@@ -33,6 +29,12 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
         console.error('Error--', error);
       }
     };
+
+
+    useEffect(() => {
+      checkAssign();
+      // eslint-disable-next-line
+    }, []);
 
     const handleRunAutomationClick = async () => {
       const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
