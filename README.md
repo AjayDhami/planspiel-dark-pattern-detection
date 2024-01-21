@@ -67,6 +67,8 @@ $ docker --version
 $ docker-compose --version
 ```
 
+**Note:** Before executing below docker commands make sure docker is running in your local machine.
+
 ### Instructions to start docker container
 1. Create `.env` file inside `frontend` directory and set following properties
    ```bash
@@ -103,10 +105,12 @@ $ docker-compose --version
 
 
 8. To check the data stored in the MongoDB, install [MongoDB Compass](https://www.mongodb.com/products/tools/compass). Enter `mongodb://localhost:27018/` as a connections string URL in MongoDB Compass to view the data stored in db.
-   
-   
 
-The application will be accessible at [http://localhost:3000](http://localhost:3000)
+
+9. Swagger UI can be accessed at [http://localhost:8088/api-docs](http://localhost:8088/api-docs).
+
+
+**The application will be accessible at [http://localhost:3000](http://localhost:3000)**
 
 ## Contributors
 
