@@ -426,7 +426,13 @@ export class WebsiteService {
   }
 
   async fetchKpiForClient(clientId: string) {
-    await this.checkUserExists(clientId);
+    const user = await this.checkUserExists(clientId);
+    if (user.role !== UserType.Client) {
+      throw new HttpException(
+        'Client is only allowed',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
     const websites = await this.websiteModel.find({ userId: clientId }).exec();
 
     const totalWebsites = websites.length;
@@ -452,6 +458,49 @@ export class WebsiteService {
       websitesInProgress,
       websitesCertified,
       websitesRejected,
+    };
+  }
+
+  async fetchKpiForExpert(expertId: string) {
+    const user = await this.checkUserExists(expertId);
+    if (user.role !== UserType.Expert) {
+      throw new HttpException(
+        'Expert is only allowed',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+
+    const websites = await this.websiteModel
+      .find({ expertIds: expertId })
+      .exec();
+    const totalWebsitesAssigned = websites.length;
+
+    const patterns = await this.patternModel
+      .find({ createdByExpertId: expertId })
+      .exec();
+    const totalPatternsCreated = patterns.length;
+
+    const verifiedWithPattern = patterns.filter((pattern) =>
+      pattern.expertVerifications.some(
+        (verification) =>
+          verification.expertVerificationPhase ==
+          ExpertVerificationPhase.VerifiedWithPattern,
+      ),
+    ).length;
+
+    const verifiedWithoutPattern = patterns.filter((pattern) =>
+      pattern.expertVerifications.some(
+        (verification) =>
+          verification.expertVerificationPhase ==
+          ExpertVerificationPhase.VerifiedWithoutPattern,
+      ),
+    ).length;
+
+    return {
+      totalWebsitesAssigned,
+      totalPatternsCreated,
+      verifiedWithPattern,
+      verifiedWithoutPattern,
     };
   }
 
