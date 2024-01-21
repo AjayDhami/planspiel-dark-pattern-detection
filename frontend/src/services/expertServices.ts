@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData, WebsiteData, publishObj} from "../types"
+import { ExpertKpi, KpiCardProps, PatternData, WebsiteData, publishObj} from "../types"
 
 
 const getUserDetails = async(id:String) => {
@@ -141,6 +141,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     `/website/${websiteId}/pattern`,
     body,
   );
+  console.log(response);
   return response.status
 }
 
@@ -156,6 +157,24 @@ const postVerification = async(websiteId : string, patternId : string, expertId 
     body,
   );
   return response.status
+}
+
+const getKpiDetails = async(expertId:string) => {
+  const response = await api.get(`/website/expertKpi/${expertId}`);
+  console.log(response.data);
+  // function getColorByText(text) {
+    
+  //   // You can implement your own logic to assign colors based on text
+  //   // For simplicity, let's use a placeholder function that always returns 'blue'
+  //   return 'blue';
+  // }
+  const newArray: ExpertKpi[] = Object.keys(response.data).map((key) => ({
+    title: key,
+    count: response.data[key],
+    color: "bg-[#F9C32F]",
+  }));
+  console.log(newArray);
+  return newArray
 }
 
 function stringToColor(string: string) {
@@ -189,4 +208,4 @@ const publishWebsite = async(websiteId:string, publishObj:publishObj) =>{
   }
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite};
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails};

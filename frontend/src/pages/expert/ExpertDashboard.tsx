@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react'
-import { getWebsites } from '../../services/expertServices'
+import { getWebsites, getKpiDetails } from '../../services/expertServices'
 import Navbar from '../../components/expert/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
-import { WebsiteData } from '../../types';
+import { ExpertKpi, WebsiteData } from '../../types';
 import { Tooltip } from '@mui/material';
+import KpiCard from '../../components/expert/KpiCard';
 
 const ExpertDashboard : React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -21,6 +22,7 @@ const ExpertDashboard : React.FC = () => {
         };
     }, [authContext]);
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
+    const [kpiData, setKpiData] = useState<ExpertKpi[]>([])
     const navigate = useNavigate();
 
     const id  = localStorage.getItem("userId")
@@ -31,6 +33,8 @@ const ExpertDashboard : React.FC = () => {
             if(id && authToken){
                 let websites : any = []
                 websites = await getWebsites(id);
+                let kpis:ExpertKpi[] = await getKpiDetails(id);
+                setKpiData(kpis);
                 setWebsiteData(websites) 
             }
         } catch (error) {
@@ -55,6 +59,11 @@ const ExpertDashboard : React.FC = () => {
   return (
     <>
         <Navbar/>
+        <div className='grid md:grid-cols-4 gap-4 mx-8 my-12 bg:white'>
+            {kpiData.map((kpi:ExpertKpi) => (
+                <KpiCard title={kpi.title} count={kpi.count} color={kpi.color}/>
+            ))}
+        </div>
         <div className='grid md:grid-cols-3 mx-8 my-12 bg:white'>
             {websiteData.map((website, index)=>(
                 <div key={website.websiteId} 

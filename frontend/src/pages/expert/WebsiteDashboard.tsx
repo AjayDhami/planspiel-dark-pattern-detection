@@ -77,7 +77,6 @@ const WebsiteDashboard = () => {
               data = await getPatternsData(websiteId);
               setPatterns(data);
               const patternPhases = data.map((item : PatternData)=>item.patternPhase);
-              console.log(patternPhases);
               !patternPhases.includes("InProgress") ? setIsPublishBtnDisabled(false) : setIsPublishBtnDisabled(true);
               const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
