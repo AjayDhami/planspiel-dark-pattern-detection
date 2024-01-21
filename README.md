@@ -73,6 +73,7 @@ $ docker-compose --version
 1. Create `.env` file inside `frontend` directory and set following properties
    ```bash
    REACT_APP_API_BASE_URL_CLIENT='http://localhost:8088'
+   REACT_APP_ML_MODEL_BASE_URL='http://localhost:5001'
    ```
 2. Create `.env.docker` inside `backend-api` directory and set following properties
    ```bash
