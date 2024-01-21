@@ -56,9 +56,9 @@ export class WebsiteController {
 
   @Get(':websiteId')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Client, UserType.Expert)
+  @Roles(UserType.Client, UserType.Expert, UserType.SuperAdmin)
   @ApiOperation({
-    summary: 'Fetch details of a website [For Client/Expert]',
+    summary: 'Fetch details of a website [For Client/Expert/SuperAdmin]',
     description: 'Retrieve details of a specific website based on its ID.',
   })
   async fetchParticularWebsiteDetails(@Param('websiteId') websiteId: string) {

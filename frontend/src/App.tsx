@@ -14,11 +14,13 @@ import CardFlip from "./pages/landing/CardFlip";
 import { ExpertProvider } from "./context/ExpertContext";
 import SuperAdmin from "./pages/superAdmin/SuperAdmin";
 import SuperAdminSignin from "./pages/superAdmin/SuperAdminSignin";
+import { AdminProvider } from "./context/AdminContext";
 
 function App() {
   return (
     <AuthProvider>
       <ExpertProvider>
+        <AdminProvider>
         <Routes>
           {/* <!-- Common routes --> */}
           <Route path="/" element={<LandingPage />} />
@@ -39,6 +41,7 @@ function App() {
           <Route path="/expert/website" element={<WebsiteDashboard />} />
           <Route path="/superAdmin" element={<SuperAdmin />} />
         </Routes>
+        </AdminProvider>
       </ExpertProvider>
     </AuthProvider>
   );

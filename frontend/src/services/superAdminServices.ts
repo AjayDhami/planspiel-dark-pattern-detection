@@ -1,22 +1,7 @@
 import axios from 'axios';
 import api from '../utils/AxiosHelper';
 import { BASE_ML_URL } from '../utils/constatnt';
-
-export type ClientsDetails = {
-   userId: string;
-   firstName: string;
-   lastName: string;
-   email: string;
-   role: string;
-   websites: Websites[];
-  };
-
-export type Websites = {
-    websiteId: string;
-    baseUrl: string;
-    websiteName: string;
-    description?: string;
-  };
+import { AdminPatterns } from '../types';
 
 export const getClientsDetails = async() => {
     try {
@@ -59,6 +44,28 @@ export const runAutomation = async(id: string, websiteUrl: string) => {
   try {    
     const response = await axios.post(`${BASE_ML_URL}/darkPattern/${id}`, body);
     return response.data;
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+}
+
+export const sendFilteredPatterns = async(websiteId:string, patternList: AdminPatterns[]) => {
+  try {
+    const response = await api.put(`/website/${websiteId}/automatedPatterns`, patternList);
+    return response.status
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+}
+
+export const checkPrimaryExpert = async(websiteId:string) => {
+  try {
+    const response = await api.get(`/website/${websiteId}`);
+    if(response.data.expertDetails.length === 0) {
+      return true;
+    } else { return false; } 
   } catch (error) {
     console.error('Error is --', error);
     throw error;

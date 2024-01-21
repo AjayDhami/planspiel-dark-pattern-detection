@@ -1,7 +1,7 @@
-import { Box, Button, Paper, Stack, Typography, styled, Dialog, DialogTitle, DialogContent, DialogActions, Link, FormControl, FormControlLabel, FormGroup, Switch, InputLabel, Select, MenuItem } from "@mui/material";
+import { Box, Button, Paper, Stack, Typography, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { AdminWebsiteDetails, AdminExperts } from "../../types";
-import { assignExperts, getExpertsDetails, runAutomation } from "../../services/superAdminServices";
+import { AdminWebsites } from "../../types";
+import { checkPrimaryExpert, runAutomation } from "../../services/superAdminServices";
 import DarkPatternListModal from "./DarkPatternListModal";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
@@ -12,70 +12,47 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display website list for a particular client
-const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, websiteName, description}) => {
+const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName}) => {
 
-    const [open, setOpen] = useState(false);
-    const [experts, setExperts] = useState([]);
-    const [expertIds, setExpertIds] = useState<string[]>([]);
-    const [primaryExpertId, setPrimaryExpertId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
+    const [websiteUrl, setWebsiteUrl] = useState("");
+    const [showAutomationButton, setShowAutomationButton] = useState<boolean>(false);
 
-    useEffect(() => {
-      console.log(primaryExpertId);
-    }, [primaryExpertId])
-
-    const handleAssignToClick = async () => {
-      // logic for the Assign to button 
-      setOpen(true);
-      const resp = await getExpertsDetails();
-      if(resp) {
-        setExperts(resp)
-        console.log(resp); 
-
+    const checkAssign = async () => {
+      try {
+        const response = await checkPrimaryExpert(websiteId? websiteId: "");
+        if (response) {
+          setShowAutomationButton(true);
+        }
+      } catch (error) {
+        console.error('Error--', error);
       }
     };
+
+
+    useEffect(() => {
+      checkAssign();
+      // eslint-disable-next-line
+    }, []);
 
     const handleRunAutomationClick = async () => {
       const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
       if(resp) {
         setIsModalOpen(true);
         setPatterns(resp);
+        setWebsiteUrl(baseUrl? baseUrl: "");
       }
     }
-
-    const handleClose = () => {
-        setExpertIds([]);
-        setOpen(false);
-    };
 
     const handleModalClose = () => {
         setIsModalOpen(false);
     };
 
-    const handleSubmit = async() => {
-        // Perform any actions you want on confirmation (e.g., submit form)
-        const updatedExpertIds = [...expertIds, primaryExpertId];
-        const resp = await assignExperts(websiteId? websiteId: "", updatedExpertIds, primaryExpertId? primaryExpertId: "");
-        if(resp === 200) {
-          setOpen(false);
-        }
-      };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const selectedUserId = event.target.name;
-
-      if (expertIds.includes(selectedUserId)) {
-        setExpertIds((prevIds) => prevIds.filter((id) => id !== selectedUserId));
-      } else {
-        setExpertIds((prevIds) => [...prevIds, selectedUserId]);
-      }
-    };
-
   return (
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
-        <DarkPatternListModal onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns}/>
+        <DarkPatternListModal websiteId={websiteId? websiteId:""} websiteName={websiteName? websiteName:""} onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
         <Box
           sx={{
             display: "block",
@@ -83,65 +60,31 @@ const WebsiteCard: React.FC<AdminWebsiteDetails> = ({websiteId, baseUrl, website
             alignItems: "center",
           }}
         >
-          <Typography variant="subtitle1" component="span">
+          <Typography variant="h6" component="span">
             {websiteName}
           </Typography>
+          <div></div>
           <Typography variant="body1" component="span">
             {baseUrl}
           </Typography>
-          <Box>
-          <Button variant="contained" color="success" onClick={handleAssignToClick}>
-            Assign To
-          </Button>
-          <Button variant="contained" color="success" onClick={handleRunAutomationClick}>
-            Run Automation
-          </Button>
+          
+          <Box sx={{
+            marginTop: "10px",
+          }}>
+          <div>
+            {showAutomationButton ? (
+              <Button variant="contained" color="primary" onClick={handleRunAutomationClick}>
+                Run Automation
+              </Button>
+            ) : (
+              <Button variant="outlined" color="success" disabled>
+                Assigned
+              </Button>
+            )}
+          </div>
           </Box>
         </Box>
       </Stack>
-
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>
-            Assigning {websiteName} 
-            <Link href={baseUrl}>{baseUrl}</Link>
-        </DialogTitle>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Primary expert</InputLabel>
-            <Select
-              id="primaryexpert"
-              value={primaryExpertId}
-              label="Select primary expert"
-              onChange={(e) => setPrimaryExpertId(e.target.value)}
-              >
-              {experts.map((expert: AdminExperts) => (
-                <MenuItem value={expert.userId}>{expert.firstName}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        <DialogContent>
-          {/* Add content for the popup here */}
-            <FormControl component="fieldset" variant="standard">
-                <FormGroup>
-                  {experts.map((expert: AdminExperts) => (
-                      expert.userId !== primaryExpertId ? 
-                      <FormControlLabel 
-                      control={
-                        <Switch onChange={handleChange} value={expert.userId} name={expert.userId}/>
-                      }
-                      label={expert.firstName}
-                      />
-                      : null
-                  ))}
-                </FormGroup>
-            </FormControl>
-        </DialogContent>
-        <DialogActions>
-            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-            <Button variant="outlined" onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-
     </CustomPaper>
   );
 }; 
