@@ -236,4 +236,15 @@ export class WebsiteController {
   async getKpiForClient(@Param('clientId') clientId: string) {
     return await this.websiteService.fetchKpiForClient(clientId);
   }
+
+  @Get('expertKpi/:expertId')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Fetch KPI for a expert [For Expert]',
+    description: 'Retrieve KPI of all websites  associated with a expert',
+  })
+  async getKpiForExpert(@Param('expertId') expertId: string) {
+    return await this.websiteService.fetchKpiForExpert(expertId);
+  }
 }
