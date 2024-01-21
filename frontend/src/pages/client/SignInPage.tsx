@@ -1,24 +1,27 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useContext } from "react";
-import { styled } from "@mui/system";
-import AuthContext from "../../context/AuthContext1";
-import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+  styled,
+} from "@mui/material";
+import { Field, Formik, Form } from "formik";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { UserCredentials } from "../../types";
+import AuthContext from "../../context/AuthContext1";
 
-const StyledTextField = styled(TextField)({
-  "& label": {
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  input: {
+    backgroundColor: "transparent",
     color: "white",
   },
+  label: { color: "white" },
   "& label.Mui-focused": {
     color: "white",
   },
@@ -37,8 +40,7 @@ const StyledTextField = styled(TextField)({
       borderColor: "white",
     },
   },
-});
-const defaultTheme = createTheme({});
+}));
 
 const initialValues: UserCredentials = {
   email: "",
@@ -47,10 +49,13 @@ const initialValues: UserCredentials = {
 };
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required("This field is required"),
+  email: Yup.string()
+    .email("Please enter a valid email")
+    .required("This field is required"),
   password: Yup.string().required("This field is required"),
 });
-export default function SignIn() {
+
+const SignInPage = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   if (!authContext) {
@@ -67,141 +72,171 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Grid
-        container
-        component="main"
-        sx={{
-          height: "100dvh",
-        }}
-      >
+    <Container
+      maxWidth={false}
+      sx={{
+        p: "0 !important",
+        height: "100vh",
+      }}
+    >
+      <Grid container height="100%">
         <Grid
           item
           xs={12}
-          sm={12}
           md={4}
           sx={{
-            backgroundImage: `linear-gradient(to right,rgb(0,15,45) 30%,rgb(0, 5, 14))`,
+            height: "100vh",
+            background: `linear-gradient(to right,rgb(0,15,45) 30%,rgb(0, 5, 14))`,
+            color: (theme) => theme.palette.common.white,
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <Box
+          <Stack
+            gap={4}
+            margin={4}
+            alignItems="center"
             sx={{
-              my: { xs: 2, md: 7 },
-              mx: { xs: 5, md: 6 },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "auto",
-              width: "80%",
+              my: 10,
+              width: {
+                xs: "auto",
+                sm: "60%",
+                md: "80%",
+              },
             }}
           >
-            <Link href="/" sx={{ m: 1 }}>
+            <Link to="/">
               <img
                 src="/assets/logo.png"
-                alt="..."
-                style={{
-                  width: "4rem",
-                  height: "4rem",
-                }}
+                alt="V-tenet"
+                width={64}
+                height={64}
               />
             </Link>
-            <Typography
-              component="h1"
-              variant="h5"
-              sx={{
-                color: "white",
-                padding: "2rem",
-              }}
-            >
-              Sign In To the Client portal
+
+            <Typography variant="h5" component="h1" textAlign="center">
+              Sign in to the Client Portal
             </Typography>
+
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
-              {({ values, errors, touched }) => (
+              {({ errors, touched }) => (
                 <Form noValidate>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12}>
-                      <h4 style={{ color: "#ffa500" }}>Email:</h4>
-                      <Field
-                        as={StyledTextField}
-                        label="Email Address"
-                        name="email"
-                        fullWidth
-                        required
-                        error={touched.email && Boolean(errors.email)}
-                        helperText={
-                          touched.email && Boolean(errors.email) && errors.email
-                        }
-                        margin="normal"
-                        sx={{
-                          input: {
-                            backgroundColor: "Transparent ",
-                            color: "white",
-                          },
-                          label: { color: "white" },
-                        }}
-                      />
+                    <Grid item xs={12}>
+                      <Box display="flex" flexDirection="column">
+                        {touched.email && Boolean(errors.email) ? (
+                          <Typography
+                            variant="subtitle1"
+                            component="h4"
+                            color="error"
+                          >
+                            Email
+                          </Typography>
+                        ) : (
+                          <Typography
+                            variant="subtitle1"
+                            component="h4"
+                            color="#ffa500"
+                          >
+                            Email
+                          </Typography>
+                        )}
+                        <Field
+                          as={StyledTextField}
+                          name="email"
+                          type="email"
+                          fullWidth
+                          required
+                          error={touched.email && Boolean(errors.email)}
+                          helperText={
+                            touched.email &&
+                            Boolean(errors.email) &&
+                            errors.email
+                          }
+                          sx={{ mb: 2 }}
+                        />
+                      </Box>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                      <h4 style={{ color: "#ffa500" }}>Password:</h4>
-                      <Field
-                        as={StyledTextField}
-                        label="Password"
-                        name="password"
-                        type="password"
-                        fullWidth
-                        required
-                        error={touched.password && Boolean(errors.password)}
-                        helperText={
-                          touched.password &&
-                          Boolean(errors.password) &&
-                          errors.password
-                        }
-                        margin="normal"
-                        sx={{
-                          input: {
-                            backgroundColor: "Transparent ",
-                            color: "white",
-                          },
-                          label: { color: "white" },
-                        }}
-                      />
+                    <Grid item xs={12}>
+                      <Box display="flex" flexDirection="column">
+                        {touched.password && Boolean(errors.password) ? (
+                          <Typography
+                            variant="subtitle1"
+                            component="h4"
+                            color="error"
+                          >
+                            Password
+                          </Typography>
+                        ) : (
+                          <Typography
+                            variant="subtitle1"
+                            component="h4"
+                            color="#ffa500"
+                          >
+                            Password
+                          </Typography>
+                        )}
+                        <Field
+                          as={StyledTextField}
+                          name="password"
+                          type="password"
+                          fullWidth
+                          required
+                          error={touched.password && Boolean(errors.password)}
+                          helperText={
+                            touched.password &&
+                            Boolean(errors.password) &&
+                            errors.password
+                          }
+                          sx={{ mb: 2 }}
+                        />
+                      </Box>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12}>
                       <Button type="submit" fullWidth variant="contained">
                         Sign In
                       </Button>
                     </Grid>
-                    <Grid item xs={12} sm={12} sx={{ mt: 1, textAlign: "end" }}>
-                      <Link href="/signup" variant="subtitle1">
-                        New User? Sign Up
+                    <Grid item xs={12} display="flex" justifyContent="flex-end">
+                      <Link to="/signup">
+                        <Typography
+                          variant="subtitle1"
+                          component="span"
+                          color="primary"
+                        >
+                          New User? Sign Up
+                        </Typography>
                       </Link>
                     </Grid>
                   </Grid>
                 </Form>
               )}
             </Formik>
-          </Box>
+          </Stack>
         </Grid>
         <Grid
           item
           xs={false}
-          sm={false}
           md={8}
-          sx={{
-            display: { xs: "none", sm: "none", md: "flex" },
-            backgroundImage: ` url(${process.env.PUBLIC_URL}/assets/signIn.svg)`,
-            width: "100%",
-            height: "auto",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+          sx={(theme) => ({
+            background: `url(${process.env.PUBLIC_URL}/assets/signIn.svg) no-repeat`,
             backgroundPosition: "center",
-          }}
+            backgroundSize: "cover",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            [theme.breakpoints.down("sm")]: {
+              display: "none",
+            },
+          })}
         ></Grid>
       </Grid>
-    </ThemeProvider>
+    </Container>
   );
-}
+};
+
+export default SignInPage;

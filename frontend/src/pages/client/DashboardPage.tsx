@@ -115,7 +115,7 @@ const DashboardPage = () => {
       </Grid>
 
       <Grid flex={1} container spacing={2}>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
           <Paper
             elevation={0}
             sx={{
@@ -135,7 +135,7 @@ const DashboardPage = () => {
               alignItems="center"
             >
               <Typography variant="h5" component="span" color="primary">
-                Your Websites
+                Recent Websites
               </Typography>
               {websiteDataList.length > 6 && (
                 <Button
@@ -149,19 +149,26 @@ const DashboardPage = () => {
               )}
             </Stack>
 
-            <Grid
-              container
-              spacing={3}
-              justifyContent="space-around"
-              alignItems="center"
-              padding={2}
-            >
-              {websiteDataList.slice(0, 6).map((website) => (
-                <Grid item xs={12} md={6} key={website.websiteId}>
-                  <WebsiteDashboardCard {...website} />
-                </Grid>
-              ))}
-            </Grid>
+            {websiteDataList.length === 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "2rem",
+                }}
+              >
+                <Typography variant="h5">No Websites added</Typography>
+              </div>
+            ) : (
+              <Grid container spacing={3} padding={2}>
+                {websiteDataList.slice(0, 6).map((website) => (
+                  <Grid item xs={12} md={6} key={website.websiteId}>
+                    <WebsiteDashboardCard {...website} />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>

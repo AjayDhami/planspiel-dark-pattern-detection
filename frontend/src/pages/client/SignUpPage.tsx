@@ -86,7 +86,13 @@ export default function SignUp() {
   return (
     <>
       <ThemeProvider theme={defaultTheme}>
-        <Grid container component="main" sx={{ height: "auto" }}>
+        <Grid
+          container
+          component="main"
+          sx={{
+            height: "100dvh",
+          }}
+        >
           <Grid
             item
             xs={false}
