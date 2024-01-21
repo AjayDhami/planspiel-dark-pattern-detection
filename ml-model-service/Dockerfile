@@ -17,4 +17,4 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 
 # Run the ml model service
-CMD ["gunicorn", "main:app", "-b", "0.0.0.0:5001"]
+CMD ["gunicorn", "main:app", "-b", "0.0.0.0:5001", "-w", "4", "--timeout", "120"]
