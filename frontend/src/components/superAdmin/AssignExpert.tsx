@@ -4,7 +4,7 @@ import { Button, DialogActions, DialogContent, DialogTitle, FormControl, FormCon
 import { assignExperts, getClientsDetails, getExpertsDetails } from '../../services/superAdminServices';
 import { useAdminContext } from '../../context/AdminContext';
 
-const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteName, websiteUrl}) => {
+const AssignExpert: React.FC<AdminAssignProps> = ({handleExpertAssigned, websiteId, websiteName, websiteUrl}) => {
 
     const [expertIds, setExpertIds] = useState<string[]>([]);
     const [experts, setExperts] = useState([]);
@@ -29,8 +29,9 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
               console.log("An unknown error occurred.");
             }
           }
-          onClose();
-          window.location.reload();
+          handleExpertAssigned();
+          // onClose();
+          // window.location.reload();
         }
       };
 

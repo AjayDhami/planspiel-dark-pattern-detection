@@ -228,7 +228,7 @@ export interface AdminDarkPatternListProp {
 } 
 
 export interface AdminAssignProps {
-  onClose: () => void;
+  handleExpertAssigned: () => void
   websiteId: string;
   websiteName: string;
   websiteUrl: string;

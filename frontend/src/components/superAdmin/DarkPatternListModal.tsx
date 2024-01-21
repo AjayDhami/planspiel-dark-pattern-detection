@@ -5,7 +5,7 @@ import { sendFilteredPatterns } from '../../services/superAdminServices';
 import AssignExpert from './AssignExpert';
 
 const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, websiteName, onClose, isOpen, patterns, websiteUrl}) => {
-
+  
   const [darkPatternList, setDarkPatternList] = useState<AdminPatterns[]>([]);
   const [assignExpert, setAssignExpert] = useState(true);
   const expertId = localStorage.getItem("userId");
@@ -38,13 +38,19 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
     });
   };
 
+  const handleExpertSubmitted = () =>{
+    console.log(patterns);
+    setAssignExpert(false);
+  }
+
   const handleSubmit = async() => {
     console.log(darkPatternList);  
     try {
       const resp = await sendFilteredPatterns(websiteId, darkPatternList);
       if(resp === 200) {
         // onClose();
-        setAssignExpert(false);
+        onClose();
+        window.location.reload();
       };
     } catch (error) {
       console.error('Error is --', error);
@@ -63,7 +69,9 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
         </DialogTitle>
         <DialogContent>
           {assignExpert ? (
-              <FormControl component="fieldset" variant="standard">
+            <AssignExpert handleExpertAssigned={handleExpertSubmitted} websiteId={websiteId} websiteName={websiteName} websiteUrl={websiteUrl} />
+          ) : (
+            <FormControl component="fieldset" variant="standard">
                 <FormGroup>
                   {patterns.map((pattern) => (
                     <>
@@ -86,8 +94,6 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
                 </Button>
                 </FormGroup>
               </FormControl>
-          ) : (
-            <AssignExpert onClose={onClose} websiteId={websiteId} websiteName={websiteName} websiteUrl={websiteUrl} />
              )}
          </DialogContent>   
         
