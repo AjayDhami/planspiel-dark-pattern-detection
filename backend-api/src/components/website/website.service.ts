@@ -533,32 +533,23 @@ export class WebsiteService {
       .exec();
     const totalWebsitesAssigned = websites.length;
 
+    const totalInProgressWebsites = websites.filter(
+      (website) => website.phase === WebsitePhaseType.InProgress,
+    ).length;
+    const totalPublishedWebsites = websites.filter(
+      (website) => website.phase === WebsitePhaseType.Published,
+    ).length;
+
     const patterns = await this.patternModel
       .find({ createdByExpertId: expertId })
       .exec();
     const totalPatternsCreated = patterns.length;
 
-    const verifiedWithPattern = patterns.filter((pattern) =>
-      pattern.expertVerifications.some(
-        (verification) =>
-          verification.expertVerificationPhase ==
-          ExpertVerificationPhase.VerifiedWithPattern,
-      ),
-    ).length;
-
-    const verifiedWithoutPattern = patterns.filter((pattern) =>
-      pattern.expertVerifications.some(
-        (verification) =>
-          verification.expertVerificationPhase ==
-          ExpertVerificationPhase.VerifiedWithoutPattern,
-      ),
-    ).length;
-
     return {
       totalWebsitesAssigned,
+      totalInProgressWebsites,
+      totalPublishedWebsites,
       totalPatternsCreated,
-      verifiedWithPattern,
-      verifiedWithoutPattern,
     };
   }
 

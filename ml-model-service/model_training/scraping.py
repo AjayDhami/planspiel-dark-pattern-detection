@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
 import pandas as pd
@@ -11,9 +12,23 @@ import os
 
 def web_scrap(url, website_id):
     all_text = []
-    
+
+    # Initialize Chrome in headless mode
+    chrome_options = Options()
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
     # Initialize WebDriver
-    driver = webdriver.Chrome()
+    if os.environ.get('DOCKER_ENV') == 'true':
+        # Running inside Docker, use Selenium Grid
+        print('using selenium docker')
+        driver = webdriver.Remote(command_executor='http://selenium-chrome:4444/wd/hub', options=chrome_options)
+    else:
+        # Running outside Docker, use local Chrome driver
+        print('using local chrome driver')
+        driver = webdriver.Chrome(options=chrome_options)
+
     driver.get(url)
 
     # Use explicit wait for elements to be present in the DOM
@@ -70,7 +85,7 @@ def web_scrap(url, website_id):
         for nested_tag in span_tag:
             text = nested_tag.text
             all_text.append(text)
-    
+
     h1_tags = soup.find_all('h1')
     for h1_tag in h1_tags:
         for nested_tag in h1_tag:
@@ -96,6 +111,7 @@ def web_scrap(url, website_id):
         text = [string for string in string_list if sum(c.isalpha() for c in string) >= 20]
         text = [string for string in text if sum(c.isalpha() for c in string) <= 500]
         return text
+
     filtered_list = filter_by_count(filtered_list)
 
     # Remove unwanted text from the list elements
@@ -103,7 +119,6 @@ def web_scrap(url, website_id):
         pattern = re.compile('[a-zA-Z]')
         filtered_strings = [s for s in strings if pattern.search(s)]
         return filtered_strings
-    
 
     def remove_numbers(input_str):
         return re.sub(r'\d', '', input_str)
