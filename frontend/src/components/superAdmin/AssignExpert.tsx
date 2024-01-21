@@ -30,6 +30,7 @@ const AssignExpert: React.FC<AdminAssignProps> = ({onClose, websiteId, websiteNa
             }
           }
           onClose();
+          window.location.reload();
         }
       };
 
