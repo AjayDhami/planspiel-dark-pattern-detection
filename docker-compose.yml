@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   mongo:
+    container_name: mongo
     image: mongo:latest
     ports:
       - '27018:27017'
@@ -11,8 +12,10 @@ services:
       - vtenet-network
 
   backend-api:
+    container_name: backend-server
     build:
       context: ./backend-api
+    image: backend-server:latest
     ports:
       - '8088:8088'
     environment:
@@ -23,16 +26,20 @@ services:
       - vtenet-network
 
   ml-model-service:
+    container_name: ml-model
     build:
       context: ./ml-model-service
+    image: ml-model:latest
     ports:
       - '5001:5001'
     networks:
       - vtenet-network
 
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
+    image: frontend:latest
     ports:
       - '3000:3000'
     depends_on:
