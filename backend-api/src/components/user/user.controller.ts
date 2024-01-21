@@ -22,7 +22,7 @@ export class UserController {
 
   @Post('signup')
   @ApiOperation({
-    summary: 'User Sign Up [For Client/Expert/SuperAdmin]',
+    summary: 'User Sign Up [For Client]',
     description: 'Register a new user.',
   })
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
