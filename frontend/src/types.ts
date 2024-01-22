@@ -138,6 +138,12 @@ export interface WebsiteData {
   hoverText : string;
 }
 
+export interface ExpertKpi {
+  title : string;
+  count : number;
+  color : string;
+}
+
 export interface PatternCardProps {
   loggedInExpert: string;
   openModal: () => void;

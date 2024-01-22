@@ -10,7 +10,7 @@ import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
-import { Avatar} from '@mui/material';
+import { Avatar, Tooltip} from '@mui/material';
 import LoadingPatternCard from '../../components/expert/LoadingPatternCard';
 import LoadingCards from '../../components/expert/LoadingCards';
 
@@ -77,7 +77,6 @@ const WebsiteDashboard = () => {
               data = await getPatternsData(websiteId);
               setPatterns(data);
               const patternPhases = data.map((item : PatternData)=>item.patternPhase);
-              console.log(patternPhases);
               !patternPhases.includes("InProgress") ? setIsPublishBtnDisabled(false) : setIsPublishBtnDisabled(true);
               const uniquePatternTypes = data
                 .map((item : PatternData) => item.patternType)
@@ -199,7 +198,7 @@ const WebsiteDashboard = () => {
               <h2 className='text-3xl font-bold text-blue-500'>{websiteName}</h2>
               {websiteData.primaryExpertId === experId && websiteData.phase==="InProgress" ? 
                 (!isPublishBtnDisabled ? <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} onClick={handlePublish}>Publish</button> : <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} >Publish</button> )  
-              : <p>{websiteData.phaseText}</p>}
+              : <Tooltip title={websiteData.phaseText} arrow><p className='p-2 border-2 border-green-300 rounded-md text-green-500 font-bold'>Published</p></Tooltip>}
             </div>
             <div className='text-lg px-2'>{websiteData.baseUrl}</div>
             <div className='mt-3'>
