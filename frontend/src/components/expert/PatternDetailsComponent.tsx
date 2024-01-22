@@ -9,7 +9,6 @@ import {
   CommentPost,
 } from "../../services/expertServices";
 import { useExpertContext } from "../../context/ExpertContext";
-import { LiaEdit } from "react-icons/lia";
 import PatternUpdateForm from "./PatternUpdateForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -126,12 +125,12 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                     <h2 className="italic font-serif text-gray-500 mr-2">
                       Added By - you
                     </h2>
-                    <div>
+                    {/* <div>
                       <LiaEdit
                         className="hover:bg-blue-200 rounded-lg p-2 text-4xl"
                         onClick={() => setEditing(true)}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 ) : (
                   <div className="flex items-center text-md ">
@@ -176,33 +175,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
               ) : null
             )}
           </div>
-          {/* <h2 className="px-4 py-2 text-xl text-blue-500 font-bold">
-            Verification
-          </h2> */}
           <div className="grid grid-cols-2 mx-4 mt-3">
-            {/* {patternData.expertVerifications.map((verify) =>
-              verify.expertId === expertId &&
-              verify.expertVerificationPhase === "NotVerified" ? (
-                <div className="flex justify-center col-span-1 rounded-lg">
-                  <button
-                    className="border-2 bg-white hover:bg-green-300 p-2 mr-5 rounded-xl bg-green-100 border-green-300"
-                    onClick={() => verifyOpen(true)}
-                  >
-                    <div className="flex items-center"><VerifiedIcon className="mr-2"/><p>Is a Pattern</p></div>
-                  </button>
-                  <button
-                    className="border-2 bg-white hover:bg-red-300 p-2 rounded-xl bg-red-100 border-red-300"
-                    onClick={() => verifyOpen(false)}
-                  >
-                    <div className="flex items-center"><ErrorOutlineIcon className="mr-2"/><p>Not a Pattern</p></div>
-                  </button>
-                </div>
-              ) : verify.expertId === expertId ? (
-                <div className="px-4 py-3 italic font-serif bg-gray-100 flex justify-center col-span-1 rounded-lg border-b-2">
-                  <h2>Already Verified : {verify.expertVerificationPhase}</h2>
-                </div>
-              ) : null
-            )} */}
             <div className="col-span-1 bg-gray-100 rounded-lg border-b-2 p-3">
               {patternData.expertVerifications.map((verify) =>
                   <div className="text-md flex justify-center">
