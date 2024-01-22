@@ -95,19 +95,6 @@ export class UserService {
     return await this.userModel.findById(userId).exec();
   }
 
-  async updateUserWithWebsiteId(
-    userId: string,
-    websiteId: string,
-  ): Promise<User | null> {
-    return this.userModel
-      .findByIdAndUpdate(
-        userId,
-        { $push: { websiteIds: websiteId.toString() } },
-        { new: true },
-      )
-      .exec();
-  }
-
   private async getUsersByRole(role: string) {
     return await this.userModel.find({ role: role }).exec();
   }
@@ -119,6 +106,7 @@ export class UserService {
       lastName: user.lastName,
       email: user.email,
       role: user.role,
+      createdAt: user.createdAt,
     };
   }
 }
