@@ -92,20 +92,6 @@ const WebsiteDetailsModal = ({
         <Stack direction="column" gap={2}>
           <Grid container>
             <Grid item xs={12} sm={3}>
-              <Typography variant="subtitle1">Website ID</Typography>
-            </Grid>
-            <Grid item xs={12} sm={9}>
-              <Typography variant="body1">
-                {website === null ? (
-                  <Skeleton animation="wave" />
-                ) : (
-                  website.websiteId
-                )}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={12} sm={3}>
               <Typography variant="subtitle1">Website URL</Typography>
             </Grid>
             <Grid item xs={12} sm={9}>
@@ -145,7 +131,7 @@ const WebsiteDetailsModal = ({
                   ))}
                 </Stack>
               ) : (
-                <Typography variant="body1" component="span">
+                <Typography variant="body1" component="span" color="gray">
                   No additional URLs
                 </Typography>
               )}
@@ -156,15 +142,17 @@ const WebsiteDetailsModal = ({
               <Typography variant="subtitle1">Description</Typography>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <Typography variant="body1">
-                {website === null ? (
-                  <Skeleton animation="wave" />
-                ) : website.description ? (
-                  website.description
-                ) : (
-                  "No Description Provided"
-                )}
-              </Typography>
+              {website === null ? (
+                <Skeleton animation="wave" />
+              ) : website.description ? (
+                <Typography variant="body1" component="span">
+                  {website.description}
+                </Typography>
+              ) : (
+                <Typography variant="body1" component="span" color="gray">
+                  No Description
+                </Typography>
+              )}
             </Grid>
           </Grid>
           <Grid container>
@@ -175,7 +163,11 @@ const WebsiteDetailsModal = ({
               {website === null ? (
                 <Skeleton animation="wave" />
               ) : (
-                <PhaseBadge phase={website.phase} />
+                <PhaseBadge
+                  phase={website.phase}
+                  isCompleted={website.isCompleted}
+                  isDarkPatternFree={website.isDarkPatternFree}
+                />
               )}
             </Grid>
           </Grid>

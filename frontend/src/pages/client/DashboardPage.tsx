@@ -99,7 +99,7 @@ const DashboardPage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <KpiCard
             title={kpiData.websitesCertified}
-            subtitle="Websites Certified"
+            subtitle="Websites Published"
             color="success"
             icon={<VerifiedIcon />}
           />
@@ -120,8 +120,7 @@ const DashboardPage = () => {
             elevation={0}
             sx={{
               padding: (theme) => ({
-                xs: theme.spacing(0),
-                md: theme.spacing(2),
+                xs: theme.spacing(2),
               }),
               color: (theme) => theme.palette.text.secondary,
               background: (theme) => theme.palette.background.paper,
