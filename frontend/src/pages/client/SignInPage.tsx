@@ -143,6 +143,7 @@ const SignInPage = () => {
                           as={StyledTextField}
                           name="email"
                           type="email"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.email && Boolean(errors.email)}
@@ -172,6 +173,7 @@ const SignInPage = () => {
                           as={StyledTextField}
                           name="password"
                           type="password"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.password && Boolean(errors.password)}

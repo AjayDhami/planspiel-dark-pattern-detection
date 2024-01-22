@@ -19,7 +19,8 @@ p.MuiFormHelperText-root.Mui-error {
   margin: 3px 0 0 !important;
 }
 
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+.form-input
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   -webkit-text-fill-color: white;
   transition: background-color 5000s ease-in-out 0s;
 }

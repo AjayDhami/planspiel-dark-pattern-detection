@@ -165,6 +165,7 @@ export default function SignUp() {
                         <Field
                           as={StyledTextField}
                           name="firstName"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.firstName && Boolean(errors.firstName)}
@@ -193,6 +194,7 @@ export default function SignUp() {
                         <Field
                           as={StyledTextField}
                           name="lastName"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.lastName && Boolean(errors.lastName)}
@@ -222,6 +224,7 @@ export default function SignUp() {
                           as={StyledTextField}
                           name="email"
                           type="email"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.email && Boolean(errors.email)}
@@ -251,6 +254,7 @@ export default function SignUp() {
                           as={StyledTextField}
                           name="password"
                           type="password"
+                          className="form-input"
                           fullWidth
                           required
                           error={touched.password && Boolean(errors.password)}
