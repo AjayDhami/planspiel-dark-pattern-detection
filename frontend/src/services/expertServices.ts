@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { ExpertKpi, KpiCardProps, PatternData, WebsiteData, publishObj} from "../types"
+import { ExpertKpi, PatternData, WebsiteData, publishObj} from "../types"
 
 
 const getUserDetails = async(id:String) => {
