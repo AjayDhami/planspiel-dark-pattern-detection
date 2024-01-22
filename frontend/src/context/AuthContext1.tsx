@@ -108,7 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const fetchedUser = await getUserDetails();
       setUser(fetchedUser);
     } catch (error) {
-      console.log("error >>>> ", error);
+      console.error("error >>>> ", error);
     }
   };
 

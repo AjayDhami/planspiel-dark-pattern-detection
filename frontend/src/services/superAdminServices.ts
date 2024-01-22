@@ -43,7 +43,6 @@ export const runAutomation = async(id: string, websiteUrl: string) => {
   };
   try {    
     const response = await axios.post(`${BASE_ML_URL}/darkPattern/${id}`, body);
-    console.log(response.data);
     return response.data; 
   } catch (error) {
     console.error('Error is --', error);

@@ -39,12 +39,10 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
   };
 
   const handleExpertSubmitted = () =>{
-    console.log(patterns);
     setAssignExpert(false);
   }
 
-  const handleSubmit = async() => {
-    console.log(darkPatternList);  
+  const handleSubmit = async() => { 
     try {
       const resp = await sendFilteredPatterns(websiteId, darkPatternList);
       if(resp === 200) {

@@ -166,8 +166,6 @@ const WebsiteDashboard = () => {
     }
 
     const handlePublish = async() => {
-      console.log("btn clicked");
-      
       const contsinsDarkPattern = patterns.some((pattern:PatternData)=>
         pattern.isPatternExists
       )
@@ -178,10 +176,8 @@ const WebsiteDashboard = () => {
       }
       try {
         const resp = await publishWebsite(websiteId?websiteId:"", publishObj )
-        console.log(resp);
-        
       } catch (error) {
-        
+        console.error(error)
       }
     }
 

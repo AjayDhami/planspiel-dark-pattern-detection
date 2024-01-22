@@ -28,9 +28,9 @@ const SuperAdmin: React.FC = () => {
       setClientDetails(clientsData);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.log(`Error: ${error.message}`);
+        console.error(`Error: ${error.message}`);
       } else {
-        console.log("An unknown error occurred.");
+        console.error("An unknown error occurred.");
       }
     }
   };

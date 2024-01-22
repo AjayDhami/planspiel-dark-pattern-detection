@@ -141,7 +141,6 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     `/website/${websiteId}/pattern`,
     body,
   );
-  console.log(response);
   return response.status
 }
 
@@ -161,7 +160,6 @@ const postVerification = async(websiteId : string, patternId : string, expertId 
 
 const getKpiDetails = async(expertId:string) => {
   const response = await api.get(`/website/expertKpi/${expertId}`);
-  console.log(response.data);
   // function getColorByText(text) {
     
   //   // You can implement your own logic to assign colors based on text
@@ -173,7 +171,6 @@ const getKpiDetails = async(expertId:string) => {
     count: response.data[key],
     color: "bg-[#F9C32F]",
   }));
-  console.log(newArray);
   return newArray
 }
 

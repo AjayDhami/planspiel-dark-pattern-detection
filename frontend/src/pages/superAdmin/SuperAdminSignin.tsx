@@ -36,7 +36,7 @@ const SuperAdminSignin = () => {
                 navigate('/superAdmin');
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
