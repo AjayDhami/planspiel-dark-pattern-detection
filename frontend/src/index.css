@@ -15,10 +15,6 @@ body {
   gap: 1rem;
 }
 
-p.MuiFormHelperText-root.Mui-error {
-  margin: 3px 0 0 !important;
-}
-
 .form-input
   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   -webkit-text-fill-color: white;

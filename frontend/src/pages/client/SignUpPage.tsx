@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  FormLabel,
   Grid,
   Stack,
   TextField,
@@ -151,17 +152,16 @@ export default function SignUp() {
                   <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.firstName && Boolean(errors.firstName)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.firstName && Boolean(errors.firstName)}
                         >
                           First Name
-                        </Typography>
+                        </FormLabel>
                         <Field
                           as={StyledTextField}
                           name="firstName"
@@ -180,17 +180,16 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.lastName && Boolean(errors.lastName)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.lastName && Boolean(errors.lastName)}
                         >
                           Last Name
-                        </Typography>
+                        </FormLabel>
                         <Field
                           as={StyledTextField}
                           name="lastName"
@@ -209,17 +208,16 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.email && Boolean(errors.email)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.email && Boolean(errors.email)}
                         >
                           Email
-                        </Typography>
+                        </FormLabel>
                         <Field
                           as={StyledTextField}
                           name="email"
@@ -239,17 +237,16 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.password && Boolean(errors.password)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.password && Boolean(errors.password)}
                         >
                           Password
-                        </Typography>
+                        </FormLabel>
                         <Field
                           as={StyledTextField}
                           name="password"

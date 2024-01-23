@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  FormLabel,
   Grid,
   Stack,
   TextField,
@@ -128,17 +129,17 @@ const SignInPage = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.email && Boolean(errors.email)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.email && Boolean(errors.email)}
                         >
                           Email
-                        </Typography>
+                        </FormLabel>
+
                         <Field
                           as={StyledTextField}
                           name="email"
@@ -158,17 +159,16 @@ const SignInPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <Box display="flex" flexDirection="column">
-                        <Typography
-                          variant="subtitle1"
-                          component="h4"
-                          color={
-                            touched.password && Boolean(errors.password)
-                              ? "error"
-                              : "#ffa500"
-                          }
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={touched.password && Boolean(errors.password)}
                         >
                           Password
-                        </Typography>
+                        </FormLabel>
                         <Field
                           as={StyledTextField}
                           name="password"
