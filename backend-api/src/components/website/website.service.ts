@@ -33,23 +33,11 @@ export class WebsiteService {
   ) {}
 
   async persistWebsiteDetails(websiteCreateDto: WebsiteCreateDto) {
-    const existingUser = await this.checkUserExists(websiteCreateDto.userId);
+    await this.checkUserExists(websiteCreateDto.userId);
 
     try {
       const newWebsite = new this.websiteModel(websiteCreateDto);
       await newWebsite.save();
-
-      const updatedUser = await this.userService.updateUserWithWebsiteId(
-        existingUser._id,
-        newWebsite._id,
-      );
-
-      if (!updatedUser) {
-        throw new HttpException(
-          'Failed to update user with website ID',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
 
       return {
         websiteId: newWebsite._id,
@@ -98,18 +86,24 @@ export class WebsiteService {
     const user = await this.checkUserExists(userId);
     let websites: Website[];
     if (user.role === UserType.Client) {
-      websites = await this.websiteModel.find({ userId }).exec();
+      websites = await this.websiteModel
+        .find({ userId })
+        .sort({ createdAt: -1 })
+        .exec();
     } else if (user.role === UserType.Expert) {
       websites = await this.websiteModel
         .find({
           expertIds: userId,
         })
+        .sort({ createdAt: -1 })
         .exec();
     }
-    const websiteDetailsPromises = websites.map(async (website: Website) => {
-      return await this.convertToWebsiteResponseDto(website);
-    });
-    return Promise.all(websiteDetailsPromises);
+
+    return await Promise.all(
+      websites.map(async (website: Website) => {
+        return await this.convertToWebsiteResponseDto(website);
+      }),
+    );
   }
 
   async getWebsitesAssociatedWithClients(userType: string) {
@@ -603,6 +597,7 @@ export class WebsiteService {
       description: website.description,
       isCompleted: website.isCompleted,
       phase: website.phase,
+      createdAt: website.createdAt,
       isDarkPatternFree: website.isDarkPatternFree,
       expertFeedback: website.expertFeedback,
       expertDetails: expertDetails,
