@@ -10,9 +10,7 @@ import re
 import os
 
 
-def web_scrap(url, website_id):
-    all_text = []
-
+def get_driver(url):
     # Initialize Chrome in headless mode
     chrome_options = Options()
     chrome_options.add_argument("--no-sandbox")
@@ -25,11 +23,17 @@ def web_scrap(url, website_id):
         print('using selenium docker')
         driver = webdriver.Remote(command_executor='http://selenium-chrome:4444/wd/hub', options=chrome_options)
     else:
-        # Running outside Docker, use local Chrome driver
-        print('using local chrome driver')
+        # Running using chrome driver
+        print('using chrome driver')
         driver = webdriver.Chrome(options=chrome_options)
-
     driver.get(url)
+    return driver
+
+
+def web_scrap(url, website_id):
+    all_text = []
+
+    driver = get_driver(url)
 
     # Use explicit wait for elements to be present in the DOM
     wait = WebDriverWait(driver, 25)
