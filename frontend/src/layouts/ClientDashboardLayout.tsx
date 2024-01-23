@@ -27,6 +27,8 @@ const ClientDashboardLayout = () => {
       <Container
         maxWidth={false}
         sx={{
+          display: "flex",
+          flexDirection: "column",
           position: "absolute",
           height: {
             xs: "auto",

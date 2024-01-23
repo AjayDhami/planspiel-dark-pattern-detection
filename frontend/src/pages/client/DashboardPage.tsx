@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import {
   ErrorOutline as ErrorOutlineIcon,
+  Folder as FolderIcon,
   HourglassTop as HourglassTopIcon,
   Menu as MenuIcon,
   Verified as VerifiedIcon,
@@ -119,9 +120,9 @@ const DashboardPage = () => {
           <Paper
             elevation={0}
             sx={{
-              padding: (theme) => ({
-                xs: theme.spacing(2),
-              }),
+              display: "flex",
+              flexDirection: "column",
+              padding: (theme) => theme.spacing(2),
               color: (theme) => theme.palette.text.secondary,
               background: (theme) => theme.palette.background.paper,
               borderRadius: 2,
@@ -149,16 +150,38 @@ const DashboardPage = () => {
             </Stack>
 
             {websiteDataList.length === 0 ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: "2rem",
-                }}
+              <Stack
+                spacing={2}
+                color="gray"
+                flex={1}
+                justifyContent="center"
+                alignItems="center"
+                sx={{ mt: 2 }}
               >
-                <Typography variant="h5">No Websites added</Typography>
-              </div>
+                <FolderIcon
+                  sx={{
+                    width: {
+                      xs: 80,
+                      md: 100,
+                    },
+                    height: {
+                      xs: 80,
+                      md: 100,
+                    },
+                  }}
+                />
+                <Typography variant="h6" textAlign="center">
+                  No websites certified yet. Click on button below to certify
+                  your first website
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setOnboardingForm(true)}
+                >
+                  Certify your website
+                </Button>
+              </Stack>
             ) : (
               <Grid container spacing={3} padding={2}>
                 {websiteDataList.slice(0, 6).map((website) => (
@@ -170,7 +193,7 @@ const DashboardPage = () => {
             )}
           </Paper>
         </Grid>
-        <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>
+        <Grid item xs={12} md={5} order={isMobile ? 1 : 2} flex={1}>
           <Paper
             elevation={0}
             sx={{

@@ -34,7 +34,6 @@ export interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-// TODO there is no expertFeedback, expertIds and primaryExpertId (do we need in frontend?)
 export type Website = {
   websiteId: string;
   baseUrl: string;
@@ -44,8 +43,9 @@ export type Website = {
   description?: string;
   isCompleted: boolean;
   phase: string;
-  expertDetails?: any[]; // Find out what this will give you
-  isDarkPatternFree: boolean; // this is not setting to fals by default (we need it)
+  expertDetails?: any[];
+  isDarkPatternFree: boolean;
+  expertFeedback: string;
 };
 
 export interface DashboardKPI {
