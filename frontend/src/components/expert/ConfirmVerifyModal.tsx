@@ -32,7 +32,7 @@ const ConfirmVerifyModal: React.FC<VerifyPatternProps> = ({isOpen, onClose, patt
     if(!isOpen) return null
   return (
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
-        <div className='bg-white px-4 py-2 rounded-lg relative z-40 w-80 h-40'>
+        <div className='bg-white px-4 py-2 rounded-lg relative z-[50] w-80 h-40'>
             <div className='flex justify-center pt-2'>
                 <div className='font-bold text-blue-500'>Are you sure you want to complete verification ?</div>
             </div>

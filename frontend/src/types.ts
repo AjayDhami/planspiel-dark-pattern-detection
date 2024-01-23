@@ -112,11 +112,6 @@ export interface PatternData {
   isPatternExists: boolean;
 }
 
-export interface publishObj {
-  expertId: string,
-  isCertified: boolean,
-  expertFeedback : string
-}
 export interface expertData {
   id: string;
   name: string;
@@ -153,6 +148,14 @@ export interface PatternCardProps {
 export interface PatternAdditionFormProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+export interface PublishModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  patterns : PatternData[];
+  expertId: string,
+  websiteId: string
 }
 
 export interface PatternDetailsProps {

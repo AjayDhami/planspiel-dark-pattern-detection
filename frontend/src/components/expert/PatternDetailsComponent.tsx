@@ -28,6 +28,8 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
   const [commentTextClicked, setCommentTextClicked] = useState<boolean>(false);
   const [isPatternExist, setIsPatternExist] = useState<boolean>(false);
   const [editing, setEditing] = useState<boolean>(false);
+  const [zindex, setZindex ] = useState(false)
+  const z_index = zindex ? "z-[-10]" : "z-[30]"
   const { patternData, setPatternData } = useExpertContext();
   const getBgColorClass =
     patternData.phaseColor === "#F9C32F"
@@ -78,9 +80,11 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
   const verifyOpen = (patternExist: boolean) => {
     setIsPatternExist(patternExist);
     setVerifyClicked(true);
+    setZindex(true)
   };
   const verifyClose = () => {
     setVerifyClicked(false);
+    setZindex(false);
   };
   const onCloseEdit = () => {
     setEditing(false);
@@ -186,10 +190,10 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
           </div>
           <div>
             {expertVerificationPhase.includes("NotVerified") ? (
-              <div className="col-span-full mt-2 px-4 pt-4 pb-2 flex items-center">
+              <div className={`col-span-full mt-2 px-4 pt-4 pb-2 flex items-center`}>
                 <Avatar
                   {...stringAvatar(expertName ? expertName : "")}
-                  className="mr-2"
+                  className={`mr-2 z-[-30]`}
                 />
                 <textarea
                   name="description"
@@ -236,6 +240,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                         ? true
                         : false
                     }
+                    z_index={z_index}
                   />
                 ))
               )}

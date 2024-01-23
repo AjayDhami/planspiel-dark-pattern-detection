@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { ExpertKpi, PatternData, WebsiteData, publishObj} from "../types"
+import { ExpertKpi, PatternData, WebsiteData} from "../types"
 
 
 const getUserDetails = async(id:String) => {
@@ -196,9 +196,14 @@ function stringAvatar(name: string) {
   };
 }
 
-const publishWebsite = async(websiteId:string, publishObj:publishObj) =>{
+const publishWebsite = async(websiteId:string, expertId: string, isCertified: boolean, expertFeedback: string) =>{
+  const body = {
+    expertId: expertId,
+    isCertified: isCertified,
+    expertFeedback : expertFeedback
+  }
   try {
-    const response = await api.put(`/website/${websiteId}/publish`, publishObj)
+    const response = await api.put(`/website/${websiteId}/publish`, body)
     return response.status;
   } catch (error) {
     

@@ -10,7 +10,6 @@ import {
 const KpiCard: React.FC<ExpertKpi> = ({title, count, color}) => {
     const heading = title==="totalWebsitesAssigned" ? "Total Assigned Websites" : title === "totalInProgressWebsites" ? "Websites In Progress" : title==="totalPublishedWebsites" ? "Published Websites" : "Total Patterns Detected";
     const icon = title==="totalWebsitesAssigned" ? <MenuIcon /> : title === "totalInProgressWebsites" ? <HourglassTopIcon/> : title==="totalPublishedWebsites" ? <VerifiedIcon/> : <ErrorOutlineIcon/>
-    // const iconbg = color ==="bg-[#F9C32F]" ? "bg-[#9C770A]" : ""
     //const iconbg = title==="totalWebsitesAssigned" ? "bg-[#9C770A]" : title==="totalPatternsCreated" ? "bg-[#533F5C]" : title==="verifiedWithPattern" ? "bg-[#2E5222]" : "bg-[#8C1A0A]"
     const iconbg = title==="totalWebsitesAssigned" ? "bg-[#533F5C]" : title==="totalInProgressWebsites" ? "bg-[#9C770A]" : title==="totalPublishedWebsites" ? "bg-[#2E5222]" : "bg-[#8C1A0A]"
     //const bgColor = title==="totalWebsitesAssigned" ? "bg-[#805DA8]" : title==="totalInProgressWebsites" ? "bg-[#F9C32F]" : title==="totalPublishedWebsites" ? "bg-[#538D3F]" : "bg-[#E6641D]"
