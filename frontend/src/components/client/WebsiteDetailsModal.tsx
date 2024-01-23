@@ -3,9 +3,11 @@ import { Website } from "../../types";
 import { toast } from "react-toastify";
 import { getWebsite } from "../../api";
 import {
+  Box,
   Dialog,
   DialogContent,
   DialogTitle,
+  Divider,
   Grid,
   IconButton,
   Skeleton,
@@ -15,6 +17,7 @@ import {
   useTheme,
 } from "@mui/material";
 import {
+  Celebration as CelebrationIcon,
   Close as CloseIcon,
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
@@ -92,20 +95,6 @@ const WebsiteDetailsModal = ({
         <Stack direction="column" gap={2}>
           <Grid container>
             <Grid item xs={12} sm={3}>
-              <Typography variant="subtitle1">Website ID</Typography>
-            </Grid>
-            <Grid item xs={12} sm={9}>
-              <Typography variant="body1">
-                {website === null ? (
-                  <Skeleton animation="wave" />
-                ) : (
-                  website.websiteId
-                )}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={12} sm={3}>
               <Typography variant="subtitle1">Website URL</Typography>
             </Grid>
             <Grid item xs={12} sm={9}>
@@ -131,21 +120,28 @@ const WebsiteDetailsModal = ({
               ) : website.additionalUrls?.length ? (
                 <Stack>
                   {website.additionalUrls.map((url, index) => (
-                    <Typography
-                      variant="body1"
-                      component="span"
-                      color="primary"
-                      key={index}
-                    >
+                    <Box display="flex">
+                      <Typography
+                        variant="body1"
+                        component="span"
+                        color="primary"
+                        noWrap
+                      >
+                        <Link to={url} target="_blank">
+                          {url}
+                        </Link>
+                      </Typography>
                       <Link to={url} target="_blank">
-                        {url}&nbsp;
-                        <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
+                        <OpenInNewIcon
+                          sx={{ width: "20px", height: "20px" }}
+                          color="primary"
+                        />
                       </Link>
-                    </Typography>
+                    </Box>
                   ))}
                 </Stack>
               ) : (
-                <Typography variant="body1" component="span">
+                <Typography variant="body1" component="span" color="gray">
                   No additional URLs
                 </Typography>
               )}
@@ -156,15 +152,17 @@ const WebsiteDetailsModal = ({
               <Typography variant="subtitle1">Description</Typography>
             </Grid>
             <Grid item xs={12} sm={9}>
-              <Typography variant="body1">
-                {website === null ? (
-                  <Skeleton animation="wave" />
-                ) : website.description ? (
-                  website.description
-                ) : (
-                  "No Description Provided"
-                )}
-              </Typography>
+              {website === null ? (
+                <Skeleton animation="wave" />
+              ) : website.description ? (
+                <Typography variant="body1" component="span">
+                  {website.description}
+                </Typography>
+              ) : (
+                <Typography variant="body1" component="span" color="gray">
+                  No Description
+                </Typography>
+              )}
             </Grid>
           </Grid>
           <Grid container>
@@ -175,10 +173,61 @@ const WebsiteDetailsModal = ({
               {website === null ? (
                 <Skeleton animation="wave" />
               ) : (
-                <PhaseBadge phase={website.phase} />
+                <PhaseBadge
+                  phase={website.phase}
+                  isCompleted={website.isCompleted}
+                  isDarkPatternFree={website.isDarkPatternFree}
+                />
               )}
             </Grid>
           </Grid>
+
+          {website?.phase === "Published" && (
+            <>
+              <Divider sx={{ my: 2 }} />
+              <Typography variant="h6" component="h6" color="primary">
+                Website Feedbacks
+              </Typography>
+
+              <Box
+                m={2}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {website === null ? (
+                  <Skeleton
+                    variant="rectangular"
+                    animation="wave"
+                    height={100}
+                  />
+                ) : website.expertFeedback ? (
+                  <Typography
+                    variant="body1"
+                    component="p"
+                    sx={{
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {website.expertFeedback}
+                  </Typography>
+                ) : (
+                  <Stack
+                    spacing={2}
+                    direction="column"
+                    alignItems="center"
+                    color="gray"
+                  >
+                    <CelebrationIcon sx={{ width: "50px", height: "50px" }} />
+                    <Typography variant="body1" component="p">
+                      Hurray! No Feedbacks. Seems like your website is pretty
+                      perfect and clean off Dark Patterns.
+                    </Typography>
+                  </Stack>
+                )}
+              </Box>
+            </>
+          )}
         </Stack>
       </DialogContent>
     </Dialog>

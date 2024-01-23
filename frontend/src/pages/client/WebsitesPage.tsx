@@ -180,7 +180,11 @@ const WebsiteViewPage = () => {
                         </Link>
                       </TableCell>
                       <TableCell>
-                        <PhaseBadge phase={row.phase} />
+                        <PhaseBadge
+                          phase={row.phase}
+                          isCompleted={row.isCompleted}
+                          isDarkPatternFree={row.isDarkPatternFree}
+                        />
                       </TableCell>
                       <TableCell>
                         <Tooltip title="View Details" arrow>

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import {
   ErrorOutline as ErrorOutlineIcon,
+  Folder as FolderIcon,
   HourglassTop as HourglassTopIcon,
   Menu as MenuIcon,
   Verified as VerifiedIcon,
@@ -99,7 +100,7 @@ const DashboardPage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <KpiCard
             title={kpiData.websitesCertified}
-            subtitle="Websites Certified"
+            subtitle="Websites Published"
             color="success"
             icon={<VerifiedIcon />}
           />
@@ -115,14 +116,13 @@ const DashboardPage = () => {
       </Grid>
 
       <Grid flex={1} container spacing={2}>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={7} order={isMobile ? 2 : 1}>
           <Paper
             elevation={0}
             sx={{
-              padding: (theme) => ({
-                xs: theme.spacing(0),
-                md: theme.spacing(2),
-              }),
+              display: "flex",
+              flexDirection: "column",
+              padding: (theme) => theme.spacing(2),
               color: (theme) => theme.palette.text.secondary,
               background: (theme) => theme.palette.background.paper,
               borderRadius: 2,
@@ -135,7 +135,7 @@ const DashboardPage = () => {
               alignItems="center"
             >
               <Typography variant="h5" component="span" color="primary">
-                Your Websites
+                Recent Websites
               </Typography>
               {websiteDataList.length > 6 && (
                 <Button
@@ -149,22 +149,51 @@ const DashboardPage = () => {
               )}
             </Stack>
 
-            <Grid
-              container
-              spacing={3}
-              justifyContent="space-around"
-              alignItems="center"
-              padding={2}
-            >
-              {websiteDataList.slice(0, 6).map((website) => (
-                <Grid item xs={12} md={6} key={website.websiteId}>
-                  <WebsiteDashboardCard {...website} />
-                </Grid>
-              ))}
-            </Grid>
+            {websiteDataList.length === 0 ? (
+              <Stack
+                spacing={2}
+                color="gray"
+                flex={1}
+                justifyContent="center"
+                alignItems="center"
+                sx={{ mt: 2 }}
+              >
+                <FolderIcon
+                  sx={{
+                    width: {
+                      xs: 80,
+                      md: 100,
+                    },
+                    height: {
+                      xs: 80,
+                      md: 100,
+                    },
+                  }}
+                />
+                <Typography variant="h6" textAlign="center">
+                  No websites certified yet. Click on button below to certify
+                  your first website
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setOnboardingForm(true)}
+                >
+                  Certify your website
+                </Button>
+              </Stack>
+            ) : (
+              <Grid container spacing={3} padding={2}>
+                {websiteDataList.slice(0, 6).map((website) => (
+                  <Grid item xs={12} md={6} key={website.websiteId}>
+                    <WebsiteDashboardCard {...website} />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
           </Paper>
         </Grid>
-        <Grid item xs={12} md={5} order={isMobile ? 1 : 2}>
+        <Grid item xs={12} md={5} order={isMobile ? 1 : 2} flex={1}>
           <Paper
             elevation={0}
             sx={{
