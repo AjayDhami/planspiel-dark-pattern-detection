@@ -9,14 +9,18 @@ import WebsiteDashboard from "./pages/expert/WebsiteDashboard";
 import SignIn from "./pages/client/SignInPage";
 import SignUp from "./pages/client/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
-import { ExpertProvider } from "./context/ExpertContext";
 import LandingPage from "./pages/landing/LandingPage";
 import CardFlip from "./pages/landing/CardFlip";
+import { ExpertProvider } from "./context/ExpertContext";
+import SuperAdmin from "./pages/superAdmin/SuperAdmin";
+import SuperAdminSignin from "./pages/superAdmin/SuperAdminSignin";
+import { AdminProvider } from "./context/AdminContext";
 
 function App() {
   return (
     <AuthProvider>
       <ExpertProvider>
+        <AdminProvider>
         <Routes>
           {/* <!-- Common routes --> */}
           <Route path="/" element={<LandingPage />} />
@@ -24,6 +28,8 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/expertsignin" element={<ExpertSignin />} />
+          <Route path="/adminsignin" element={<SuperAdminSignin/>}/>
+
           {/* <!-- Client Dashboard routes --> */}
           <Route path="/client" element={<ClientDashboardLayout />}>
             {/* Redirect to actual dashboard instead of just layout page */}
@@ -33,7 +39,9 @@ function App() {
           </Route>
           <Route path="/expert/dashboard" element={<ExpertDashboard />} />
           <Route path="/expert/website" element={<WebsiteDashboard />} />
+          <Route path="/superAdmin" element={<SuperAdmin />} />
         </Routes>
+        </AdminProvider>
       </ExpertProvider>
     </AuthProvider>
   );

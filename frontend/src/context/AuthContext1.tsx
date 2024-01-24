@@ -25,6 +25,14 @@ const initialUserDetails: User = {
   role: "",
 };
 
+type userToken = {
+  email: string;
+  exp: string;
+  iat: string;
+  role: string;
+  sub: string;
+}
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate();
 
@@ -37,9 +45,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await loginUserAPI(user);
       const token = response.data.accessToken;
+      const userDetails: userToken = jwtDecode(token)
 
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", jwtDecode(token).sub || "");
+      localStorage.setItem("userId", userDetails.sub || "");
+      localStorage.setItem("userRole", userDetails.role || "");
 
       setAuthTokens(token);
 
@@ -76,17 +86,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(initialUserDetails);
-
+    const role = localStorage.getItem("userRole") || "Client";
+    
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
 
     toast.success("You have been signed out");
 
-    if (user?.role === "Expert") {
+    if (role === "Expert") {
       navigate("/expertsignin");
+    } else if (role === "SuperAdmin"){
+      navigate("/adminsignin");
     } else {
-      navigate("/signIn");
+      navigate("/signin");
     }
   };
 
@@ -95,7 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const fetchedUser = await getUserDetails();
       setUser(fetchedUser);
     } catch (error) {
-      console.log("error >>>> ", error);
+      console.error("error >>>> ", error);
     }
   };
 
@@ -111,7 +124,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (authTokens) fetchUser();
-  }, [authTokens]);
+  }, [authTokens]);  
 
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

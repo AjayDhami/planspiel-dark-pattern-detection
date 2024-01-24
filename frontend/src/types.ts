@@ -48,6 +48,7 @@ export type Website = {
   expertFeedback: string;
 };
 
+
 export interface DashboardKPI {
   totalWebsites: string;
   websitesCertified: string;
@@ -124,12 +125,20 @@ export interface WebsiteData {
   phase: string;
   websiteId: string;
   isCompleted: boolean;
+  isDarkPatternFree : boolean
   expertDetails: expertData[];
   userId: string;
   additionalUrls: [];
   primaryExpertId: string;
   phaseColor: string;
   phaseText: string;
+  hoverText : string;
+}
+
+export interface ExpertKpi {
+  title : string;
+  count : number;
+  color : string;
 }
 
 export interface PatternCardProps {
@@ -141,6 +150,14 @@ export interface PatternCardProps {
 export interface PatternAdditionFormProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+export interface PublishModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  patterns : PatternData[];
+  expertId: string,
+  websiteId: string
 }
 
 export interface PatternDetailsProps {
@@ -160,6 +177,90 @@ export interface ServiceResponse {
   status: number;
   patterns: PatternData[];
 }
+
+export interface AccountMenuProps {
+  onProfile: () => void;
+  onLogout: () => void;
+}
+
+export interface KpiCardProps {
+  color: string;
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+}
+
+
+export type AdminWebsiteDetails = {
+  websiteId?: string;
+  baseUrl?: string;
+  websiteName?: string;
+  description?: string;
+}
+
+export type AdminCardProps = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: WebsiteDetails[];
+};
+
+export type AdminExperts = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: WebsiteDetails[];
+};
+
+ 
+export interface AdminPatterns {
+  createdByExpertId: string;
+  patternType: string;
+  description: string;
+  detectedUrl: string;
+}
+
+export interface AdminPatternResponse {
+text: string;
+patternType: string;
+}
+
+export interface AdminDarkPatternListProp {
+  onClose: () => void;
+  websiteId: string;
+  websiteName: string;
+  isOpen: boolean;
+  patterns: AdminPatternResponse[];
+  websiteUrl: string;
+} 
+
+export interface AdminAssignProps {
+  handleExpertAssigned: () => void
+  websiteId: string;
+  websiteName: string;
+  websiteUrl: string;
+}
+
+export type AdminClientsDetails = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  websites: AdminWebsites[];
+  isExpertAssigned: boolean;
+ };
+
+export type AdminWebsites = {
+    websiteId: string;
+    baseUrl: string;
+    websiteName: string;
+    description: string;
+ };
 
 export interface AccountMenuProps {
   onProfile: () => void;

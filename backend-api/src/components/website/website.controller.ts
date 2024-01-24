@@ -11,7 +11,7 @@ import {
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { WebsiteService } from './website.service';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/roles.decorator';
 import { UserType } from 'src/components/user/enum/user-type.enum';
 import { PatternCreateDto } from './dto/pattern-create.dto';
@@ -56,9 +56,9 @@ export class WebsiteController {
 
   @Get(':websiteId')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Client, UserType.Expert)
+  @Roles(UserType.Client, UserType.Expert, UserType.SuperAdmin)
   @ApiOperation({
-    summary: 'Fetch details of a website [For Client/Expert]',
+    summary: 'Fetch details of a website [For Client/Expert/SuperAdmin]',
     description: 'Retrieve details of a specific website based on its ID.',
   })
   async fetchParticularWebsiteDetails(@Param('websiteId') websiteId: string) {
@@ -92,7 +92,7 @@ export class WebsiteController {
     return await this.websiteService.getWebsitesAssociatedWithClients(userType);
   }
 
-  @Post(':websiteId/pattern')
+  @Put(':websiteId/pattern')
   @UseGuards(AuthGuard)
   @Roles(UserType.Expert)
   @ApiOperation({
@@ -106,6 +106,23 @@ export class WebsiteController {
     return await this.websiteService.addPatternInWebsite(
       websiteId,
       patternCreateDto,
+    );
+  }
+
+  @Put(':websiteId/automatedPatterns')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.SuperAdmin)
+  @ApiOperation({
+    summary: 'Add automated pattern in a website [For SuperAdmin]',
+  })
+  @ApiBody({ type: [PatternCreateDto] })
+  async addAutomatedPatternInWebsite(
+    @Param('websiteId') websiteId: string,
+    @Body() patternCreateDtos: PatternCreateDto[],
+  ) {
+    return await this.websiteService.addAutomatedPatternInWebsite(
+      websiteId,
+      patternCreateDtos,
     );
   }
 

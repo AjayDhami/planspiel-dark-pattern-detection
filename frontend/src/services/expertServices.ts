@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from "../utils/AxiosHelper";
-import { PatternData, WebsiteData} from "../types"
+import { ExpertKpi, PatternData, WebsiteData} from "../types"
 
 
 const getUserDetails = async(id:String) => {
@@ -18,6 +18,17 @@ const getWebsites = async(id:String) => {
       if(website.phase === "InProgress"){
         website.phaseColor = "bg-[#F9C32F]"
         website.phaseText = "In Progress"
+        website.hoverText = "In Progress"
+      }
+      else if(website.phase==="Published" && website.isDarkPatternFree === false){
+        website.phaseColor = "bg-[#E6321D]"
+        website.phaseText = "Published"
+        website.hoverText = "Published without certification"
+      }
+      else if(website.phase==="Published" && website.isDarkPatternFree === true){
+        website.phaseColor = "bg-[#E6321D]"
+        website.phaseText = "Published"
+        website.hoverText = "Published with certification"
       }
     })
     return response.data
@@ -27,8 +38,12 @@ const getWebsites = async(id:String) => {
 
 const getSpecificWebsite = async(id:string) => {
   try {
-    const response = await api.get(`/website/${id}`);
-    console.log(response);
+    const response: AxiosResponse<WebsiteData> = await api.get<WebsiteData>(`/website/${id}`);
+    if(response.data.phase==="Published" && response.data.isDarkPatternFree===true){
+      response.data.phaseText = "Published with certification"
+    }else if(response.data.phase==="Published" && response.data.isDarkPatternFree===false){
+      response.data.phaseText = "Published without certification"
+    }
     return response.data
   } catch (error) {
   }
@@ -122,7 +137,7 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     description : description,
     detectedUrl : detectedUrl
   }
-  const response: AxiosResponse<PatternData> = await api.post<PatternData>(
+  const response: AxiosResponse<PatternData> = await api.put<PatternData>(
     `/website/${websiteId}/pattern`,
     body,
   );
@@ -141,6 +156,22 @@ const postVerification = async(websiteId : string, patternId : string, expertId 
     body,
   );
   return response.status
+}
+
+const getKpiDetails = async(expertId:string) => {
+  const response = await api.get(`/website/expertKpi/${expertId}`);
+  // function getColorByText(text) {
+    
+  //   // You can implement your own logic to assign colors based on text
+  //   // For simplicity, let's use a placeholder function that always returns 'blue'
+  //   return 'blue';
+  // }
+  const newArray: ExpertKpi[] = Object.keys(response.data).map((key) => ({
+    title: key,
+    count: response.data[key],
+    color: "bg-[#F9C32F]",
+  }));
+  return newArray
 }
 
 function stringToColor(string: string) {
@@ -165,4 +196,18 @@ function stringAvatar(name: string) {
   };
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite  };
+const publishWebsite = async(websiteId:string, expertId: string, isCertified: boolean, expertFeedback: string) =>{
+  const body = {
+    expertId: expertId,
+    isCertified: isCertified,
+    expertFeedback : expertFeedback
+  }
+  try {
+    const response = await api.put(`/website/${websiteId}/publish`, body)
+    return response.status;
+  } catch (error) {
+    
+  }
+}
+
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails};

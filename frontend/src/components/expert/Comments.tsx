@@ -8,7 +8,7 @@ import { useExpertContext } from '../../context/ExpertContext';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Comments: React.FC<{ review: Comment, expertId : string, isVerified : boolean }> = ({ review, expertId, isVerified }) => {
+const Comments: React.FC<{ review: Comment, expertId : string, isVerified : boolean, z_index:string }> = ({ review, expertId, isVerified, z_index }) => {
     const [replyClicked , setReplyClicked] = useState(false) 
     const { patternData, setPatternData } = useExpertContext();
     const [replyText,  setReplyText] = useState("")
@@ -36,11 +36,11 @@ const Comments: React.FC<{ review: Comment, expertId : string, isVerified : bool
         }  
       }
   return (
-    <div>
+    <div className='z-30'>
         <div key={review.id} className='bg-gray-100 p-2 my-3 rounded-lg'>
             <div className="items-center mt-3">
                 <div className='flex items-center'>
-                  <Avatar {...stringAvatar(review.expertName)}/>
+                  <Avatar {...stringAvatar(review.expertName)} className={`z-[20]`}/>
                   <div className='mx-2 bg-blue-100 border-2 rounded-2xl p-1 border-blue-300 w-full'>{review.content}</div>
                 </div>
                     {review.replies.map((comment: Reply)=>(
