@@ -44,6 +44,8 @@ export type Website = {
   isCompleted: boolean;
   phase: string;
   expertDetails?: any[];
+  isDarkPatternFree: boolean;
+  expertFeedback: string;
 };
 
 

@@ -1,8 +1,8 @@
 import { AppBar, Container, Toolbar, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext1";
+import AuthContext from "../../context/AuthContext1";
 import { useContext } from "react";
-import AccountMenu from "./client/AccountMenu";
+import AccountMenu from "./AccountMenu";
 
 const StyledNavBar = styled(AppBar)(({ theme }) => ({
   ...theme.typography.body1,
@@ -20,8 +20,8 @@ const Navbar = () => {
 
   return (
     <StyledNavBar position="sticky">
-      <Container maxWidth="xl">
-        <Toolbar>
+      <Container maxWidth={false}>
+        <Toolbar sx={{ p: 2 }}>
           <Link
             to="/client/dashboard"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -29,7 +29,7 @@ const Navbar = () => {
             <img
               src="/assets/logo.png"
               alt="Logo"
-              style={{ width: 40, marginRight: 16 }}
+              style={{ width: 50, marginRight: 16 }}
             />
           </Link>
           <div style={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
