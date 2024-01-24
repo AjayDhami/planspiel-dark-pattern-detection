@@ -6,7 +6,7 @@ import withSuperAdminAuth from "../../hoc/withSuperAdminAuth";
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import { useAdminContext } from "../../context/AdminContext";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/client/Navbar";
 
 const SuperAdmin: React.FC = () => {
   const authContext = useContext(AuthContext);
