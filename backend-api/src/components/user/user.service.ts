@@ -13,6 +13,7 @@ import { SigninUserDto } from './dto/signin-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserResponseDto } from './dto/user-response.dto';
+import { convertUserToDto } from '../../utils/user.converter';
 
 @Injectable()
 export class UserService {
@@ -83,12 +84,12 @@ export class UserService {
     if (!existingUser) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    return this.convertUserToDto(existingUser);
+    return convertUserToDto(existingUser);
   }
 
-  async fetchUsersByType(role) {
+  async fetchUsersByType(role: string) {
     const experts = await this.getUsersByRole(role);
-    return experts.map((expert) => this.convertUserToDto(expert));
+    return experts.map((expert) => convertUserToDto(expert));
   }
 
   async findUserById(userId: string): Promise<User | null> {
@@ -97,16 +98,5 @@ export class UserService {
 
   private async getUsersByRole(role: string) {
     return await this.userModel.find({ role: role }).exec();
-  }
-
-  private convertUserToDto(user: User): UserResponseDto {
-    return {
-      userId: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      role: user.role,
-      createdAt: user.createdAt,
-    };
   }
 }
