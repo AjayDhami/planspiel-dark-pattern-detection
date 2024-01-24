@@ -99,7 +99,6 @@ def train_second_level_models(df, dark_pattern_types):
 
 
 def predict_dark_pattern(input_text):
-    # print(f"\nInput Text: {input_text}")
 
     dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
 
@@ -110,8 +109,6 @@ def predict_dark_pattern(input_text):
 
     # Make first level prediction
     first_level_prediction = loaded_first_level_model.predict([input_text])
-
-    # print(f"\nFirst-Level Prediction: {'Dark Pattern' if first_level_prediction[0] == 1 else 'Not Dark Pattern'}")
 
     # Check if it is identified as a Dark Pattern
     if first_level_prediction[0] == 1:
@@ -127,7 +124,6 @@ def predict_dark_pattern(input_text):
             second_level_prediction = loaded_second_level_model.predict([input_text])
 
             if second_level_prediction[0] == 1:
-                # print(f"{dark_pattern_type}: Dark Pattern")
                 return dark_pattern_type
     else:
         return "Not Dark Pattern"
@@ -158,7 +154,6 @@ def predict_website_dark_pattern_type(website_id):
         with open(csv_file_path, 'r', encoding='utf-8') as file:
             csv_reader = csv.reader(file)
             for row in csv_reader:
-                # print(row)
                 if row:
                     text_to_predict = row[0]
                     detected_type = predict_dark_pattern(text_to_predict)
@@ -171,10 +166,3 @@ def predict_website_dark_pattern_type(website_id):
         print(f'Error reading the file: {e}')
 
     return dark_patterns
-    # user_input_text = "Manage Cookies Learn More"
-    # detected_type = predict_dark_pattern(user_input_text)
-    # print(f"{user_input_text}: {detected_type}")
-
-
-# train_dark_pattern_detection_model()
-# predict_website_dark_pattern_type('123')

@@ -2,18 +2,38 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
-import csv
+import pandas as pd
+import re
 import os
+
+
+def get_driver(url):
+    # Initialize Chrome in headless mode
+    chrome_options = Options()
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    # Initialize WebDriver
+    if os.environ.get('DOCKER_ENV') == 'true':
+        # Running inside Docker, use Selenium Grid
+        print('using selenium docker')
+        driver = webdriver.Remote(command_executor='http://selenium-chrome:4444/wd/hub', options=chrome_options)
+    else:
+        # Running using chrome driver
+        print('using chrome driver')
+        driver = webdriver.Chrome(options=chrome_options)
+    driver.get(url)
+    return driver
 
 
 def web_scrap(url, website_id):
     all_text = []
-    
-    # Initialize WebDriver
-    driver = webdriver.Chrome()
-    driver.get(url)
+
+    driver = get_driver(url)
 
     # Use explicit wait for elements to be present in the DOM
     wait = WebDriverWait(driver, 25)
@@ -23,14 +43,63 @@ def web_scrap(url, website_id):
     data = driver.page_source
     soup = BeautifulSoup(data, 'html.parser')
 
-    # Find all div tags
-    div_tags = soup.find_all('div')
+    # Old logic Find all div tags
+    # div_tags = soup.find_all('div')
 
-    # Print id and class attributes in sequence
-    for div_tag in div_tags:
-        # Iterate through nested tags inside the div
-        for nested_tag in div_tag.find_all(recursive=False):
-            text = nested_tag.get_text(strip=True)
+    # # Print id and class attributes in sequence
+    # for div_tag in div_tags:
+    #     # Iterate through nested tags inside the div
+    #     for nested_tag in div_tag.find_all(recursive=False):
+    #         text = nested_tag.get_text(strip=True)
+    #         all_text.append(text)
+
+    # For all tags 
+    th_tags = soup.find_all('th')
+    for th_tag in th_tags:
+        for nested_tag in th_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    td_tags = soup.find_all('td')
+    for td_tag in td_tags:
+        for nested_tag in td_tag:
+            text = nested_tag.text
+            all_text.append(text)
+            
+    li_tags = soup.find_all('li')
+    for li_tag in li_tags:
+        for nested_tag in li_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    p_tags = soup.find_all('p')
+    for p_tag in p_tags:
+        for nested_tag in p_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    a_tags = soup.find_all('a')
+    for a_tag in a_tags:
+        for nested_tag in a_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    span_tags = soup.find_all('span')
+    for span_tag in span_tags:
+        for nested_tag in span_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    h1_tags = soup.find_all('h1')
+    for h1_tag in h1_tags:
+        for nested_tag in h1_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+    h2_tags = soup.find_all('h2')
+    for h2_tag in h2_tags:
+        for nested_tag in h2_tag:
+            text = nested_tag.text
             all_text.append(text)
 
     # To filter empty list or lines from fetched data
@@ -41,22 +110,38 @@ def web_scrap(url, website_id):
     # Remove duplicate elements
     filtered_list = list(OrderedSet(filtered_list))
 
+    # Remove text based on length of list element 
+    def filter_by_count(string_list):
+        text = [string for string in string_list if sum(c.isalpha() for c in string) >= 20]
+        text = [string for string in text if sum(c.isalpha() for c in string) <= 500]
+        return text
+
+    filtered_list = filter_by_count(filtered_list)
+
+    # Remove unwanted text from the list elements
+    def filter_alphabets(strings):
+        pattern = re.compile('[a-zA-Z]')
+        filtered_strings = [s for s in strings if pattern.search(s)]
+        return filtered_strings
+
+    def remove_numbers(input_str):
+        return re.sub(r'\d', '', input_str)
+
+    filtered_list = filter_alphabets(filtered_list)
+    filtered_list = [remove_numbers(item) for item in filtered_list]
+
     current_script_path = os.path.dirname(os.path.abspath(__file__))
     output_directory = os.path.join(current_script_path, "scraped_data")
 
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
+    df = pd.DataFrame({"Text": filtered_list})
     output_file_path = os.path.join(output_directory, "{}.csv".format(website_id))
 
     try:
-        with open(output_file_path, 'w', encoding='utf-8') as file:
-            # Create a CSV writer
-            csv_writer = csv.writer(file)
-            # Write each line of text as a separate row in the CSV file
-            # TODO use regex to save only certain text
-            for line in filtered_list:
-                csv_writer.writerow([line])
+        df.to_csv(output_file_path, index=False, encoding='utf-8')
+        # TODO use regex to save only certain text
         print(f'Data has been successfully written to {output_file_path}')
     except Exception as e:
         print(f'Error writing to the file: {e}')

@@ -15,6 +15,8 @@ body {
   gap: 1rem;
 }
 
-.css-17slrf3-MuiFormHelperText-root {
-  margin: 3px 0 !important;
+.form-input
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+  transition: background-color 5000s ease-in-out 0s;
 }

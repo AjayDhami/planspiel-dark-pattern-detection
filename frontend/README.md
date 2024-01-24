@@ -10,7 +10,7 @@ Follow these steps to set up the project on your local machine:
 
 Before you begin, make sure you have the following installed on your system:
 
-- Node.js: [Download and Install Node.js](https://nodejs.org/)
+- Node.js
 - npm (Node Package Manager): npm is included with Node.js installation.
 
 ### Installation
