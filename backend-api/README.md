@@ -1,10 +1,25 @@
-# Description
+# V-Tenet Dark Pattern Detection Backend
 
 This is backend service of Dark Pattern Detection Project. It involves creating backend APIs for UI Dashboard.
 
-# Installation
+## Prerequisites
+
+Before you begin, make sure you have the following installed on your system:
+
+- Node.js
+- npm
+- MongoDB
+
+## Installation
 
 ```bash
+# clone the repository to your machine
+$ git clone https://gitlab.hrz.tu-chemnitz.de/vsr/edu/planspiel/WS2324/v-tenet.git
+
+# navigate to project directory
+$ cd backend-api
+
+# install required dependencies
 $ npm install
 ```
 
@@ -32,8 +47,3 @@ $ NODE_ENV=ENV_NAME npm run start:dev
 # debug mode
 $ NODE_ENV=ENV_NAME npm run start:debug
 ```
-
-## Stay in touch
-
-- Website - [V-Tenet](https://v-tenet.vercel.app/)
-- LinkedIn - [LinkedIn](https://www.linkedin.com/in/v-tenet/)

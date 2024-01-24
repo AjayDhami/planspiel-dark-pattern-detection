@@ -1,4 +1,5 @@
 import { WebsitePhaseType } from '../enum/website-phase.enum';
+import { Date } from 'mongoose';
 
 export class WebsiteResponseDto {
   websiteId: string;
@@ -13,6 +14,7 @@ export class WebsiteResponseDto {
   expertFeedback: string;
   expertDetails: ExpertDetailsDto[];
   primaryExpertId: string;
+  createdAt: Date;
 }
 
 export class ExpertDetailsDto {

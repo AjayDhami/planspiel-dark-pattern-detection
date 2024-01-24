@@ -16,5 +16,5 @@ COPY . .
 # Build the applicaiton inside docker container
 RUN npm run build
 
-# Start the backend server in development mode
-CMD [ "npm", "start" ]
+# Start the frontend
+CMD ["npm", "start"]
