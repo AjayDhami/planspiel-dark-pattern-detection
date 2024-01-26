@@ -102,6 +102,13 @@ def web_scrap(url, website_id):
             text = nested_tag.text
             all_text.append(text)
 
+    div_tags = soup.find_all('div')
+    for div_tag in div_tags:
+        for nested_tag in div_tag:
+            text = nested_tag.text
+            all_text.append(text)
+
+
     # To filter empty list or lines from fetched data
     filtered_list = [item for item in all_text if item.strip() != '']
     for i in range(len(filtered_list)):
