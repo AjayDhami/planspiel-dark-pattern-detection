@@ -547,6 +547,56 @@ export class WebsiteService {
     };
   }
 
+  async generateCertification(websiteId: string) {
+    const website = await this.checkWebsiteExists(websiteId);
+
+    if (!website.isCompleted) {
+      throw new HttpException(
+        'Dark pattern check in progress website cannot be certified',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (website.isCompleted) {
+      if (!website.isDarkPatternFree) {
+        throw new HttpException(
+          'Only dark pattern-free websites can be certified.',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
+    if (website.certificationId) {
+      throw new HttpException(
+        'The website is already certified and cannot be certified again.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    let certificationId: string;
+    do {
+      certificationId = this.generateCertificationId();
+    } while (await this.websiteModel.findOne({ certificationId }));
+
+    website.certificationId = certificationId;
+
+    await website.save();
+    return {
+      certificationId: website.certificationId,
+    };
+  }
+
+  private generateCertificationId(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let certificationId = '';
+    for (let i = 0; i < 12; i++) {
+      certificationId += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+    return certificationId;
+  }
+
   private async checkUserExists(userId: string) {
     const existingUser = await this.userService.findUserById(userId);
     if (!existingUser) {
@@ -602,6 +652,7 @@ export class WebsiteService {
       expertFeedback: website.expertFeedback,
       expertDetails: expertDetails,
       primaryExpertId: website.primaryExpertId,
+      certificationId: website.certificationId,
     };
   }
 
