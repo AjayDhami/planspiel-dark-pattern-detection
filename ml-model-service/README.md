@@ -1,13 +1,11 @@
 # V-Tenet Dark Pattern Detection Ml Model Service
-
 This repository is a Flask-based web service which is one of the submodule for Dark Pattern Detection Project.
 It involves building, training AI Models for dark pattern detection as well as web scrapping part.
 
 ## Prerequisites
 
 Before you begin, make sure you have the following installed on your system
-
-- Python
+- Python 
 
 ## Instructions to run ml-model-service
 
@@ -25,7 +23,7 @@ $ python -m venv venv
 $ source venv/bin/activate
 
 # activate the virtual environment for Windows
-$ source venv/Scripts/activate
+$ .\venv\Scripts\activate
 
 # Install the required dependencies
 $ pip install -r requirements.txt

@@ -100,7 +100,7 @@ def train_second_level_models(df, dark_pattern_types):
 
 def predict_dark_pattern(input_text):
 
-    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
+    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency"]
 
     # Load and make predictions with the first-level model
     current_script_path = os.path.dirname(os.path.abspath(__file__))
@@ -132,7 +132,7 @@ def predict_dark_pattern(input_text):
 def create_dark_pattern_detection_model():
     current_file_path = os.path.dirname(os.path.abspath(__file__))
     csv_path = os.path.join(current_file_path, "dataset.csv")
-    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency", "Misdirection"]
+    dark_pattern_types = ["Scarcity", "Social Proof", "Urgency"]
 
     filtered_df = read_and_clean_dataset(csv_path)
     train_first_level_model(filtered_df, dark_pattern_types)
@@ -157,7 +157,7 @@ def predict_website_dark_pattern_type(website_id):
                 if row:
                     text_to_predict = row[0]
                     detected_type = predict_dark_pattern(text_to_predict)
-                    if detected_type != "Not Dark Pattern":
+                    if detected_type is not None and detected_type != "Not Dark Pattern":
                         dark_patterns[text_to_predict] = detected_type
         print(f'Data has been successfully read from {csv_file_path}')
     except FileNotFoundError:
