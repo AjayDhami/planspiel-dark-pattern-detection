@@ -247,4 +247,15 @@ export class WebsiteController {
   async getKpiForExpert(@Param('expertId') expertId: string) {
     return await this.websiteService.fetchKpiForExpert(expertId);
   }
+
+  @Get(':websiteId/generateCertification')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
+  @ApiOperation({
+    summary:
+      'Generate Certification for dark pattern free websites [For Client]',
+  })
+  async generateWebsiteCertification(@Param('websiteId') websiteId: string) {
+    return await this.websiteService.generateCertification(websiteId);
+  }
 }
