@@ -1,4 +1,8 @@
-import { UserCredentials, UserRegistrationCredentials, WebsiteDetails } from "./types";
+import {
+  UserCredentials,
+  UserRegistrationCredentials,
+  WebsiteDetails,
+} from "./types";
 import api from "./utils/AxiosHelper";
 import { extractUserDetails } from "./utils/DataHelper";
 
@@ -8,8 +12,8 @@ export const registerUser = async (user: UserRegistrationCredentials) => {
     const response = await api.post("/user/signup", user);
     return response;
   } catch (error) {
-    throw error;
-  }
+    throw error;
+  }
 };
 
 // Function to Log in User
@@ -75,6 +79,18 @@ export const addWebsiteForCertification = async (website: WebsiteDetails) => {
     const data = { ...website, userId: user?.sub };
 
     const response = await api.post(`/website`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to generate website certificate
+export const generateCertification = async (websiteId: string) => {
+  try {
+    const response = await api.get(
+      `/website/${websiteId}/generateCertification`
+    );
     return response.data;
   } catch (error) {
     throw error;
