@@ -23,6 +23,7 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import PhaseBadge from "./PhaseBadge";
+import CertificateSection from "./CertificateSection";
 
 type WebsiteDetailsModalProps = {
   websiteId?: string;
@@ -184,24 +185,23 @@ const WebsiteDetailsModal = ({
 
           {website?.phase === "Published" && (
             <>
-              <Divider sx={{ my: 2 }} />
+              <Divider sx={{ mt: 2 }} />
+              <Typography variant="h6" component="h6" color="primary">
+                Website Certification
+              </Typography>
+              {website.isCompleted && website.isDarkPatternFree && (
+                <CertificateSection {...website} />
+              )}
+
+              <Divider sx={{ mt: 2 }} />
               <Typography variant="h6" component="h6" color="primary">
                 Website Feedbacks
               </Typography>
 
-              <Box
-                m={2}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                {website === null ? (
-                  <Skeleton
-                    variant="rectangular"
-                    animation="wave"
-                    height={100}
-                  />
-                ) : website.expertFeedback ? (
+              {website === null ? (
+                <Skeleton variant="rectangular" animation="wave" height={100} />
+              ) : website.expertFeedback ? (
+                <Box>
                   <Typography
                     variant="body1"
                     component="p"
@@ -211,7 +211,9 @@ const WebsiteDetailsModal = ({
                   >
                     {website.expertFeedback}
                   </Typography>
-                ) : (
+                </Box>
+              ) : (
+                <Box display="flex" justifyContent="center" alignItems="center">
                   <Stack
                     spacing={2}
                     direction="column"
@@ -224,8 +226,8 @@ const WebsiteDetailsModal = ({
                       perfect and clean off Dark Patterns.
                     </Typography>
                   </Stack>
-                )}
-              </Box>
+                </Box>
+              )}
             </>
           )}
         </Stack>

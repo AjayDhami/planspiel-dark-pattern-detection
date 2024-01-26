@@ -100,7 +100,7 @@ const DashboardPage = () => {
         <Grid item xs={12} sm={6} md={3}>
           <KpiCard
             title={kpiData.websitesCertified}
-            subtitle="Websites Published"
+            subtitle="Websites Certified"
             color="success"
             icon={<VerifiedIcon />}
           />

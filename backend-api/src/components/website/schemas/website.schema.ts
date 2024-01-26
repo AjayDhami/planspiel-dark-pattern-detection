@@ -39,6 +39,9 @@ export class Website extends Document {
 
   @Prop({ default: Date.now, type: Date })
   createdAt: Date;
+
+  @Prop({ unique: true })
+  certificationId: string;
 }
 
 export const WebsiteSchema = SchemaFactory.createForClass(Website);

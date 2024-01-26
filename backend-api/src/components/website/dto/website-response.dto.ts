@@ -15,6 +15,7 @@ export class WebsiteResponseDto {
   expertDetails: ExpertDetailsDto[];
   primaryExpertId: string;
   createdAt: Date;
+  certificationId: string;
 }
 
 export class ExpertDetailsDto {
