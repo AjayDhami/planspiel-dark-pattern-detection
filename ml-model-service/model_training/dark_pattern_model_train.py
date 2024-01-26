@@ -100,7 +100,7 @@ def train_second_level_models(df, dark_pattern_types):
 
 def predict_dark_pattern(input_text):
 
-    dark_pattern_types = ["Fake Scarcity", "Fake Social Proof", "Fake Urgency"]
+    dark_pattern_types = ["Scarcity", "Social Proof", "Urgency"]
 
     # Load and make predictions with the first-level model
     current_script_path = os.path.dirname(os.path.abspath(__file__))
