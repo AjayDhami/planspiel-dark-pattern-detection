@@ -15,19 +15,7 @@
   font-weight: 600;
   position: relative;
 }
-/* ._service-section_ h1::after {
-  font-size: 3rem;
-  padding: 5px;
-  margin: 5px 0px;
-  color: rgb(110, 118, 129);
-  font-weight: 600;
-  position: absolute;
-  content: " ";
-  top:8px;
-  left:-30px;
-  border-top:20px solid transparent ;
-  border-left: 30px solid orange;y
-} */
+
 .service-card h3 {
   font-size: 1.5rem;
   color: rgb(254, 254, 254);
