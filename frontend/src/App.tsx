@@ -11,7 +11,11 @@ import SignUp from "./pages/client/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
 import { ExpertProvider } from "./context/ExpertContext";
 import LandingPage from "./pages/landing/LandingPage";
+import NavbarPage from "./pages/landing/NavbarPage";
 import CardFlip from "./pages/landing/CardFlip";
+import CardOverlap from "./pages/landing/CardOverlap";
+import ServicePage from "./pages/landing/ServicePage";
+import ProcessPage from "./pages/landing/ProcessPage";
 function App() {
   return (
     <AuthProvider>
@@ -19,7 +23,11 @@ function App() {
         <Routes>
           {/* <!-- Common routes --> */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/cardflip" element={<CardFlip />} />
+          <Route path="/cardflip" element={<CardFlip message={undefined} />} />
+          <Route path="/cardoverlap" element={<CardOverlap />} />
+          <Route path="/processpage" element={<ProcessPage />} />
+          <Route path="/servicepage" element={<ServicePage />} />
+          <Route path="/navbar" element={<NavbarPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/expertsignin" element={<ExpertSignin />} />

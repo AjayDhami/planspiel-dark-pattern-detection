@@ -107,25 +107,25 @@
 }
 @keyframes scrolling {
   0% {
-    transform: translateX(40%);
+    transform: translateX(50%);
   }
   100% {
-    transform: translateX(-60%);
+    transform: translateX(-50%);
   }
 }
-form {
+.footer-form {
   display: flex;
-  border-bottom: 2px solid cyan;
-  margin-top: 2rem;
+  border-bottom: 2px solid rgba(6, 231, 231, 0.5);
+  margin-top: 0.2rem;
   position: relative;
   align-items: center;
   justify-content: space-between;
-  margin-left: 4rem;
+  margin-left: 1rem;
+  width: auto;
 }
-form input {
+.footer-form input {
   background-color: transparent;
-  color: #ffffff;
+  color: #f1f1f1;
   border: 0;
   outline: none;
-  width: 100%;
 }

@@ -60,17 +60,19 @@ const ServicePage = () => {
                 Detecting dark patterns is a critical objective in the realm of
                 user experience and ethical business practices.
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    color: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box className="service-card">

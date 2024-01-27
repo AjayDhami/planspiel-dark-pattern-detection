@@ -39,7 +39,7 @@ const NavbarPage = () => {
                 style={{
                   width: "7rem",
                   height: "6rem",
-                  margin: "2vw",
+                  margin: "2.2vw",
                 }}
               />
             </Link>
