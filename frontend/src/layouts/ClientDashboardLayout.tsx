@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/client/Navbar";
 import { Box, Container, CssBaseline } from "@mui/material";
 import withAuth from "../hoc/withAuth";
 import { useContext, useEffect } from "react";
@@ -21,25 +21,26 @@ const ClientDashboardLayout = () => {
   }, [authContext]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        maxHeight: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <Box sx={{ position: "relative" }}>
       <CssBaseline />
-      <Navbar></Navbar>
+      <Navbar />
       <Container
-        component="main"
-        maxWidth="xl"
+        maxWidth={false}
         sx={{
-          my: 1,
-          overflowY: "auto",
-          height: "inherit",
+          display: "flex",
+          flexDirection: "column",
+          position: "absolute",
+          height: {
+            xs: "auto",
+            md: `calc(100vh - 88px)`,
+          },
+          py: {
+            xs: 2,
+            md: 3,
+          },
+          backgroundColor: (theme) => theme.palette.grey[300],
         }}
+        component="main"
       >
         <Outlet />
       </Container>

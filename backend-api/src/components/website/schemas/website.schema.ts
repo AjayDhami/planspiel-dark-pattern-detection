@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Date, Document } from 'mongoose';
 import { WebsitePhaseType } from '../enum/website-phase.enum';
 
 @Schema()
@@ -36,6 +36,12 @@ export class Website extends Document {
 
   @Prop()
   primaryExpertId: string;
+
+  @Prop({ default: Date.now, type: Date })
+  createdAt: Date;
+
+  @Prop({ unique: true, sparse: true })
+  certificationId: string;
 }
 
 export const WebsiteSchema = SchemaFactory.createForClass(Website);

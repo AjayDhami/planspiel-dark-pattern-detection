@@ -1,4 +1,7 @@
-from model_training.dark_pattern_model_train import predict_website_dark_pattern_type, create_dark_pattern_detection_model
+from model_training.dark_pattern_model_train import predict_website_dark_pattern_type, \
+    create_dark_pattern_detection_model
+from model_training.scraping import web_scrap
+from flask import jsonify
 
 
 def create_model():
@@ -9,14 +12,11 @@ def create_model():
 
 def parse_website_url(website_id, params):
     print('Parsing website')
-    website_urls = params['websiteUrls']
+    website_url = params['websiteUrl']
 
-    # TODO change implementation of web_scrap method to accept list of website_urls and store their content in given website id
-    # web_scrap(website_url, website_id)
+    web_scrap(website_url, website_id)
 
     dark_patterns = predict_website_dark_pattern_type(website_id)
+    dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
 
-    for text, pattern_type in dark_patterns.items():
-        print(f"{text}: {pattern_type}")
-
-    return 'Successfully website parsed', 200
+    return jsonify(dark_patterns)

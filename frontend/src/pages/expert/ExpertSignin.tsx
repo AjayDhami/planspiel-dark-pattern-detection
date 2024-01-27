@@ -16,7 +16,6 @@ const ExpertSignin = () => {
 
     const authContext = useContext(AuthContext)
     if(!authContext) {
-        console.log("not context");
         return null
     };
     const { loginUser } = authContext

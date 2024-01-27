@@ -8,33 +8,50 @@ import {
   UserCredentials,
   UserRegistrationCredentials,
 } from "../types";
-import { loginUser as loginUserAPI, registerUser } from "../api";
+import {
+  getUserDetails,
+  loginUser as loginUserAPI,
+  registerUser,
+} from "../api";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
+const initialUserDetails: User = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+};
+
+type userToken = {
+  email: string;
+  exp: string;
+  iat: string;
+  role: string;
+  sub: string;
+}
+
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const navigate = useNavigate();
+
   const [authTokens, setAuthTokens] = useState<string | null>(() =>
     localStorage.getItem("authToken") ? localStorage.getItem("authToken") : null
   );
-
-  const [user, setUser] = useState<User | null>(() =>
-    localStorage.getItem("authToken")
-      ? jwtDecode(localStorage.getItem("authToken") as string)
-      : null
-  );
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [user, setUser] = useState<User>(initialUserDetails);
 
   const loginUser = async (user: UserCredentials): Promise<boolean> => {
     try {
       const response = await loginUserAPI(user);
       const token = response.data.accessToken;
+      const userDetails: userToken = jwtDecode(token)
+
       localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", jwtDecode(token).sub || "");
+      localStorage.setItem("userId", userDetails.sub || "");
+      localStorage.setItem("userRole", userDetails.role || "");
 
       setAuthTokens(token);
-      setUser(jwtDecode(token));
 
       return true;
     } catch (error: unknown) {
@@ -68,15 +85,30 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logoutUser = () => {
     setAuthTokens(null);
-    setUser(null);
+    setUser(initialUserDetails);
+    const role = localStorage.getItem("userRole") || "Client";
+    
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
+
     toast.success("You have been signed out");
-    if (user?.role === "Expert") {
+
+    if (role === "Expert") {
       navigate("/expertsignin");
+    } else if (role === "SuperAdmin"){
+      navigate("/adminsignin");
     } else {
-      navigate("/signIn");
+      navigate("/signin");
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      const fetchedUser = await getUserDetails();
+      setUser(fetchedUser);
+    } catch (error) {
+      console.error("error >>>> ", error);
     }
   };
 
@@ -91,16 +123,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    if (authTokens) {
-      setUser(jwtDecode(authTokens));
-    }
-    setLoading(false);
-  }, [authTokens, loading]);
+    if (authTokens) fetchUser();
+  }, [authTokens]);  
 
   return (
-    <AuthContext.Provider value={contextData}>
-      {loading ? null : children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
 };
 

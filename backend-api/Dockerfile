@@ -1,5 +1,5 @@
 # Base node runtime image
-FROM node:18.12.1
+FROM node:18-alpine
 
 # Setting working directory to /app inside the container
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY . .
 RUN npm run build
 
 # Start the backend server in development mode
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "start" ]
