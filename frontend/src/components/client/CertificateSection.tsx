@@ -3,6 +3,7 @@ import { Website } from "../../types";
 import {
   Box,
   Button,
+  Divider,
   IconButton,
   Stack,
   Tooltip,
@@ -65,6 +66,12 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
   return (
     <Stack>
+      <Divider sx={{ my: 2 }} />
+
+      <Typography variant="h6" component="h6" color="primary">
+        Website Certification
+      </Typography>
+
       {!certificate && (
         <Stack
           spacing={1}

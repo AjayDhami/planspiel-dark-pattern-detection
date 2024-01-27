@@ -185,10 +185,6 @@ const WebsiteDetailsModal = ({
 
           {website?.phase === "Published" && (
             <>
-              <Divider sx={{ mt: 2 }} />
-              <Typography variant="h6" component="h6" color="primary">
-                Website Certification
-              </Typography>
               {website.isCompleted && website.isDarkPatternFree && (
                 <CertificateSection {...website} />
               )}
