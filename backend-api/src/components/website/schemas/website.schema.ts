@@ -40,7 +40,7 @@ export class Website extends Document {
   @Prop({ default: Date.now, type: Date })
   createdAt: Date;
 
-  @Prop({ unique: true })
+  @Prop({ unique: true, sparse: true })
   certificationId: string;
 }
 
