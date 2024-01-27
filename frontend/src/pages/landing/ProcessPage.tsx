@@ -1,8 +1,5 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
-import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import { Box } from "@mui/material";
 
 import "./ProcessPage.css";
 
@@ -33,7 +30,7 @@ const ProcessPage = () => {
 
       <Box className="timeline">
         <Box className="timeline-container left-timeline-container">
-          <Box className="pic">{/* 1. <ModeCommentOutlinedIcon /> */}</Box>
+          <Box className="pic"></Box>
           <Box className="text-box">
             <h2
               style={{
