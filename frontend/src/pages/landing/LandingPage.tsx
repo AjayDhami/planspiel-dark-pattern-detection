@@ -4,6 +4,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import { motion } from "framer-motion";
+import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
 import ProcessPage from "./ProcessPage";
@@ -326,7 +327,6 @@ const LandingPage = () => {
         >
           <ServicePage />
         </Box>
-
         <Box
           sx={{
             height: { xs: "53rem", md: "25rem" },
@@ -443,7 +443,7 @@ const LandingPage = () => {
                     alignItems: "center",
                     flexDirection: "column",
                     color: "#cccc",
-                    fontSize: "1rem", // Adjust font size for smaller screens
+                    fontSize: "1rem",
                     marginTop: 2,
                   }}
                 >
@@ -478,7 +478,7 @@ const LandingPage = () => {
                     alignItems: "center",
                     flexDirection: "column",
                     color: "#cccc",
-                    fontSize: "1rem", // Adjust font size for smaller screens
+                    fontSize: "1rem",
                     marginTop: 2,
                   }}
                 >
@@ -490,11 +490,11 @@ const LandingPage = () => {
           <Box
             sx={{
               color: "white",
-              marginTop: "1rem", // Adjust margin for smaller screens
+              marginTop: "1rem",
               borderBottom: ".1rem solid #2B1B42",
               fontFamily: "var(--secular-font)",
-              fontSize: "1rem", // Adjust font size for smaller screens
-              textAlign: "center", // Center text for smaller screens
+              fontSize: "1rem",
+              textAlign: "center",
             }}
           >
             © V-Tenet 2024.

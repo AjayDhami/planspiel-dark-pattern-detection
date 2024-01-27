@@ -54,7 +54,7 @@ const ProcessPage = () => {
       </Box>
       <Box className="timeline">
         <Box className="timeline-container right-timeline-container">
-          <Box className="pic">{/* 1. <ModeCommentOutlinedIcon /> */}</Box>
+          <Box className="pic"></Box>
           <Box className="text-box">
             <h2
               style={{
@@ -75,7 +75,7 @@ const ProcessPage = () => {
       </Box>
       <Box className="timeline">
         <Box className="timeline-container left-timeline-container">
-          <Box className="pic">{/* 1. <ModeCommentOutlinedIcon /> */}</Box>
+          <Box className="pic"></Box>
           <Box className="text-box">
             <h2
               style={{
@@ -95,7 +95,7 @@ const ProcessPage = () => {
       </Box>
       <Box className="timeline">
         <Box className="timeline-container right-timeline-container">
-          <Box className="pic">{/* 1. <ModeCommentOutlinedIcon /> */}</Box>
+          <Box className="pic"></Box>
           <Box className="text-box">
             <h2
               style={{
