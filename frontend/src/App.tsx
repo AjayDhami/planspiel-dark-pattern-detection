@@ -11,13 +11,10 @@ import SignUp from "./pages/client/SignUpPage";
 import { AuthProvider } from "./context/AuthContext1";
 import LandingPage from "./pages/landing/LandingPage";
 import NavbarPage from "./pages/landing/NavbarPage";
-import CardFlip from "./pages/landing/CardFlip";
 import { ExpertProvider } from "./context/ExpertContext";
 import SuperAdmin from "./pages/superAdmin/SuperAdmin";
 import SuperAdminSignin from "./pages/superAdmin/SuperAdminSignin";
 import { AdminProvider } from "./context/AdminContext";
-
-import CardOverlap from "./pages/landing/CardOverlap";
 import ServicePage from "./pages/landing/ServicePage";
 import ProcessPage from "./pages/landing/ProcessPage";
 function App() {
@@ -25,30 +22,29 @@ function App() {
     <AuthProvider>
       <ExpertProvider>
         <AdminProvider>
-        <Routes>
-          {/* <!-- Common routes --> */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/cardflip" element={<CardFlip message={undefined} />} />
-          <Route path="/cardoverlap" element={<CardOverlap />} />
-          <Route path="/processpage" element={<ProcessPage />} />
-          <Route path="/servicepage" element={<ServicePage />} />
-          <Route path="/navbar" element={<NavbarPage />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/expertsignin" element={<ExpertSignin />} />
-          <Route path="/adminsignin" element={<SuperAdminSignin/>}/>
+          <Routes>
+            {/* <!-- Common routes --> */}
+            <Route path="/" element={<LandingPage />} />
 
-          {/* <!-- Client Dashboard routes --> */}
-          <Route path="/client" element={<ClientDashboardLayout />}>
-            {/* Redirect to actual dashboard instead of just layout page */}
-            <Route index element={<Navigate to="dashboard" replace />} />
-            <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="websites" element={<WebsiteViewPage />} />
-          </Route>
-          <Route path="/expert/dashboard" element={<ExpertDashboard />} />
-          <Route path="/expert/website" element={<WebsiteDashboard />} />
-          <Route path="/superAdmin" element={<SuperAdmin />} />
-        </Routes>
+            <Route path="/processpage" element={<ProcessPage />} />
+            <Route path="/servicepage" element={<ServicePage />} />
+            <Route path="/navbar" element={<NavbarPage />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/expertsignin" element={<ExpertSignin />} />
+            <Route path="/adminsignin" element={<SuperAdminSignin />} />
+
+            {/* <!-- Client Dashboard routes --> */}
+            <Route path="/client" element={<ClientDashboardLayout />}>
+              {/* Redirect to actual dashboard instead of just layout page */}
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="websites" element={<WebsiteViewPage />} />
+            </Route>
+            <Route path="/expert/dashboard" element={<ExpertDashboard />} />
+            <Route path="/expert/website" element={<WebsiteDashboard />} />
+            <Route path="/superAdmin" element={<SuperAdmin />} />
+          </Routes>
         </AdminProvider>
       </ExpertProvider>
     </AuthProvider>
