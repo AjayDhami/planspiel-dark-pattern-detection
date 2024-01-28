@@ -15,3 +15,10 @@ def create_dark_pattern_model():
 @cross_origin()
 def parse_website_for_dark_pattern_detection(website_id):
     return dark_pattern_service.parse_website_url(website_id, params=request.json)
+
+
+@dark_pattern.route('/freeCheck', methods=['GET'])
+@cross_origin()
+def free_verification():
+    return dark_pattern_service.free_verification(params=request.json)
+   
