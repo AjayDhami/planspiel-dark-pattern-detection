@@ -15,6 +15,7 @@ import LandingModal from "../../components/landing/LandingModal";
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
+  const [urlForCheck, setUrlForCheck] = useState<string>("");
 
   const handleClose = () => {
     setOpen(false);
@@ -50,7 +51,7 @@ const LandingPage = () => {
           backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
-        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose}/>
+        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} urlForCheck={urlForCheck?urlForCheck:""}/>
         <Box
           sx={{
             height: { xs: "100dvh", lg: "100dvh" },
@@ -91,8 +92,8 @@ const LandingPage = () => {
                 justifyContent="space-between"
                 className="input-box"
               >
-                <input type="text" placeholder="Enter Your URL Here......" />
-                <button className="search-btn">
+                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)}/>
+                <button className="search-btn" onClick={handleWebsiteSubmitClick}>
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
               </Box>
