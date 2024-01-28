@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Box, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
@@ -9,13 +9,24 @@ import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
 import ProcessPage from "./ProcessPage";
 import Typography from "@mui/material/Typography";
+import LandingModal from "../../components/landing/LandingModal";
 
 const LandingPage = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleWebsiteSubmitClick = () => {
+    setIsmodalOpen(true);
+    console.log(isModalOpen);
+  }
+
+  const handleWebsiteSubmitClose = () => {
+    setIsmodalOpen(false);
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,13 +42,14 @@ const LandingPage = () => {
           height: { xs: "auto", md: "auto", lg: "auto" },
           width: { xs: "100%", md: "100%", lg: "100%" },
           display: "flex",
-
+          zIndex: "0",
           alignItems: "center",
           flexDirection: "column",
           position: "sticky",
           backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
+        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose}/>
         <Box
           sx={{
             height: { xs: "100dvh", lg: "100dvh" },
@@ -84,7 +96,6 @@ const LandingPage = () => {
                     </form>
                   </Grid>
                   <Grid item md={4}>
-                    <Link href="/signup">
                       <Button
                         sx={{
                           color: "white",
@@ -95,10 +106,10 @@ const LandingPage = () => {
                           padding: ".5rem",
                           mt: 2,
                         }}
+                        onClick={handleWebsiteSubmitClick}
                       >
                         Visit Your Website for verification
                       </Button>
-                    </Link>
                   </Grid>
                 </Grid>
               </Box>

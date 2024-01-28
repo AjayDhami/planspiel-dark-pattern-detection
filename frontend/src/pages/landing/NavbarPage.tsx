@@ -137,7 +137,11 @@ const NavbarPage = () => {
             >
               <MenuItem onClick={handleClose}>As a Client</MenuItem>
             </Link>
-            <MenuItem onClick={handleClose}>As an Expert</MenuItem>
+            <Link
+              style={{ textDecoration: "none", color: "purple" }}
+              href="/expertsignin"
+            ><MenuItem onClick={handleClose}>As an Expert</MenuItem>
+            </Link>
           </Menu>
         </Toolbar>
       </AppBar>
