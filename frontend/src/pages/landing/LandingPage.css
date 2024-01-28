@@ -1,7 +1,6 @@
 .main-text {
   position: relative;
-  /* transform: translate(50%, -50%); */
-  font-size: 5dvw;
+  font-size: 4dvw;
   font-weight: 700;
   text-shadow: 1px 1px 1px #14213b, 1px 2px 1px #14213b, 1px 3px 1px #14213b,
     1px 4px 1px #14213b, 1px 5px 1px #14213b, 1px 6px 1px #14213b,
@@ -11,15 +10,12 @@
     1px 30px 60px rgba(16, 16, 16, 0.4);
   color: rgba(80, 123, 204, 0.8);
   line-height: 1.5;
-  /* color: rgba(59, 109, 202, 0.8); */
-  /* color:rgba(3, 47, 129, 0.859); */
   -webkit-text-stroke: 0.1vw #071d43;
   text-transform: uppercase;
 }
-.main-text1 {
+/* .main-text1 {
   position: relative;
   font-size: 3vw;
-  /* color: rgba(158, 75, 154, 0.859); */
   color: rgba(158, 75, 154, 0.859);
   -webkit-text-stroke: 0.1vw #2d1b2c;
   line-height: 1.5;
@@ -35,15 +31,6 @@
   transform-style: preserve-3d;
   letter-spacing: 1.2px;
 }
-/* .main-text3 {
-  position: relative;
-  font-size: 4vw;
-  color: rgb(131, 132, 134);
-  -webkit-text-stroke: 0.3vw rgb(18, 19, 19);
-  text-transform: capitalize;
-  transform-style: preserve-3d;
-  letter-spacing: 1px;
-} */
 
 .main-text2:before {
   content: attr(data-text);
@@ -58,19 +45,7 @@
   overflow: hidden;
   animation: animate 6s linear infinite;
 }
-/* .main-text3:before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  color: aqua;
-  -webkit-text-stroke: 0vw #0da3cd;
-  border-right: 2px solid #206264;
-  overflow: hidden;
-  animation: animate 6s linear infinite;
-} */
+
 @keyframes animate {
   0%,
   10%,
@@ -81,7 +56,7 @@
   90% {
     width: 100%;
   }
-}
+} */
 
 /* .........................................Partner........................................................ */
 
@@ -96,7 +71,6 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.4px);
   -webkit-backdrop-filter: blur(7.4px);
-  /* border: 1px solid rgba(255, 255, 255, 0.4); */
 }
 ._partner-items_ {
   display: flex;
@@ -129,3 +103,48 @@
   border: 0;
   outline: none;
 }
+/* --------------------------------------searchbox--------------------------------------- */
+.input-box {
+  height: 50px;
+  width: 80%;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 5px 10px rgba(3, 47, 129, 0.859);
+}
+
+.input-box input {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 0 0 0 20px;
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  border-radius: 30px;
+}
+
+.input-box .search-btn {
+  right: 0;
+  border: none;
+  padding: 12px 20px;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  cursor: pointer;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+/* @media only screen and (min-width: 600px) {
+  .input-box {
+    margin: 0 auto;
+  }
+
+  .input-box input {
+    width: 70%;
+    font-size: 18px;
+  }
+} */

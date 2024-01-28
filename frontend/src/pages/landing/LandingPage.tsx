@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, IconButton, Stack } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
+// import Link from "@mui/material/Link";
+// import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 import { motion } from "framer-motion";
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
@@ -58,32 +59,59 @@ const LandingPage = () => {
         >
           <NavbarPage />
 
-          <Grid container spacing={0}>
-            <Grid item md={7} xs={12}>
+          <Grid
+            container
+            spacing={0}
+            height={{
+              xs: "inherit",
+              md: "auto",
+            }}
+          >
+            <Grid
+              item
+              md={7}
+              xs={12}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <motion.span
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2 }}
+                className="my-4"
+              >
+                <h2 className="main-text">Let's Get Started</h2>
+              </motion.span>
+
               <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                className="input-box"
+              >
+                <input type="text" placeholder="Enter Your URL Here......" />
+                <button className="search-btn">
+                  <SendIcon sx={{ color: "#9fa2a5" }} />
+                </button>
+              </Box>
+
+              {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  height: "60dvh",
-                  //backgroundColor: "white",
                 }}
-              >
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.2 }}
-                >
-                  <h2 className="main-text">Let's Start With </h2>
-                </motion.span>
+              > */}
 
-                <h2 className="main-text1">Your Dark Pattern Detector</h2>
+              {/* <h2 className="main-text1">Your Dark Pattern Detector</h2>
                 <span data-text="GotYa!" className="main-text2">
                   GotYa!
-                </span>
-                <Grid container spacing={4}>
-                  <Grid item md={8}>
+                </span> */}
+
+              {/* <Grid item md={8}>
                     <form
                       className="footer-form"
                       style={{
@@ -94,8 +122,9 @@ const LandingPage = () => {
                     >
                       <input type="email" placeholder="Enter Your URL" />
                     </form>
-                  </Grid>
-                  <Grid item md={4}>
+                  </Grid> */}
+              {/* <Grid item md={4}>
+                    <Link href="/signup">
                       <Button
                         sx={{
                           color: "white",
@@ -110,9 +139,9 @@ const LandingPage = () => {
                       >
                         Visit Your Website for verification
                       </Button>
-                  </Grid>
-                </Grid>
-              </Box>
+                    </Link>
+                  </Grid> */}
+              {/* </Box> */}
             </Grid>
             <Grid item md={4}>
               <Box
@@ -155,7 +184,6 @@ const LandingPage = () => {
             marginTop: "2vw",
             height: { md: "40dvh" },
             width: { md: "100%" },
-            // backgroundColor: "rgba(110, 118, 129,.1)",
             display: "grid",
             placeItems: "center",
             fontSize: { xs: "1.5rem", md: "3rem" },
@@ -326,8 +354,6 @@ const LandingPage = () => {
         <Box>
           <ProcessPage />
         </Box>
-
-        <Box></Box>
         <Box
           sx={{
             height: "auto",
