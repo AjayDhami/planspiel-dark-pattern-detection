@@ -20,16 +20,22 @@ import {
 import { Formik, FieldArray, Field, Form } from "formik";
 import * as Yup from "yup";
 import { addWebsiteForCertification } from "../../api";
-import { WebsiteDetails, WebsiteOnboardingFormProps } from "../../types";
+import {
+  WebsiteDetails,
+  WebsiteOnboardingFormDetails,
+  WebsiteOnboardingFormProps,
+} from "../../types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { sanitizeStringArray } from "../../utils/DataHelper";
+import TermsAndConditions from "./TermsAndConditions";
 
-const initialValues: WebsiteDetails = {
+const initialValues: WebsiteOnboardingFormDetails = {
   websiteName: "",
   baseUrl: "",
   description: "",
   additionalUrls: [""],
+  acceptedTerms: false,
 };
 
 const validationSchema = Yup.object().shape({
@@ -54,6 +60,7 @@ const WebsiteOnboardingForm = ({
   onSuccess,
 }: WebsiteOnboardingFormProps) => {
   const [isFormLoading, setIsFormLoading] = useState<boolean>(false);
+  const [openTC, setOpenTC] = useState<boolean>(false);
 
   const handleClose = (
     event: React.SyntheticEvent<Element, Event>,
@@ -63,15 +70,26 @@ const WebsiteOnboardingForm = ({
     onClose();
   };
 
-  const handleSubmit = async (values: WebsiteDetails): Promise<void> => {
-    try {
-      setIsFormLoading(true);
+  const handleSubmit = async (
+    values: WebsiteOnboardingFormDetails
+  ): Promise<void> => {
+    if (values.acceptedTerms) {
+      try {
+        setIsFormLoading(true);
+        setOpenTC(false);
 
-      const sanitizedAdditionalUrls = values.additionalUrls
-        ? sanitizeStringArray(values.additionalUrls)
-        : [];
-      values.additionalUrls = sanitizedAdditionalUrls;
-      await addWebsiteForCertification(values);
+        const sanitizedAdditionalUrls = values.additionalUrls
+          ? sanitizeStringArray(values.additionalUrls)
+          : [];
+        values.additionalUrls = sanitizedAdditionalUrls;
+
+        const data: WebsiteDetails = {
+          websiteName: values.websiteName,
+          baseUrl: values.baseUrl,
+          additionalUrls: values.additionalUrls,
+          description: values.description,
+        };
+        await addWebsiteForCertification(data);
 
       toast.success("Website sent for certification. It may take some time for expert verification");
 
@@ -85,7 +103,10 @@ const WebsiteOnboardingForm = ({
         toast.error("An unknown error occurred.");
       }
     }
-  };
+  } else {
+    setOpenTC(true)
+  }
+}
 
   useEffect(() => {
     return () => {
@@ -126,7 +147,7 @@ const WebsiteOnboardingForm = ({
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ values, errors, touched }) => (
+          {({ values, errors, touched, handleSubmit, setFieldValue }) => (
             <Form noValidate>
               <Grid container spacing={2} sx={{ mt: 0 }}>
                 <Grid item xs={12} md={6}>
@@ -261,6 +282,14 @@ const WebsiteOnboardingForm = ({
                   </Button>
                 </Grid>
               </Grid>
+              <TermsAndConditions
+                open={openTC}
+                onAccept={() => {
+                  setFieldValue("acceptedTerms", true);
+                  handleSubmit();
+                }}
+                onReject={() => setOpenTC(false)}
+              />
             </Form>
           )}
         </Formik>

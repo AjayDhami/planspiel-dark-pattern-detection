@@ -66,6 +66,14 @@ export interface WebsiteDetails
     "websiteName" | "baseUrl" | "description" | "additionalUrls"
   > {}
 
+export interface WebsiteOnboardingFormDetails
+  extends Pick<
+    Website,
+    "websiteName" | "baseUrl" | "description" | "additionalUrls"
+  > {
+  acceptedTerms: boolean;
+}
+
 export interface WebsiteOnboardingFormProps {
   open: boolean;
   onClose: () => void;
