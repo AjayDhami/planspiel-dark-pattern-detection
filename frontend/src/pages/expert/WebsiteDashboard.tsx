@@ -14,6 +14,10 @@ import { Avatar, Tooltip} from '@mui/material';
 import LoadingPatternCard from '../../components/expert/LoadingPatternCard';
 import LoadingCards from '../../components/expert/LoadingCards';
 import PublishForm from '../../components/expert/PublishForm';
+import {
+  OpenInNew as OpenInNewIcon,
+} from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 
 const WebsiteDashboard = () => {
@@ -203,7 +207,10 @@ const WebsiteDashboard = () => {
                 (!isPublishBtnDisabled ? <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} onClick={handlePublish}>Publish</button> : <button className={`${bgForPublishBtn} px-3 py-2 rounded-lg text-white`} >Publish</button> )  
               : websiteData.phase==="Published" ? <Tooltip title={websiteData.phaseText} arrow><p className='p-2 border-2 border-green-300 rounded-md text-green-500 font-bold'>Published</p></Tooltip> : null}
             </div>
-            <div className='text-lg px-2'>{websiteData.baseUrl}</div>
+            <Link to={websiteData.baseUrl} target="_blank" className='text-blue-500'>
+              {websiteData.baseUrl}&nbsp;
+              <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
+            </Link>
             <div className='mt-3'>
               <div className='w-full bg-gray-200 py-2 px-2 mt-2 rounded-lg'>
                 <h2 className='font-bold'>Description</h2>
