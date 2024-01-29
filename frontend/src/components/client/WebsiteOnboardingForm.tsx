@@ -73,7 +73,7 @@ const WebsiteOnboardingForm = ({
       values.additionalUrls = sanitizedAdditionalUrls;
       await addWebsiteForCertification(values);
 
-      toast.success("Website sent for certification");
+      toast.success("Website sent for certification. It may take some time for expert verification");
 
       setIsFormLoading(false);
       onSuccess();
