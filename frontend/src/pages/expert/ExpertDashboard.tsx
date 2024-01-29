@@ -73,14 +73,14 @@ const ExpertDashboard : React.FC = () => {
                         <div className="flex justify-between items-center">
                             <h2 className='font-bold text-xl text-blue-500'>{website.websiteName}</h2>
                             <Tooltip title={website.hoverText} arrow>
-                                <div className={`p-2 rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
+                                <div className={`p-2 font-bold text-white rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
                             </Tooltip>
                         </div>
                         <p>{website.baseUrl}</p>
                         <button 
                             className='w-full my-4 py-1 px-2 border-2 border-blue-500 rounded-xl font-bold hover:bg-blue-300'
                                 onClick={() => handleClick(website.websiteId, website.websiteName)}
-                            >Go To Website
+                            >Website Dashboard
                         </button>
                     </div>
                 </div>

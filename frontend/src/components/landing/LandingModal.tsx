@@ -1,7 +1,8 @@
 import React from 'react'
-import { Dialog, DialogTitle, Typography, Box} from '@mui/material'
+import { Dialog, DialogTitle, Typography, Box, Button} from '@mui/material'
 import {styled} from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import '../../index.css'
 
 interface LandingModalProps {
     isOpen : boolean,
@@ -27,13 +28,14 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, urlForCheck}
     <Dialog open={isOpen} onClose={onClose} fullScreen={false} maxWidth="md" fullWidth>
       <DialogTitle
         sx={{
+          display:"flex",
           fontStyle:"normal",
           justifyContent: "center",
           alignItems:"center"
         }}
       >
         <Typography variant="h5" component="span">
-          Pattern Check by V-Tenet AI
+          Pattern Check by <span className="font-CustomFont font-bold text-blue-500">VORT</span>
         </Typography>
       </DialogTitle>
       <Box
@@ -41,47 +43,28 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, urlForCheck}
           margin:"2rem"
         }}
       >
-        <BorderLinearProgress variant='determinate' value={50}/>
+        <BorderLinearProgress variant='determinate' value={percentage}/>
+        <Typography sx={{display: "flex",justifyContent:"center", alignContent:"center", marginTop:"0.5rem"}}>{percentage}% dark pattern free text</Typography>
       </Box>
-      <Box>
-        <Typography>
-          {percentage===100 ? "Your website doesn't contain any dark patterns" : `${percentage}% of your website text can potentially be dark patterns`}
+      <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>
+        <Typography sx={{marginInline:"2rem", fontSize:"1.5rem"}}>
+          {percentage===100 ? "Congratulations, vort didn't detect any potential dark pattern in your website" : `${percentage}% of your website text can potentially be dark patterns`}
         </Typography>
       </Box>
-      {/* <Grid
-        container
-        spacing={0}
-        height={{
-          xs: "inherit",
-          md: "auto",
-        }}
-      >
-        <Grid
-          item
-          md={7}
-          xs={12}
-          display="flex"
-          flexDirection="column"
-          alignItems="start"
-          justifyContent="start"
+      <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>
+        <Typography sx={{marginInline:"2rem", fontSize:"1.5rem"}}>
+          Register with vort to get in depth expert evaluation and certification 
+        </Typography>
+      </Box>
+      <Box sx={{display: "flex",justifyContent:"center", alignContent:"center", marginBottom:"2rem", marginTop:"1rem"}}>
+        <Button
+          type="submit"
+          variant="contained"
         >
-          <h2>{urlForCheck}</h2>
-        </Grid>
-        <Grid item md={4} xs={12}>
-        <PieChart
-          series={[
-          {
-            data: [
-              { id: 0, value: 90},
-              { id: 1, value: 10}
-            ],
-          },
-          ]}
-          width={350}
-          height={200}
-        />
-        </Grid>
-      </Grid> */}
+          Register
+        </Button>
+      </Box>
+      <p className='flex justify-center pb-3 px-3 text-gray-400 text-sm'>Vort is our AI tool which detects presence of dark patterns in websites. The vort detections may not be accurate every time</p>
     </Dialog>
   )
 }

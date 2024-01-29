@@ -96,3 +96,9 @@ export const generateCertification = async (websiteId: string) => {
     throw error;
   }
 };
+
+export const getPatternPercentage = async (websiteUrl: string) => {
+  const body = {
+    url : websiteUrl
+  }
+}

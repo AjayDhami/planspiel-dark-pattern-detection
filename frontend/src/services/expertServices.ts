@@ -26,7 +26,7 @@ const getWebsites = async(id:String) => {
         website.hoverText = "Published without certification"
       }
       else if(website.phase==="Published" && website.isDarkPatternFree === true){
-        website.phaseColor = "bg-[#E6321D]"
+        website.phaseColor = "bg-[#538D3F]"
         website.phaseText = "Published"
         website.hoverText = "Published with certification"
       }

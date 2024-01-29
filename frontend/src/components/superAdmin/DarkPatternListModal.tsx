@@ -39,7 +39,13 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
   };
 
   const handleExpertSubmitted = () =>{
-    setAssignExpert(false);
+    if(patterns.length===0){
+      onClose();
+      window.location.reload();
+    }
+    else{
+      setAssignExpert(false);
+    }
   }
 
   const handleSubmit = async() => { 

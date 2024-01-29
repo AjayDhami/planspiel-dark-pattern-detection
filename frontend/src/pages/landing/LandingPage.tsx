@@ -81,9 +81,9 @@ const LandingPage = () => {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2 }}
-                className="my-4"
+                className="my-6"
               >
-                <h2 className="main-text">Let's Get Started</h2>
+                <h2 className="main-text">Get Started with <span className="text-blue-500">Vort</span></h2>
               </motion.span>
 
               <Box
@@ -164,17 +164,18 @@ const LandingPage = () => {
                     backgroundColor: "transparent",
                   }}
                 />
-                <Box
+                {/* <Box
                   sx={{
                     fontSize: "1.5rem",
                     fontFamily: "monospace",
                     fontStyle: "revert-layer",
                     fontWeight: "900",
-                    color: "white",
+                    marginLeft:"3rem"
                   }}
+                  className="text-slate-500"
                 >
-                  Dark Patterns Detected By GotYa
-                </Box>
+                  Dark Pattern Detection By Vort
+                </Box> */}
               </Box>
             </Grid>
           </Grid>
