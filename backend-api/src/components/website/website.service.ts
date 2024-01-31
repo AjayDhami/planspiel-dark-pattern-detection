@@ -144,21 +144,35 @@ export class WebsiteService {
     );
   }
 
-  async addImagesInPattern(patternId: string, files: any) {
-    const pattern = await this.checkPatternExists(patternId);
-
+  private createS3Client() {
     const region = this.configService.get<string>('AWS_REGION');
     const accessKey = this.configService.get<string>('AWS_ACCESS_KEY');
     const secretKey = this.configService.get<string>('AWS_SECRET_KEY');
-    const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
 
-    const s3Client: S3Client = new S3Client({
+    return new S3Client({
       region: region,
       credentials: {
         accessKeyId: accessKey,
         secretAccessKey: secretKey,
       },
     });
+  }
+
+  private async executePutObjectCommand(params: any) {
+    const s3Client = this.createS3Client();
+    const putCommand = new PutObjectCommand(params);
+    return await s3Client.send(putCommand);
+  }
+
+  private async executeGetObjectCommand(params: any) {
+    const s3Client = this.createS3Client();
+    const getCommand = new GetObjectCommand(params);
+    return await getSignedUrl(s3Client, getCommand, { expiresIn: 3600 });
+  }
+
+  async addImagesInPattern(patternId: string, files: any) {
+    const pattern = await this.checkPatternExists(patternId);
+    const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
 
     const uploadPromises = files.map(async (file) => {
       const { originalname, buffer } = file;
@@ -170,7 +184,7 @@ export class WebsiteService {
         Body: buffer,
       };
 
-      await s3Client.send(new PutObjectCommand(params));
+      await this.executePutObjectCommand(params);
       return fileKey;
     });
 
@@ -186,19 +200,7 @@ export class WebsiteService {
 
   async fetchImageFromPattern(patternId: string) {
     const pattern = await this.checkPatternExists(patternId);
-
-    const region = this.configService.get<string>('AWS_REGION');
-    const accessKey = this.configService.get<string>('AWS_ACCESS_KEY');
-    const secretKey = this.configService.get<string>('AWS_SECRET_KEY');
     const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
-
-    const s3Client: S3Client = new S3Client({
-      region: region,
-      credentials: {
-        accessKeyId: accessKey,
-        secretAccessKey: secretKey,
-      },
-    });
 
     const patternImageUrls = await Promise.all(
       pattern.patternImageKeys.map(async (key) => {
@@ -207,10 +209,7 @@ export class WebsiteService {
           Key: key,
         };
 
-        const getCommand = new GetObjectCommand(params);
-        return await getSignedUrl(s3Client, getCommand, {
-          expiresIn: 3600,
-        });
+        return await this.executeGetObjectCommand(params);
       }),
     );
 
