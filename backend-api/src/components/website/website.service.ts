@@ -23,15 +23,8 @@ import { WebsitePhaseType } from './enum/website-phase.enum';
 import { PublishCertificationDto } from './dto/publish-certification.dto';
 import { ExpertVerificationDto } from './dto/expert-verification.dto';
 import { ConfigService } from '@nestjs/config';
-import {
-  GetObjectCommand,
-  PutObjectCommand,
-  S3Client,
-} from '@aws-sdk/client-s3';
 import { v4 as uuid } from 'uuid';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { SendEmailCommand, SESClient } from '@aws-sdk/client-ses';
-import { User } from '../user/schemas/user.schema';
+import { AwsHelper } from '../aws/aws.helper';
 
 @Injectable()
 export class WebsiteService {
@@ -41,6 +34,7 @@ export class WebsiteService {
     @InjectModel(Comment.name) private readonly commentModel: Model<Comment>,
     private readonly userService: UserService,
     private configService: ConfigService,
+    private readonly awsHelper: AwsHelper,
   ) {}
 
   async persistWebsiteDetails(websiteCreateDto: WebsiteCreateDto) {
@@ -160,7 +154,7 @@ export class WebsiteService {
         Body: buffer,
       };
 
-      await this.executePutObjectCommand(params);
+      await this.awsHelper.executePutObjectCommand(params);
       return fileKey;
     });
 
@@ -185,7 +179,7 @@ export class WebsiteService {
           Key: key,
         };
 
-        return await this.executeGetObjectCommand(params);
+        return await this.awsHelper.executeGetObjectCommand(params);
       }),
     );
 
@@ -525,7 +519,7 @@ export class WebsiteService {
 
     try {
       const updatedWebsite = await website.save();
-      await this.executeSendEmailCommand(client, updatedWebsite);
+      await this.awsHelper.executeSendEmailCommand(client, updatedWebsite);
       return {
         message: `Certification details successfully published for website with id ${updatedWebsite._id}`,
       };
@@ -789,76 +783,5 @@ export class WebsiteService {
   private async getUserName(userId: string) {
     const user = await this.checkUserExists(userId);
     return user.firstName + ' ' + user.lastName;
-  }
-
-  private fetchAWSCredentials() {
-    const region = this.configService.get<string>('AWS_REGION');
-    const accessKey = this.configService.get<string>('AWS_ACCESS_KEY');
-    const secretKey = this.configService.get<string>('AWS_SECRET_KEY');
-
-    return {
-      region: region,
-      credentials: {
-        accessKeyId: accessKey,
-        secretAccessKey: secretKey,
-      },
-    };
-  }
-
-  private createS3Client() {
-    const credentials = this.fetchAWSCredentials();
-    return new S3Client(credentials);
-  }
-
-  private createSESClient() {
-    const awsCredentials = this.fetchAWSCredentials();
-    return new SESClient(awsCredentials);
-  }
-
-  private async executePutObjectCommand(params: any) {
-    const s3Client = this.createS3Client();
-    const putCommand = new PutObjectCommand(params);
-    return await s3Client.send(putCommand);
-  }
-
-  private async executeGetObjectCommand(params: any) {
-    const s3Client = this.createS3Client();
-    const getCommand = new GetObjectCommand(params);
-    return await getSignedUrl(s3Client, getCommand, { expiresIn: 3600 });
-  }
-
-  private async executeSendEmailCommand(client: User, website: Website) {
-    const sesClient = this.createSESClient();
-
-    const to = client.email;
-    const from = 'vtenet125@gmail.com';
-    const subject = 'Website Published';
-    const body = `
-      <p>Dear ${client.firstName} ${client.lastName},</p>
-      <p>Your website <strong>${website.websiteName}</strong> has been successfully published.</p>
-      <p>To see more details, please visit the Vort homepage.</p>
-      <p>Sincerely,<br/>The Vort Team</p>
-    `;
-
-    const sendEmailCommand = new SendEmailCommand({
-      Destination: {
-        ToAddresses: [to],
-      },
-      Message: {
-        Body: {
-          Html: {
-            Charset: 'UTF-8',
-            Data: body,
-          },
-        },
-        Subject: {
-          Charset: 'UTF-8',
-          Data: subject,
-        },
-      },
-      Source: from,
-    });
-
-    await sesClient.send(sendEmailCommand);
   }
 }

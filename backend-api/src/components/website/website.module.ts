@@ -11,6 +11,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { User, UserSchema } from 'src/components/user/schemas/user.schema';
 import { Pattern, PatternSchema } from './schemas/pattern.schema';
 import { Comment, CommentSchema } from './schemas/comment.schema';
+import { AwsHelper } from '../aws/aws.helper';
 
 @Module({
   imports: [
@@ -30,6 +31,6 @@ import { Comment, CommentSchema } from './schemas/comment.schema';
     ConfigModule,
   ],
   controllers: [WebsiteController],
-  providers: [WebsiteService, UserService, AuthGuard],
+  providers: [WebsiteService, UserService, AuthGuard, AwsHelper],
 })
 export class WebsiteModule {}
