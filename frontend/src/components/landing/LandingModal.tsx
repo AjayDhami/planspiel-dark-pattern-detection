@@ -2,16 +2,15 @@ import React from 'react'
 import { Dialog, DialogTitle, Typography, Box, Button} from '@mui/material'
 import {styled} from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import '../../index.css'
+import '../../index.css';
 
 interface LandingModalProps {
     isOpen : boolean,
     onClose: () => void,
-    urlForCheck: string,
+    percentage: number,
 }
 
-const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, urlForCheck}) => {
-  let percentage = 100
+const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, percentage}) => {
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 20,
     borderRadius: 5,
@@ -48,7 +47,7 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, urlForCheck}
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>
         <Typography sx={{marginInline:"2rem", fontSize:"1.5rem"}}>
-          {percentage===100 ? "Congratulations, vort didn't detect any potential dark pattern in your website" : `${percentage}% of your website text can potentially be dark patterns`}
+          {percentage===100 ? "Congratulations, vort didn't detect any potential dark pattern in your website" : `Only ${100-percentage}% of your website text can potentially be dark patterns`}
         </Typography>
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Box, Grid, IconButton, Stack } from "@mui/material";
+import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 // import Link from "@mui/material/Link";
 // import Button from "@mui/material/Button";
@@ -11,23 +11,50 @@ import ServicePage from "./ServicePage";
 import ProcessPage from "./ProcessPage";
 import Typography from "@mui/material/Typography";
 import LandingModal from "../../components/landing/LandingModal";
+import { getPatternPercentage } from '../../api';
+import LinearProgress from '@mui/material/LinearProgress';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
+  const [isLoadingOpen, setIsLoadingOpen] = useState<boolean>(false);
   const [urlForCheck, setUrlForCheck] = useState<string>("");
+  const [percentage, setPercentage] = useState<number>();
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleWebsiteSubmitClick = () => {
-    setIsmodalOpen(true);
-    console.log(isModalOpen);
+  const handleWebsiteSubmitClick = async() => {
+    //setIsmodalOpen(true);
+    setIsLoadingOpen(true);
+    const data = await getPatternPercentage(urlForCheck);
+    if(data.Percentage){
+      setUrlForCheck("");
+      setIsLoadingOpen(false);
+      setPercentage(data.Percentage);
+      setIsmodalOpen(true);
+    }
+    else{
+      setIsLoadingOpen(false);
+      setUrlForCheck("");
+      toast.error("Error while running detetction, try again", {
+          position: toast.POSITION.TOP_CENTER
+      });
+    }
+    console.log(data);
   }
 
   const handleWebsiteSubmitClose = () => {
     setIsmodalOpen(false);
+    setUrlForCheck("");
+  }
+
+  const handleLoadingClose = () => {
+    setIsLoadingOpen(false);
+    setUrlForCheck("");
   }
 
   const handleOpen = () => {
@@ -51,7 +78,28 @@ const LandingPage = () => {
           backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
-        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} urlForCheck={urlForCheck?urlForCheck:""}/>
+        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} percentage={percentage ? percentage : 0 }/>
+        <Dialog open={isLoadingOpen} onClose={handleLoadingClose} fullScreen={false} maxWidth="md" fullWidth>
+          <DialogTitle
+            sx={{
+            display:"flex",
+            fontStyle:"normal",
+            justifyContent: "center",
+            alignItems:"center"
+            }}
+          >
+            <Typography variant="h5" component="span">
+              Pattern Check by <span className="font-CustomFont font-bold text-blue-500">VORT</span>
+            </Typography>
+          </DialogTitle>
+          <Box
+            sx={{
+            margin:"2rem"
+            }}
+          >
+            <LinearProgress/>
+          </Box>
+        </Dialog>
         <Box
           sx={{
             height: { xs: "100dvh", lg: "100dvh" },
@@ -92,7 +140,7 @@ const LandingPage = () => {
                 justifyContent="space-between"
                 className="input-box"
               >
-                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)}/>
+                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck}/>
                 <button className="search-btn" onClick={handleWebsiteSubmitClick}>
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
