@@ -113,6 +113,11 @@ export class WebsiteController {
   }
 
   @Put(':patternId/uploadImages')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Expert)
+  @ApiOperation({
+    summary: 'Add images for the detected pattern [For Expert]',
+  })
   @UseInterceptors(FilesInterceptor('files'))
   async addImageInPattern(
     @Param('patternId') patternId: string,

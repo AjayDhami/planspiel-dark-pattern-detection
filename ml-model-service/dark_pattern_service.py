@@ -22,6 +22,7 @@ def parse_website_url(website_id, params):
 
     return jsonify(dark_patterns)
 
+
 def free_verification(params):
     website_url = params['url']
     result = web_scrap(website_url, '65b3de8af380a27e55c21102')
