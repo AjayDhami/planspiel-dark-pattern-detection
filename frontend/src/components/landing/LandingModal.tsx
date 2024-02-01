@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, Typography, Box, Button} from '@mui/material'
 import {styled} from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import '../../index.css';
+import Link from "@mui/material/Link";
 
 interface LandingModalProps {
     isOpen : boolean,
@@ -56,12 +57,14 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, percentage})
         </Typography>
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center", marginBottom:"2rem", marginTop:"1rem"}}>
+        <Link href="/signup">
         <Button
           type="submit"
           variant="contained"
         >
           Register
         </Button>
+        </Link>
       </Box>
       <p className='flex justify-center pb-3 px-3 text-gray-400 text-sm'>Vort is our AI tool which detects presence of dark patterns in websites. The vort detections may not be accurate every time</p>
     </Dialog>

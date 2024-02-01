@@ -28,8 +28,13 @@ const LandingPage = () => {
   };
 
   const handleWebsiteSubmitClick = async() => {
-    //setIsmodalOpen(true);
-    setIsLoadingOpen(true);
+    if(urlForCheck===""){
+      toast.error("Please Enter the url", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+    else{
+      setIsLoadingOpen(true);
     const data = await getPatternPercentage(urlForCheck);
     if(data.Percentage){
       setUrlForCheck("");
@@ -44,7 +49,7 @@ const LandingPage = () => {
           position: toast.POSITION.TOP_CENTER
       });
     }
-    console.log(data);
+    }
   }
 
   const handleWebsiteSubmitClose = () => {
@@ -140,7 +145,7 @@ const LandingPage = () => {
                 justifyContent="space-between"
                 className="input-box"
               >
-                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck}/>
+                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck} required/>
                 <button className="search-btn" onClick={handleWebsiteSubmitClick}>
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
