@@ -1,11 +1,70 @@
-import React from "react";
-import { Box, Grid } from "@mui/material";
-import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
+import React, {useState} from "react";
+import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+// import Link from "@mui/material/Link";
+// import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 import { motion } from "framer-motion";
 import "./LandingPage.css";
-import CardFlip from "./CardFlip";
+import NavbarPage from "./NavbarPage";
+import ServicePage from "./ServicePage";
+import ProcessPage from "./ProcessPage";
+import Typography from "@mui/material/Typography";
+import LandingModal from "../../components/landing/LandingModal";
+import { getPatternPercentage } from '../../api';
+import LinearProgress from '@mui/material/LinearProgress';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const LandingPage = () => {
+  const [open, setOpen] = useState(false);
+  const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
+  const [isLoadingOpen, setIsLoadingOpen] = useState<boolean>(false);
+  const [urlForCheck, setUrlForCheck] = useState<string>("");
+  const [percentage, setPercentage] = useState<number>();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleWebsiteSubmitClick = async() => {
+    if(urlForCheck===""){
+      toast.error("Please Enter the url", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+    else{
+      setIsLoadingOpen(true);
+    const data = await getPatternPercentage(urlForCheck);
+    if(data.Percentage){
+      setUrlForCheck("");
+      setIsLoadingOpen(false);
+      setPercentage(data.Percentage);
+      setIsmodalOpen(true);
+    }
+    else{
+      setIsLoadingOpen(false);
+      setUrlForCheck("");
+      toast.error("Error while running detetction, try again", {
+          position: toast.POSITION.TOP_CENTER
+      });
+    }
+    }
+  }
+
+  const handleWebsiteSubmitClose = () => {
+    setIsmodalOpen(false);
+    setUrlForCheck("");
+  }
+
+  const handleLoadingClose = () => {
+    setIsLoadingOpen(false);
+    setUrlForCheck("");
+  }
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <>
       <Box
@@ -13,273 +72,524 @@ const LandingPage = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          height: "auto",
-          width: "100%",
+          backgroundAttachment: "fixed",
+          height: { xs: "auto", md: "auto", lg: "auto" },
+          width: { xs: "100%", md: "100%", lg: "100%" },
           display: "flex",
-          justifyContent: "center",
+          zIndex: "0",
           alignItems: "center",
           flexDirection: "column",
-          position: "",
-          backgroundImage: `linear-gradient(
-          to left,
-          rgba(2, 24, 77, 0.984),
-          rgba(3, 47, 129, 0.859)
-        ), url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
+          position: "sticky",
+          backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
+        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} percentage={percentage ? percentage : 0 }/>
+        <Dialog open={isLoadingOpen} onClose={handleLoadingClose} fullScreen={false} maxWidth="md" fullWidth>
+          <DialogTitle
+            sx={{
+            display:"flex",
+            fontStyle:"normal",
+            justifyContent: "center",
+            alignItems:"center"
+            }}
+          >
+            <Typography variant="h5" component="span">
+              Pattern Check by <span className="font-CustomFont font-bold text-blue-500">VORT</span>
+            </Typography>
+          </DialogTitle>
+          <Box
+            sx={{
+            margin:"2rem"
+            }}
+          >
+            <LinearProgress/>
+          </Box>
+        </Dialog>
         <Box
           sx={{
-            height: "100dvh",
-            width: "90%",
-            display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
-            flexDirection: "column",
-            backgroundColor: "",
+            height: { xs: "100dvh", lg: "100dvh" },
+            width: { xs: "100%", lg: "100%" },
           }}
         >
-          <Grid md={12}>
-            <div className="landingpage-navbar">
-              <div className="wrapper">
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.2 }}
-                >
-                  <Link href="/" sx={{ m: 1 }}>
-                    <img
-                      src="/assets/logo.png"
-                      alt="..."
-                      style={{
-                        width: "5rem",
-                        height: "5rem",
-                      }}
-                    />
-                  </Link>
-                </motion.span>
-                <div>
-                  <Link href="/signin">
-                    <Button className="navbar-btn" variant="outlined">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button className="navbar-btn" variant="outlined">
-                      Sign UP
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Grid>
-          <Grid container spacing={0}>
-            <Grid item md={7}>
+          <NavbarPage />
+
+          <Grid
+            container
+            spacing={0}
+            height={{
+              xs: "inherit",
+              md: "auto",
+            }}
+          >
+            <Grid
+              item
+              md={7}
+              xs={12}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <motion.span
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2 }}
+                className="my-6"
+              >
+                <h2 className="main-text">Get Started with <span className="text-blue-500">Vort</span></h2>
+              </motion.span>
+
               <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                className="input-box"
+              >
+                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck} required/>
+                <button className="search-btn" onClick={handleWebsiteSubmitClick}>
+                  <SendIcon sx={{ color: "#9fa2a5" }} />
+                </button>
+              </Box>
+
+              {/* <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  backgroundColor: "black",
                 }}
-              >
-                Box1
-              </Box>
+              > */}
+
+              {/* <h2 className="main-text1">Your Dark Pattern Detector</h2>
+                <span data-text="GotYa!" className="main-text2">
+                  GotYa!
+                </span> */}
+
+              {/* <Grid item md={8}>
+                    <form
+                      className="footer-form"
+                      style={{
+                        paddingTop: "2rem",
+                        display: "flex",
+                        padding: "1rem",
+                      }}
+                    >
+                      <input type="email" placeholder="Enter Your URL" />
+                    </form>
+                  </Grid> */}
+              {/* <Grid item md={4}>
+                    <Link href="/signup">
+                      <Button
+                        sx={{
+                          color: "white",
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                          borderRadius: "1rem",
+                          border: ".1rem solid cyan ",
+                          padding: ".5rem",
+                          mt: 2,
+                        }}
+                        onClick={handleWebsiteSubmitClick}
+                      >
+                        Visit Your Website for verification
+                      </Button>
+                    </Link>
+                  </Grid> */}
+              {/* </Box> */}
             </Grid>
             <Grid item md={4}>
               <Box
                 sx={{
-                  display: "flex",
+                  display: { xs: "none", md: "flex" },
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  backgroundColor: "red",
+                  backgroundColor: "",
                 }}
               >
-                Box2
+                <img
+                  src="/assets/2.png"
+                  alt="..."
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    marginLeft: "5rem",
+                    backgroundColor: "transparent",
+                  }}
+                />
+                {/* <Box
+                  sx={{
+                    fontSize: "1.5rem",
+                    fontFamily: "monospace",
+                    fontStyle: "revert-layer",
+                    fontWeight: "900",
+                    marginLeft:"3rem"
+                  }}
+                  className="text-slate-500"
+                >
+                  Dark Pattern Detection By Vort
+                </Box> */}
               </Box>
             </Grid>
           </Grid>
         </Box>
+        {/* -------------------------------------------Section2------------------------------------------------- */}
         <Box
           sx={{
-            height: "100dvh",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            // backgroundImage: `linear-gradient(to right,rgb(0,15,45) 40%,rgb(0, 5, 14))`,
-            //backgroundColor: "white",
+            marginTop: "2vw",
+            height: { md: "40dvh" },
+            width: { md: "100%" },
+            display: "grid",
+            placeItems: "center",
+            fontSize: { xs: "1.5rem", md: "3rem" },
           }}
         >
-          <Box
-            sx={{
-              height: "10dvh",
-              width: "100rem",
-              justifyContent: "end",
-              alignItems: "end",
-              //backgroundColor: "green",
-              fontSize: "2rem",
+          <h1
+            style={{
+              padding: "5px",
+              margin: "5px 0px",
+              color: "rgb(110, 118, 129)",
+              fontWeight: "600",
             }}
           >
-            Dark Pattrens
+            Our Valuable Customer
+          </h1>
+          <Box className="_partner_">
+            <Box className="_partner-items_">
+              <img
+                src="/assets/binarybrenz_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                }}
+              />
+              <img
+                src="/assets/vps_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/webwizards_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+
+              <img
+                src="/assets/binarybrenz_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                }}
+              />
+              <img
+                src="/assets/vps_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/webwizards_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/logo.png"
+                alt="..."
+                style={{
+                  width: "6%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/vps_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/binarybrenz_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                }}
+              />
+              <img
+                src="/assets/logo.png"
+                alt="..."
+                style={{
+                  width: "6%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/webwizards_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+
+              <img
+                src="/assets/binarybrenz_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                }}
+              />
+              <img
+                src="/assets/logo.png"
+                alt="..."
+                style={{
+                  width: "6%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+              <img
+                src="/assets/binarybrenz_logo.png"
+                alt="..."
+                style={{
+                  width: "12%",
+                  height: "",
+                  margin: "20px",
+                }}
+              />
+              <img
+                src="/assets/logo.png"
+                alt="..."
+                style={{
+                  width: "6%",
+                  height: "",
+                  margin: "20px",
+                  backgroundColor: "",
+                }}
+              />
+            </Box>
           </Box>
-          <Grid container rowSpacing={2}>
-            <Grid container spacing={4}>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-              <Grid item md={4}>
-                <CardFlip />
-              </Grid>
-            </Grid>
-          </Grid>
+        </Box>
+        <Box>
+          <ProcessPage />
         </Box>
         <Box
           sx={{
-            height: "70dvh",
+            height: "auto",
+            width: "90%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <ServicePage />
+        </Box>
+        <Box
+          sx={{
+            height: { xs: "53rem", md: "25rem" },
             width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            //backgroundImage: `linear-gradient(to right,rgb(0,15,45) 40%,rgb(0, 5, 14))`,
+            background: "rgba(255,255,255,.1)",
+            backdropFilter: "blur(10px)",
+            marginTop: { xs: "3rem", md: "5rem" },
           }}
         >
-          <Box
-            sx={{
-              height: "70rem",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              //backgroundColor: "rgb(0, 153, 255)",
-              //backgroundImage: `linear-gradient(to right,rgb(0,15,45) 40%,rgb(0, 5, 14))`,
-              margin: "10rem",
-              //border: ".1rem solid  rgb(0, 153, 255)",
-            }}
-          >
-            <Grid container spacing={6}>
-              <Grid item xs={12} md={4}>
-                <Box
-                  sx={{
-                    height: "auto",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    // backgroundColor: "",
-                    color: "white",
-                    fontStyle: "revert-layer",
-                    fontSize: "2.5rem",
-                    fontWeight: "bold",
-                  }}
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={4}>
+              <Box
+                sx={{
+                  height: { xs: "auto", md: "auto" },
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  color: "white",
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                <Tooltip
+                  open={open}
+                  onClose={handleClose}
+                  onOpen={handleOpen}
+                  title={
+                    <Box>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontSize: "1rem", padding: 0 }}
+                      >
+                        This Website is Dark Pattern Free
+                      </Typography>
+                      <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
+                        Certificate ID: GVBX23GER019
+                      </Typography>
+                    </Box>
+                  }
+                  placement="left"
                 >
-                  V-TENET
-                  <Link href="/signup">
-                    <Button
-                      sx={{
-                        color: "white",
-                        fontSize: "1rem",
-                        fontWeight: "bold",
-                        borderRadius: "1rem",
-                        border: ".1rem solid  rgb(0, 153, 255)",
-                        padding: ".5rem",
-                        mt: 2,
-                      }}
-                    >
-                      Get Start
-                    </Button>
-                  </Link>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box
-                  sx={{
-                    height: "auto",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    backgroundColor: "",
-                    color: "white",
-                    fontStyle: "revert-layer",
-                    fontSize: "1.7rem",
-                  }}
-                >
-                  Features
                   <Box
                     sx={{
-                      height: "auto",
-                      width: "100%",
+                      width: "180px",
+                      height: "180px",
+                      borderRadius: "50%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      flexDirection: "column",
-                      //backgroundColor: " red",
-                      color: "#cccc",
-                      fontStyle: "revert-layer",
-                      fontSize: "1.2rem",
-                      marginTop: 2,
+                      border: "2px solid transparent",
+                      backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
+                      backgroundSize: "100px 100px",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      backdropFilter: "blur(10px)",
+                      backgroundColor: "rgba(0, 0, 0, 0.1)",
+                      marginTop: { xs: "3rem", md: "1rem" },
                     }}
                   >
-                    CMS<br></br> Localization<br></br> AI<br></br> Effects Site
-                    <br></br> Management<br></br> Enterprise<br></br>
-                    Developers
+                    <Typography
+                      sx={{
+                        fontSize: ".95rem",
+                        fontWeight: "900",
+                        color: "white",
+                        lineHeight: "1.5rem",
+                      }}
+                    >
+                      Certified by
+                      <a
+                        href="https://v-tenet.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          textDecoration: "underline",
+                          color: "inherit",
+                        }}
+                      >
+                        V-TENET
+                      </a>
+                    </Typography>
                   </Box>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
+                </Tooltip>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box
+                sx={{
+                  height: "auto",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  color: "white",
+                  marginTop: { xs: "3rem", md: "1rem" },
+                  fontSize: "1.5rem",
+                  textAlign: "center",
+                }}
+              >
+                Adress
                 <Box
                   sx={{
                     height: "auto",
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "start",
+                    alignItems: "center",
                     flexDirection: "column",
-                    // backgroundColor: "",
-                    color: "white",
-                    fontStyle: "revert-layer",
-                    fontSize: "1.5rem",
+                    color: "#cccc",
+                    fontSize: "1rem",
+                    marginTop: 2,
                   }}
                 >
-                  Support
-                  <Box
-                    sx={{
-                      height: "auto",
-                      width: { xs: "80%", md: "80%" },
-                      display: "flex",
-                      justifyContent: "start",
-                      alignItems: { xs: "center", md: "center", lg: "end" },
-                      //backgroundColor: " red",
-                      color: "#cccc",
-                      fontStyle: "revert-layer",
-                      fontSize: "1.2rem",
-                      margin: 2,
-                    }}
-                  >
-                    Help<br></br>Social Media <br></br> Contact
-                  </Box>
+                  CMS<br></br> Localization<br></br> AI<br></br> Effects Site
+                  <br></br> Management<br></br> Enterprise<br></br>
+                  Developers
                 </Box>
-              </Grid>
+              </Box>
             </Grid>
+            <Grid item xs={12} md={4}>
+              <Box
+                sx={{
+                  height: "auto",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  color: "white",
+                  fontSize: "1.5rem",
+                  textAlign: "center",
+                  marginTop: { xs: "3rem", md: "1rem" },
+                }}
+              >
+                Support
+                <Box
+                  sx={{
+                    height: "auto",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    color: "#cccc",
+                    fontSize: "1rem",
+                    marginTop: 2,
+                  }}
+                >
+                  Help<br></br>Social Media <br></br> Contact
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box
+            sx={{
+              color: "white",
+              marginTop: "1rem",
+              borderBottom: ".1rem solid #2B1B42",
+              fontFamily: "var(--secular-font)",
+              fontSize: "1rem",
+              textAlign: "center",
+            }}
+          >
+            © V-Tenet 2024.
           </Box>
         </Box>
       </Box>

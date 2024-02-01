@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { ExpertKpi, WebsiteData } from '../../types';
 import { Tooltip } from '@mui/material';
 import KpiCard from '../../components/expert/KpiCard';
+import LoadingExpertDashboard from '../../components/expert/LoadingExpertDashboard';
 
 const ExpertDashboard : React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -22,12 +23,14 @@ const ExpertDashboard : React.FC = () => {
         };
     }, [authContext]);
     const [websiteData, setWebsiteData] = useState<WebsiteData[]>([])
-    const [kpiData, setKpiData] = useState<ExpertKpi[]>([])
+    const [kpiData, setKpiData] = useState<ExpertKpi[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
 
     const id  = localStorage.getItem("userId")
     const authToken = localStorage.getItem("authToken")
     const getWebsiteData = useCallback( async () => {
+        setIsLoading(true);
         setWebsiteData([]);
         try {
             if(id && authToken){
@@ -35,7 +38,8 @@ const ExpertDashboard : React.FC = () => {
                 websites = await getWebsites(id);
                 let kpis:ExpertKpi[] = await getKpiDetails(id);
                 setKpiData(kpis);
-                setWebsiteData(websites) 
+                setWebsiteData(websites);
+                setIsLoading(false)
             }
         } catch (error) {
             if (error instanceof Error) {
@@ -59,6 +63,8 @@ const ExpertDashboard : React.FC = () => {
   return (
     <>
         <Navbar/>
+        {isLoading ? <LoadingExpertDashboard/> :
+        <>
         <div className='grid md:grid-cols-4 gap-4 mx-8 my-12 bg:white'>
             {kpiData.map((kpi:ExpertKpi) => (
                 <KpiCard title={kpi.title} count={kpi.count} color={kpi.color}/>
@@ -73,19 +79,19 @@ const ExpertDashboard : React.FC = () => {
                         <div className="flex justify-between items-center">
                             <h2 className='font-bold text-xl text-blue-500'>{website.websiteName}</h2>
                             <Tooltip title={website.hoverText} arrow>
-                                <div className={`p-2 rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
+                                <div className={`p-2 font-bold text-white rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
                             </Tooltip>
                         </div>
                         <p>{website.baseUrl}</p>
                         <button 
                             className='w-full my-4 py-1 px-2 border-2 border-blue-500 rounded-xl font-bold hover:bg-blue-300'
                                 onClick={() => handleClick(website.websiteId, website.websiteName)}
-                            >Go To Website
+                            >Website Dashboard
                         </button>
                     </div>
                 </div>
             ))}
-        </div>
+        </div></>}
     </>
   )
 }

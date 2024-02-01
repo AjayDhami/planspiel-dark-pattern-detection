@@ -91,22 +91,22 @@ const WebsiteOnboardingForm = ({
         };
         await addWebsiteForCertification(data);
 
-        toast.success("Website sent for certification");
-        onSuccess();
-        onClose();
-      } catch (error) {
-        if (error instanceof Error) {
-          toast.error(`Error: ${error.message}`);
-        } else {
-          toast.error("An unknown error occurred.");
-        }
-      } finally {
-        setIsFormLoading(false);
+      toast.success("Website sent for certification. It may take some time for expert verification");
+
+      setIsFormLoading(false);
+      onSuccess();
+      onClose();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error("An unknown error occurred.");
       }
-    } else {
-      setOpenTC(true);
     }
-  };
+  } else {
+    setOpenTC(true)
+  }
+}
 
   useEffect(() => {
     return () => {

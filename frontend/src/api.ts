@@ -5,6 +5,8 @@ import {
 } from "./types";
 import api from "./utils/AxiosHelper";
 import { extractUserDetails } from "./utils/DataHelper";
+import { BASE_ML_URL } from '../src/utils/constatnt';
+import axios from "axios";
 
 // Function to Register User
 export const registerUser = async (user: UserRegistrationCredentials) => {
@@ -96,3 +98,13 @@ export const generateCertification = async (websiteId: string) => {
     throw error;
   }
 };
+
+export const getPatternPercentage = async (websiteUrl: string) => {
+  try {    
+    const response = await axios.get(`${BASE_ML_URL}/darkPattern/freeCheck?url=${websiteUrl}`);
+    return response.data; 
+  } catch (error) {
+    console.error('Error is --', error);
+    throw error;
+  }
+}

@@ -25,6 +25,7 @@ const Navbar = () => {
           <Link
             to="/client/dashboard"
             style={{ textDecoration: "none", color: "inherit" }}
+            className="border-r-4"
           >
             <img
               src="/assets/logo.png"
@@ -39,9 +40,10 @@ const Navbar = () => {
             >
               <Link
                 to="/client/dashboard"
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{ textDecoration: "none" }}
+                className="font-bold text-blue-500 text-3xl mx-3"
               >
-                V-Tenet
+                Vort
               </Link>
             </Typography>
           </div>
