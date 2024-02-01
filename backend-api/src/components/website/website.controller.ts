@@ -6,7 +6,9 @@ import {
   Post,
   Put,
   Query,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { WebsiteService } from './website.service';
@@ -20,6 +22,7 @@ import { ReplyCreateDto } from './dto/reply-create.dto';
 import { AssignExpertsDto } from './dto/assign-experts.dto';
 import { UpdatePatternPhase } from './dto/update-pattern-phase.dto';
 import { PublishCertificationDto } from './dto/publish-certification.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Website')
 @ApiBearerAuth()
@@ -107,6 +110,15 @@ export class WebsiteController {
       websiteId,
       patternCreateDto,
     );
+  }
+
+  @Put(':patternId/uploadImages')
+  @UseInterceptors(FilesInterceptor('files'))
+  async addImageInPattern(
+    @Param('patternId') patternId: string,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ) {
+    return await this.websiteService.addImagesInPattern(patternId, files);
   }
 
   @Put(':websiteId/automatedPatterns')

@@ -30,6 +30,9 @@ export class Pattern extends Document {
   description: string;
 
   @Prop()
+  patternImageKeys?: string[];
+
+  @Prop()
   detectedUrl: string;
 
   @Prop({ default: PatternPhaseType.InProgress, enum: PatternPhaseType })

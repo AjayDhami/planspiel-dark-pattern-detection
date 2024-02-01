@@ -11,6 +11,7 @@ export class PatternResponseDto {
   expertName: string;
   description: string;
   detectedUrl: string;
+  patternImageUrls: string[];
   createdAt: Date;
   patternPhase: string;
   isPatternExists: boolean;
