@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PatternAdditionFormProps } from '../../types';
 import { IoMdClose } from 'react-icons/io';
+import ImageCarousel from './ImageCarousel';
 
 
 const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
@@ -16,6 +17,10 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         patternlink : "",
     })
     const [images, setImages] = useState<File[]>([]);
+    const [imgToDisplay, setImgToDisplay] = useState<File>();
+    const [imgOpen, setImageOpen] = useState<boolean>(false);
+    const [zIndex, setZindex] = useState<boolean>(false);
+    const z_index = zIndex ? "-z-50" : "z-0"
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
         setFormData(p=>({...p,[e.target.name] : e.target.value}))
     }
@@ -33,6 +38,17 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
           return newImages;
         });
       };
+
+    const handleImageClick = (img:File) => {
+        setImgToDisplay(img);
+        setImageOpen(true);
+        setZindex(true);
+    }
+
+    const handleImageClose = () => {
+        setImageOpen(false);
+        setZindex(false);
+    }
 
     const handleCloseClick = () => {
         setFormData({
@@ -69,6 +85,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
   return (
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
         <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 w-3/5'>
+            <ImageCarousel image={imgToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-4">
                     <h2 className='text-base font-bold leading-7'>Add a Pattern</h2>
@@ -111,7 +128,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                             className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' placeholder='Short description for pattern detection and review'></textarea>
                     </div>
                     <div className='col-span-full border-2 rounded-md flex flex-col items-center justify-center'>
-                        <p className='mb-2 block text-md font-medium pt-8'>Add screenshots where pattern was detected</p>
+                        <p className='mb-2 block text-md font-medium pt-4'>Add screenshots where pattern was detected</p>
                         <label htmlFor="images" className='mb-2 block text-md font-medium p-2 bg-gray-100 mb-4 rounded-md cursor-pointer'>
                             <span className="text-blue-500">Choose File</span>
                             <input
@@ -127,11 +144,12 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         {images.length > 0 && (
                             <div className="my-2 px-6 grid grid-cols-4 gap-4 w-full">
                                 {images.map((image, index) => (
-                                    <div key={index} className="relative">
+                                    <div key={index} className={`relative ${z_index}`}>
                                         <img
                                             src={URL.createObjectURL(image)}
                                             alt={`Preview ${index + 1}`}
-                                            className="w-full h-20 object-cover rounded-md border-2 border-gray-200 opacity-50"
+                                            className="w-full h-20 object-cover rounded-md border-2 border-gray-200 opacity-50 cursor-pointer"
+                                            onClick={()=>handleImageClick(image)}
                                         />
                                         <button
                                             type="button"
