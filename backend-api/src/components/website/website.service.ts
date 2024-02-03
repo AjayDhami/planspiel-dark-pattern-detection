@@ -141,6 +141,7 @@ export class WebsiteService {
   }
 
   async addImagesInPattern(patternId: string, files: any) {
+    console.log(files.length);
     const pattern = await this.checkPatternExists(patternId);
     const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
 
@@ -155,6 +156,7 @@ export class WebsiteService {
       };
 
       await this.awsHelper.executePutObjectCommand(params);
+      console.log("executed S3 Bucket");
       return fileKey;
     });
 
@@ -162,6 +164,7 @@ export class WebsiteService {
       const patternImageKeys = await Promise.all(uploadPromises);
       pattern.patternImageKeys.push(...patternImageKeys);
       await pattern.save();
+      console.log("Pattern", pattern);
       return { message: 'Images added successfully' };
     } catch (error) {
       throw new Error('Failed to upload files to S3');

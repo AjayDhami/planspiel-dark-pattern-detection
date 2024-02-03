@@ -123,6 +123,7 @@ export class WebsiteController {
     @Param('patternId') patternId: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
+    console.log(files);
     return await this.websiteService.addImagesInPattern(patternId, files);
   }
 

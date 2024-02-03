@@ -29,14 +29,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if(files){
-            // const formDataArray = Array.from(files).map((file)=>{
-            //     const formData = new FormData();
-            //     formData.append("files[]",file);
-            //     return formData
-            // })
-            // setImages((prev)=>[...prev, ...formDataArray]);
-            setImages((prev) => [...prev, ...Array.from(files)]);
-            // console.log(images);   
+            setImages((prev) => [...prev, ...Array.from(files)]);   
         }
     }
     const handleImageDelete = (index: number) => {
@@ -78,14 +71,13 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                     images.forEach((file) =>{
                         files.append("files", file)
                     })
+                    //const formData = new FormData()
                     const config = {
                         headers : {
-                            'Content-Type' : 'multipart/form-data',
+                            "Content-Type": "multipart/form-data",
                         },
                     }
-                    const body = {
-                        files : files
-                    }
+                    const body = files
                     const imgResponse = await api.put(`/website/${response.data.patternId}/uploadImages`, body, config);
                     if(imgResponse.status===200){
                         onClose();
