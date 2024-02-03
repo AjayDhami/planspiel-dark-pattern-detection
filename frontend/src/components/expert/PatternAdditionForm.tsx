@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PatternAdditionFormProps } from '../../types';
 import { IoMdClose } from 'react-icons/io';
 import ImageCarousel from './ImageCarousel';
+import api from '../../utils/AxiosHelper';
 
 
 const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
@@ -28,7 +29,14 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if(files){
-            setImages((prev)=>[...prev, ...Array.from(files)]);
+            // const formDataArray = Array.from(files).map((file)=>{
+            //     const formData = new FormData();
+            //     formData.append("files[]",file);
+            //     return formData
+            // })
+            // setImages((prev)=>[...prev, ...formDataArray]);
+            setImages((prev) => [...prev, ...Array.from(files)]);
+            // console.log(images);   
         }
     }
     const handleImageDelete = (index: number) => {
@@ -64,20 +72,40 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         e.preventDefault();
         if(websiteId && experId && token){
             const response = await patternPost(websiteId,experId,formData.patterntype, formData.description, formData.patternlink ); 
-            if(response === 200){
-                onClose();
-                toast.success("Pattern added successfully", {
-                    position: toast.POSITION.TOP_CENTER
-                });
-                setFormData({
-                    patterntype : "",
-                    description : "",
-                    patternlink : ""
-                })
-            }  else{
-                toast.error("Error while adding pattern, try again", {
-                    position: toast.POSITION.TOP_CENTER
-                });
+            if(response.status === 200){
+                try {
+                    const files = new FormData();
+                    images.forEach((file) =>{
+                        files.append("files", file)
+                    })
+                    const config = {
+                        headers : {
+                            'Content-Type' : 'multipart/form-data',
+                        },
+                    }
+                    const body = {
+                        files : files
+                    }
+                    const imgResponse = await api.put(`/website/${response.data.patternId}/uploadImages`, body, config);
+                    if(imgResponse.status===200){
+                        onClose();
+                        toast.success("Pattern added successfully", {
+                            position: toast.POSITION.TOP_CENTER
+                        });
+                        setFormData({
+                            patterntype : "",
+                            description : "",
+                            patternlink : ""
+                        })
+                        setImages([])
+                    }else{
+                        toast.error("Error while adding pattern, try again", {
+                            position: toast.POSITION.TOP_CENTER
+                        });
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
     }
@@ -143,7 +171,9 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         </label>
                         {images.length > 0 && (
                             <div className="my-2 px-6 grid grid-cols-4 gap-4 w-full">
-                                {images.map((image, index) => (
+                                {images.map((image, index) => {
+                                    //const file = formData.get('files') as File
+                                    return(
                                     <div key={index} className={`relative ${z_index}`}>
                                         <img
                                             src={URL.createObjectURL(image)}
@@ -160,8 +190,8 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                                 className="p-1 text-2xl font-bold"
                                             />
                                         </button>
-                                    </div>
-                                ))}
+                                    </div>)
+                                })}
                             </div>
                         )}
                     </div>
