@@ -36,11 +36,11 @@ const Comments: React.FC<{ review: Comment, expertId : string, isVerified : bool
         }  
       }
   return (
-    <div className='z-30'>
+    <div className='-z-50'>
         <div key={review.id} className='bg-gray-100 p-2 my-3 rounded-lg'>
             <div className="items-center mt-3">
                 <div className='flex items-center'>
-                  <Avatar {...stringAvatar(review.expertName)} className={`z-[20]`}/>
+                  <Avatar {...stringAvatar(review.expertName)} />
                   <div className='mx-2 bg-blue-100 border-2 rounded-2xl p-1 border-blue-300 w-full'>{review.content}</div>
                 </div>
                     {review.replies.map((comment: Reply)=>(
