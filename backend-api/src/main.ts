@@ -8,8 +8,10 @@ import { swaggerConfig } from './config/swagger.config';
 import * as process from 'process';
 
 async function bootstrap() {
-  const nodeEnv = process.env.NODE_ENV;
+  const nodeEnv = process.env.NODE_ENV || 'prod';
   const envFilePath = `.env.${nodeEnv}`;
+  console.log('Selected env: ', nodeEnv);
+  console.log('Env File Path: ', envFilePath);
 
   dotenv.config({ path: envFilePath });
 
