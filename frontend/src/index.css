@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'CustomFont';
-  src: url('../public/assets/Copperplate.otf') format('truetype');
+  font-family: "CustomFont";
+  src: url("../public/assets/Copperplate.otf") format("truetype");
 }
 
 body {
@@ -24,4 +24,17 @@ body {
   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
   -webkit-text-fill-color: white;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+.quill > .ql-toolbar {
+  border-radius: 4px 4px 0 0;
+}
+
+.quill > .ql-container {
+  height: 250px;
+  border-radius: 0 0 4px 4px;
+}
+
+.quill > .ql-container > .ql-editor {
+  height: 250px;
 }
