@@ -271,7 +271,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
             </div>
           <div className="md:col-span-1 hover:border-l-4 ml-4 px-4">
             <div><h2 className="text-xl font-bold text-blue-500">Screenshots</h2></div>
-          {patternData.patternImageUrls.length > 0 && (
+          {patternData.patternImageUrls.length > 0 ? (
             <div className="my-2 grid grid-cols-2 gap-4 w-full">
               {patternData.patternImageUrls.map((image, index) => {
                 //const file = formData.get('files') as File
@@ -286,6 +286,8 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>)
                 })}
             </div>
+          ): (
+            <div className="flex justify-center items-center h-20 bg-gray-100 shadow-md rounded-md my-2"><h2>No screenshots added for this pattern</h2></div>
           )}
           </div>
         </div>

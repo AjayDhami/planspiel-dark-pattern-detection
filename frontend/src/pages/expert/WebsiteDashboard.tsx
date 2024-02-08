@@ -51,7 +51,7 @@ const WebsiteDashboard = () => {
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const {  setPatternData } = useExpertContext();
     const [zindex, setZindex ] = useState(false)
-    const z_index = zindex ? "z-[-10]" : "z-[0]"
+    const z_index = zindex ? "z-[-20]" : "z-[-10]"
     const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-green-500";
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
@@ -191,10 +191,10 @@ const WebsiteDashboard = () => {
     }
 
   return (
-    <>
+    <div>
         <Navbar/>
         {isLoading ? <LoadingPatternCard/> :
-        <>
+        <div>
         <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom}/>
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <PublishForm isOpen={isPublishOpen} onClose={handlePublishClose} patterns={patterns} expertId={experId ? experId : ""} websiteId={websiteId? websiteId: ""}/>
@@ -223,7 +223,7 @@ const WebsiteDashboard = () => {
               </div>
             </div>
           </div>
-          <div className='md:col-span-2 h-full px-12 py-4 shadow-xl rounded-2xl bg-white'>
+          <div className='md:col-span-2 h-[80%] px-12 py-4 shadow-xl rounded-2xl bg-white overflow-auto'>
               <div className='flex justify-between items-center mt-2'>
                 <div className='flex items-center'>
                 <div className='mx-2'>
@@ -274,8 +274,8 @@ const WebsiteDashboard = () => {
             }
           </div>
         </div>
-        </>}
-    </>
+        </div>}
+    </div>
   )
 }
 

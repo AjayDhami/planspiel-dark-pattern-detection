@@ -28,27 +28,41 @@ const LandingPage = () => {
   };
 
   const handleWebsiteSubmitClick = async() => {
+    setIsLoadingOpen(true);
     if(urlForCheck===""){
       toast.error("Please Enter the url", {
         position: toast.POSITION.TOP_CENTER
       });
     }
     else{
-      setIsLoadingOpen(true);
-    const data = await getPatternPercentage(urlForCheck);
-    if(data.Percentage){
-      setUrlForCheck("");
-      setIsLoadingOpen(false);
-      setPercentage(data.Percentage);
-      setIsmodalOpen(true);
-    }
-    else{
-      setIsLoadingOpen(false);
-      setUrlForCheck("");
-      toast.error("Error while running detetction, try again", {
-          position: toast.POSITION.TOP_CENTER
+      const dataPromise = getPatternPercentage(urlForCheck);
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error('Timeout error'));
+        }, 35000);
       });
-    }
+      try {
+        const data = await Promise.race([dataPromise, timeoutPromise]);
+        if(data.Percentage){
+          setUrlForCheck("");
+          setIsLoadingOpen(false);
+          setPercentage(data.Percentage);
+          setIsmodalOpen(true);
+        }
+        else{
+          setIsLoadingOpen(false);
+          setUrlForCheck("");
+          toast.error("Error while running detetction, try again", {
+            position: toast.POSITION.TOP_CENTER
+          });
+        }
+      } catch (error) {
+        setIsLoadingOpen(false);
+        setUrlForCheck("");
+        toast.error("Timeout error: Request took too long to complete", {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
     }
   }
 

@@ -9,7 +9,7 @@ const Navbar = () => {
   const userName = localStorage.getItem("userName")
   const authContext = useContext(AuthContext);
   return (
-    <div className='flex justify-between items-center shadow-xl'>
+    <div className='flex justify-between items-center shadow-xl bg-white sticky top-0'>
         <div className='flex items-center'>
           <Link to="/expert/dashboard" className='w-14 ml-12 mr-8 py-6'><img src="/assets/logo.png" alt="logo" /></Link>
           <h2 className='text-3xl font-bold text-blue-500'>Vort</h2>
