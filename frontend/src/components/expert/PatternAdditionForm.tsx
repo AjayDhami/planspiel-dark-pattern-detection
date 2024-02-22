@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { patternPost } from '../../services/expertServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PatternAdditionFormProps } from '../../types';
-import { IoMdClose } from 'react-icons/io';
+import { IoMdClose, IoMdAdd  } from 'react-icons/io';
 import ImageCarousel from './ImageCarousel';
 import api from '../../utils/AxiosHelper';
+import { Tooltip } from '@mui/material';
 
 
-const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
+const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose, extensionPatterns, extensionImages}) => {
     const websiteId = sessionStorage.getItem("websiteId");
     const experId = localStorage.getItem("userId");
     const token = localStorage.getItem("authToken");
@@ -17,7 +18,6 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         description : "",
         patternlink : "",
     })
-    const [extensionData, setExtensionData] = useState();
     const [images, setImages] = useState<File[]>([]);
     const [imgToDisplay, setImgToDisplay] = useState<File>();
     const [imgOpen, setImageOpen] = useState<boolean>(false);
@@ -50,6 +50,18 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     const handleImageClose = () => {
         setImageOpen(false);
         setZindex(false);
+    }
+
+    const extensionImageAddToSenderList = (base64: string, index:number) => {
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i=0; i<byteCharacters.length; i++){
+            byteNumbers[i] = byteCharacters.charCodeAt(i)
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {type: "image/png"});
+        const file = new File([blob], `image-${index}`, {type:"image/png"});
+        setImages((prev)=>[...prev, file]);
     }
 
     const handleCloseClick = () => {
@@ -105,9 +117,9 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     if(!isOpen) return null
   return (
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
-        <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 w-4/5'>
+        <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 h-4/5 w-4/5 overflow-auto'>
             <ImageCarousel image={imgToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
-            <div className='grid md:grid-cols-5'>
+            <div className='grid md:grid-cols-5 gap-4'>
                 <div className='md:col-span-3'>
                     <form onSubmit={handleSubmit}>
                         <div className="space-y-4">
@@ -197,8 +209,37 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         </div>
                     </form>
                 </div>
-                <div className='md:col-span-2'>
-                    
+                <div className='md:col-span-2 border-2 p-4 h-[30rem] overflow-auto'>
+                    <div className='flex justify-center'><h1 className='text-lg text-blue-500 font-bold'>Pattern Details from VORT extension</h1></div>
+                    <div className='border-b-2 pb-4'> 
+                        {extensionPatterns.map((expats)=> (
+                            <div className='shadow-lg m-3 rounded-lg'>
+                                <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
+                                <p className='text-md pt-1 px-4'>{expats.patternDesc}</p>
+                                <p className='px-4 pt-1 pb-2'>Detected At : <span className='text-blue-500'>{expats.patternUrl}</span></p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='mt-3 mx-3'><h2 className='text-lg text-blue-500 font-bold'>Add screenshots from extension</h2></div>
+                    <div className='grid md:grid-cols-2 gap-4 m-3'>
+                        {extensionImages.map((eximages, index)=>(
+                            <div key={index} className={`relative ${z_index} col-span-1`}>
+                                <img src={`data:image/png;base64,${eximages.file_base64}`} 
+                                    alt='extension image' 
+                                    className="h-40 w-full object-cover rounded-md border-2 cursor-pointer"
+                                />
+                                <Tooltip title="Add image to send with pattern"><button
+                                    type="button"
+                                    onClick={() => extensionImageAddToSenderList(eximages.file_base64, index)}
+                                    className="absolute top-0 right-0 text-black-500 cursor-pointer bg-gray-200 rounded-full shadow-xl hover:bg-blue-300"
+                                >
+                                    <IoMdAdd 
+                                        className="p-1 text-2xl font-bold"
+                                    />
+                                </button></Tooltip>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <ToastContainer/>

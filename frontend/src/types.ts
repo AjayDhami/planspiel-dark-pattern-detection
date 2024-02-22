@@ -156,9 +156,21 @@ export interface PatternCardProps {
   patternData: PatternData;
 }
 
+export interface extensionPatternDetails {
+  patternDesc : string,
+  patternType: string,
+  patternUrl : string
+}
+export interface extensionImages {
+  file_base64 : string,
+  name : string,
+  timestamp : number,
+}
 export interface PatternAdditionFormProps {
   isOpen: boolean;
   onClose: () => void;
+  extensionPatterns : extensionPatternDetails[];
+  extensionImages : extensionImages[];
 }
 
 export interface PublishModalProps {
