@@ -57,6 +57,7 @@ const WebsiteDashboard = () => {
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
     const [isPublishOpen, setIsPublishOpen] = useState<boolean>(false);
     const [displayEmptyPatternsText, setDisplayEmptyPatternsText] = useState<boolean>(false);
+    //const [value, setValue, isPersistent, error, isInitialStateResolved] = useChromeStorageLocal('patternType', 0)
 
     const getWebsiteData = useCallback(async ()=> {
       if(websiteId){
@@ -144,7 +145,24 @@ const WebsiteDashboard = () => {
         [filterType]: option
       }));
     };
+
+    const handleMessageFromContentScript = (event:MessageEvent) => {
+      if (event.source === window && event.data.action === 'sendDataToReactApp') {
+        // Handle the data received from the content script
+        const dataFromContentScript = event.data;
+        console.log('Data received from content script:', dataFromContentScript);
+      }
+    }
+
+    useEffect(()=>{
+      window.addEventListener('message', handleMessageFromContentScript);
+      return () => {
+        window.removeEventListener('message', handleMessageFromContentScript);
+      };
+    },[]);
+
     const openForm = () =>{
+      window.postMessage({action : 'getDataFromStorage', keys: ['patternType']},'*')
       setIsPatternformOpen(true);
       setZindex(true)
     }
