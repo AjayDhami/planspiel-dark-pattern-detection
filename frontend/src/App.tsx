@@ -17,6 +17,7 @@ import SuperAdminSignin from "./pages/superAdmin/SuperAdminSignin";
 import { AdminProvider } from "./context/AdminContext";
 import ServicePage from "./pages/landing/ServicePage";
 import ProcessPage from "./pages/landing/ProcessPage";
+import WebsiteDetailsPage from "./pages/client/WebsiteDetailsPage";
 function App() {
   return (
     <AuthProvider>
@@ -40,6 +41,7 @@ function App() {
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="websites" element={<WebsiteViewPage />} />
+              <Route path="website/:id" element={<WebsiteDetailsPage />} />
             </Route>
             <Route path="/expert/dashboard" element={<ExpertDashboard />} />
             <Route path="/expert/website" element={<WebsiteDashboard />} />
