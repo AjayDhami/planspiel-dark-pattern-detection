@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
-import { patternPost } from '../../services/expertServices';
+import { patternPost, base64DataToFile } from '../../services/expertServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PatternAdditionFormProps } from '../../types';
 import { IoMdClose, IoMdAdd  } from 'react-icons/io';
 import ImageCarousel from './ImageCarousel';
-import ExtensionImage from './ExtensionImage';
 import api from '../../utils/AxiosHelper';
 import { Tooltip } from '@mui/material';
 
@@ -21,7 +20,6 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     })
     const [images, setImages] = useState<File[]>([]);
     const [imgToDisplay, setImgToDisplay] = useState<File>();
-    const [extImageToDisplay, setExtImageToDisplay] = useState<string>();
     const [imgOpen, setImageOpen] = useState<boolean>(false);
     const [zIndex, setZindex] = useState<boolean>(false);
     const z_index = zIndex ? "-z-50" : "z-0"
@@ -49,8 +47,9 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         setZindex(true);
     }
 
-    const handleExtImageClick = (base64:string) => {
-        setExtImageToDisplay(base64);
+    const handleExtImageClick = (base64:string, index:number) => {
+        const file = base64DataToFile(base64, index);
+        setImgToDisplay(file)
         setImageOpen(true);
         setZindex(true);
     }
@@ -61,14 +60,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     }
 
     const extensionImageAddToSenderList = (base64: string, index:number) => {
-        const byteCharacters = atob(base64);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i=0; i<byteCharacters.length; i++){
-            byteNumbers[i] = byteCharacters.charCodeAt(i)
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], {type: "image/png"});
-        const file = new File([blob], `image-${index}`, {type:"image/png"});
+        const file = base64DataToFile(base64,index)
         const imageExists = images.some((img) => img.name === file.name);
         imageExists ? toast.error("image already added") : setImages((prev) => [...prev, file])
         console.log(images);
@@ -137,7 +129,6 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
         <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 h-4/5 w-4/5 overflow-auto'>
             <ImageCarousel image={imgToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
-            <ExtensionImage image={extImageToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
             <div className='grid md:grid-cols-5 gap-4'>
                 <div className='md:col-span-3'>
                     <form onSubmit={handleSubmit}>
@@ -255,7 +246,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                 <img src={`data:image/png;base64,${eximages.file_base64}`} 
                                     alt='extension snapshots' 
                                     className="h-40 w-full object-cover rounded-md border-2 cursor-pointer"
-                                    onClick={()=>handleExtImageClick(eximages.file_base64)}
+                                    onClick={()=>handleExtImageClick(eximages.file_base64, index)}
                                 />
                                 <Tooltip title="Add image to send with pattern"><button
                                     type="button"

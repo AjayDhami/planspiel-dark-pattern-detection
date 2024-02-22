@@ -230,4 +230,16 @@ const publishWebsite = async(websiteId:string, expertId: string, isCertified: bo
   }
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails, postImages};
+const base64DataToFile = (base64: string, index:number) => {
+  const byteCharacters = atob(base64);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i=0; i<byteCharacters.length; i++){
+    byteNumbers[i] = byteCharacters.charCodeAt(i)
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], {type: "image/png"});
+  const file = new File([blob], `image-${index}`, {type:"image/png"});
+  return file;
+}
+
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails, postImages, base64DataToFile};
