@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PatternAdditionFormProps } from '../../types';
 import { IoMdClose, IoMdAdd  } from 'react-icons/io';
 import ImageCarousel from './ImageCarousel';
+import ExtensionImage from './ExtensionImage';
 import api from '../../utils/AxiosHelper';
 import { Tooltip } from '@mui/material';
 
@@ -20,6 +21,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     })
     const [images, setImages] = useState<File[]>([]);
     const [imgToDisplay, setImgToDisplay] = useState<File>();
+    const [extImageToDisplay, setExtImageToDisplay] = useState<string>();
     const [imgOpen, setImageOpen] = useState<boolean>(false);
     const [zIndex, setZindex] = useState<boolean>(false);
     const z_index = zIndex ? "-z-50" : "z-0"
@@ -47,6 +49,12 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         setZindex(true);
     }
 
+    const handleExtImageClick = (base64:string) => {
+        setExtImageToDisplay(base64);
+        setImageOpen(true);
+        setZindex(true);
+    }
+
     const handleImageClose = () => {
         setImageOpen(false);
         setZindex(false);
@@ -61,7 +69,17 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         const byteArray = new Uint8Array(byteNumbers);
         const blob = new Blob([byteArray], {type: "image/png"});
         const file = new File([blob], `image-${index}`, {type:"image/png"});
-        setImages((prev)=>[...prev, file]);
+        const imageExists = images.some((img) => img.name === file.name);
+        imageExists ? toast.error("image already added") : setImages((prev) => [...prev, file])
+        console.log(images);
+    }
+
+    const handleAddclickExtensionPattern = (patternType:string, patternUrl: string, patternDesc:string) => {
+        setFormData({
+            patterntype : patternType,
+            description : patternDesc,
+            patternlink : patternUrl
+        })
     }
 
     const handleCloseClick = () => {
@@ -119,6 +137,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
         <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 h-4/5 w-4/5 overflow-auto'>
             <ImageCarousel image={imgToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
+            <ExtensionImage image={extImageToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
             <div className='grid md:grid-cols-5 gap-4'>
                 <div className='md:col-span-3'>
                     <form onSubmit={handleSubmit}>
@@ -210,13 +229,22 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                     </form>
                 </div>
                 <div className='md:col-span-2 border-2 p-4 h-[30rem] overflow-auto'>
-                    <div className='flex justify-center'><h1 className='text-lg text-blue-500 font-bold'>Pattern Details from VORT extension</h1></div>
+                    <div className='border-b-2 pb-2'><h1 className='text-lg text-blue-500 font-bold'>Pattern Details from VORT extension</h1></div>
                     <div className='border-b-2 pb-4'> 
                         {extensionPatterns.map((expats)=> (
-                            <div className='shadow-lg m-3 rounded-lg'>
+                            <div className={`relative shadow-lg m-3 ${z_index} rounded-lg`}>
                                 <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
                                 <p className='text-md pt-1 px-4'>{expats.patternDesc}</p>
                                 <p className='px-4 pt-1 pb-2'>Detected At : <span className='text-blue-500'>{expats.patternUrl}</span></p>
+                                <Tooltip title="Add pattern for transfer"><button
+                                    type="button"
+                                    onClick={() => handleAddclickExtensionPattern(expats.patternType, expats.patternDesc, expats.patternUrl)}
+                                    className="absolute top-0 right-0 rounded-tr-lg bg-gray-100 text-black-500 cursor-pointer hover:bg-blue-300"
+                                >
+                                    <IoMdAdd 
+                                        className="p-1 text-3xl"
+                                    />
+                                </button></Tooltip>
                             </div>
                         ))}
                     </div>
@@ -225,8 +253,9 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         {extensionImages.map((eximages, index)=>(
                             <div key={index} className={`relative ${z_index} col-span-1`}>
                                 <img src={`data:image/png;base64,${eximages.file_base64}`} 
-                                    alt='extension image' 
+                                    alt='extension snapshots' 
                                     className="h-40 w-full object-cover rounded-md border-2 cursor-pointer"
+                                    onClick={()=>handleExtImageClick(eximages.file_base64)}
                                 />
                                 <Tooltip title="Add image to send with pattern"><button
                                     type="button"
