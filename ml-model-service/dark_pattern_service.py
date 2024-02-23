@@ -55,7 +55,6 @@ def free_verification(params):
 
 def parse_multiple_website_url(website_url, website_id):
     print('Parsing website')
-
     web_scrap(website_url, website_id)
 
     dark_patterns = predict_website_dark_pattern_type(website_id)
