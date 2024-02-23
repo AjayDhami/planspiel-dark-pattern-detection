@@ -43,7 +43,7 @@ def web_scrap(url, website_id):
     data = driver.page_source
     soup = BeautifulSoup(data, 'html.parser')
 
-    # Old logic Find all div tags
+    # Old logic for Finding all div tags
     # div_tags = soup.find_all('div')
 
     # # Print id and class attributes in sequence
