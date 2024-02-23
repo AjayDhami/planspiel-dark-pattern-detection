@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, jsonify, request
 from flask_cors import cross_origin
 import dark_pattern_service
 
@@ -22,4 +22,18 @@ def parse_website_for_dark_pattern_detection(website_id):
 def free_verification():
     website_url = request.args.get('url')
     return dark_pattern_service.free_verification(params={'url': website_url})
+
+@dark_pattern.route('/websiteIdList', methods=['POST'])
+@cross_origin()
+def parse_multiple_website_for_dark_pattern_detection():
+    data = request.json
+    respData = {}
+    for i, j in data.items():
+        print(i, j)
+        respData[i] = dark_pattern_service.parse_multiple_website_url(j, i)
+    
+    respData = {str(key): value for key, value in respData.items()}
+    print(respData)
+    return jsonify(respData)
+
    
