@@ -9,9 +9,10 @@ const ProcessPage = () => {
       <h1
         style={{
           fontSize: "3rem",
-          color: "rgba(51, 179, 174,.9)",
+          color: "white",
           fontWeight: "600",
           marginTop: "3vw",
+          textAlign: "center",
         }}
       >
         Let's a Look Our Product Demo
@@ -19,13 +20,14 @@ const ProcessPage = () => {
       <p
         style={{
           fontSize: "1.2rem",
-          color: "rgba(255,255,255,.6)",
+          color: "rgba(255,255,255,.9)",
           fontWeight: "400",
-          marginTop: "vw",
-          marginBottom: "2vw",
+          marginTop: "1vw",
+          marginBottom: "4vw",
+          textAlign: "center",
         }}
       >
-        Write Some small intro about your process
+        Here is our  Product RoadMap
       </p>
 
       <Box className="timeline">
@@ -36,7 +38,7 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
               Enter URL
@@ -57,7 +59,7 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
               Dark Patterns Detection
@@ -78,7 +80,7 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
               Got Ceretification
@@ -98,7 +100,7 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
               Got Feed Back
