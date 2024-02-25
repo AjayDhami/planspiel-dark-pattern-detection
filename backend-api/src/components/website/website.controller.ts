@@ -157,10 +157,10 @@ export class WebsiteController {
 
   @Get(':websiteId/pattern')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Expert)
+  @Roles(UserType.Client, UserType.Expert)
   @ApiOperation({
-    summary: 'Fetch all pattern of a website [For Expert]',
-    description: 'Fetch all patterns from a particular website',
+    summary: 'Fetch all patterns details of a website [For Client/Expert]',
+    description: 'Fetch all patterns details of a particular website',
   })
   async fetchAllPatternsOfWebsite(@Param('websiteId') websiteId: string) {
     this.logger.log(`Retrieve all patterns for website with id: ${websiteId}`);
