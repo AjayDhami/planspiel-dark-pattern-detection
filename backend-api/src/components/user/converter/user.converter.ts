@@ -9,5 +9,6 @@ export function convertUserToDto(user: User): UserResponseDto {
     email: user.email,
     role: user.role,
     createdAt: user.createdAt,
+    subscription: user.subscription,
   };
 }
