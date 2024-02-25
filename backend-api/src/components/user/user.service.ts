@@ -14,7 +14,7 @@ import { SigninUserDto } from './dto/signin-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserResponseDto } from './dto/user-response.dto';
-import { convertUserToDto } from '../../utils/user.converter';
+import { convertUserToDto } from './converter/user.converter';
 
 @Injectable()
 export class UserService {
