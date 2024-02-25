@@ -66,8 +66,6 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
   return (
     <Stack>
-      <Divider sx={{ my: 2 }} />
-
       <Typography variant="h6" component="h6" color="primary">
         Website Certification
       </Typography>
