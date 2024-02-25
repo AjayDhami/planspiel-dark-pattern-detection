@@ -7,4 +7,5 @@ export class UserResponseDto {
   email: string;
   role: string;
   createdAt: Date;
+  subscription: string;
 }
