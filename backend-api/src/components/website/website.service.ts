@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Website } from './schemas/website.schema';
@@ -28,6 +28,7 @@ import { AwsHelper } from '../aws/aws.helper';
 
 @Injectable()
 export class WebsiteService {
+  private readonly logger = new Logger(WebsiteService.name);
   constructor(
     @InjectModel(Website.name) private readonly websiteModel: Model<Website>,
     @InjectModel(Pattern.name) private readonly patternModel: Model<Pattern>,
@@ -48,6 +49,7 @@ export class WebsiteService {
         websiteId: newWebsite._id,
       };
     } catch (error) {
+      this.logger.error(`Error while saving website: ${error.message}`);
       throw new HttpException(
         'Failed to save website details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -164,6 +166,9 @@ export class WebsiteService {
       await pattern.save();
       return { message: 'Images added successfully' };
     } catch (error) {
+      this.logger.error(
+        `Error while adding images in pattern : ${error.message}`,
+      );
       throw new Error('Failed to upload files to S3');
     }
   }
@@ -218,6 +223,9 @@ export class WebsiteService {
       await newPattern.save();
       return { patternId: newPattern._id };
     } catch (error) {
+      this.logger.error(
+        `Error while adding pattern in website: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to save pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -279,6 +287,9 @@ export class WebsiteService {
         message: `Automated patterns successfully added`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while adding automated pattern details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to save pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -352,6 +363,9 @@ export class WebsiteService {
         message: `Pattern phase updated for pattern with id ${pattern._id}`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while updating pattern phase by expert: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to update pattern phase',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -385,6 +399,7 @@ export class WebsiteService {
 
       return { commentId: savedComment._id };
     } catch (error) {
+      this.logger.error(`Error while adding comment: ${error.message}`);
       throw new HttpException(
         'Failed to add comment',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -418,6 +433,7 @@ export class WebsiteService {
 
       return { message: 'Reply successfully added' };
     } catch (error) {
+      this.logger.error(`Error while adding reply: ${error.message}`);
       throw new HttpException(
         'Failed to add reply',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -439,6 +455,9 @@ export class WebsiteService {
       }
       return this.convertPatternToDto(pattern, true);
     } catch (error) {
+      this.logger.error(
+        `Error while fetching particular pattern details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to fetch pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -524,6 +543,9 @@ export class WebsiteService {
         message: `Certification details successfully published for website with id ${updatedWebsite._id}`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while publish website certification details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to publish website certification details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -654,6 +676,7 @@ export class WebsiteService {
   private async checkUserExists(userId: string) {
     const existingUser = await this.userService.findUserById(userId);
     if (!existingUser) {
+      this.logger.debug(`User not found with id: ${userId}`);
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     return existingUser;
@@ -662,6 +685,7 @@ export class WebsiteService {
   private async checkWebsiteExists(websiteId: string) {
     const existingWebsite = await this.websiteModel.findById(websiteId).exec();
     if (!existingWebsite) {
+      this.logger.debug(`Website not found with id: ${websiteId}`);
       throw new HttpException('Website not found', HttpStatus.NOT_FOUND);
     }
     return existingWebsite;
@@ -670,6 +694,7 @@ export class WebsiteService {
   private async checkPatternExists(patternId: string) {
     const existingPattern = await this.patternModel.findById(patternId).exec();
     if (!existingPattern) {
+      this.logger.debug(`Pattern not found with id: ${patternId}`);
       throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
     }
     return existingPattern;
@@ -678,6 +703,7 @@ export class WebsiteService {
   private async checkCommentExists(commentId: string) {
     const existingComment = await this.commentModel.findById(commentId).exec();
     if (!existingComment) {
+      this.logger.debug(`Comment not found with id: ${commentId}`);
       throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
     }
   }

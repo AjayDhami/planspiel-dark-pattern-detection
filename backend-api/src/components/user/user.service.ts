@@ -2,6 +2,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { SignUpUserDto } from './dto/signup-user.dto';
@@ -17,6 +18,7 @@ import { convertUserToDto } from '../../utils/user.converter';
 
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly jwtService: JwtService,
@@ -37,6 +39,7 @@ export class UserService {
         statusCode: HttpStatus.CREATED,
       };
     } catch (error) {
+      this.logger.error(`Error while sign up: ${error.message}`);
       if (error.name === 'ValidationError' && error.errors.email.message) {
         throw new DuplicateKeyException(
           error.errors.email.message,
@@ -53,6 +56,9 @@ export class UserService {
     const user = await this.userModel.findOne({ email, role }).exec();
 
     if (!user || !(await this.comparePasswords(password, user.password))) {
+      this.logger.debug(
+        `User provided password doesn't match with stored password`,
+      );
       throw new UnauthorizedException({
         message: 'Invalid credentials',
         statusCode: HttpStatus.UNAUTHORIZED,
@@ -82,6 +88,7 @@ export class UserService {
   async fetchParticularUserDetails(userId: string): Promise<UserResponseDto> {
     const existingUser = await this.findUserById(userId);
     if (!existingUser) {
+      this.logger.debug(`User not found with id: ${userId}`);
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     return convertUserToDto(existingUser);
