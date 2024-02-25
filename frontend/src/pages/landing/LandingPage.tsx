@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 // import Link from "@mui/material/Link";
@@ -11,10 +11,10 @@ import ServicePage from "./ServicePage";
 import ProcessPage from "./ProcessPage";
 import Typography from "@mui/material/Typography";
 import LandingModal from "../../components/landing/LandingModal";
-import { getPatternPercentage } from '../../api';
-import LinearProgress from '@mui/material/LinearProgress';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { getPatternPercentage } from "../../api";
+import LinearProgress from "@mui/material/LinearProgress";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
@@ -27,40 +27,38 @@ const LandingPage = () => {
     setOpen(false);
   };
 
-  const handleWebsiteSubmitClick = async() => {
-    if(urlForCheck===""){
+  const handleWebsiteSubmitClick = async () => {
+    if (urlForCheck === "") {
       toast.error("Please Enter the url", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
-    }
-    else{
+    } else {
       setIsLoadingOpen(true);
-    const data = await getPatternPercentage(urlForCheck);
-    if(data.Percentage){
-      setUrlForCheck("");
-      setIsLoadingOpen(false);
-      setPercentage(data.Percentage);
-      setIsmodalOpen(true);
+      const data = await getPatternPercentage(urlForCheck);
+      if (data.Percentage) {
+        setUrlForCheck("");
+        setIsLoadingOpen(false);
+        setPercentage(data.Percentage);
+        setIsmodalOpen(true);
+      } else {
+        setIsLoadingOpen(false);
+        setUrlForCheck("");
+        toast.error("Error while running detetction, try again", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
-    else{
-      setIsLoadingOpen(false);
-      setUrlForCheck("");
-      toast.error("Error while running detetction, try again", {
-          position: toast.POSITION.TOP_CENTER
-      });
-    }
-    }
-  }
+  };
 
   const handleWebsiteSubmitClose = () => {
     setIsmodalOpen(false);
     setUrlForCheck("");
-  }
+  };
 
   const handleLoadingClose = () => {
     setIsLoadingOpen(false);
     setUrlForCheck("");
-  }
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -83,26 +81,39 @@ const LandingPage = () => {
           backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
-        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} percentage={percentage ? percentage : 0 }/>
-        <Dialog open={isLoadingOpen} onClose={handleLoadingClose} fullScreen={false} maxWidth="md" fullWidth>
+        <LandingModal
+          isOpen={isModalOpen}
+          onClose={handleWebsiteSubmitClose}
+          percentage={percentage ? percentage : 0}
+        />
+        <Dialog
+          open={isLoadingOpen}
+          onClose={handleLoadingClose}
+          fullScreen={false}
+          maxWidth="md"
+          fullWidth
+        >
           <DialogTitle
             sx={{
-            display:"flex",
-            fontStyle:"normal",
-            justifyContent: "center",
-            alignItems:"center"
+              display: "flex",
+              fontStyle: "normal",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Typography variant="h5" component="span">
-              Pattern Check by <span className="font-CustomFont font-bold text-blue-500">VORT</span>
+              Pattern Check by{" "}
+              <span className="font-CustomFont font-bold text-blue-500">
+                VORT
+              </span>
             </Typography>
           </DialogTitle>
           <Box
             sx={{
-            margin:"2rem"
+              margin: "2rem",
             }}
           >
-            <LinearProgress/>
+            <LinearProgress />
           </Box>
         </Dialog>
         <Box
@@ -136,7 +147,9 @@ const LandingPage = () => {
                 transition={{ duration: 1.2 }}
                 className="my-6"
               >
-                <h2 className="main-text">Get Started with <span className="text-blue-500">Vort</span></h2>
+                <h2 className="main-text">
+                  Get Started with <span className="text-blue-500">Vort</span>
+                </h2>
               </motion.span>
 
               <Box
@@ -145,8 +158,17 @@ const LandingPage = () => {
                 justifyContent="space-between"
                 className="input-box"
               >
-                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck} required/>
-                <button className="search-btn" onClick={handleWebsiteSubmitClick}>
+                <input
+                  type="text"
+                  placeholder="Enter Your URL Here......"
+                  onChange={(e) => setUrlForCheck(e.target.value)}
+                  value={urlForCheck}
+                  required
+                />
+                <button
+                  className="search-btn"
+                  onClick={handleWebsiteSubmitClick}
+                >
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
               </Box>
@@ -508,6 +530,16 @@ const LandingPage = () => {
                     </Typography>
                   </Box>
                 </Tooltip>
+                <Box
+                  sx={{
+                    width: "5rem",
+                    height: "5rem",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                ></Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
