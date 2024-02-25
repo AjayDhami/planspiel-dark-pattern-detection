@@ -221,7 +221,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                 </div>
                 <div className='md:col-span-2 border-2 p-4 h-[30rem] overflow-auto'>
                     <div className='border-b-2 pb-2'><h1 className='text-lg text-blue-500 font-bold'>Pattern Details from VORT extension</h1></div>
-                    <div className='border-b-2 pb-4'> 
+                    <div className='pb-4'> 
                         {extensionPatterns.map((expats)=> (
                             <div className={`relative shadow-lg m-3 ${z_index} rounded-lg`}>
                                 <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
@@ -236,30 +236,29 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                         className="p-1 text-3xl"
                                     />
                                 </button></Tooltip>
+                                <div className='grid md:grid-cols-2 gap-4 mt-3 mx-3 pb-5'>
+                                    {expats.patternimages.map((eximages, index)=>(
+                                        <div key={index} className={`relative ${z_index} col-span-1`}>
+                                            <img src={`data:image/png;base64,${eximages.file_base64}`} 
+                                                alt='extension snapshots' 
+                                                className="h-20 w-full object-cover rounded-md border-2 cursor-pointer"
+                                                onClick={()=>handleExtImageClick(eximages.file_base64, index)}
+                                            />
+                                            <Tooltip title="Add image to send with pattern"><button
+                                                type="button"
+                                                onClick={() => extensionImageAddToSenderList(eximages.file_base64, index)}
+                                                className="absolute top-0 right-0 text-black-500 cursor-pointer bg-gray-200 rounded-full shadow-xl hover:bg-blue-300"
+                                            >
+                                            <IoMdAdd 
+                                                className="p-1 text-2xl font-bold"
+                                            />
+                                            </button></Tooltip>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         ))}
                     </div>
-                    <div className='mt-3 mx-3'><h2 className='text-lg text-blue-500 font-bold'>Add screenshots from extension</h2></div>
-                    {/* <div className='grid md:grid-cols-2 gap-4 m-3'>
-                        {extensionImages.map((eximages, index)=>(
-                            <div key={index} className={`relative ${z_index} col-span-1`}>
-                                <img src={`data:image/png;base64,${eximages.file_base64}`} 
-                                    alt='extension snapshots' 
-                                    className="h-40 w-full object-cover rounded-md border-2 cursor-pointer"
-                                    onClick={()=>handleExtImageClick(eximages.file_base64, index)}
-                                />
-                                <Tooltip title="Add image to send with pattern"><button
-                                    type="button"
-                                    onClick={() => extensionImageAddToSenderList(eximages.file_base64, index)}
-                                    className="absolute top-0 right-0 text-black-500 cursor-pointer bg-gray-200 rounded-full shadow-xl hover:bg-blue-300"
-                                >
-                                    <IoMdAdd 
-                                        className="p-1 text-2xl font-bold"
-                                    />
-                                </button></Tooltip>
-                            </div>
-                        ))}
-                    </div> */}
                 </div>
             </div>
             <ToastContainer/>

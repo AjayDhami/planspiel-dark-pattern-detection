@@ -167,7 +167,7 @@ export interface extensionPatternDetails {
   patternType: string,
   patternUrl : string,
   patternTime : number,
-  patternImages : extensionImages[];
+  patternimages : extensionImages[];
 }
 export interface PatternAdditionFormProps {
   isOpen: boolean;
