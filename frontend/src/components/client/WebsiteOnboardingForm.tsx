@@ -29,6 +29,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { sanitizeStringArray } from "../../utils/DataHelper";
 import TermsAndConditions from "./TermsAndConditions";
+import RichTextEditor from "../common/RichTextEditor";
 
 const initialValues: WebsiteOnboardingFormDetails = {
   websiteName: "",
@@ -73,6 +74,7 @@ const WebsiteOnboardingForm = ({
   const handleSubmit = async (
     values: WebsiteOnboardingFormDetails
   ): Promise<void> => {
+    console.log("handleSubmit called >>>>> ", values);
     if (values.acceptedTerms) {
       try {
         setIsFormLoading(true);
@@ -91,22 +93,24 @@ const WebsiteOnboardingForm = ({
         };
         await addWebsiteForCertification(data);
 
-      toast.success("Website sent for certification. It may take some time for expert verification");
+        toast.success(
+          "Website sent for certification. It may take some time for expert verification"
+        );
 
-      setIsFormLoading(false);
-      onSuccess();
-      onClose();
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`);
-      } else {
-        toast.error("An unknown error occurred.");
+        setIsFormLoading(false);
+        onSuccess();
+        onClose();
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
       }
+    } else {
+      setOpenTC(true);
     }
-  } else {
-    setOpenTC(true)
-  }
-}
+  };
 
   useEffect(() => {
     return () => {
@@ -181,14 +185,16 @@ const WebsiteOnboardingForm = ({
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Field
-                    as={TextField}
-                    label="Description"
-                    name="description"
-                    fullWidth
-                    multiline
-                    rows={4}
-                  />
+                  <Field name="description">
+                    {({ field }: any) => (
+                      <RichTextEditor
+                        label="Description"
+                        value={field.value}
+                        onChange={field.onChange(field.name)}
+                        noUpload
+                      />
+                    )}
+                  </Field>
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray name="additionalUrls">
