@@ -5,7 +5,7 @@ import Navbar from '../../components/expert/Navbar';
 import PatternCard from '../../components/expert/PatternCard';
 import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 import PatternDetailsComponent from '../../components/expert/PatternDetailsComponent';
-import { PatternData, extensionImages, extensionPatternDetails } from '../../types';
+import { PatternData, extensionPatternDetails } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
@@ -58,7 +58,6 @@ const WebsiteDashboard = () => {
     const [isPublishOpen, setIsPublishOpen] = useState<boolean>(false);
     const [displayEmptyPatternsText, setDisplayEmptyPatternsText] = useState<boolean>(false);
     const [extensionPatterns, setExtensionPatterns] = useState<extensionPatternDetails[]>();
-    const [extensionImages, setExtensionImages] = useState<extensionImages[]>();
 
     const getWebsiteData = useCallback(async ()=> {
       if(websiteId){
@@ -153,7 +152,6 @@ const WebsiteDashboard = () => {
         const dataFromContentScript = event.data;
         console.log('Data received from content script:', dataFromContentScript);
         setExtensionPatterns(dataFromContentScript.result.patternType);
-        setExtensionImages(dataFromContentScript.result.snapshots);
       }
     }
 
@@ -216,7 +214,7 @@ const WebsiteDashboard = () => {
         <Navbar/>
         {isLoading ? <LoadingPatternCard/> :
         <div>
-        <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom} extensionPatterns={extensionPatterns ? extensionPatterns :[]} extensionImages={extensionImages ? extensionImages : []}/>
+        <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom} extensionPatterns={extensionPatterns ? extensionPatterns :[]}/>
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <PublishForm isOpen={isPublishOpen} onClose={handlePublishClose} patterns={patterns} expertId={experId ? experId : ""} websiteId={websiteId? websiteId: ""}/>
         <div className='mx-24 h-screen grid md:grid-cols-3 gap-4 mt-8'>

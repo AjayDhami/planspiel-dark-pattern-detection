@@ -9,7 +9,7 @@ import api from '../../utils/AxiosHelper';
 import { Tooltip } from '@mui/material';
 
 
-const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose, extensionPatterns, extensionImages}) => {
+const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose, extensionPatterns}) => {
     const websiteId = sessionStorage.getItem("websiteId");
     const experId = localStorage.getItem("userId");
     const token = localStorage.getItem("authToken");
@@ -240,7 +240,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         ))}
                     </div>
                     <div className='mt-3 mx-3'><h2 className='text-lg text-blue-500 font-bold'>Add screenshots from extension</h2></div>
-                    <div className='grid md:grid-cols-2 gap-4 m-3'>
+                    {/* <div className='grid md:grid-cols-2 gap-4 m-3'>
                         {extensionImages.map((eximages, index)=>(
                             <div key={index} className={`relative ${z_index} col-span-1`}>
                                 <img src={`data:image/png;base64,${eximages.file_base64}`} 
@@ -259,7 +259,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                 </button></Tooltip>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <ToastContainer/>
