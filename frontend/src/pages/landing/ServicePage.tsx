@@ -19,7 +19,7 @@ const ServicePage = () => {
                 placeContent: "center",
                 display: "inline-block",
                 margin: "auto",
-                color: " rgb(79, 104, 93  )",
+                color: " rgb(79, 104, 93 )",
                 width: "20%",
                 height: "20%",
               }}
