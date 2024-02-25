@@ -21,8 +21,8 @@ def parse_website_for_dark_pattern_detection(website_id):
 @dark_pattern.route('/freeCheck', methods=['GET'])
 @cross_origin()
 def free_verification():
-    # delete_files_in_scraped_data()
-    website_url = request.args.get('url')
+    delete_files_in_scraped_data()
+    website_url = request.json.get('url')
     return dark_pattern_service.free_verification(params={'url': website_url})
 
 @dark_pattern.route('/websiteIdList', methods=['POST'])
