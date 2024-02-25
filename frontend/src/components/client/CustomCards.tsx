@@ -13,9 +13,10 @@ import {
   HourglassTop as PendingIcon,
   Verified as VerifiedIcon,
 } from "@mui/icons-material";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { KpiCardProps, WebsiteCardProps } from "../../types";
-import WebsiteDetailsModal from "./WebsiteDetailsModal";
+// import WebsiteDetailsModal from "./WebsiteDetailsModal";
+import { useNavigate } from "react-router-dom";
 
 const kpiCardPalettes = {
   primary: {
@@ -133,8 +134,9 @@ export const WebsiteDashboardCard = ({
   isCompleted,
   isDarkPatternFree,
 }: WebsiteCardProps) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const onClose = () => setOpen(false);
+  const navigate = useNavigate();
+  // const [open, setOpen] = useState<boolean>(false);
+  // const onClose = () => setOpen(false);
 
   const getPaperStyles = (theme: Theme) => {
     let paperStyles: SxProps<Theme> = {
@@ -159,7 +161,12 @@ export const WebsiteDashboardCard = ({
 
   return (
     <>
-      <Paper elevation={2} sx={getPaperStyles} onClick={() => setOpen(true)}>
+      {/* <Paper elevation={2} sx={getPaperStyles} onClick={() => setOpen(true)}> */}
+      <Paper
+        elevation={2}
+        sx={getPaperStyles}
+        onClick={() => navigate(`/client/website/${websiteId}`)}
+      >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Tooltip title={websiteName} arrow>
             <Typography noWrap variant="subtitle1">
@@ -199,11 +206,11 @@ export const WebsiteDashboardCard = ({
         </Box>
       </Paper>
 
-      <WebsiteDetailsModal
+      {/* <WebsiteDetailsModal
         websiteId={websiteId}
         open={open}
         onClose={onClose}
-      />
+      /> */}
     </>
   );
 };
