@@ -138,6 +138,34 @@
   background-color: transparent;
 }
 
+.email-container {
+  display: flex;
+  align-items: center;
+}
+.icon-mail {
+  margin-right: 1.5rem;
+  align-items: center;
+}
+
+.icon-instagram {
+  align-items: center;
+}
+
+.icon-linkedin {
+  align-items: center;
+  margin-right: 1.5rem;
+}
+.icon-mail:hover {
+  color: black;
+}
+
+.icon-instagram :hover {
+  color: black;
+}
+
+.icon-linkedin:hover {
+  color: black;
+}
 /* @media only screen and (min-width: 600px) {
   .input-box {
     margin: 0 auto;

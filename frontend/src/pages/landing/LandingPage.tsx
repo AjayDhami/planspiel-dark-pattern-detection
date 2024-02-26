@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
-import Tooltip from "@mui/material/Tooltip";
 // import Link from "@mui/material/Link";
 // import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
@@ -16,6 +15,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PaymentPage from "./PaymentPage";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
@@ -484,25 +486,6 @@ const LandingPage = () => {
                   textAlign: "center",
                 }}
               >
-                {/* <Tooltip
-                  open={open}
-                  onClose={handleClose}
-                  onOpen={handleOpen}
-                  title={
-                    <Box>
-                      <Typography
-                        variant="body1"
-                        sx={{ fontSize: "1rem", padding: 0 }}
-                      >
-                        This Website is Dark Pattern Free
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
-                        Certificate ID: GVBX23GER019
-                      </Typography>
-                    </Box>
-                  }
-                  placement="left"
-                > */}
                 <Box
                   sx={{
                     width: "12rem",
@@ -520,30 +503,7 @@ const LandingPage = () => {
                     backgroundColor: "rgba(0, 0, 0, 0.1)",
                     marginTop: { xs: "3rem", md: "9rem" },
                   }}
-                >
-                  {/* <Typography
-                      sx={{
-                        fontSize: ".95rem",
-                        fontWeight: "900",
-                        color: "white",
-                        lineHeight: "1.5rem",
-                      }}
-                    >
-                      Certified by
-                      <a
-                        href="https://v-tenet.vercel.app/"
-                        target="_blank"add
-                        rel="noopener noreferrer"
-                        style={{
-                          textDecoration: "underline",
-                          color: "inherit",
-                        }}
-                      >
-                        V-TENET
-                      </a>
-                    </Typography> */}
-                </Box>
-                {/* </Tooltip> */}
+                ></Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -579,7 +539,8 @@ const LandingPage = () => {
                   It is a Planspiel Web Engineering project at <br></br>
                   University of Technology Chemnitz.<br></br> Any concern
                   regarding this website<br></br> <br></br>Contact Person is :
-                  Amay Rajvaidya
+                  Amay Rajvaidya<br></br>
+                  E-mail: vtenet125@gmail.com
                   <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
                 </Box>
                 <Box
@@ -622,12 +583,18 @@ const LandingPage = () => {
                     alignItems: "center",
                     flexDirection: "column",
                     color: "#cccc",
-                    fontSize: "1rem",
+                    fontSize: "1.4rem",
                     marginTop: "2rem",
                   }}
                 >
-                  Help<br></br>Social Media Social Media Social Media <br></br>
-                  Contact Help<br></br>
+                  <Box className="email-container">
+                    <MailOutlineIcon fontSize="large" className="icon-mail" />
+                    <LinkedInIcon fontSize="large" className="icon-linkedin" />
+                    <InstagramIcon
+                      fontSize="large"
+                      className="icon-instagram"
+                    />
+                  </Box>
                 </Box>
                 <br></br>
                 <Box
