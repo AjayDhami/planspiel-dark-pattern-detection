@@ -233,6 +233,7 @@ export interface AdminPatterns {
 export interface AdminPatternResponse {
   text: string;
   patternType: string;
+  webpageUrl: string;
 }
 
 export interface AdminDarkPatternListProp {

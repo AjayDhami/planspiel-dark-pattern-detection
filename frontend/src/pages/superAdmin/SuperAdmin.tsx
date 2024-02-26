@@ -40,18 +40,6 @@ const SuperAdmin: React.FC = () => {
     //  eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    clientDetails.map((client) => {
-      console.log(client);
-      
-      // client.websites.map((webpage) => {
-      //   if(webpage.additionalUrls) {
-      //     console.log(webpage.additionalUrls);
-      //   }
-      // })
-    })
-  }, [clientDetails]);
-
     return (
       <Box>
         <Navbar/>

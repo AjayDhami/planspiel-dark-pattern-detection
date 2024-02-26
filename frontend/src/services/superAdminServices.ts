@@ -41,6 +41,7 @@ export const runAutomation = async(id: string, webpageUrls: string[]) => {
   const body = {
     websiteUrl: webpageUrls
   };
+  
   try {    
     const response = await axios.post(`${BASE_ML_URL}/darkPattern/webpageList`, body);
     return response.data; 
