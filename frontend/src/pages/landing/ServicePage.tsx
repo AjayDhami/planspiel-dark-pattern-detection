@@ -44,6 +44,36 @@ const ServicePage = () => {
             </Box>
           </Box>
           <Box className="service-card">
+            <ImportantDevicesOutlinedIcon
+              sx={{
+                placeContent: "center",
+                display: "inline-block",
+                margin: "auto",
+                color: " rgb(79, 104, 93  )",
+                width: "20%",
+                height: "20%",
+              }}
+            />
+            <Box className="service-content">
+              <h3>Experts Feed Back </h3>
+              <p>
+                Detecting dark patterns is a critical objective in the realm of
+                user experience and ethical business practices.
+              </p>
+              <Button
+                sx={{
+                  placeContent: "center",
+                  display: "flex",
+                  margin: "auto auto 10px auto",
+                  color: "rgb(79, 104, 93)",
+                  fontWeight: "bold",
+                }}
+              >
+                Get Start
+              </Button>
+            </Box>
+          </Box>
+          <Box className="service-card">
             <WorkspacePremiumOutlinedIcon
               sx={{
                 placeContent: "center",
@@ -73,36 +103,6 @@ const ServicePage = () => {
                   Get Start
                 </Button>
               </Link>
-            </Box>
-          </Box>
-          <Box className="service-card">
-            <ImportantDevicesOutlinedIcon
-              sx={{
-                placeContent: "center",
-                display: "inline-block",
-                margin: "auto",
-                color: " rgb(79, 104, 93  )",
-                width: "20%",
-                height: "20%",
-              }}
-            />
-            <Box className="service-content">
-              <h3>Feed Back </h3>
-              <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
-              </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                }}
-              >
-                Get Start
-              </Button>
             </Box>
           </Box>
         </Box>
