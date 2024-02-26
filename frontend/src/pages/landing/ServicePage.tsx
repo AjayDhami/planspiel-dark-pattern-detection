@@ -35,8 +35,9 @@ const ServicePage = () => {
                   placeContent: "center",
                   display: "flex",
                   margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
+                  backgroundColor: "rgb(79, 104, 93)",
                   fontWeight: "bold",
+                  color: "white",
                 }}
               >
                 Get Start
@@ -65,8 +66,9 @@ const ServicePage = () => {
                   placeContent: "center",
                   display: "flex",
                   margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
+                  backgroundColor: "rgb(79, 104, 93)",
                   fontWeight: "bold",
+                  color: "white",
                 }}
               >
                 Get Start
@@ -96,8 +98,9 @@ const ServicePage = () => {
                     placeContent: "center",
                     display: "flex",
                     margin: "auto auto 10px auto",
-                    color: "rgb(79, 104, 93)",
+                    backgroundColor: "rgb(79, 104, 93)",
                     fontWeight: "bold",
+                    color: "white",
                   }}
                 >
                   Get Start

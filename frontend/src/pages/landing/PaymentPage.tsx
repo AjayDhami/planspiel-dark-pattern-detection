@@ -1,10 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
-import FindInPageOutlinedIcon from "@mui/icons-material/FindInPageOutlined";
-import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
-import ImportantDevicesOutlinedIcon from "@mui/icons-material/ImportantDevicesOutlined";
+
 import "./PaymentPage.css";
 const PaymentPage = () => {
   return (
@@ -54,7 +51,7 @@ const PaymentPage = () => {
                     padding: "1rem",
                     borderRadius: "5rem",
                     fontSize: "1rem",
-                    marginTop: "5.3vw",
+                    marginTop: "5vw",
                     width: "100%",
                     transition: "background-color 0.3s",
                     "&:hover": {
@@ -110,7 +107,7 @@ const PaymentPage = () => {
                     fontSize: "1rem",
                     width: "100%",
                     alignContent: "center",
-                    marginTop: "5.6vw",
+                    marginTop: "5vw",
                     transition: "background-color 0.3s",
                     "&:hover": {
                       backgroundColor: "rgba(176, 219, 114,0.9)",
@@ -163,7 +160,7 @@ const PaymentPage = () => {
                     padding: "1rem",
                     borderRadius: "5rem",
                     fontSize: "1rem",
-                    marginTop: "5.6vw",
+                    marginTop: "5vw",
                     width: "100%",
                     transition: "background-color 0.3s",
                     "&:hover": {
