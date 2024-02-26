@@ -80,7 +80,7 @@ const NavbarPage = () => {
                 "&:hover": {
                   backgroundImage:
                     "linear-gradient(to left, rgba(158, 75, 154, 0.859))",
-                  border: "0.01rem solid rgba(2, 24, 77, 0.984)",
+                  border: " solid transparent",
                   color: "#efefef",
                   textTransform: "capitalize",
                 },
@@ -102,10 +102,21 @@ const NavbarPage = () => {
                 xs: "var(--h1-size, 12px)",
                 md: "var(--h1-size, 18px)",
               },
-              fontWeight: "var(--base-text-weight-semibold, 600)",
               lineHeight: 1.5,
-              color: "#efefef",
+              fontWeight: "var(--base-text-weight-semibold, 600)",
+              padding: { xs: ".5rem", md: ".7wv" },
+              borderRadius: { xs: ".5rem", md: ".5rem" },
+              border: "0.1rem solid rgb(230, 230, 230)",
+              color: "#e1eef3",
+              backgroundColor: "transparent",
               textTransform: "capitalize",
+              "&:hover": {
+                backgroundImage:
+                  "linear-gradient(to left, rgba(158, 75, 154, 0.859))",
+                border: " solid transparent",
+                color: "#efefef",
+                textTransform: "capitalize",
+              },
             }}
             color="inherit"
           >
@@ -140,7 +151,8 @@ const NavbarPage = () => {
             <Link
               style={{ textDecoration: "none", color: "purple" }}
               href="/expertsignin"
-            ><MenuItem onClick={handleClose}>As an Expert</MenuItem>
+            >
+              <MenuItem onClick={handleClose}>As an Expert</MenuItem>
             </Link>
           </Menu>
         </Toolbar>

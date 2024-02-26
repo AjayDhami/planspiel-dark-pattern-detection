@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-
 import "./ProcessPage.css";
 
 const ProcessPage = () => {
@@ -30,7 +29,7 @@ const ProcessPage = () => {
         Here is our Product RoadMap
       </p>
 
-      <Box className="timeline">
+      <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -51,7 +50,7 @@ const ProcessPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-left" className="timeline">
         <Box className="timeline-container right-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -72,7 +71,7 @@ const ProcessPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -93,7 +92,7 @@ const ProcessPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-left" className="timeline">
         <Box className="timeline-container right-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -118,3 +117,6 @@ const ProcessPage = () => {
 };
 
 export default ProcessPage;
+function useEffect(arg0: () => () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
