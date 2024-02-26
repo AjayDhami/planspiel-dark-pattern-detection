@@ -270,7 +270,8 @@ const LandingPage = () => {
             style={{
               padding: "5px",
               margin: "5px 0px",
-              color: "rgb(110, 118, 129)",
+              // color: "rgb(110, 118, 129)",
+              color: "white",
               fontWeight: "600",
             }}
           >
@@ -507,7 +508,7 @@ const LandingPage = () => {
                       marginTop: { xs: "3rem", md: "1rem" },
                     }}
                   >
-                    <Typography
+                    {/* <Typography
                       sx={{
                         fontSize: ".95rem",
                         fontWeight: "900",
@@ -527,19 +528,9 @@ const LandingPage = () => {
                       >
                         V-TENET
                       </a>
-                    </Typography>
+                    </Typography> */}
                   </Box>
                 </Tooltip>
-                <Box
-                  sx={{
-                    width: "5rem",
-                    height: "5rem",
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                ></Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -623,6 +614,17 @@ const LandingPage = () => {
           >
             © V-Tenet 2024.
           </Box>
+          <br></br>
+          <Box
+                  sx={{
+                    width: "3rem",
+                    height: "3rem",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                ></Box>
         </Box>
       </Box>
     </>

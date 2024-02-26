@@ -27,7 +27,7 @@ const ProcessPage = () => {
           textAlign: "center",
         }}
       >
-        Here is our  Product RoadMap
+        Here is our Product RoadMap
       </p>
 
       <Box className="timeline">
@@ -83,11 +83,12 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Got Ceretification
+              Got Feed Back
             </h2>
             <p>
-              After successfully completing the process, your product receives
-              certification, proving its legitimacy and adherence to standards.
+              Enter URL is a user interface prompt commonly found in web
+              browsers, search engines, and various online platforms. This
+              instructive text invites users to input a URL the web address .
             </p>
           </Box>
         </Box>
@@ -103,12 +104,11 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Got Feed Back
+              Got Certification
             </h2>
             <p>
-              Enter URL is a user interface prompt commonly found in web
-              browsers, search engines, and various online platforms. This
-              instructive text invites users to input a URL the web address .
+              After successfully completing the process, your product receives
+              certification, proving its legitimacy and adherence to standards.
             </p>
           </Box>
         </Box>
