@@ -29,7 +29,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { sanitizeStringArray } from "../../utils/DataHelper";
 import TermsAndConditions from "./TermsAndConditions";
-import RichTextEditor from "../common/RichTextEditor";
 
 const initialValues: WebsiteOnboardingFormDetails = {
   websiteName: "",
@@ -74,7 +73,6 @@ const WebsiteOnboardingForm = ({
   const handleSubmit = async (
     values: WebsiteOnboardingFormDetails
   ): Promise<void> => {
-    console.log("handleSubmit called >>>>> ", values);
     if (values.acceptedTerms) {
       try {
         setIsFormLoading(true);
@@ -185,16 +183,15 @@ const WebsiteOnboardingForm = ({
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Field name="description">
-                    {({ field }: any) => (
-                      <RichTextEditor
-                        label="Description"
-                        value={field.value}
-                        onChange={field.onChange(field.name)}
-                        noUpload
-                      />
-                    )}
-                  </Field>
+                  <Field
+                    as={TextField}
+                    label="Additional Details"
+                    name="description"
+                    fullWidth
+                    rows={4}
+                    multiline
+                    helperText="Add specific instructions regarding your website here. (e.g. Login credentials)"
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray name="additionalUrls">
