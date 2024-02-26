@@ -66,14 +66,11 @@
 }
 
 @media (max-width: 1100px) {
-  .service-section h1 {
-    font-size: 1.5rem;
-  }
   .service-cards {
     grid-template-columns: repeat(1, 1fr);
   }
   .service-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .service-card {
     height: fit-content;

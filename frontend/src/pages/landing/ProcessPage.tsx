@@ -14,7 +14,7 @@ const ProcessPage = () => {
           textAlign: "center",
         }}
       >
-        Let's a Look Our Product Demo
+        Let's a Look Our Product Workflow
       </h1>
       <p
         style={{
