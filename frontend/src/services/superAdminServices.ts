@@ -37,9 +37,9 @@ export const assignExperts = async(id: string, expertIds: string[], primaryExper
   }
 }
 
-export const runAutomation = async(id: string, websiteUrl: string) => {
+export const runAutomation = async(id: string, webpageUrls: string[]) => {
   const body = {
-    websiteUrl: websiteUrl
+    websiteUrl: webpageUrls
   };
   try {    
     const response = await axios.post(`${BASE_ML_URL}/darkPattern/webpageList`, body);

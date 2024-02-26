@@ -40,7 +40,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
 
     const handleRunAutomationClick = async () => {
       setLoading(true);
-      const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
+      const resp = await runAutomation(websiteId? websiteId: "", additionalUrls);
       if(resp) {
         setIsModalOpen(true);
         setPatterns(resp);

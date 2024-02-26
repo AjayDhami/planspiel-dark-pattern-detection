@@ -66,9 +66,9 @@ def parse_multiple_website_url(webpageList):
         website_id = generate_random_id()
         web_scrap(webpage_url, website_id)
         dark_patterns = predict_website_dark_pattern_type(website_id)
-        dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
-        temp = {webpage_url: dark_patterns} 
-        dark_patterns_response.append(temp)
+        dark_patterns = [{'webpageUrl': webpage_url, 'text': key, 'patternType': value} for key, value in dark_patterns.items()]
+        for obj in dark_patterns:
+            dark_patterns_response.append(obj)
         i+=1
     else: 
         return dark_patterns_response
