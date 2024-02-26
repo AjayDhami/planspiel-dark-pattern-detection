@@ -25,16 +25,3 @@ body {
   -webkit-text-fill-color: white;
   transition: background-color 5000s ease-in-out 0s;
 }
-
-.quill > .ql-toolbar {
-  border-radius: 4px 4px 0 0;
-}
-
-.quill > .ql-container {
-  height: 250px;
-  border-radius: 0 0 4px 4px;
-}
-
-.quill > .ql-container > .ql-editor {
-  height: 250px;
-}

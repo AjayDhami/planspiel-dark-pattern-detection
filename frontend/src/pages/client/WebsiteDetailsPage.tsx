@@ -81,7 +81,7 @@ const WebsiteDetailsPage = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12}>
         <Section>
           <Button
             startIcon={<ArrowBackIcon />}
@@ -98,14 +98,14 @@ const WebsiteDetailsPage = () => {
                 {website.websiteName}
               </Typography>
 
-              <Typography variant="subtitle1" color="primary">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Website URL
               </Typography>
               <Typography variant="body1" mb={2}>
                 <LinkText url={website.baseUrl} />
               </Typography>
 
-              <Typography variant="subtitle1" color="primary">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Additional URLs
               </Typography>
               {website.additionalUrls && website.additionalUrls.length ? (
@@ -118,24 +118,7 @@ const WebsiteDetailsPage = () => {
                 </Typography>
               )}
 
-              <Typography variant="subtitle1" color="primary">
-                Description
-              </Typography>
-              {website.description ? (
-                <Typography variant="body1" mb={2}>
-                  <Skeleton
-                    variant="rectangular"
-                    animation="wave"
-                    height={100}
-                  />
-                </Typography>
-              ) : (
-                <Typography variant="body1" color="gray" mb={2}>
-                  No Description
-                </Typography>
-              )}
-
-              <Typography variant="subtitle1" color="primary">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Website Status
               </Typography>
               <Typography variant="body1" mb={2}>
@@ -145,6 +128,19 @@ const WebsiteDetailsPage = () => {
                   isDarkPatternFree={website.isDarkPatternFree}
                 />
               </Typography>
+
+              <Typography variant="subtitle1" fontWeight="bold">
+                Description
+              </Typography>
+              {website.description ? (
+                <Typography variant="body1" mb={2}>
+                  {website.description}
+                </Typography>
+              ) : (
+                <Typography variant="body1" color="gray" mb={2}>
+                  No Description
+                </Typography>
+              )}
             </>
           ) : (
             <>
