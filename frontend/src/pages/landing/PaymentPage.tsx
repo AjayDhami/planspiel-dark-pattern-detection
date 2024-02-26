@@ -26,18 +26,43 @@ const PaymentPage = () => {
                 }}
               /> */}
               <Box className="payment-content">
-                <h3> BASIC</h3>
-                <p></p>
+                <h3>BASIC</h3>
+                <h4>
+                  {/* <span
+                    style={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    3
+                  </span> */}
+                  3 Months Support
+                </h4>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
                 <Button
                   sx={{
                     placeContent: "center",
                     display: "flex",
                     margin: "auto auto 10px auto",
-                    color: "rgb(79, 104, 93)",
+                    color: "white",
                     fontWeight: "bold",
+                    backgroundColor: "rgba(131,58,180,1) ",
+                    padding: "1rem",
+                    borderRadius: "5rem",
+                    fontSize: "1rem",
+                    marginTop: "5.3vw",
+                    width: "100%",
+                    transition: "background-color 0.3s",
+                    "&:hover": {
+                      backgroundColor: "rgba(131,58,180,0.9)",
+                    },
                   }}
                 >
-                  Get Start
+                  REGISTER
                 </Button>
               </Box>
             </Box>
@@ -56,18 +81,43 @@ const PaymentPage = () => {
             /> */}
               <Box className="payment-content">
                 <h3>COMFORT</h3>
-                <p></p>
+                <h4>
+                  {/* <span
+                    style={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    3
+                  </span> */}
+                  6 Months Support
+                </h4>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
                 <Button
                   sx={{
                     placeContent: "center",
                     display: "flex",
-                    margin: "auto auto 10px auto",
-                    color: "rgb(79, 104, 93)",
+                    // margin: "auto auto 10px auto",
+                    color: "black",
                     fontWeight: "bold",
-                    backgroundColor: "rgb(49, 203, 151)",
+                    backgroundColor: "rgba(176, 219, 114, 1) ",
+                    padding: "1rem",
+                    borderRadius: "5rem",
+                    fontSize: "1rem",
+                    width: "100%",
+                    alignContent: "center",
+                    marginTop: "5.6vw",
+                    transition: "background-color 0.3s",
+                    "&:hover": {
+                      backgroundColor: "rgba(176, 219, 114,0.9)",
+                    },
                   }}
                 >
-                  Get Start
+                  REGISTER
                 </Button>
               </Box>
             </Box>
@@ -85,21 +135,44 @@ const PaymentPage = () => {
               }}
             /> */}
               <Box className="payment-content">
-                <h3>PREMIUM</h3>
-                <p></p>
-                <Link style={{ textDecoration: "none" }} href="/signup">
-                  <Button
-                    sx={{
-                      placeContent: "center",
-                      display: "flex",
-                      margin: "auto auto 10px auto",
-                      color: "rgb(79, 104, 93)",
-                      fontWeight: "bold",
+                <h3> PREMIUM</h3>
+                <h4>
+                  {/* <span
+                    style={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.5rem",
                     }}
                   >
-                    Get Start
-                  </Button>
-                </Link>
+                    3
+                  </span> */}
+                  12 Months Support
+                </h4>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    color: "white",
+                    fontWeight: "bold",
+                    backgroundColor: "rgba(228,138,19,1) ",
+                    padding: "1rem",
+                    borderRadius: "5rem",
+                    fontSize: "1rem",
+                    marginTop: "5.6vw",
+                    width: "100%",
+                    transition: "background-color 0.3s",
+                    "&:hover": {
+                      backgroundColor: "rgba(228,138,19,0.9)",
+                    },
+                  }}
+                >
+                  REGISTER
+                </Button>
               </Box>
             </Box>
           </Box>
