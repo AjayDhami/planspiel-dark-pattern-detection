@@ -94,13 +94,11 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
 
   const handleUrlClick = (texttoCheck:string) => {
     var url = document.getElementById("detectedUrl")?.getAttribute("href");
-    console.log(url);
     var suffix = "#:~:text=";
     var tempUrl = url?.split("#")[0];
     var text = encodeURIComponent(texttoCheck);
     var newurl = tempUrl + suffix + text;
     newurl.toString();
-    console.log(newurl);
     document.getElementById("detectedUrl")?.setAttribute("href", newurl);
   }
   
