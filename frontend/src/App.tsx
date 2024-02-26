@@ -17,6 +17,7 @@ import SuperAdminSignin from "./pages/superAdmin/SuperAdminSignin";
 import { AdminProvider } from "./context/AdminContext";
 import ServicePage from "./pages/landing/ServicePage";
 import ProcessPage from "./pages/landing/ProcessPage";
+import PaymentPage from "./pages/landing/PaymentPage";
 function App() {
   return (
     <AuthProvider>
@@ -28,6 +29,7 @@ function App() {
 
             <Route path="/processpage" element={<ProcessPage />} />
             <Route path="/servicepage" element={<ServicePage />} />
+            <Route path="/paymentpage" element={<PaymentPage />} />
             <Route path="/navbar" element={<NavbarPage />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />

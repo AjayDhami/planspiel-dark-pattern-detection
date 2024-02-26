@@ -15,6 +15,7 @@ import { getPatternPercentage } from "../../api";
 import LinearProgress from "@mui/material/LinearProgress";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PaymentPage from "./PaymentPage";
 
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
@@ -432,6 +433,18 @@ const LandingPage = () => {
         <Box>
           <ProcessPage />
         </Box>
+        {/* --------------------------payment-------------------- */}
+        <Box
+          sx={{
+            height: "auto",
+            width: "90%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <PaymentPage />
+        </Box>
+        {/* --------------------------Service-------------------- */}
         <Box
           sx={{
             height: "auto",
@@ -616,15 +629,15 @@ const LandingPage = () => {
           </Box>
           <br></br>
           <Box
-                  sx={{
-                    width: "3rem",
-                    height: "3rem",
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                ></Box>
+            sx={{
+              width: "3rem",
+              height: "3rem",
+              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></Box>
         </Box>
       </Box>
     </>
