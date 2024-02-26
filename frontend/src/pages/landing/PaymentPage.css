@@ -1,0 +1,115 @@
+.payment-section {
+  min-height: 90dvh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vw;
+  margin-top: 4vw;
+}
+.payment-section h1 {
+  font-size: 3rem;
+  padding: 5px;
+  margin: 20px 0px;
+  color: white;
+  font-weight: 600;
+  position: relative;
+}
+
+.payment-card h3 {
+  font-size: 2rem;
+  color: black;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 1.8rem;
+}
+.payment-card p {
+  width: 100%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  line-height: 1.5rem;
+  white-space: 1px;
+  margin-bottom: 20px;
+}
+.payment-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px;
+  z-index: 9;
+  margin-top: 20px;
+}
+.payment-card {
+  height: 480px;
+  width: 340px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 0 8%;
+  background: linear-gradient(
+    0deg,
+    rgba(110, 224, 225, 1) 35%,
+    rgba(114, 130, 219, 1) 65%
+  );
+  /* background: radial-gradient(
+    circle,
+    rgba(215, 225, 110, 1) 65%,
+    rgba(176, 219, 114, 1) 79%
+  ); */
+  position: relative;
+  margin-top: 4dvh;
+  border-radius: 2rem;
+  align-items: center;
+}
+.payment-card1 {
+  height: 420px;
+  width: 320px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 0 8%;
+  border-radius: 3rem;
+  background-color: white;
+  position: relative;
+  margin-left: 0.6rem;
+}
+@media (max-width: 1100px) {
+  .payment-section h1 {
+    /* font-size: 1.5rem; */
+    text-align: center;
+  }
+  .payment-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .payment-card h3 {
+    font-size: 1.8rem;
+  }
+  .payment-card {
+    height: 250px;
+    width: 280px;
+    margin-left: 0;
+    margin: 20px;
+  }
+  .payment-card1 {
+    height: 200px;
+    width: 100%;
+    margin-left: 0;
+    background-color: transparent;
+  }
+}
+@media (max-width: 900) {
+  .payment-card .payment-cards {
+    height: 260px;
+    width: 240px;
+    margin: 20px 0;
+  }
+
+  .payment-card1 {
+    height: 200px;
+    width: 100%;
+    margin-left: 0;
+    background-color: transparent;
+  }
+}
