@@ -34,6 +34,7 @@ const ClientDashboardLayout = () => {
             md: "auto",
             lg: `calc(100vh - 88px)`,
           },
+          overflowY: "auto",
           py: {
             xs: 2,
             md: 3,

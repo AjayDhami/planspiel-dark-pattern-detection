@@ -65,10 +65,6 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
   return (
     <Stack>
-      <Typography variant="h6" component="h6" color="primary">
-        Website Certification
-      </Typography>
-
       {!certificate && (
         <Stack
           spacing={1}
