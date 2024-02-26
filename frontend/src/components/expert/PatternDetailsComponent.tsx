@@ -92,6 +92,17 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     setEditing(false);
   };
 
+  const handleUrlClick = (texttoCheck:string) => {
+    var url = document.getElementById("detectedUrl")?.getAttribute("href");
+    console.log(url);
+    var suffix = "#:~:text=";
+    var text = encodeURIComponent(texttoCheck);
+    var newurl = url + suffix + text;
+    newurl.toString();
+    console.log(newurl);
+    document.getElementById("detectedUrl")?.setAttribute("href", newurl);
+  }
+  
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -150,10 +161,10 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <Link to={patternData.detectedUrl} target="_blank" className="text-blue-500">
+              <a href={patternData.detectedUrl} target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick("Destinations we love")}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
-              </Link>
+              </a>
               <div className="border-b-2 p-4 bg-gray-100 rounded-lg">
                 <h2 className="font-bold">Description</h2>
                 <p>{patternData.description}</p>
