@@ -41,26 +41,6 @@ const SuperAdminSignin = () => {
         }
     }
 
-    // ********************Test code********************
-    const linkStyle: React.CSSProperties = {
-      color: 'blue',
-      textDecoration: 'underline',
-      cursor: 'pointer',
-    };
-
-    const url = 'https://blog.hubspot.com/marketing/jump-link-same-page';
-    const openExternalPage = () => {
-      const contentText = 'bottom-anchor';
-      const urls = `${url}#${contentText}`;
-      const newWindow = window.open(urls, '_blank');
-
-      if (newWindow) {
-        newWindow.focus();
-      } else {
-        alert('Please allow pop-ups');
-      }
-    };
-
   return (
     <Grid container sx={{
         width: "100%",
@@ -69,10 +49,6 @@ const SuperAdminSignin = () => {
         justifyContent: "center"
     }}>
       <Grid item>
-      <div>
-        <p>URL testtt: <a style={linkStyle} onClick={openExternalPage}>{url}</a></p>
-        <br></br>
-      </div>
         <Paper elevation={3} sx={{
         padding: "20px",
         alignItems: "center",
