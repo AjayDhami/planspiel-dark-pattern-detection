@@ -265,6 +265,7 @@ export type AdminWebsites = {
   websiteId: string;
   baseUrl: string;
   websiteName: string;
+  additionalUrls: string[];
   description: string;
 };
 

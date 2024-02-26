@@ -12,7 +12,7 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display website list for a particular client
-const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName}) => {
+const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrls, websiteName}) => {
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
@@ -67,7 +67,13 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
           <Typography variant="body1" component="span">
             {baseUrl}
           </Typography>
-          
+
+         { additionalUrls && additionalUrls.map((webpage) => (
+          <Typography variant="h6" component="span">
+            {webpage}
+          </Typography>
+         ))} 
+         
           <Box sx={{
             marginTop: "10px",
           }}>
