@@ -25,18 +25,16 @@ def free_verification():
     website_url = request.json.get('url')
     return dark_pattern_service.free_verification(params={'url': website_url})
 
-@dark_pattern.route('/websiteIdList', methods=['POST'])
+@dark_pattern.route('/webpageList', methods=['POST'])
 @cross_origin()
 def parse_multiple_website_for_dark_pattern_detection():
     delete_files_in_scraped_data()
     data = request.json
-    respData = {}
-    for i, j in data.items():
-        print(i, j)
-        respData[i] = dark_pattern_service.parse_multiple_website_url(j, i)
     
-    respData = {str(key): value for key, value in respData.items()}
-    print(respData)
-    return jsonify(respData)
+    for i, j in data.items():
+        webpageList= j
+
+    response = dark_pattern_service.parse_multiple_website_url(webpageList)
+    return jsonify(response)
 
    

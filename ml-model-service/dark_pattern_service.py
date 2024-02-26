@@ -3,6 +3,8 @@ from model_training.dark_pattern_model_train import get_csv_file_path, predict_w
 from model_training.scraping import web_scrap
 from flask import jsonify
 import pandas as pd
+import random
+import string
 
 
 def create_model():
@@ -53,12 +55,27 @@ def free_verification(params):
             return jsonify({"error": error_message}), 500
         
 
-def parse_multiple_website_url(website_url, website_id):
+def parse_multiple_website_url(webpageList):
     print('Parsing website')
-    web_scrap(website_url, website_id)
-
-    dark_patterns = predict_website_dark_pattern_type(website_id)
-    dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
+    i=0
+    n = len(webpageList)
+    dark_patterns_response = []
     
-    return dark_patterns
+    while i<n:
+        webpage_url = webpageList[i]
+        website_id = generate_random_id()
+        web_scrap(webpage_url, website_id)
+        dark_patterns = predict_website_dark_pattern_type(website_id)
+        dark_patterns = [{'text': key, 'patternType': value} for key, value in dark_patterns.items()]
+        temp = {webpage_url: dark_patterns} 
+        dark_patterns_response.append(temp)
+        i+=1
+    else: 
+        return dark_patterns_response
+
+# Code to generate random ID for a webpage to run automation 
+def generate_random_id():
+    characters = string.ascii_lowercase + string.digits
+    random_id = ''.join(random.choices(characters, k=24))
+    return random_id
 
