@@ -96,8 +96,9 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     var url = document.getElementById("detectedUrl")?.getAttribute("href");
     console.log(url);
     var suffix = "#:~:text=";
+    var tempUrl = url?.split("#")[0];
     var text = encodeURIComponent(texttoCheck);
-    var newurl = url + suffix + text;
+    var newurl = tempUrl + suffix + text;
     newurl.toString();
     console.log(newurl);
     document.getElementById("detectedUrl")?.setAttribute("href", newurl);
@@ -161,7 +162,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <a href={patternData.detectedUrl} target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick("Destinations we love")}>
+              <a href={patternData.detectedUrl} target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
               </a>
