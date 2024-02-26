@@ -103,8 +103,8 @@ const LandingPage = () => {
             }}
           >
             <Typography variant="h5" component="span">
-              Pattern Check by{" "}
-              <span className="font-CustomFont font-bold text-blue-500">
+              Pattern Check by
+              <span className="font-CustomFont font-bold text-white-500">
                 VORT
               </span>
             </Typography>
@@ -457,7 +457,7 @@ const LandingPage = () => {
         </Box>
         <Box
           sx={{
-            height: { xs: "53rem", md: "25rem" },
+            height: { xs: "70rem", md: "30rem" },
             width: "100%",
             display: "flex",
             justifyContent: "center",
@@ -484,7 +484,7 @@ const LandingPage = () => {
                   textAlign: "center",
                 }}
               >
-                <Tooltip
+                {/* <Tooltip
                   open={open}
                   onClose={handleClose}
                   onOpen={handleOpen}
@@ -502,26 +502,26 @@ const LandingPage = () => {
                     </Box>
                   }
                   placement="left"
+                > */}
+                <Box
+                  sx={{
+                    width: "12rem",
+                    height: "12rem",
+                    borderRadius: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "2px solid transparent",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
+                    backgroundSize: "100px 100px",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backdropFilter: "blur(10px)",
+                    backgroundColor: "rgba(0, 0, 0, 0.1)",
+                    marginTop: { xs: "3rem", md: "9rem" },
+                  }}
                 >
-                  <Box
-                    sx={{
-                      width: "180px",
-                      height: "180px",
-                      borderRadius: "50%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      border: "2px solid transparent",
-                      backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
-                      backgroundSize: "100px 100px",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                      backdropFilter: "blur(10px)",
-                      backgroundColor: "rgba(0, 0, 0, 0.1)",
-                      marginTop: { xs: "3rem", md: "1rem" },
-                    }}
-                  >
-                    {/* <Typography
+                  {/* <Typography
                       sx={{
                         fontSize: ".95rem",
                         fontWeight: "900",
@@ -532,7 +532,7 @@ const LandingPage = () => {
                       Certified by
                       <a
                         href="https://v-tenet.vercel.app/"
-                        target="_blank"
+                        target="_blank"add
                         rel="noopener noreferrer"
                         style={{
                           textDecoration: "underline",
@@ -542,8 +542,8 @@ const LandingPage = () => {
                         V-TENET
                       </a>
                     </Typography> */}
-                  </Box>
-                </Tooltip>
+                </Box>
+                {/* </Tooltip> */}
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -556,12 +556,13 @@ const LandingPage = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   color: "white",
-                  marginTop: { xs: "3rem", md: "1rem" },
-                  fontSize: "1.5rem",
+                  marginTop: { xs: "3rem", md: "3rem" },
+                  fontSize: "1.9rem",
                   textAlign: "center",
+                  fontWeight: "bold",
                 }}
               >
-                Adress
+                Company Address
                 <Box
                   sx={{
                     height: "auto",
@@ -570,14 +571,28 @@ const LandingPage = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                    color: "#cccc",
-                    fontSize: "1rem",
+                    color: "rgba(256,256,256,.7)",
+                    fontSize: "1.2rem",
                     marginTop: 2,
                   }}
                 >
-                  CMS<br></br> Localization<br></br> AI<br></br> Effects Site
-                  <br></br> Management<br></br> Enterprise<br></br>
-                  Developers
+                  It is a Planspiel Web Engineering project at <br></br>
+                  University of Technology Chemnitz.<br></br> Any concern
+                  regarding this website<br></br> <br></br>Contact Person is :
+                  Amay Rajvaidya
+                  <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
+                </Box>
+                <Box
+                  sx={{
+                    color: "white",
+                    marginTop: "4rem",
+                    borderBottom: ".1rem solid #2B1B42",
+                    fontFamily: "var(--secular-font)",
+                    fontSize: "1.3rem",
+                    textAlign: "center",
+                  }}
+                >
+                  © V-Tenet 2024.
                 </Box>
               </Box>
             </Grid>
@@ -591,9 +606,10 @@ const LandingPage = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   color: "white",
-                  fontSize: "1.5rem",
+                  fontSize: "1.9rem",
+                  fontWeight: "bold",
                   textAlign: "center",
-                  marginTop: { xs: "3rem", md: "1rem" },
+                  marginTop: { xs: "3rem", md: "3rem" },
                 }}
               >
                 Support
@@ -607,37 +623,29 @@ const LandingPage = () => {
                     flexDirection: "column",
                     color: "#cccc",
                     fontSize: "1rem",
-                    marginTop: 2,
+                    marginTop: "2rem",
                   }}
                 >
-                  Help<br></br>Social Media <br></br> Contact
+                  Help<br></br>Social Media Social Media Social Media <br></br>
+                  Contact Help<br></br>
                 </Box>
+                <br></br>
+                <Box
+                  sx={{
+                    width: "9.2rem",
+                    height: "11.9rem",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Digital_Certificate_VORT.svg)`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    justifyContent: "end",
+                  }}
+                ></Box>
               </Box>
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              color: "white",
-              marginTop: "1rem",
-              borderBottom: ".1rem solid #2B1B42",
-              fontFamily: "var(--secular-font)",
-              fontSize: "1rem",
-              textAlign: "center",
-            }}
-          >
-            © V-Tenet 2024.
-          </Box>
+
           <br></br>
-          <Box
-            sx={{
-              width: "3rem",
-              height: "3rem",
-              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Certificate.svg)`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-            }}
-          ></Box>
         </Box>
       </Box>
     </>
