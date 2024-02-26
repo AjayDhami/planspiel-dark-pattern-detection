@@ -58,10 +58,10 @@ def free_verification(params):
 def parse_multiple_website_url(webpageList):
     print('Parsing website')
     i=0
-    n = len(webpageList)
+    total_webpages = len(webpageList)
     dark_patterns_response = []
-    
-    while i<n:
+
+    while i<total_webpages:
         webpage_url = webpageList[i]
         website_id = generate_random_id()
         web_scrap(webpage_url, website_id)
