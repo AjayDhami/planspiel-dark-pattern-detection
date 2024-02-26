@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AdminWebsites } from "../../types";
 import { checkPrimaryExpert, runAutomation } from "../../services/superAdminServices";
 import DarkPatternListModal from "./DarkPatternListModal";
+import LoadingModal from "./LoadingModal";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,6 +19,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
     const [patterns, setPatterns] = useState([]);
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [showAutomationButton, setShowAutomationButton] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const checkAssign = async () => {
       try {
@@ -37,11 +39,13 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
     }, []);
 
     const handleRunAutomationClick = async () => {
+      setLoading(true);
       const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
       if(resp) {
         setIsModalOpen(true);
         setPatterns(resp);
         setWebsiteUrl(baseUrl? baseUrl: "");
+        setLoading(false);
       }
     }
 
@@ -53,6 +57,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
         <DarkPatternListModal websiteId={websiteId? websiteId:""} websiteName={websiteName? websiteName:""} onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
+        <LoadingModal isOpen={loading}/>
         <Box
           sx={{
             display: "block",
@@ -69,9 +74,14 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
           </Typography>
 
          { additionalUrls && additionalUrls.map((webpage) => (
-          <Typography variant="h6" component="span">
-            {webpage}
+          <div>
+            <Typography sx={{
+              fontSize: '12px',
+              color: 'gray'
+            }} component="span">
+              {webpage}
           </Typography>
+          </div>
          ))} 
          
           <Box sx={{
@@ -92,7 +102,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrl
         </Box>
       </Stack>
     </CustomPaper>
-  );
+  ); 
 }; 
 
 export default WebsiteCard;
