@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
-// import Link from "@mui/material/Link";
-// import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { motion } from "framer-motion";
 import "./LandingPage.css";
@@ -106,7 +104,7 @@ const LandingPage = () => {
           >
             <Typography variant="h5" component="span">
               Pattern Check by
-              <span className="font-CustomFont font-bold text-white-500">
+              <span className="font-CustomFont font-bold text-blue-500">
                 VORT
               </span>
             </Typography>
@@ -134,6 +132,7 @@ const LandingPage = () => {
               xs: "inherit",
               md: "auto",
             }}
+            sx={{ marginTop: { xs: "0rem", md: "4rem" } }}
           >
             <Grid
               item
@@ -144,22 +143,40 @@ const LandingPage = () => {
               alignItems="center"
               justifyContent="center"
             >
-              <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2 }}
-                className="my-6"
+              <Box
+                className="main-text"
+                sx={{
+                  fontSize: { xs: "2rem", md: "4rem" },
+                  textAlign: "center",
+                }}
               >
-                <h2 className="main-text">
-                  Get Started with <span className="text-blue-500">Vort</span>
-                </h2>
-              </motion.span>
+                Get Started with <span className="text-white-500">Vort</span>
+              </Box>
+              <Box
+                className="main-text1"
+                sx={{
+                  fontSize: { xs: ".8rem", md: "1.2rem" },
+                  textAlign: "center",
+                }}
+              >
+                VORT works as a Dark Patterns detector, specifically designed to
+                identify various types of deceptive online practices. It
+                primarily targets three common dark patterns:{" "}
+                <span style={{ fontWeight: "bold", color: "white" }}>
+                  1. Fake Scarcity, 2. Fake Urgency, and 3. Fake Social Proof
+                </span>{" "}
+                You can easily check single webpage at a time for these dark
+                patterns by utilizing the "VORT" tool on your website. Conduct a
+                quick and complimentary check to ensure the absence of these
+                deceptive elements.
+              </Box>
 
               <Box
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
                 className="input-box"
+                marginTop="3rem"
               >
                 <input
                   type="text"
@@ -175,52 +192,6 @@ const LandingPage = () => {
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
               </Box>
-
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              > */}
-
-              {/* <h2 className="main-text1">Your Dark Pattern Detector</h2>
-                <span data-text="GotYa!" className="main-text2">
-                  GotYa!
-                </span> */}
-
-              {/* <Grid item md={8}>
-                    <form
-                      className="footer-form"
-                      style={{
-                        paddingTop: "2rem",
-                        display: "flex",
-                        padding: "1rem",
-                      }}
-                    >
-                      <input type="email" placeholder="Enter Your URL" />
-                    </form>
-                  </Grid> */}
-              {/* <Grid item md={4}>
-                    <Link href="/signup">
-                      <Button
-                        sx={{
-                          color: "white",
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          borderRadius: "1rem",
-                          border: ".1rem solid cyan ",
-                          padding: ".5rem",
-                          mt: 2,
-                        }}
-                        onClick={handleWebsiteSubmitClick}
-                      >
-                        Visit Your Website for verification
-                      </Button>
-                    </Link>
-                  </Grid> */}
-              {/* </Box> */}
             </Grid>
             <Grid item md={4}>
               <Box
@@ -238,22 +209,10 @@ const LandingPage = () => {
                   style={{
                     width: "100%",
                     height: "100%",
-                    marginLeft: "5rem",
+                    marginLeft: "15rem",
                     backgroundColor: "transparent",
                   }}
                 />
-                {/* <Box
-                  sx={{
-                    fontSize: "1.5rem",
-                    fontFamily: "monospace",
-                    fontStyle: "revert-layer",
-                    fontWeight: "900",
-                    marginLeft:"3rem"
-                  }}
-                  className="text-slate-500"
-                >
-                  Dark Pattern Detection By Vort
-                </Box> */}
               </Box>
             </Grid>
           </Grid>
@@ -261,12 +220,13 @@ const LandingPage = () => {
         {/* -------------------------------------------Section2------------------------------------------------- */}
         <Box
           sx={{
-            marginTop: "2vw",
+            marginTop: "2rem",
             height: { md: "40dvh" },
             width: { md: "100%" },
             display: "grid",
             placeItems: "center",
-            fontSize: { xs: "1.5rem", md: "3rem" },
+            fontSize: { xs: "3rem", md: "3rem" },
+            textAlign: "center",
           }}
         >
           <h1
