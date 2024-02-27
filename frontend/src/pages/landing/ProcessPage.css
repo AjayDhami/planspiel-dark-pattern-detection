@@ -1,9 +1,8 @@
-
 .timeline {
   position: relative;
   max-width: 1200px;
   margin: 1px auto;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(252, 252, 252, 0.7);
 }
 .timeline-container {
   padding: 30px 40px;
@@ -55,18 +54,26 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .timeline-container {
     width: auto;
     margin-top: 2rem;
+    display: none;
   }
 
   .timeline-container.right-timeline-container {
     left: auto;
     right: auto;
+    display: none;
   }
 
   .timeline::after {
     background: transparent;
+    display: none;
+  }
+
+  .timeline {
+    animation: none;
+    display: none;
   }
 }

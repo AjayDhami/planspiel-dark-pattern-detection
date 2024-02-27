@@ -1,70 +1,69 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
-import Tooltip from "@mui/material/Tooltip";
-// import Link from "@mui/material/Link";
-// import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { motion } from "framer-motion";
+
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
 import ProcessPage from "./ProcessPage";
 import Typography from "@mui/material/Typography";
 import LandingModal from "../../components/landing/LandingModal";
-import { getPatternPercentage } from '../../api';
-import LinearProgress from '@mui/material/LinearProgress';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { getPatternPercentage } from "../../api";
+import LinearProgress from "@mui/material/LinearProgress";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PaymentPage from "./PaymentPage";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const LandingPage = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState<boolean>(false);
   const [urlForCheck, setUrlForCheck] = useState<string>("");
   const [percentage, setPercentage] = useState<number>();
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  const handleWebsiteSubmitClick = async() => {
-    if(urlForCheck===""){
+  const handleWebsiteSubmitClick = async () => {
+    if (urlForCheck === "") {
       toast.error("Please Enter the url", {
-        position: toast.POSITION.TOP_CENTER
+        position: toast.POSITION.TOP_CENTER,
       });
-    }
-    else{
+    } else {
       setIsLoadingOpen(true);
-    const data = await getPatternPercentage(urlForCheck);
-    if(data.Percentage){
-      setUrlForCheck("");
-      setIsLoadingOpen(false);
-      setPercentage(data.Percentage);
-      setIsmodalOpen(true);
+      const data = await getPatternPercentage(urlForCheck);
+      if (data.Percentage) {
+        setUrlForCheck("");
+        setIsLoadingOpen(false);
+        setPercentage(data.Percentage);
+        setIsmodalOpen(true);
+      } else {
+        setIsLoadingOpen(false);
+        setUrlForCheck("");
+        toast.error("Error while running detetction, try again", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
-    else{
-      setIsLoadingOpen(false);
-      setUrlForCheck("");
-      toast.error("Error while running detetction, try again", {
-          position: toast.POSITION.TOP_CENTER
-      });
-    }
-    }
-  }
+  };
 
   const handleWebsiteSubmitClose = () => {
     setIsmodalOpen(false);
     setUrlForCheck("");
-  }
+  };
 
   const handleLoadingClose = () => {
     setIsLoadingOpen(false);
     setUrlForCheck("");
-  }
-
-  const handleOpen = () => {
-    setOpen(true);
   };
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
   return (
     <>
       <Box
@@ -83,26 +82,39 @@ const LandingPage = () => {
           backgroundImage: `linear-gradient(to left, rgba(2, 24, 77, 0.984), rgba(3, 47, 129, 0.859)),url(${process.env.PUBLIC_URL}/assets/bgimage.svg)`,
         }}
       >
-        <LandingModal isOpen={isModalOpen} onClose={handleWebsiteSubmitClose} percentage={percentage ? percentage : 0 }/>
-        <Dialog open={isLoadingOpen} onClose={handleLoadingClose} fullScreen={false} maxWidth="md" fullWidth>
+        <LandingModal
+          isOpen={isModalOpen}
+          onClose={handleWebsiteSubmitClose}
+          percentage={percentage ? percentage : 0}
+        />
+        <Dialog
+          open={isLoadingOpen}
+          onClose={handleLoadingClose}
+          fullScreen={false}
+          maxWidth="md"
+          fullWidth
+        >
           <DialogTitle
             sx={{
-            display:"flex",
-            fontStyle:"normal",
-            justifyContent: "center",
-            alignItems:"center"
+              display: "flex",
+              fontStyle: "normal",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Typography variant="h5" component="span">
-              Pattern Check by <span className="font-CustomFont font-bold text-blue-500">VORT</span>
+              Pattern Check by
+              <span className="font-CustomFont font-bold text-blue-500">
+                VORT
+              </span>
             </Typography>
           </DialogTitle>
           <Box
             sx={{
-            margin:"2rem"
+              margin: "2rem",
             }}
           >
-            <LinearProgress/>
+            <LinearProgress />
           </Box>
         </Dialog>
         <Box
@@ -120,6 +132,7 @@ const LandingPage = () => {
               xs: "inherit",
               md: "auto",
             }}
+            sx={{ marginTop: { xs: "0rem", md: "4rem" } }}
           >
             <Grid
               item
@@ -130,72 +143,55 @@ const LandingPage = () => {
               alignItems="center"
               justifyContent="center"
             >
-              <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2 }}
-                className="my-6"
+              <Box
+                className="main-text"
+                sx={{
+                  fontSize: { xs: "2rem", md: "4rem" },
+                  textAlign: "center",
+                }}
               >
-                <h2 className="main-text">Get Started with <span className="text-blue-500">Vort</span></h2>
-              </motion.span>
+                Get Started with <span className="text-white-500">Vort</span>
+              </Box>
+              <Box
+                className="main-text1"
+                sx={{
+                  fontSize: { xs: ".8rem", md: "1.2rem" },
+                  textAlign: "center",
+                }}
+              >
+                VORT works as a Dark Patterns detector, specifically designed to
+                identify various types of deceptive online practices. It
+                primarily targets three common dark patterns:{" "}
+                <span style={{ fontWeight: "bold", color: "white" }}>
+                  1. Fake Scarcity, 2. Fake Urgency, and 3. Fake Social Proof
+                </span>{" "}
+                You can easily check single webpage at a time for these dark
+                patterns by utilizing the "VORT" tool on your website. Conduct a
+                quick and complimentary check to ensure the absence of these
+                deceptive elements.
+              </Box>
 
               <Box
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
                 className="input-box"
+                marginTop="3rem"
               >
-                <input type="text" placeholder="Enter Your URL Here......" onChange={(e)=>setUrlForCheck(e.target.value)} value={urlForCheck} required/>
-                <button className="search-btn" onClick={handleWebsiteSubmitClick}>
+                <input
+                  type="text"
+                  placeholder="Enter Your URL Here......"
+                  onChange={(e) => setUrlForCheck(e.target.value)}
+                  value={urlForCheck}
+                  required
+                />
+                <button
+                  className="search-btn"
+                  onClick={handleWebsiteSubmitClick}
+                >
                   <SendIcon sx={{ color: "#9fa2a5" }} />
                 </button>
               </Box>
-
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              > */}
-
-              {/* <h2 className="main-text1">Your Dark Pattern Detector</h2>
-                <span data-text="GotYa!" className="main-text2">
-                  GotYa!
-                </span> */}
-
-              {/* <Grid item md={8}>
-                    <form
-                      className="footer-form"
-                      style={{
-                        paddingTop: "2rem",
-                        display: "flex",
-                        padding: "1rem",
-                      }}
-                    >
-                      <input type="email" placeholder="Enter Your URL" />
-                    </form>
-                  </Grid> */}
-              {/* <Grid item md={4}>
-                    <Link href="/signup">
-                      <Button
-                        sx={{
-                          color: "white",
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                          borderRadius: "1rem",
-                          border: ".1rem solid cyan ",
-                          padding: ".5rem",
-                          mt: 2,
-                        }}
-                        onClick={handleWebsiteSubmitClick}
-                      >
-                        Visit Your Website for verification
-                      </Button>
-                    </Link>
-                  </Grid> */}
-              {/* </Box> */}
             </Grid>
             <Grid item md={4}>
               <Box
@@ -213,22 +209,10 @@ const LandingPage = () => {
                   style={{
                     width: "100%",
                     height: "100%",
-                    marginLeft: "5rem",
+                    marginLeft: "15rem",
                     backgroundColor: "transparent",
                   }}
                 />
-                {/* <Box
-                  sx={{
-                    fontSize: "1.5rem",
-                    fontFamily: "monospace",
-                    fontStyle: "revert-layer",
-                    fontWeight: "900",
-                    marginLeft:"3rem"
-                  }}
-                  className="text-slate-500"
-                >
-                  Dark Pattern Detection By Vort
-                </Box> */}
               </Box>
             </Grid>
           </Grid>
@@ -236,19 +220,21 @@ const LandingPage = () => {
         {/* -------------------------------------------Section2------------------------------------------------- */}
         <Box
           sx={{
-            marginTop: "2vw",
+            marginTop: "2rem",
             height: { md: "40dvh" },
             width: { md: "100%" },
             display: "grid",
             placeItems: "center",
-            fontSize: { xs: "1.5rem", md: "3rem" },
+            fontSize: { xs: "3rem", md: "3rem" },
+            textAlign: "center",
           }}
         >
           <h1
             style={{
               padding: "5px",
               margin: "5px 0px",
-              color: "rgb(110, 118, 129)",
+              // color: "rgb(110, 118, 129)",
+              color: "white",
               fontWeight: "600",
             }}
           >
@@ -409,6 +395,18 @@ const LandingPage = () => {
         <Box>
           <ProcessPage />
         </Box>
+        {/* --------------------------payment-------------------- */}
+        <Box
+          sx={{
+            height: "auto",
+            width: "90%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <PaymentPage />
+        </Box>
+        {/* --------------------------Service-------------------- */}
         <Box
           sx={{
             height: "auto",
@@ -421,7 +419,7 @@ const LandingPage = () => {
         </Box>
         <Box
           sx={{
-            height: { xs: "53rem", md: "25rem" },
+            height: { xs: "70rem", md: "30rem" },
             width: "100%",
             display: "flex",
             justifyContent: "center",
@@ -448,66 +446,24 @@ const LandingPage = () => {
                   textAlign: "center",
                 }}
               >
-                <Tooltip
-                  open={open}
-                  onClose={handleClose}
-                  onOpen={handleOpen}
-                  title={
-                    <Box>
-                      <Typography
-                        variant="body1"
-                        sx={{ fontSize: "1rem", padding: 0 }}
-                      >
-                        This Website is Dark Pattern Free
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
-                        Certificate ID: GVBX23GER019
-                      </Typography>
-                    </Box>
-                  }
-                  placement="left"
-                >
-                  <Box
-                    sx={{
-                      width: "180px",
-                      height: "180px",
-                      borderRadius: "50%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      border: "2px solid transparent",
-                      backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
-                      backgroundSize: "100px 100px",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                      backdropFilter: "blur(10px)",
-                      backgroundColor: "rgba(0, 0, 0, 0.1)",
-                      marginTop: { xs: "3rem", md: "1rem" },
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontSize: ".95rem",
-                        fontWeight: "900",
-                        color: "white",
-                        lineHeight: "1.5rem",
-                      }}
-                    >
-                      Certified by
-                      <a
-                        href="https://v-tenet.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          textDecoration: "underline",
-                          color: "inherit",
-                        }}
-                      >
-                        V-TENET
-                      </a>
-                    </Typography>
-                  </Box>
-                </Tooltip>
+                <Box
+                  sx={{
+                    width: "12rem",
+                    height: "12rem",
+                    borderRadius: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "2px solid transparent",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
+                    backgroundSize: "100px 100px",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backdropFilter: "blur(10px)",
+                    backgroundColor: "rgba(0, 0, 0, 0.1)",
+                    marginTop: { xs: "3rem", md: "9rem" },
+                  }}
+                ></Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -520,12 +476,13 @@ const LandingPage = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   color: "white",
-                  marginTop: { xs: "3rem", md: "1rem" },
-                  fontSize: "1.5rem",
+                  marginTop: { xs: "3rem", md: "3rem" },
+                  fontSize: "1.9rem",
                   textAlign: "center",
+                  fontWeight: "bold",
                 }}
               >
-                Adress
+                Company Address
                 <Box
                   sx={{
                     height: "auto",
@@ -534,14 +491,29 @@ const LandingPage = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                    color: "#cccc",
-                    fontSize: "1rem",
+                    color: "rgba(256,256,256,.7)",
+                    fontSize: "1.2rem",
                     marginTop: 2,
                   }}
                 >
-                  CMS<br></br> Localization<br></br> AI<br></br> Effects Site
-                  <br></br> Management<br></br> Enterprise<br></br>
-                  Developers
+                  It is a Planspiel Web Engineering project at <br></br>
+                  University of Technology Chemnitz.<br></br> Any concern
+                  regarding this website<br></br> <br></br>Contact Person is :
+                  Amay Rajvaidya<br></br>
+                  E-mail: vtenet125@gmail.com
+                  <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
+                </Box>
+                <Box
+                  sx={{
+                    color: "white",
+                    marginTop: "4rem",
+                    borderBottom: ".1rem solid #2B1B42",
+                    fontFamily: "var(--secular-font)",
+                    fontSize: "1.3rem",
+                    textAlign: "center",
+                  }}
+                >
+                  © V-Tenet 2024.
                 </Box>
               </Box>
             </Grid>
@@ -555,9 +527,10 @@ const LandingPage = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   color: "white",
-                  fontSize: "1.5rem",
+                  fontSize: "1.9rem",
+                  fontWeight: "bold",
                   textAlign: "center",
-                  marginTop: { xs: "3rem", md: "1rem" },
+                  marginTop: { xs: "3rem", md: "3rem" },
                 }}
               >
                 Support
@@ -570,27 +543,36 @@ const LandingPage = () => {
                     alignItems: "center",
                     flexDirection: "column",
                     color: "#cccc",
-                    fontSize: "1rem",
-                    marginTop: 2,
+                    fontSize: "1.4rem",
+                    marginTop: "2rem",
                   }}
                 >
-                  Help<br></br>Social Media <br></br> Contact
+                  <Box className="email-container">
+                    <MailOutlineIcon fontSize="large" className="icon-mail" />
+                    <LinkedInIcon fontSize="large" className="icon-linkedin" />
+                    <InstagramIcon
+                      fontSize="large"
+                      className="icon-instagram"
+                    />
+                  </Box>
                 </Box>
+                <br></br>
+                <Box
+                  sx={{
+                    width: "9.2rem",
+                    height: "11.9rem",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Digital_Certificate_VORT.svg)`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    justifyContent: "end",
+                  }}
+                ></Box>
               </Box>
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              color: "white",
-              marginTop: "1rem",
-              borderBottom: ".1rem solid #2B1B42",
-              fontFamily: "var(--secular-font)",
-              fontSize: "1rem",
-              textAlign: "center",
-            }}
-          >
-            © V-Tenet 2024.
-          </Box>
+
+          <br></br>
         </Box>
       </Box>
     </>
