@@ -19,7 +19,6 @@ import {
   Verified as VerifiedIcon,
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
   isOpen,
@@ -160,7 +159,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <a href={patternData.detectedUrl} target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
+              <a href={patternData.detectedUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
               </a>

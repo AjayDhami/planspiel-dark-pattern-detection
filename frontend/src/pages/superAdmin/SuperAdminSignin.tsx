@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { UserCredentials } from '../../types';
 import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext1';
