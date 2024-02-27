@@ -10,14 +10,13 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
   const [assignExpert, setAssignExpert] = useState(true);
   const expertId = localStorage.getItem("userId");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-    
+  const handleChange = (patternType:string, description:string, webpageUrl:string) => {
+    // event: React.ChangeEvent<HTMLInputElement>
     const patternObj: AdminPatterns = {
       createdByExpertId: expertId? expertId: "",
-      patternType: event.target.name,
-      description: event.target.value,
-      detectedUrl: websiteUrl,
+      patternType: patternType,
+      description: description,
+      detectedUrl: webpageUrl,
     }
 
     setDarkPatternList((prevPatterns) => {
@@ -49,6 +48,7 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
   }
 
   const handleSubmit = async() => { 
+    
     try {
       const resp = await sendFilteredPatterns(websiteId, darkPatternList);
       if(resp === 200) {
@@ -86,9 +86,9 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
                             borderBottom: '1px solid #ccc',
                         }}
                       control={
-                        <Switch onChange={handleChange} name={pattern.patternType} value={pattern.text} />
+                        <Switch onChange={() => handleChange(pattern.patternType, pattern.text, pattern.webpageUrl)} name={pattern.patternType} value={pattern.text}/>
                       }
-                      label={pattern.text+"  :  "+pattern.patternType}
+                      label={ pattern.text+"  :  "+pattern.patternType+" : "+pattern.webpageUrl}
                       />
                     }
                   </> 
