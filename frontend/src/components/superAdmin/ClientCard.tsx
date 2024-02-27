@@ -35,6 +35,7 @@ const ClientCard: React.FC<AdminClientsDetails> = ({firstName, lastName, website
               <WebsiteCard
                 websiteId={website.websiteId}
                 baseUrl={website.baseUrl}
+                additionalUrls={website.additionalUrls}
                 websiteName={website.websiteName}
                 description={website.description}
               />

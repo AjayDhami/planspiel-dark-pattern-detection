@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AdminWebsites } from "../../types";
 import { checkPrimaryExpert, runAutomation } from "../../services/superAdminServices";
 import DarkPatternListModal from "./DarkPatternListModal";
+import LoadingModal from "./LoadingModal";
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -12,12 +13,13 @@ const CustomPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // to display website list for a particular client
-const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName}) => {
+const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, additionalUrls, websiteName}) => {
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [patterns, setPatterns] = useState([]);
     const [websiteUrl, setWebsiteUrl] = useState("");
     const [showAutomationButton, setShowAutomationButton] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const checkAssign = async () => {
       try {
@@ -37,11 +39,14 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
     }, []);
 
     const handleRunAutomationClick = async () => {
-      const resp = await runAutomation(websiteId? websiteId: "", baseUrl? baseUrl: "");
+      setLoading(true);
+      additionalUrls.push(baseUrl);
+      const resp = await runAutomation(websiteId? websiteId: "", additionalUrls);
       if(resp) {
         setIsModalOpen(true);
         setPatterns(resp);
         setWebsiteUrl(baseUrl? baseUrl: "");
+        setLoading(false);
       }
     }
 
@@ -53,6 +58,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
     <CustomPaper elevation={3} style={{ minHeight: "4rem" }}>
       <Stack spacing={3}>
         <DarkPatternListModal websiteId={websiteId? websiteId:""} websiteName={websiteName? websiteName:""} onClose={handleModalClose} isOpen={isModalOpen} patterns={patterns} websiteUrl={websiteUrl}/>
+        <LoadingModal isOpen={loading}/>
         <Box
           sx={{
             display: "block",
@@ -67,7 +73,18 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
           <Typography variant="body1" component="span">
             {baseUrl}
           </Typography>
-          
+
+         { additionalUrls && additionalUrls.map((webpage) => (
+          <div>
+            <Typography sx={{
+              fontSize: '12px',
+              color: 'gray'
+            }} component="span">
+              {webpage}
+          </Typography>
+          </div>
+         ))} 
+         
           <Box sx={{
             marginTop: "10px",
           }}>
@@ -86,7 +103,7 @@ const WebsiteCard: React.FC<AdminWebsites> = ({websiteId, baseUrl, websiteName})
         </Box>
       </Stack>
     </CustomPaper>
-  );
+  ); 
 }; 
 
 export default WebsiteCard;

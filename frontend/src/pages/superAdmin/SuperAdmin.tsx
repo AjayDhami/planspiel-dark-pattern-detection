@@ -36,7 +36,7 @@ const SuperAdmin: React.FC = () => {
   };
 
   useEffect(() => {
-    getClientsDataList();    
+    getClientsDataList();   
     //  eslint-disable-next-line
   }, []);
 

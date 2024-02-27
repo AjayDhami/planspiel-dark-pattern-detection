@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { WebsiteCreateDto } from './dto/website-create.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Website } from './schemas/website.schema';
@@ -6,13 +6,10 @@ import { Model } from 'mongoose';
 import { UserService } from 'src/components/user/user.service';
 import { WebsiteResponseDto } from './dto/website-response.dto';
 import { PatternCreateDto } from './dto/pattern-create.dto';
-import { Pattern, Verification } from './schemas/pattern.schema';
-import { Comment, Reply } from './schemas/comment.schema';
+import { Pattern } from './schemas/pattern.schema';
+import { Comment } from './schemas/comment.schema';
 import { CommentCreateDto } from './dto/comment-create.dto';
 import { ReplyCreateDto } from './dto/reply-create.dto';
-import { PatternResponseDto } from './dto/pattern-response.dto';
-import { CommentResponseDto } from './dto/comment-response.dto';
-import { ReplyResponseDto } from './dto/reply-response.dto';
 import { AssignExpertsDto } from './dto/assign-experts.dto';
 import { UserType } from '../user/enum/user-type.enum';
 import { ExpertVerificationPhase } from './enum/expert-verification-phase.enum';
@@ -21,13 +18,16 @@ import { PatternPhaseType } from './enum/pattern-phase.enum';
 import { UserResponseDto } from '../user/dto/user-response.dto';
 import { WebsitePhaseType } from './enum/website-phase.enum';
 import { PublishCertificationDto } from './dto/publish-certification.dto';
-import { ExpertVerificationDto } from './dto/expert-verification.dto';
 import { ConfigService } from '@nestjs/config';
 import { v4 as uuid } from 'uuid';
 import { AwsHelper } from '../aws/aws.helper';
+import { WebsiteConverter } from './converter/website.converter';
+import { WebsiteValidation } from './validation/website.validation';
+import { generateCertificationId } from './util/website.util';
 
 @Injectable()
 export class WebsiteService {
+  private readonly logger = new Logger(WebsiteService.name);
   constructor(
     @InjectModel(Website.name) private readonly websiteModel: Model<Website>,
     @InjectModel(Pattern.name) private readonly patternModel: Model<Pattern>,
@@ -35,10 +35,12 @@ export class WebsiteService {
     private readonly userService: UserService,
     private configService: ConfigService,
     private readonly awsHelper: AwsHelper,
+    private readonly websiteValidation: WebsiteValidation,
+    private readonly websiteConverter: WebsiteConverter,
   ) {}
 
   async persistWebsiteDetails(websiteCreateDto: WebsiteCreateDto) {
-    await this.checkUserExists(websiteCreateDto.userId);
+    await this.websiteValidation.checkUserExists(websiteCreateDto.userId);
 
     try {
       const newWebsite = new this.websiteModel(websiteCreateDto);
@@ -48,6 +50,7 @@ export class WebsiteService {
         websiteId: newWebsite._id,
       };
     } catch (error) {
+      this.logger.error(`Error while saving website: ${error.message}`);
       throw new HttpException(
         'Failed to save website details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -59,7 +62,7 @@ export class WebsiteService {
     websiteId: string,
     assignExpertsDto: AssignExpertsDto,
   ) {
-    const website = await this.checkWebsiteExists(websiteId);
+    const website = await this.websiteValidation.checkWebsiteExists(websiteId);
     const allExpertIds = [
       ...assignExpertsDto.expertIds,
       assignExpertsDto.primaryExpertId,
@@ -67,7 +70,7 @@ export class WebsiteService {
 
     await Promise.all(
       allExpertIds.map(async (expertId) => {
-        await this.checkUserExists(expertId);
+        await this.websiteValidation.checkUserExists(expertId);
       }),
     );
 
@@ -83,12 +86,15 @@ export class WebsiteService {
   async fetchParticularWebsiteDetails(
     websiteId: string,
   ): Promise<WebsiteResponseDto> {
-    const existingWebsite = await this.checkWebsiteExists(websiteId);
-    return await this.convertToWebsiteResponseDto(existingWebsite);
+    const existingWebsite =
+      await this.websiteValidation.checkWebsiteExists(websiteId);
+    return await this.websiteConverter.convertToWebsiteResponseDto(
+      existingWebsite,
+    );
   }
 
   async getAllWebsiteDetailsForParticularUser(userId: string) {
-    const user = await this.checkUserExists(userId);
+    const user = await this.websiteValidation.checkUserExists(userId);
     let websites: Website[];
     if (user.role === UserType.Client) {
       websites = await this.websiteModel
@@ -106,7 +112,7 @@ export class WebsiteService {
 
     return await Promise.all(
       websites.map(async (website: Website) => {
-        return await this.convertToWebsiteResponseDto(website);
+        return await this.websiteConverter.convertToWebsiteResponseDto(website);
       }),
     );
   }
@@ -124,6 +130,7 @@ export class WebsiteService {
         const formattedWebsites = websites.map((website) => ({
           websiteId: website.id,
           baseUrl: website.baseUrl,
+          additionalUrls: website.additionalUrls,
           websiteName: website.websiteName,
           description: website.description,
         }));
@@ -141,7 +148,7 @@ export class WebsiteService {
   }
 
   async addImagesInPattern(patternId: string, files: any) {
-    const pattern = await this.checkPatternExists(patternId);
+    const pattern = await this.websiteValidation.checkPatternExists(patternId);
     const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
 
     const uploadPromises = files.map(async (file) => {
@@ -164,34 +171,21 @@ export class WebsiteService {
       await pattern.save();
       return { message: 'Images added successfully' };
     } catch (error) {
+      this.logger.error(
+        `Error while adding images in pattern : ${error.message}`,
+      );
       throw new Error('Failed to upload files to S3');
     }
-  }
-
-  async fetchImageFromPattern(patternId: string) {
-    const pattern = await this.checkPatternExists(patternId);
-    const bucketName = this.configService.get<string>('AWS_S3_BUCKET');
-
-    const patternImageUrls = await Promise.all(
-      pattern.patternImageKeys.map(async (key) => {
-        const params = {
-          Bucket: bucketName,
-          Key: key,
-        };
-
-        return await this.awsHelper.executeGetObjectCommand(params);
-      }),
-    );
-
-    return { patternImageUrls };
   }
 
   async addPatternInWebsite(
     websiteId: string,
     patternCreateDto: PatternCreateDto,
   ) {
-    await this.checkUserExists(patternCreateDto.createdByExpertId);
-    const website = await this.checkWebsiteExists(websiteId);
+    await this.websiteValidation.checkUserExists(
+      patternCreateDto.createdByExpertId,
+    );
+    const website = await this.websiteValidation.checkWebsiteExists(websiteId);
 
     if (!website.expertIds.includes(patternCreateDto.createdByExpertId)) {
       throw new HttpException(
@@ -218,6 +212,9 @@ export class WebsiteService {
       await newPattern.save();
       return { patternId: newPattern._id };
     } catch (error) {
+      this.logger.error(
+        `Error while adding pattern in website: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to save pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -229,7 +226,7 @@ export class WebsiteService {
     websiteId: string,
     patternCreateDtos: PatternCreateDto[],
   ) {
-    const website = await this.checkWebsiteExists(websiteId);
+    const website = await this.websiteValidation.checkWebsiteExists(websiteId);
     const expertIds = patternCreateDtos.map(
       (patternCreateDto) => patternCreateDto.createdByExpertId,
     );
@@ -245,7 +242,7 @@ export class WebsiteService {
       );
     }
 
-    const user = await this.checkUserExists(expertIds[0]);
+    const user = await this.websiteValidation.checkUserExists(expertIds[0]);
 
     if (user.role !== UserType.SuperAdmin) {
       throw new HttpException(
@@ -279,6 +276,9 @@ export class WebsiteService {
         message: `Automated patterns successfully added`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while adding automated pattern details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to save pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -289,7 +289,9 @@ export class WebsiteService {
   async fetchAllPatternsOfWebsite(websiteId: string) {
     const patternList = await this.patternModel.find({ websiteId }).exec();
     return await Promise.all(
-      patternList.map((pattern) => this.convertPatternToDto(pattern, false)),
+      patternList.map((pattern) =>
+        this.websiteConverter.convertPatternToDto(pattern, false),
+      ),
     );
   }
 
@@ -352,6 +354,9 @@ export class WebsiteService {
         message: `Pattern phase updated for pattern with id ${pattern._id}`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while updating pattern phase by expert: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to update pattern phase',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -364,9 +369,9 @@ export class WebsiteService {
     patternId: string,
     commentCreateDto: CommentCreateDto,
   ) {
-    await this.checkUserExists(commentCreateDto.expertId);
-    await this.checkWebsiteExists(websiteId);
-    await this.checkPatternExists(patternId);
+    await this.websiteValidation.checkUserExists(commentCreateDto.expertId);
+    await this.websiteValidation.checkWebsiteExists(websiteId);
+    await this.websiteValidation.checkPatternExists(patternId);
 
     const newComment = new this.commentModel({
       ...commentCreateDto,
@@ -385,6 +390,7 @@ export class WebsiteService {
 
       return { commentId: savedComment._id };
     } catch (error) {
+      this.logger.error(`Error while adding comment: ${error.message}`);
       throw new HttpException(
         'Failed to add comment',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -398,10 +404,10 @@ export class WebsiteService {
     commentId: string,
     replyCreateDto: ReplyCreateDto,
   ) {
-    await this.checkUserExists(replyCreateDto.expertId);
-    await this.checkWebsiteExists(websiteId);
-    await this.checkPatternExists(patternId);
-    await this.checkCommentExists(commentId);
+    await this.websiteValidation.checkUserExists(replyCreateDto.expertId);
+    await this.websiteValidation.checkWebsiteExists(websiteId);
+    await this.websiteValidation.checkPatternExists(patternId);
+    await this.websiteValidation.checkCommentExists(commentId);
 
     try {
       const updatedComment = await this.commentModel.findByIdAndUpdate(
@@ -418,6 +424,7 @@ export class WebsiteService {
 
       return { message: 'Reply successfully added' };
     } catch (error) {
+      this.logger.error(`Error while adding reply: ${error.message}`);
       throw new HttpException(
         'Failed to add reply',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -437,8 +444,11 @@ export class WebsiteService {
       if (!pattern) {
         throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
       }
-      return this.convertPatternToDto(pattern, true);
+      return this.websiteConverter.convertPatternToDto(pattern, true);
     } catch (error) {
+      this.logger.error(
+        `Error while fetching particular pattern details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to fetch pattern details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -450,10 +460,10 @@ export class WebsiteService {
     websiteId: string,
     publishDto: PublishCertificationDto,
   ) {
-    await this.checkUserExists(publishDto.expertId);
-    const website = await this.checkWebsiteExists(websiteId);
+    await this.websiteValidation.checkUserExists(publishDto.expertId);
+    const website = await this.websiteValidation.checkWebsiteExists(websiteId);
 
-    const client = await this.checkUserExists(website.userId);
+    const client = await this.websiteValidation.checkUserExists(website.userId);
 
     if (website.isCompleted === true) {
       throw new HttpException(
@@ -524,6 +534,9 @@ export class WebsiteService {
         message: `Certification details successfully published for website with id ${updatedWebsite._id}`,
       };
     } catch (error) {
+      this.logger.error(
+        `Error while publish website certification details: ${error.message}`,
+      );
       throw new HttpException(
         'Failed to publish website certification details',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -532,7 +545,7 @@ export class WebsiteService {
   }
 
   async fetchKpiForClient(clientId: string) {
-    const user = await this.checkUserExists(clientId);
+    const user = await this.websiteValidation.checkUserExists(clientId);
     if (user.role !== UserType.Client) {
       throw new HttpException(
         'Client is only allowed',
@@ -568,7 +581,7 @@ export class WebsiteService {
   }
 
   async fetchKpiForExpert(expertId: string) {
-    const user = await this.checkUserExists(expertId);
+    const user = await this.websiteValidation.checkUserExists(expertId);
     if (user.role !== UserType.Expert) {
       throw new HttpException(
         'Expert is only allowed',
@@ -602,7 +615,7 @@ export class WebsiteService {
   }
 
   async generateCertification(websiteId: string) {
-    const website = await this.checkWebsiteExists(websiteId);
+    const website = await this.websiteValidation.checkWebsiteExists(websiteId);
 
     if (!website.isCompleted) {
       throw new HttpException(
@@ -629,7 +642,7 @@ export class WebsiteService {
 
     let certificationId: string;
     do {
-      certificationId = this.generateCertificationId();
+      certificationId = generateCertificationId();
     } while (await this.websiteModel.findOne({ certificationId }));
 
     website.certificationId = certificationId;
@@ -638,150 +651,5 @@ export class WebsiteService {
     return {
       certificationId: website.certificationId,
     };
-  }
-
-  private generateCertificationId(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let certificationId = '';
-    for (let i = 0; i < 12; i++) {
-      certificationId += characters.charAt(
-        Math.floor(Math.random() * characters.length),
-      );
-    }
-    return certificationId;
-  }
-
-  private async checkUserExists(userId: string) {
-    const existingUser = await this.userService.findUserById(userId);
-    if (!existingUser) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
-    return existingUser;
-  }
-
-  private async checkWebsiteExists(websiteId: string) {
-    const existingWebsite = await this.websiteModel.findById(websiteId).exec();
-    if (!existingWebsite) {
-      throw new HttpException('Website not found', HttpStatus.NOT_FOUND);
-    }
-    return existingWebsite;
-  }
-
-  private async checkPatternExists(patternId: string) {
-    const existingPattern = await this.patternModel.findById(patternId).exec();
-    if (!existingPattern) {
-      throw new HttpException('Pattern not found', HttpStatus.NOT_FOUND);
-    }
-    return existingPattern;
-  }
-
-  private async checkCommentExists(commentId: string) {
-    const existingComment = await this.commentModel.findById(commentId).exec();
-    if (!existingComment) {
-      throw new HttpException('Comment not found', HttpStatus.NOT_FOUND);
-    }
-  }
-
-  private async convertToWebsiteResponseDto(
-    website: Website,
-  ): Promise<WebsiteResponseDto> {
-    const expertDetailsPromises = website.expertIds.map(async (expertId) => {
-      return {
-        id: expertId,
-        name: await this.getUserName(expertId),
-      };
-    });
-
-    const expertDetails = await Promise.all(expertDetailsPromises);
-    return {
-      websiteId: website._id,
-      baseUrl: website.baseUrl,
-      websiteName: website.websiteName,
-      userId: website.userId,
-      additionalUrls: website.additionalUrls,
-      description: website.description,
-      isCompleted: website.isCompleted,
-      phase: website.phase,
-      createdAt: website.createdAt,
-      isDarkPatternFree: website.isDarkPatternFree,
-      expertFeedback: website.expertFeedback,
-      expertDetails: expertDetails,
-      primaryExpertId: website.primaryExpertId,
-      certificationId: website.certificationId,
-    };
-  }
-
-  private async convertPatternToDto(
-    pattern: Pattern,
-    commentsRequired: boolean,
-  ): Promise<PatternResponseDto> {
-    const urls = await this.fetchImageFromPattern(pattern._id);
-    return {
-      id: pattern._id,
-      patternType: pattern.patternType,
-      websiteId: pattern.websiteId,
-      isAutoGenerated: pattern.isAutoGenerated,
-      description: pattern.description,
-      detectedUrl: pattern.detectedUrl,
-      patternImageUrls: urls.patternImageUrls,
-      patternPhase: pattern.patternPhase,
-      isPatternExists: pattern.isPatternExists,
-      createdByExpertId: pattern.createdByExpertId,
-      expertName: await this.getUserName(pattern.createdByExpertId),
-      expertVerifications: await Promise.all(
-        pattern.expertVerifications.map((verification) =>
-          this.convertVerificationsToDto(verification),
-        ),
-      ),
-      createdAt: pattern.createdAt,
-      comments: commentsRequired
-        ? await Promise.all(
-            pattern.comments.map((comment) =>
-              this.convertCommentToDto(comment),
-            ),
-          )
-        : [],
-    };
-  }
-
-  private async convertVerificationsToDto(
-    verification: Verification,
-  ): Promise<ExpertVerificationDto> {
-    return {
-      expertId: verification.expertId,
-      expertName: await this.getUserName(verification.expertId),
-      expertVerificationPhase: verification.expertVerificationPhase,
-    };
-  }
-
-  private async convertCommentToDto(
-    comment: Comment,
-  ): Promise<CommentResponseDto> {
-    return {
-      id: comment._id,
-      websiteId: comment.websiteId,
-      patternId: comment.patternId,
-      expertId: comment.expertId,
-      expertName: await this.getUserName(comment.expertId),
-      content: comment.content,
-      createdAt: comment.createdAt,
-      replies: await Promise.all(
-        comment.replies.map((reply) => this.convertReplyToDto(reply)),
-      ),
-    };
-  }
-
-  private async convertReplyToDto(reply: Reply): Promise<ReplyResponseDto> {
-    return {
-      expertId: reply.expertId,
-      expertName: await this.getUserName(reply.expertId),
-      content: reply.content,
-      createdAt: reply.createdAt,
-    };
-  }
-
-  private async getUserName(userId: string) {
-    const user = await this.checkUserExists(userId);
-    return user.firstName + ' ' + user.lastName;
   }
 }

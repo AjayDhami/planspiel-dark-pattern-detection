@@ -28,6 +28,9 @@ export class User extends Document {
   @Prop({ required: true })
   role: string;
 
+  @Prop({ required: true })
+  subscription: string;
+
   @Prop({ default: Date.now, type: Date })
   createdAt: Date;
 }
