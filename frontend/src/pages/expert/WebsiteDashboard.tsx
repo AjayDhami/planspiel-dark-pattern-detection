@@ -5,7 +5,7 @@ import Navbar from '../../components/expert/Navbar';
 import PatternCard from '../../components/expert/PatternCard';
 import PatternAdditionForm from '../../components/expert/PatternAdditionForm';
 import PatternDetailsComponent from '../../components/expert/PatternDetailsComponent';
-import { PatternData, extensionPatternDetails } from '../../types';
+import { PatternData } from '../../types';
 import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
@@ -33,7 +33,7 @@ const WebsiteDashboard = () => {
     const websiteId = sessionStorage.getItem("websiteId")
     const websiteName = sessionStorage.getItem("websiteName");
     const { websiteData, setWebsiteData } = useExpertContext();
-    const { extensionPatterns, setExtensionPatterns } = useExpertContext();
+    const { setExtensionPatterns } = useExpertContext();
     const [patterns, setPatterns] = useState<any[]>([]);
     const [filteredArray, setFilteredArray] = useState<any[]>([]);
     const experId = localStorage.getItem("userId");
@@ -161,6 +161,7 @@ const WebsiteDashboard = () => {
       return () => {
         window.removeEventListener('message', handleMessageFromContentScript);
       };
+      // eslint-disable-next-line
     },[]);
 
     const openForm = () =>{

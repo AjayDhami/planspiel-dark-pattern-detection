@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IoMdClose } from 'react-icons/io';
 import { useExpertContext } from '../../context/ExpertContext'
+import { extensionImages } from '../../types';
 
 interface ImageCarouselProops {
     image?: File;
@@ -40,12 +41,24 @@ const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime
     },[image])
 
     const handleImageSubmitAfterEdit = async () => {
+        
+        const canvas = canvasRef.current;
+        let imgObj:extensionImages
+        if (canvas) {
+            const imageDataUrl = canvas.toDataURL(); 
+            const base64 = imageDataUrl.replace(/^data:image\/?[A-z]*;base64,/,"");
+            imgObj = {
+                name: "image",
+                timestamp:Date.now(),
+                file_base64: base64.toString()
+            }
+        }
         const updatedPatterns = extensionPatterns.map((expats) => {
             if (expats.patternTime === patternTime) {
                 const filteredImages = expats.patternimages.filter((img) => img.timestamp !== imageTime);
                 return {
                     ...expats,
-                    patternimages: filteredImages,
+                    patternimages: filteredImages.concat(imgObj ? [imgObj] : [])
                 };
             }
             return expats;

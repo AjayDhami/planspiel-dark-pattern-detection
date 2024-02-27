@@ -11,7 +11,7 @@ import { useExpertContext } from '../../context/ExpertContext'
 
 
 const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
-    const { extensionPatterns, setExtensionPatterns } = useExpertContext();
+    const { extensionPatterns } = useExpertContext();
     const websiteId = sessionStorage.getItem("websiteId");
     const experId = localStorage.getItem("userId");
     const token = localStorage.getItem("authToken");
