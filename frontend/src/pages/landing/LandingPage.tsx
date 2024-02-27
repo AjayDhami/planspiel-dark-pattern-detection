@@ -232,7 +232,6 @@ const LandingPage = () => {
             style={{
               padding: "5px",
               margin: "5px 0px",
-              // color: "rgb(110, 118, 129)",
               color: "white",
               fontWeight: "600",
             }}

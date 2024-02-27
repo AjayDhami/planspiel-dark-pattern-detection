@@ -1,11 +1,5 @@
 .main-text {
   font-weight: 900;
-  /* text-shadow: 1px 1px 1px #14213b, 1px 2px 1px #14213b, 1px 3px 1px #14213b,
-    1px 4px 1px #14213b, 1px 5px 1px #14213b, 1px 6px 1px #14213b,
-    1px 7px 1px #14213b, 1px 8px 1px #14213b, 1px 9px 1px #14213b,
-    1px 10px 1px #14213b, 1px 18px 6px rgba(16, 16, 16, 0.4),
-    1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
-    1px 30px 60px rgba(16, 16, 16, 0.4); */
   color: white;
   -webkit-text-stroke: 0.1vw #071d43;
   text-transform: uppercase;
@@ -28,44 +22,6 @@
     width: 80%;
   }
 }
-/* .main-text2 {
-  position: relative;
-  font-size: 4vw;
-  color: rgb(131, 132, 134);
-  -webkit-text-stroke: 0.3vw rgb(18, 19, 19);
-  text-transform: capitalize;
-  transform-style: preserve-3d;
-  letter-spacing: 1.2px;
-}
-
-.main-text2:before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  color: #fec005;
-  -webkit-text-stroke: 0.1vw #e3b051;
-  border-right: 1px solid #fec005;
-  overflow: hidden;
-  animation: animate 6s linear infinite;
-}
-
-@keyframes animate {
-  0%,
-  10%,
-  100% {
-    width: 0;
-  }
-  70%,
-  90% {
-    width: 100%;
-  }
-}  */
-
-/* .........................................Partner........................................................ */
-
 ._partner_ {
   display: flex;
   justify-content: center;
@@ -74,9 +30,6 @@
   width: 100%;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
-  /* box-shadow: 0 4px 40px rgba(0, 0, 0, .7);
-  backdrop-filter: blur(7.4px);
-  -webkit-backdrop-filter: blur(7.4px); */
 }
 ._partner-items_ {
   display: flex;
@@ -109,7 +62,6 @@
   border: 0;
   outline: none;
 }
-/* --------------------------------------searchbox--------------------------------------- */
 .input-box {
   height: 50px;
   width: 80%;
@@ -168,13 +120,3 @@
 .icon-linkedin:hover {
   color: black;
 }
-/* @media only screen and (min-width: 600px) {
-  .input-box {
-    margin: 0 auto;
-  }
-
-  .input-box input {
-    width: 70%;
-    font-size: 18px;
-  }
-} */
