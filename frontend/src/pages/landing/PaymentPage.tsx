@@ -14,30 +14,9 @@ const PaymentPage = () => {
         <Box className="payment-cards">
           <Box className="payment-card">
             <Box className="payment-card1">
-              {/* <Box
-                sx={{
-                  placeContent: "center",
-                  display: "inline-block",
-                  margin: "auto",
-                  color: " rgb(79, 104, 93 )",
-                  width: "20%",
-                  height: "20%",
-                }}
-              /> */}
               <Box className="payment-content">
                 <h3>BASIC</h3>
-                <h4>
-                  {/* <span
-                    style={{
-                      color: "rgba(131,58,180,0.9)",
-                      fontWeight: "900",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    3
-                  </span> */}
-                  3 Months Support
-                </h4>
+                <h4>3 Months Support</h4>
                 <br></br>
                 <p>
                   <DoneOutlineIcon
@@ -89,30 +68,9 @@ const PaymentPage = () => {
           </Box>
           <Box className="payment-card">
             <Box className="payment-card1">
-              {/* <ImportantDevicesOutlinedIcon
-              sx={{
-                placeContent: "center",
-                display: "inline-block",
-                margin: "auto",
-                color: " rgb(79, 104, 93  )",
-                width: "20%",
-                height: "20%",
-              }}
-            /> */}
               <Box className="payment-content">
                 <h3>COMFORT</h3>
-                <h4>
-                  {/* <span
-                    style={{
-                      color: "rgba(131,58,180,0.9)",
-                      fontWeight: "900",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    3
-                  </span> */}
-                  6 Months Support
-                </h4>
+                <h4>6 Months Support</h4>
                 <br></br>
                 <p>
                   <DoneOutlineIcon
@@ -149,7 +107,7 @@ const PaymentPage = () => {
                     sx={{
                       placeContent: "center",
                       display: "flex",
-                      // margin: "auto auto 10px auto",
+
                       color: "black",
                       fontWeight: "bold",
                       backgroundColor: "rgba(176, 219, 114, 1) ",
@@ -173,27 +131,9 @@ const PaymentPage = () => {
           </Box>
           <Box className="payment-card">
             <Box className="payment-card1">
-              {/* <WorkspacePremiumOutlinedIcon
-              sx={{
-                placeContent: "center",
-                display: "inline-block",
-                margin: "auto",
-                color: " rgb(79, 104, 93  )",
-                width: "20%",
-                height: "20%",
-              }}
-            /> */}
               <Box className="payment-content">
                 <h3> PREMIUM</h3>
-                {/* <span
-                    style={{
-                      color: "rgba(131,58,180,0.9)",
-                      fontWeight: "900",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    3
-                  </span> */}
+
                 <h4>12 Months Support</h4>
                 <br></br>
                 <p>
