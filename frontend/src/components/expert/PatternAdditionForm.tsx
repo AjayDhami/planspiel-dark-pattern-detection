@@ -173,8 +173,8 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                     className='block w-full rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:ring-2 focus:ring-inset focus:ring-green-300' placeholder='Short description for pattern detection and review'></textarea>
                             </div>
                             <div className='col-span-full border-2 rounded-md flex flex-col items-center justify-center'>
-                                <p className='mb-2 block text-md font-medium pt-4'>Add screenshots where pattern was detected</p>
-                                <label htmlFor="images" className='mb-2 block text-md font-medium p-2 bg-gray-100 mb-4 rounded-md cursor-pointer'>
+                                <p className='mb-4 block text-md font-medium pt-4'>Select images from the pattern list from extension</p>
+                                {/* <label htmlFor="images" className='mb-2 block text-md font-medium p-2 bg-gray-100 mb-4 rounded-md cursor-pointer'>
                                     <span className="text-blue-500">Choose File</span>
                                     <input
                                         type='file'
@@ -185,7 +185,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                         multiple 
                                         className='hidden'
                                     />
-                                </label>
+                                </label> */}
                                 {images.length > 0 && (
                                     <div className="my-2 px-6 grid grid-cols-4 gap-4 w-full">
                                         {images.map((image, index) => {
@@ -226,10 +226,10 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                             <div className={`relative shadow-lg m-3 ${z_index} rounded-lg`}>
                                 <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
                                 <p className='text-md pt-1 px-4'>{expats.patternDesc}</p>
-                                <p className='px-4 pt-1 pb-2'>Detected At : <span className='text-blue-500'>{expats.patternUrl}</span></p>
+                                <p className='px-4 pt-1 pb-2'>Detected At : <span className='text-blue-500'>https://www.booking.com/</span></p>
                                 <Tooltip title="Add pattern for transfer"><button
                                     type="button"
-                                    onClick={() => handleAddclickExtensionPattern(expats.patternType, expats.patternDesc, expats.patternUrl)}
+                                    onClick={() => handleAddclickExtensionPattern(expats.patternType, expats.patternUrl, expats.patternDesc)}
                                     className="absolute top-0 right-0 rounded-tr-lg bg-gray-100 text-black-500 cursor-pointer hover:bg-blue-300"
                                 >
                                     <IoMdAdd 

@@ -106,6 +106,16 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     setZindex(false);
   }
 
+  const handleUrlClick = (texttoCheck:string) => {
+    var url = document.getElementById("detectedUrl")?.getAttribute("href");
+    var suffix = "#:~:text=";
+    var tempUrl = url?.split("#")[0];
+    var text = encodeURIComponent(texttoCheck);
+    var newurl = tempUrl + suffix + text;
+    newurl.toString();
+    document.getElementById("detectedUrl")?.setAttribute("href", newurl);
+  }
+
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -165,10 +175,10 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <Link to={patternData.detectedUrl} target="_blank" className="text-blue-500">
+              <a href="https://www.airindia.com/" target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick("Our posts will take a couple of minutes")}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
-              </Link>
+              </a>
             </div>
           )}
           <div className="md:grid grid-cols-3">
