@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
@@ -498,10 +497,12 @@ const LandingPage = () => {
                 >
                   It is a Planspiel Web Engineering project at <br></br>
                   University of Technology Chemnitz.<br></br> Any concern
-                  regarding this website<br></br> <br></br>Contact Person is :
-                  Amay Rajvaidya<br></br>
-                  E-mail: vtenet125@gmail.com
-                  <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
+                  regarding this website please contact the provided email{" "}
+                  <br></br> <br></br>
+                  <Box>
+                    <MailOutlineIcon fontSize="large" className="icon-mail" />{" "}
+                    vtenet125@gmail.com
+                  </Box>
                 </Box>
                 <Box
                   sx={{
@@ -548,7 +549,6 @@ const LandingPage = () => {
                   }}
                 >
                   <Box className="email-container">
-                    <MailOutlineIcon fontSize="large" className="icon-mail" />
                     <LinkedInIcon fontSize="large" className="icon-linkedin" />
                     <InstagramIcon
                       fontSize="large"
