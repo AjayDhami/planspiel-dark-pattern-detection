@@ -1,6 +1,8 @@
 import React from "react";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import Link from "@mui/material/Link";
 
 import "./PaymentPage.css";
 const PaymentPage = () => {
@@ -36,31 +38,52 @@ const PaymentPage = () => {
                   </span> */}
                   3 Months Support
                 </h4>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    margin: "auto auto 10px auto",
-                    color: "white",
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(131,58,180,1) ",
-                    padding: "1rem",
-                    borderRadius: "5rem",
-                    fontSize: "1rem",
-                    marginTop: "5vw",
-                    width: "100%",
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      backgroundColor: "rgba(131,58,180,0.9)",
-                    },
-                  }}
-                >
-                  REGISTER
-                </Button>
+                <br></br>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Timeline 3 months
+                </p>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Websites check: 20 Times
+                </p>
+                <br></br>
+
+                <Link style={{ textDecoration: "none" }} href="/signup">
+                  <Button
+                    sx={{
+                      placeContent: "center",
+                      display: "flex",
+                      margin: "auto auto 10px auto",
+                      color: "white",
+                      fontWeight: "bold",
+                      backgroundColor: "rgba(131,58,180,1) ",
+                      padding: "1rem",
+                      borderRadius: "5rem",
+                      fontSize: "1rem",
+                      marginTop: "5vw",
+                      width: "100%",
+                      transition: "background-color 0.3s",
+                      "&:hover": {
+                        backgroundColor: "rgba(131,58,180,0.9)",
+                      },
+                    }}
+                  >
+                    REGISTER
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Box>
@@ -90,32 +113,61 @@ const PaymentPage = () => {
                   </span> */}
                   6 Months Support
                 </h4>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    // margin: "auto auto 10px auto",
-                    color: "black",
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(176, 219, 114, 1) ",
-                    padding: "1rem",
-                    borderRadius: "5rem",
-                    fontSize: "1rem",
-                    width: "100%",
-                    alignContent: "center",
-                    marginTop: "5vw",
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      backgroundColor: "rgba(176, 219, 114,0.9)",
-                    },
-                  }}
-                >
-                  REGISTER
-                </Button>
+                <br></br>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(176, 219, 114,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Timeline 6 months
+                </p>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(176, 219, 114,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Websites check: 50 Times
+                </p>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(176, 219, 114,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  25% off in Certification
+                </p>
+                <Link style={{ textDecoration: "none" }} href="/signup">
+                  <Button
+                    sx={{
+                      placeContent: "center",
+                      display: "flex",
+                      // margin: "auto auto 10px auto",
+                      color: "black",
+                      fontWeight: "bold",
+                      backgroundColor: "rgba(176, 219, 114, 1) ",
+                      padding: "1rem",
+                      borderRadius: "5rem",
+                      fontSize: "1rem",
+                      width: "100%",
+                      alignContent: "center",
+                      marginTop: "5vw",
+                      transition: "background-color 0.3s",
+                      "&:hover": {
+                        backgroundColor: "rgba(176, 219, 114,0.9)",
+                      },
+                    }}
+                  >
+                    REGISTER
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Box>
@@ -133,8 +185,7 @@ const PaymentPage = () => {
             /> */}
               <Box className="payment-content">
                 <h3> PREMIUM</h3>
-                <h4>
-                  {/* <span
+                {/* <span
                     style={{
                       color: "rgba(131,58,180,0.9)",
                       fontWeight: "900",
@@ -143,33 +194,61 @@ const PaymentPage = () => {
                   >
                     3
                   </span> */}
-                  12 Months Support
-                </h4>
-                <p>1</p>
-                <p>2</p>
-                <p>3</p>
-                <p>4</p>
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    margin: "auto auto 10px auto",
-                    color: "white",
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(228,138,19,1) ",
-                    padding: "1rem",
-                    borderRadius: "5rem",
-                    fontSize: "1rem",
-                    marginTop: "5vw",
-                    width: "100%",
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      backgroundColor: "rgba(228,138,19,0.9)",
-                    },
-                  }}
-                >
-                  REGISTER
-                </Button>
+                <h4>12 Months Support</h4>
+                <br></br>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(228,138,19,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Timeline 12 months
+                </p>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(228,138,19,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  Websites check: Unlimited Times
+                </p>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(228,138,19,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.2rem",
+                    }}
+                  />{" "}
+                  50% off in Certification
+                </p>
+                <Link style={{ textDecoration: "none" }} href="/signup">
+                  <Button
+                    sx={{
+                      placeContent: "center",
+                      display: "flex",
+                      margin: "auto auto 10px auto",
+                      color: "white",
+                      fontWeight: "bold",
+                      backgroundColor: "rgba(228,138,19,1) ",
+                      padding: "1rem",
+                      borderRadius: "5rem",
+                      fontSize: "1rem",
+                      marginTop: "5vw",
+                      width: "100%",
+                      transition: "background-color 0.3s",
+                      "&:hover": {
+                        backgroundColor: "rgba(228,138,19,0.9)",
+                      },
+                    }}
+                  >
+                    REGISTER
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Box>
