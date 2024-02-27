@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IoMdClose } from 'react-icons/io';
+import { useExpertContext } from '../../context/ExpertContext'
 
 interface ImageCarouselProops {
     image?: File;
@@ -10,6 +11,7 @@ interface ImageCarouselProops {
 }
 
 const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime, imageTime, onClose}) => {
+    const { extensionPatterns, setExtensionPatterns } = useExpertContext();
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const contextRef = useRef<CanvasRenderingContext2D | null>(null);
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
@@ -37,6 +39,20 @@ const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime
         // eslint-disable-next-line
     },[image])
 
+    const handleImageSubmitAfterEdit = async () => {
+        const updatedPatterns = extensionPatterns.map((expats) => {
+            if (expats.patternTime === patternTime) {
+                const filteredImages = expats.patternimages.filter((img) => img.timestamp !== imageTime);
+                return {
+                    ...expats,
+                    patternimages: filteredImages,
+                };
+            }
+            return expats;
+        });
+        setExtensionPatterns(updatedPatterns);
+        onClose();
+    };
 
     const handleSelectOption = (color: string) => {
         setColor(color)
@@ -142,8 +158,15 @@ const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime
                         <option value="blue">Blue</option>
                         <option value="green">Green</option>
                         <option value="red">Red</option>
-                  </select>
-                </div>
+                        </select>
+                    </div>
+                    <button
+                        type="button"
+                        onClick={handleImageSubmitAfterEdit}
+                        className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                    >
+                        Save
+                    </button>
                 </div>
                 <button
                     type="button"

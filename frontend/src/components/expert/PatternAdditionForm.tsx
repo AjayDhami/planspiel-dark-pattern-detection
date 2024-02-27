@@ -54,20 +54,6 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         setZindex(true);
     }
 
-    const handleImageSubmitAfterEdit = async (image: string, patternTime: number, imageTime: number) => {
-        const updatedPatterns = extensionPatterns.map((expats) => {
-            if (expats.patternTime === patternTime) {
-                const filteredImages = expats.patternimages.filter((img) => img.timestamp !== imageTime);
-                return {
-                    ...expats,
-                    patternimages: filteredImages,
-                };
-            }
-            return expats;
-        });
-        setExtensionPatterns(updatedPatterns);
-    };
-
     const handleImageClose = () => {
         setImageOpen(false);
         setZindex(false);
