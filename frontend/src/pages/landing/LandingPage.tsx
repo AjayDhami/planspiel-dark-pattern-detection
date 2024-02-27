@@ -163,7 +163,7 @@ const LandingPage = () => {
                 identify various types of deceptive online practices. It
                 primarily targets three common dark patterns:{" "}
                 <span style={{ fontWeight: "bold", color: "white" }}>
-                  1. Fake Scarcity, 2. Fake Urgency, and 3. Fake Social Proof
+                  Fake Scarcity, Fake Urgency, and Fake Social Proof.
                 </span>{" "}
                 You can easily check single webpage at a time for these dark
                 patterns by utilizing the "VORT" tool on your website. Conduct a
