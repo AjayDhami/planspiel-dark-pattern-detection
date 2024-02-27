@@ -54,18 +54,26 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .timeline-container {
     width: auto;
     margin-top: 2rem;
+    display: none;
   }
 
   .timeline-container.right-timeline-container {
     left: auto;
     right: auto;
+    display: none;
   }
 
   .timeline::after {
     background: transparent;
+    display: none;
+  }
+
+  .timeline {
+    animation: none;
+    display: none;
   }
 }

@@ -5,30 +5,31 @@ import "./ProcessPage.css";
 const ProcessPage = () => {
   return (
     <Box className="process-container">
-      <h1
-        style={{
+      <Box
+        sx={{
           fontSize: "3rem",
           color: "white",
           fontWeight: "600",
           marginTop: "3vw",
           textAlign: "center",
+          display: { xs: "none", md: "block" },
         }}
       >
         Let's a Look Our Product Workflow
-      </h1>
-      <p
-        style={{
+      </Box>
+      <Box
+        sx={{
           fontSize: "1.2rem",
           color: "rgba(255,255,255,.9)",
           fontWeight: "400",
           marginTop: "1vw",
           marginBottom: "4vw",
           textAlign: "center",
+          display: { xs: "none", md: "block" },
         }}
       >
         Here is our Product RoadMap
-      </p>
-
+      </Box>
       <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
           <Box className="pic"></Box>
@@ -117,6 +118,3 @@ const ProcessPage = () => {
 };
 
 export default ProcessPage;
-function useEffect(arg0: () => () => void, arg1: never[]) {
-  throw new Error("Function not implemented.");
-}
