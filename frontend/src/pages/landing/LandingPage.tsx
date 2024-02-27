@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { motion } from "framer-motion";
+
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
@@ -18,15 +18,15 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
 const LandingPage = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState<boolean>(false);
   const [urlForCheck, setUrlForCheck] = useState<string>("");
   const [percentage, setPercentage] = useState<number>();
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const handleWebsiteSubmitClick = async () => {
     if (urlForCheck === "") {
@@ -61,9 +61,9 @@ const LandingPage = () => {
     setUrlForCheck("");
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
   return (
     <>
       <Box
