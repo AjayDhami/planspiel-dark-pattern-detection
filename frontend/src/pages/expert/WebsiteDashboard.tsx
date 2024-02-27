@@ -33,6 +33,7 @@ const WebsiteDashboard = () => {
     const websiteId = sessionStorage.getItem("websiteId")
     const websiteName = sessionStorage.getItem("websiteName");
     const { websiteData, setWebsiteData } = useExpertContext();
+    const { extensionPatterns, setExtensionPatterns } = useExpertContext();
     const [patterns, setPatterns] = useState<any[]>([]);
     const [filteredArray, setFilteredArray] = useState<any[]>([]);
     const experId = localStorage.getItem("userId");
@@ -57,7 +58,7 @@ const WebsiteDashboard = () => {
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
     const [isPublishOpen, setIsPublishOpen] = useState<boolean>(false);
     const [displayEmptyPatternsText, setDisplayEmptyPatternsText] = useState<boolean>(false);
-    const [extensionPatterns, setExtensionPatterns] = useState<extensionPatternDetails[]>();
+    //const [extensionPatterns, setExtensionPatterns] = useState<extensionPatternDetails[]>();
 
     const getWebsiteData = useCallback(async ()=> {
       if(websiteId){
@@ -214,7 +215,7 @@ const WebsiteDashboard = () => {
         <Navbar/>
         {isLoading ? <LoadingPatternCard/> :
         <div>
-        <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom} extensionPatterns={extensionPatterns ? extensionPatterns :[]}/>
+        <PatternAdditionForm isOpen={isPatternformOpen} onClose={closeFrom} />
         <PatternDetailsComponent isOpen={isPatternModalOpen} onClose={closePatternModal} expertId={experId ? experId : ""}/>
         <PublishForm isOpen={isPublishOpen} onClose={handlePublishClose} patterns={patterns} expertId={experId ? experId : ""} websiteId={websiteId? websiteId: ""}/>
         <div className='mx-24 h-screen grid md:grid-cols-3 gap-4 mt-8'>

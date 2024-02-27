@@ -172,7 +172,6 @@ export interface extensionPatternDetails {
 export interface PatternAdditionFormProps {
   isOpen: boolean;
   onClose: () => void;
-  extensionPatterns : extensionPatternDetails[];
 }
 
 export interface PublishModalProps {

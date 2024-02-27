@@ -7,9 +7,11 @@ import { IoMdClose, IoMdAdd  } from 'react-icons/io';
 import ImageCarousel from './ImageCarousel';
 import api from '../../utils/AxiosHelper';
 import { Tooltip } from '@mui/material';
+import { useExpertContext } from '../../context/ExpertContext'
 
 
-const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose, extensionPatterns}) => {
+const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClose}) => {
+    const { extensionPatterns, setExtensionPatterns } = useExpertContext();
     const websiteId = sessionStorage.getItem("websiteId");
     const experId = localStorage.getItem("userId");
     const token = localStorage.getItem("authToken");
@@ -23,16 +25,12 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
     const [imgOpen, setImageOpen] = useState<boolean>(false);
     const [zIndex, setZindex] = useState<boolean>(false);
     const z_index = zIndex ? "-z-50" : "z-0"
+    const [patternTime, setPatternTime] = useState<number>()
+    const [imageTime, setImageTime] = useState<number>();
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
         setFormData(p=>({...p,[e.target.name] : e.target.value}))
     }
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if(files){
-            setImages((prev) => [...prev, ...Array.from(files)]);   
-        }
-    }
     const handleImageDelete = (index: number) => {
         setImages((prev) => {
           const newImages = [...prev];
@@ -47,19 +45,35 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         setZindex(true);
     }
 
-    const handleExtImageClick = (base64:string, index:number) => {
-        const file = base64DataToFile(base64, index);
+    const handleExtImageClick = (base64:string, patternTime:number, imageTime:number, index:number) => {
+        const file = base64DataToFile(base64, index); 
+        setPatternTime(patternTime);
+        setImageTime(imageTime)
         setImgToDisplay(file)
         setImageOpen(true);
         setZindex(true);
     }
+
+    const handleImageSubmitAfterEdit = async (image: string, patternTime: number, imageTime: number) => {
+        const updatedPatterns = extensionPatterns.map((expats) => {
+            if (expats.patternTime === patternTime) {
+                const filteredImages = expats.patternimages.filter((img) => img.timestamp !== imageTime);
+                return {
+                    ...expats,
+                    patternimages: filteredImages,
+                };
+            }
+            return expats;
+        });
+        setExtensionPatterns(updatedPatterns);
+    };
 
     const handleImageClose = () => {
         setImageOpen(false);
         setZindex(false);
     }
 
-    const extensionImageAddToSenderList = (base64: string, index:number) => {
+    const extensionImageAddToSenderList = (base64: string,  index:number) => {
         const file = base64DataToFile(base64,index)
         const imageExists = images.some((img) => img.name === file.name);
         imageExists ? toast.error("image already added") : setImages((prev) => [...prev, file])
@@ -128,7 +142,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
   return (
     <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
         <div className='bg-white p-8 rounded-lg relative z-10 space-y-8 h-4/5 w-4/5 overflow-auto'>
-            <ImageCarousel image={imgToDisplay} isOpen={imgOpen} onClose={handleImageClose}/>
+            <ImageCarousel image={imgToDisplay} isOpen={imgOpen} patternTime={patternTime?patternTime:0} imageTime={imageTime?imageTime:0} onClose={handleImageClose}/>
             <div className='grid md:grid-cols-5 gap-4'>
                 <div className='md:col-span-3'>
                     <form onSubmit={handleSubmit}>
@@ -242,7 +256,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                                             <img src={`data:image/png;base64,${eximages.file_base64}`} 
                                                 alt='extension snapshots' 
                                                 className="h-20 w-full object-cover rounded-md border-2 cursor-pointer"
-                                                onClick={()=>handleExtImageClick(eximages.file_base64, index)}
+                                                onClick={()=>handleExtImageClick(eximages.file_base64, expats.patternTime, eximages.timestamp, index)}
                                             />
                                             <Tooltip title="Add image to send with pattern"><button
                                                 type="button"
