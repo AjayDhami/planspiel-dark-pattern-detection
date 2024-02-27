@@ -31,18 +31,20 @@ const ServicePage = () => {
                 identify dark patterns, ensuring a user-friendly and ethical
                 online presence
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  backgroundColor: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box className="service-card">
@@ -63,18 +65,20 @@ const ServicePage = () => {
                 dark patterns missed by automated tools. Get personalized
                 feedback for enhanced user trust and satisfaction.
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  backgroundColor: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box className="service-card">
