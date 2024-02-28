@@ -166,4 +166,33 @@ const removePattern = async (timeStamp) =>{
     getData();
 }
 
+const getImageData = async () => {
+    const key = 'snapshots'
+    let patterns = await new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const patterns = result.snapshots ?? [];
+            resolve(patterns)
+        });
+    });
+    const updatedPatterns = patterns || [];
+    const patternList = document.getElementById("screenshotContainer");
+    if(Array.isArray(updatedPatterns)){
+        updatedPatterns.forEach(element => {
+            const listItem = document.createElement("div");
+            listItem.innerHTML = `
+                <div style="margin: 5px;">
+                    <div style="display:flex; justify-content: space-between; color:azure;">
+                        <h4>${element.name}</h4>
+                        <button class="removeImage" style="padding:2px;" data-pattern-time="${element.timestamp}">remove</button>
+                    </div>
+                    <img src="data:image/png;base64,${element.file_base64}" width="200" />
+                </div>
+            `
+            patternList.appendChild(listItem)
+        });
+    }
+}
 
