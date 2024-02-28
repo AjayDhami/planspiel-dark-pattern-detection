@@ -19,7 +19,6 @@ import {
   Verified as VerifiedIcon,
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import ImageSlides from "./ImageSlides";
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
@@ -106,6 +105,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     setZindex(false);
   }
 
+
   const handleUrlClick = (texttoCheck:string) => {
     var url = document.getElementById("detectedUrl")?.getAttribute("href");
     var suffix = "#:~:text=";
@@ -115,7 +115,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     newurl.toString();
     document.getElementById("detectedUrl")?.setAttribute("href", newurl);
   }
-
+  
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -175,7 +175,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <a href="https://www.airindia.com/" target="_blank" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick("Our posts will take a couple of minutes")}>
+              <a href={patternData.detectedUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
               </a>
@@ -301,97 +301,6 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
           )}
           </div>
         </div>
-          {/* <div className="flex items-center mt-5">
-            <h2 className="px-4 py-2 text-xl text-blue-500 font-bold">
-              Verification 
-            </h2>
-            {patternData.expertVerifications.map((verify) =>
-              verify.expertId === expertId &&
-              verify.expertVerificationPhase === "NotVerified" ? (
-                <div className="flex justify-center col-span-1 rounded-lg">
-                  <button
-                    className="border-2 bg-white hover:bg-green-300 p-2 mr-5 rounded-xl bg-green-100 border-green-300"
-                    onClick={() => verifyOpen(true)}
-                  >
-                    <div className="flex items-center"><VerifiedIcon className="mr-2"/><p>Is a Pattern</p></div>
-                  </button>
-                  <button
-                    className="border-2 bg-white hover:bg-red-300 p-2 rounded-xl bg-red-100 border-red-300"
-                    onClick={() => verifyOpen(false)}
-                  >
-                    <div className="flex items-center"><ErrorOutlineIcon className="mr-2"/><p>Not a Pattern</p></div>
-                  </button>
-                </div>
-              ) : null
-            )}
-          </div>
-          <div className="grid grid-cols-2 mx-4 mt-3">
-            <div className="col-span-1 bg-gray-100 rounded-lg border-b-2 p-3">
-              {patternData.expertVerifications.map((verify) =>
-                  <div className="text-md flex justify-center">
-                    {verify.expertId!==expertId ? verify.expertName : "You"} : {verify.expertVerificationPhase==="NotVerified" ? "Not Verified" : verify.expertVerificationPhase==="VerifiedWithPattern" ? "Verified With Pattern" : "Verified Without Pattern"}
-                  </div>
-              )}
-            </div>
-          </div>
-          <div>
-            {expertVerificationPhase.includes("NotVerified") ? (
-              <div className={`col-span-full mt-2 px-4 pt-4 pb-2 flex items-center`}>
-                <Avatar
-                  {...stringAvatar(expertName ? expertName : "")}
-                  className={`mr-2 z-[-30]`}
-                />
-                <textarea
-                  name="description"
-                  id="patterndescription"
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  onClick={() => setCommentTextClicked(true)}
-                  className="block w-full rounded-md border-0 h-10 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400"
-                  placeholder="Add a comment"
-                ></textarea>
-              </div>
-            ) : null}
-            {commentTextClicked ? (
-              <div className="px-4">
-                <button
-                  className="col-span-1 bg-blue-300 p-2 rounded-lg hover:bg-blue-400 mt-2"
-                  onClick={handleCommentSubmit}
-                >
-                  Add Comment
-                </button>
-                <button
-                  className="col-span-1 p-2 rounded-lg hover:bg-gray-200 mt-2 mx-2"
-                  onClick={() => setCommentTextClicked(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            ) : null}
-          </div>
-          <div className="px-4 py-2">
-            <h2 className="font-bold text-xl text-blue-500">Comments</h2>
-            <div>
-              {patternData.comments.length === 0 ? (
-                <div className="bg-gray-100 p-4 my-3 rounded-lg">
-                  <p className="text-gray-400">No feedbacks added yet</p>
-                </div>
-              ) : (
-                patternData.comments.map((comment) => (
-                  <Comments
-                    review={comment}
-                    expertId={expertId}
-                    isVerified={
-                      expertVerificationPhase.includes("NotVerified")
-                        ? true
-                        : false
-                    }
-                    z_index={z_index}
-                  />
-                ))
-              )}
-            </div>
-          </div> */}
         </>
       </div>
     </div>

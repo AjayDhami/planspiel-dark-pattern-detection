@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Logger,
   Param,
   Post,
   Query,
@@ -18,6 +19,7 @@ import { UserType } from './enum/user-type.enum';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
+  private readonly logger = new Logger(UserController.name);
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
@@ -26,6 +28,7 @@ export class UserController {
     description: 'Register a new user.',
   })
   async signUp(@Body() signUpUserDto: SignUpUserDto) {
+    this.logger.log(`Signing up the user`);
     return await this.userService.signUp(signUpUserDto);
   }
 
@@ -35,6 +38,9 @@ export class UserController {
     description: 'Authenticate and sign in a user.',
   })
   async signIn(@Body() signInUserDto: SigninUserDto) {
+    this.logger.log(
+      `Signing in the user with role: ${signInUserDto.role} and email: ${signInUserDto.email}`,
+    );
     return await this.userService.signIn(signInUserDto);
   }
 
@@ -47,6 +53,7 @@ export class UserController {
     description: 'Retrieve details of a specific user.',
   })
   async fetchUserDetails(@Param('userId') userId: string) {
+    this.logger.log(`Fetch particular user details with id: ${userId}`);
     return await this.userService.fetchParticularUserDetails(userId);
   }
 
@@ -59,6 +66,7 @@ export class UserController {
     description: 'Fetch all the users details by user type/role',
   })
   async fetchAllUsersByType(@Query('role') role: string) {
+    this.logger.log(`Fetch all users of type: ${role}`);
     return await this.userService.fetchUsersByType(role);
   }
 }

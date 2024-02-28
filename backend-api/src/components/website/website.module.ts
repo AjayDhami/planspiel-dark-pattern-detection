@@ -12,6 +12,8 @@ import { User, UserSchema } from 'src/components/user/schemas/user.schema';
 import { Pattern, PatternSchema } from './schemas/pattern.schema';
 import { Comment, CommentSchema } from './schemas/comment.schema';
 import { AwsHelper } from '../aws/aws.helper';
+import { WebsiteValidation } from './validation/website.validation';
+import { WebsiteConverter } from './converter/website.converter';
 
 @Module({
   imports: [
@@ -31,6 +33,13 @@ import { AwsHelper } from '../aws/aws.helper';
     ConfigModule,
   ],
   controllers: [WebsiteController],
-  providers: [WebsiteService, UserService, AuthGuard, AwsHelper],
+  providers: [
+    WebsiteService,
+    UserService,
+    AuthGuard,
+    AwsHelper,
+    WebsiteValidation,
+    WebsiteConverter,
+  ],
 })
 export class WebsiteModule {}

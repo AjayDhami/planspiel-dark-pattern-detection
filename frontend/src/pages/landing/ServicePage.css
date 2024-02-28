@@ -1,5 +1,5 @@
 .service-section {
-  min-height: 75dvh;
+  min-height: 85dvh;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   font-size: 3rem;
   padding: 5px;
   margin: 20px 0px;
-  color: rgb(79, 104, 93);
+  color: white;
   font-weight: 600;
   position: relative;
 }
@@ -37,7 +37,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 80px;
   z-index: 9;
-  margin-top: 20px;
+  margin-top: 4rem;
 }
 .service-card {
   height: 280px;
@@ -66,14 +66,11 @@
 }
 
 @media (max-width: 1100px) {
-  .service-section h1 {
-    font-size: 1.5rem;
-  }
   .service-cards {
     grid-template-columns: repeat(1, 1fr);
   }
   .service-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .service-card {
     height: fit-content;

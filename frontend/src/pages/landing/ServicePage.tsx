@@ -19,7 +19,7 @@ const ServicePage = () => {
                 placeContent: "center",
                 display: "inline-block",
                 margin: "auto",
-                color: " rgb(79, 104, 93  )",
+                color: " rgb(79, 104, 93 )",
                 width: "20%",
                 height: "20%",
               }}
@@ -27,38 +27,9 @@ const ServicePage = () => {
             <Box className="service-content">
               <h3> Detection</h3>
               <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
-              </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                }}
-              >
-                Get Start
-              </Button>
-            </Box>
-          </Box>
-          <Box className="service-card">
-            <WorkspacePremiumOutlinedIcon
-              sx={{
-                placeContent: "center",
-                display: "inline-block",
-                margin: "auto",
-                color: " rgb(79, 104, 93  )",
-                width: "20%",
-                height: "20%",
-              }}
-            />
-            <Box className="service-content">
-              <h3> Certification</h3>
-              <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
+                Using advanced detection technology, we analyze your website to
+                identify dark patterns, ensuring a user-friendly and ethical
+                online presence
               </p>
               <Link style={{ textDecoration: "none" }} href="/signup">
                 <Button
@@ -66,8 +37,9 @@ const ServicePage = () => {
                     placeContent: "center",
                     display: "flex",
                     margin: "auto auto 10px auto",
-                    color: "rgb(79, 104, 93)",
+                    backgroundColor: "rgb(79, 104, 93)",
                     fontWeight: "bold",
+                    color: "white",
                   }}
                 >
                   Get Start
@@ -87,22 +59,60 @@ const ServicePage = () => {
               }}
             />
             <Box className="service-content">
-              <h3>Feed Back </h3>
+              <h3>Experts Feed Back </h3>
               <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
+                Our skilled experts manually review your website, identifying
+                dark patterns missed by automated tools. Get personalized
+                feedback for enhanced user trust and satisfaction.
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  color: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+          <Box className="service-card">
+            <WorkspacePremiumOutlinedIcon
+              sx={{
+                placeContent: "center",
+                display: "inline-block",
+                margin: "auto",
+                color: " rgb(79, 104, 93  )",
+                width: "20%",
+                height: "20%",
+              }}
+            />
+            <Box className="service-content">
+              <h3> Certification</h3>
+              <p>
+                Secure a competitive edge with our transparent, ethical
+                certification, boosting brand credibility and ensuring a
+                trustworthy online experience..
+              </p>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
         </Box>

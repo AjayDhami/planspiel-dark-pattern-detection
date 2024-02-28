@@ -1,65 +1,27 @@
 .main-text {
-  position: relative;
-  font-size: 4dvw;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px #14213b, 1px 2px 1px #14213b, 1px 3px 1px #14213b,
-    1px 4px 1px #14213b, 1px 5px 1px #14213b, 1px 6px 1px #14213b,
-    1px 7px 1px #14213b, 1px 8px 1px #14213b, 1px 9px 1px #14213b,
-    1px 10px 1px #14213b, 1px 18px 6px rgba(16, 16, 16, 0.4),
-    1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
-    1px 30px 60px rgba(16, 16, 16, 0.4);
-  color: rgba(80, 123, 204, 0.8);
-  line-height: 1.5;
+  font-weight: 900;
+  color: white;
   -webkit-text-stroke: 0.1vw #071d43;
   text-transform: uppercase;
+  margin-bottom: 2rem;
 }
-/* .main-text1 {
+.main-text1 {
+  color: rgba(255, 255, 255, 0.7);
+  display: "flex";
+  text-align: "center";
+  letter-spacing: 1.5px;
   position: relative;
-  font-size: 3vw;
-  color: rgba(158, 75, 154, 0.859);
-  -webkit-text-stroke: 0.1vw #2d1b2c;
-  line-height: 1.5;
-  transform-style: preserve-3d;
-  letter-spacing: 1.2px;
+  width: 80%;
 }
-.main-text2 {
-  position: relative;
-  font-size: 4vw;
-  color: rgb(131, 132, 134);
-  -webkit-text-stroke: 0.3vw rgb(18, 19, 19);
-  text-transform: capitalize;
-  transform-style: preserve-3d;
-  letter-spacing: 1.2px;
-}
-
-.main-text2:before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  color: #fec005;
-  -webkit-text-stroke: 0.1vw #e3b051;
-  border-right: 1px solid #fec005;
-  overflow: hidden;
-  animation: animate 6s linear infinite;
-}
-
-@keyframes animate {
-  0%,
-  10%,
-  100% {
-    width: 0;
+@media (max-width: 900px) {
+  .main-text {
+    margin-bottom: 0.2rem;
   }
-  70%,
-  90% {
-    width: 100%;
+
+  .main-text1 {
+    width: 80%;
   }
-} */
-
-/* .........................................Partner........................................................ */
-
+}
 ._partner_ {
   display: flex;
   justify-content: center;
@@ -67,10 +29,7 @@
   height: 60%;
   width: 100%;
   overflow: hidden;
-  background: transparent;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.4px);
-  -webkit-backdrop-filter: blur(7.4px);
+  background: rgba(255, 255, 255, 0.6);
 }
 ._partner-items_ {
   display: flex;
@@ -103,7 +62,6 @@
   border: 0;
   outline: none;
 }
-/* --------------------------------------searchbox--------------------------------------- */
 .input-box {
   height: 50px;
   width: 80%;
@@ -138,13 +96,27 @@
   background-color: transparent;
 }
 
-/* @media only screen and (min-width: 600px) {
-  .input-box {
-    margin: 0 auto;
-  }
+.email-container {
+  display: flex;
+  align-items: center;
+}
+.icon-mail {
+  margin-right: 0.5rem;
+  align-items: center;
+}
 
-  .input-box input {
-    width: 70%;
-    font-size: 18px;
-  }
-} */
+.icon-instagram {
+  align-items: center;
+}
+
+.icon-linkedin {
+  align-items: center;
+  margin-right: 1.5rem;
+}
+.icon-instagram :hover {
+  color: black;
+}
+
+.icon-linkedin:hover {
+  color: black;
+}

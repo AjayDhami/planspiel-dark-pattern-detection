@@ -1,6 +1,7 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { UserType } from '../enum/user-type.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { SubscriptionType } from '../enum/subscription-type.enum';
 
 export class SignUpUserDto {
   @ApiProperty()
@@ -25,4 +26,8 @@ export class SignUpUserDto {
   @IsString({ message: 'Role must be string' })
   @IsEnum(UserType, { message: 'Invalid role' })
   role: string;
+
+  @ApiProperty()
+  @IsEnum(SubscriptionType, { message: 'Invalid subscription type' })
+  subscription: string;
 }

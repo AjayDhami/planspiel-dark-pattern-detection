@@ -2,14 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { swaggerConfig } from './config/swagger.config';
 import * as process from 'process';
 
 async function bootstrap() {
-  const nodeEnv = process.env.NODE_ENV;
+  const logger = new Logger('Bootstrap');
+  const nodeEnv = process.env.NODE_ENV || 'prod';
   const envFilePath = `.env.${nodeEnv}`;
+  logger.log(
+    `Selected environment: ${nodeEnv} and Selected env file path: ${envFilePath}`,
+  );
 
   dotenv.config({ path: envFilePath });
 

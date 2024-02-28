@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -28,6 +29,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 @ApiBearerAuth()
 @Controller('website')
 export class WebsiteController {
+  private readonly logger = new Logger(WebsiteController.name);
   constructor(private readonly websiteService: WebsiteService) {}
 
   @Post()
@@ -38,6 +40,7 @@ export class WebsiteController {
     description: 'Persist details of a new website for a user.',
   })
   async persistWebsiteDetails(@Body() websiteCreateDto: WebsiteCreateDto) {
+    this.logger.log(`Save new website details`);
     return await this.websiteService.persistWebsiteDetails(websiteCreateDto);
   }
 
@@ -51,6 +54,7 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Body() assignExpertsDto: AssignExpertsDto,
   ) {
+    this.logger.log(`Assign experts to website`);
     return await this.websiteService.assignExpertsToWebsite(
       websiteId,
       assignExpertsDto,
@@ -65,6 +69,7 @@ export class WebsiteController {
     description: 'Retrieve details of a specific website based on its ID.',
   })
   async fetchParticularWebsiteDetails(@Param('websiteId') websiteId: string) {
+    this.logger.log(`Fetching website details with id: ${websiteId}`);
     return await this.websiteService.fetchParticularWebsiteDetails(websiteId);
   }
 
@@ -77,6 +82,7 @@ export class WebsiteController {
       'Retrieve details of all websites associated with a specific user(Client or Expert).',
   })
   async getAllWebsiteDetailsForParticularUser(@Query('userId') userId: string) {
+    this.logger.log(`Fetch all website details for user with id: ${userId}`);
     return await this.websiteService.getAllWebsiteDetailsForParticularUser(
       userId,
     );
@@ -92,6 +98,7 @@ export class WebsiteController {
   async getAllWebsitesAssociatedWithClients(
     @Param('userType') userType: string,
   ) {
+    this.logger.log(`Retrieve all websites associated with clients`);
     return await this.websiteService.getWebsitesAssociatedWithClients(userType);
   }
 
@@ -106,6 +113,7 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Body() patternCreateDto: PatternCreateDto,
   ) {
+    this.logger.log(`Add pattern in website with id: ${websiteId}`);
     return await this.websiteService.addPatternInWebsite(
       websiteId,
       patternCreateDto,
@@ -123,8 +131,16 @@ export class WebsiteController {
     @Param('patternId') patternId: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
-    console.log(files);
+    this.logger.log(`Add images in pattern with id: ${patternId}`);
     return await this.websiteService.addImagesInPattern(patternId, files);
+  }
+
+  @Get(':imageId/certificationImageFetch')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
+  async uploadCertificationImage() {
+    this.logger.log('Get certification image in S3 Bucket');
+    return await this.websiteService.getCertificationInS3Bucket();
   }
 
   @Put(':websiteId/automatedPatterns')
@@ -138,6 +154,9 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Body() patternCreateDtos: PatternCreateDto[],
   ) {
+    this.logger.log(
+      `Add AI model generated patterns in website with id:  ${websiteId}`,
+    );
     return await this.websiteService.addAutomatedPatternInWebsite(
       websiteId,
       patternCreateDtos,
@@ -146,12 +165,13 @@ export class WebsiteController {
 
   @Get(':websiteId/pattern')
   @UseGuards(AuthGuard)
-  @Roles(UserType.Expert)
+  @Roles(UserType.Client, UserType.Expert)
   @ApiOperation({
-    summary: 'Fetch all pattern of a website [For Expert]',
-    description: 'Fetch all patterns from a particular website',
+    summary: 'Fetch all patterns details of a website [For Client/Expert]',
+    description: 'Fetch all patterns details of a particular website',
   })
   async fetchAllPatternsOfWebsite(@Param('websiteId') websiteId: string) {
+    this.logger.log(`Retrieve all patterns for website with id: ${websiteId}`);
     return await this.websiteService.fetchAllPatternsOfWebsite(websiteId);
   }
 
@@ -165,6 +185,7 @@ export class WebsiteController {
   async updatePatternPhaseByExpert(
     @Body() updatePatternPhase: UpdatePatternPhase,
   ) {
+    this.logger.log(`Update pattern phase`);
     return await this.websiteService.updatePatternPhaseByExpert(
       updatePatternPhase,
     );
@@ -182,6 +203,7 @@ export class WebsiteController {
     @Param('patternId') patternId: string,
     @Body() commentCreateDto: CommentCreateDto,
   ) {
+    this.logger.log(`Add comment to pattern with id : ${patternId}`);
     return await this.websiteService.addCommentToPattern(
       websiteId,
       patternId,
@@ -202,6 +224,7 @@ export class WebsiteController {
     @Param('commentId') commentId: string,
     @Body() replyCreateDto: ReplyCreateDto,
   ) {
+    this.logger.log(`Add reply to comment with id: ${commentId}`);
     return await this.websiteService.addReplyToComment(
       websiteId,
       patternId,
@@ -221,6 +244,7 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Param('patternId') patternId: string,
   ) {
+    this.logger.log(`Fetch pattern details with id: ${patternId}`);
     return await this.websiteService.fetchParticularPatternDetails(
       websiteId,
       patternId,
@@ -238,6 +262,7 @@ export class WebsiteController {
     @Param('websiteId') websiteId: string,
     @Body() publishDto: PublishCertificationDto,
   ) {
+    this.logger.log(`Publish certification for website with id :${websiteId}`);
     return await this.websiteService.publishCertificationDetailsOfWebsite(
       websiteId,
       publishDto,
@@ -252,6 +277,7 @@ export class WebsiteController {
     description: 'Retrieve KPI of all websites  associated with a client',
   })
   async getKpiForClient(@Param('clientId') clientId: string) {
+    this.logger.log(`Fetch KPI for client with id: ${clientId}`);
     return await this.websiteService.fetchKpiForClient(clientId);
   }
 
@@ -263,6 +289,7 @@ export class WebsiteController {
     description: 'Retrieve KPI of all websites  associated with a expert',
   })
   async getKpiForExpert(@Param('expertId') expertId: string) {
+    this.logger.log(`Fetch KPI for expert with id: ${expertId}`);
     return await this.websiteService.fetchKpiForExpert(expertId);
   }
 
@@ -274,6 +301,7 @@ export class WebsiteController {
       'Generate Certification for dark pattern free websites [For Client]',
   })
   async generateWebsiteCertification(@Param('websiteId') websiteId: string) {
+    this.logger.log(`Generate certification for website with id: ${websiteId}`);
     return await this.websiteService.generateCertification(websiteId);
   }
 }

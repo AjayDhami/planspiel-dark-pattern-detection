@@ -1,34 +1,36 @@
 import React from "react";
 import { Box } from "@mui/material";
-
 import "./ProcessPage.css";
 
 const ProcessPage = () => {
   return (
     <Box className="process-container">
-      <h1
-        style={{
+      <Box
+        sx={{
           fontSize: "3rem",
-          color: "rgba(51, 179, 174,.9)",
+          color: "white",
           fontWeight: "600",
           marginTop: "3vw",
+          textAlign: "center",
+          display: { xs: "none", md: "block" },
         }}
       >
-        Let's a Look Our Product Demo
-      </h1>
-      <p
-        style={{
+        Dark Patterns Detection Workflow
+      </Box>
+      <Box
+        sx={{
           fontSize: "1.2rem",
-          color: "rgba(255,255,255,.6)",
+          color: "rgba(255,255,255,.9)",
           fontWeight: "400",
-          marginTop: "vw",
-          marginBottom: "2vw",
+          marginTop: "1vw",
+          marginBottom: "4vw",
+          textAlign: "center",
+          display: { xs: "none", md: "block" },
         }}
       >
-        Write Some small intro about your process
-      </p>
-
-      <Box className="timeline">
+        Let's Get Started
+      </Box>
+      <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -36,20 +38,20 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
-              Enter URL
+              Submit Website URL
             </h2>
             <p>
-              Enter URL is a user interface prompt commonly found in web
-              browsers, search engines, and various online platforms. This
-              instructive text invites users to input a URL, the web address.
+              Website owner can submit website URL for dark pattern detection.
+              Also can provide additional URLs as well as additional information
+              related to website.
             </p>
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-left" className="timeline">
         <Box className="timeline-container right-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -57,20 +59,19 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
               Dark Patterns Detection
             </h2>
             <p>
-              Dark Pattern Detection is crucial in preventing deceptive
-              practices. This step ensures a clean and transparent user
-              experience.
+              It comprises two steps for detecting dark patterns, the first step involves
+              detection using automation, and the second step involves manual detection by experts.
             </p>
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -78,19 +79,19 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
-              Got Ceretification
+              Feedback From Experts
             </h2>
             <p>
-              After successfully completing the process, your product receives
-              certification, proving its legitimacy and adherence to standards.
+              Website owners will receive feedback from experts which can be useful
+              for them to make website dark pattern free.
             </p>
           </Box>
         </Box>
       </Box>
-      <Box className="timeline">
+      <Box data-aos="fade-left" className="timeline">
         <Box className="timeline-container right-timeline-container">
           <Box className="pic"></Box>
           <Box className="text-box">
@@ -98,15 +99,15 @@ const ProcessPage = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: "rgba(0,0,0)",
+                color: "rgb(255,255,255)",
               }}
             >
-              Got Feed Back
+              Certification
             </h2>
             <p>
-              Enter URL is a user interface prompt commonly found in web
-              browsers, search engines, and various online platforms. This
-              instructive text invites users to input a URL the web address .
+              Certification will be provided to those websites which are free of
+              dark patterns. This certifications helps to ensure the authenticity of
+              the website.
             </p>
           </Box>
         </Box>
