@@ -1,6 +1,6 @@
 # V-Tenet Chrome Extension
 
-The extension package for V-Tenet includes extension load for V-Tenet. The extension supports integration and data transfer with V-Tenet Expert frontend interface.
+The extension supports integration and data transfer with V-Tenet Expert frontend interface.
 
 ## Prerequisites
 
