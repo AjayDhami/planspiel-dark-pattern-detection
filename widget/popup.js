@@ -70,3 +70,74 @@ const getData = async () => {
     }
 }
 
+async function processInput() {
+    let typeInput = document.getElementById("patterntype").value;
+    let currentUrl = await new Promise((resolve,reject) =>{
+        chrome.tabs.query({currentWindow: true, active: true}, tabs => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            }
+            let urlInput = tabs[0].url;
+            resolve(urlInput)
+        });
+    })
+    console.log("Current url is: ", currentUrl);
+    let descInput = document.getElementById("patterndesc").value;
+    let tempImages = await new Promise((resolve, reject) => {
+        chrome.storage.local.get("snapshots", (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const patterns = result.snapshots ?? [];
+            resolve(patterns)
+        });
+    });
+    let timeCreated = Date.now();
+    if(typeInput===""){
+        alert("Please enter a valid pattern type");
+        document.getElementById("patterntype").value = "";
+        document.getElementById("patterndesc").value = "";
+    }
+    else{
+    const key = 'patternType'
+    let patternObj = {
+        patternType : typeInput,
+        patternUrl : currentUrl,
+        patternDesc : descInput,
+        patternimages : tempImages,
+        patternTime : timeCreated
+    }
+    let patterns = await new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const patterns = result.patternType ?? [];
+            resolve(patterns);
+        });
+    });
+    const updatePatterns = [...patterns, patternObj];
+
+    await new Promise((resolve, reject) => {
+        chrome.storage.local.set({ [key]: updatePatterns }, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            resolve(updatePatterns)
+        });
+    });
+    // window.localStorage["patternType"] = "updatePatterns";
+    chrome.storage.local.set({ "snapshots": [] }, () => {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+        } 
+    });
+    document.getElementById("patterntype").value = "";
+    document.getElementById("patterndesc").value = "";
+    document.getElementById("patternobj-list").innerHTML = "";
+    document.getElementById("screenshotContainer").innerHTML = "";
+    getData();
+}
+}
+
+
