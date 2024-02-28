@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "My Extension",
+    "version": "1.0",
+    "description": "V-Tenet widget",
+    "homepage_url" : "http://localhost:3000",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "storage",
+      "activeTab"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches" : ["<all_urls>"],
+        "match_origin_as_fallback": true,
+        "js": ["content-script.js"],
+        "run_at" : "document_end",
+        "world" : "ISOLATED"
+      }
+    ]
+  }
