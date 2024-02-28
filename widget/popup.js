@@ -196,3 +196,52 @@ const getImageData = async () => {
     }
 }
 
+async function captureImage() {
+    const screenshotContainer = document.getElementById("screenshotContainer");
+    const key = "snapshots";
+    const imgObj = await new Promise((resolve,reject) => {
+        chrome.tabs.captureVisibleTab(null, {}, function(screenshotDataUrl) {
+            const screenshotImage = new Image();
+            screenshotImage.src = screenshotDataUrl;
+            screenshotImage.onload = function(){
+                var canvas = document.createElement("canvas");
+                canvas.width = screenshotImage.width;
+                canvas.height = screenshotImage.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(screenshotImage,0,0);
+                var dataUrl = canvas.toDataURL();
+                const base64 = dataUrl.replace(/^data:image\/?[A-z]*;base64,/,"");
+                let imageObj = {
+                    name: "image",
+                    timestamp: Date.now(),
+                    file_base64: base64.toString()
+                }
+                console.log("Image converted to base64:", base64);
+                resolve(imageObj)
+            }
+        })
+    });
+    let screenshots = await new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const snaps = result.snapshots ?? [];
+            resolve(snaps);
+        });
+    });
+    const updatedImages = [...screenshots, imgObj]
+    await new Promise((resolve, reject) => {
+        chrome.storage.local.set({ [key]: updatedImages }, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            resolve(updatedImages)
+        });
+    });
+    const patternList = document.getElementById("screenshotContainer");
+    patternList.innerHTML = ""
+    getImageData();
+}
+
+
