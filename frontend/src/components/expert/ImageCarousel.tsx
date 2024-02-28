@@ -64,6 +64,7 @@ const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime
             return expats;
         });
         setExtensionPatterns(updatedPatterns);
+        window.postMessage({action : 'updateDatainStorage', updatedData : extensionPatterns},'*')
         onClose();
     };
 
