@@ -17,6 +17,7 @@ export interface UserRegistrationCredentials {
   lastName: string;
   email: string;
   password: string;
+  subscription: "Three_Months" | "Six_Months" | "Twelve_Months";
   role: string;
 }
 
