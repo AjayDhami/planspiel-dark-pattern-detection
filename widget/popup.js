@@ -139,5 +139,31 @@ async function processInput() {
     getData();
 }
 }
+const removePattern = async (timeStamp) =>{
+    const key = "patternType";
+    let timeStampNumber = parseInt(timeStamp)
+    let patterns = await new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const patterns = result.patternType ?? [];
+            resolve(patterns);
+        });
+    });
+    const filteredPatterns = patterns.filter(pattern => {
+        return pattern.patternTime !== timeStampNumber;
+    });
+    await new Promise((resolve, reject) => {
+        chrome.storage.local.set({ [key]: filteredPatterns }, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            resolve(patterns)
+        });
+    });
+    document.getElementById("patternobj-list").innerHTML=""
+    getData();
+}
 
 
