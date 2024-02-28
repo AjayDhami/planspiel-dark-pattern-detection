@@ -244,4 +244,37 @@ async function captureImage() {
     getImageData();
 }
 
+const removeImage = async (timeStamp) =>{
+    console.log(timeStamp);
+    const key = "snapshots";
+    let timeStampNumber = parseInt(timeStamp)
+    let images = await new Promise((resolve, reject) => {
+        chrome.storage.local.get(key, (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            const images = result.snapshots ?? [];
+            resolve(images);
+        });
+    });
+    const filteredImages = images.filter(img => {
+        return img.timestamp !== timeStampNumber;
+    });
+    await new Promise((resolve, reject) => {
+        chrome.storage.local.set({ [key]: filteredImages }, () => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+            } 
+            resolve(images)
+        });
+    });
+    document.getElementById("screenshotContainer").innerHTML=""
+    getImageData();
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    getData();
+    getImageData();
+})
+
 
