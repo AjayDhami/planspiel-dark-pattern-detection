@@ -48,12 +48,12 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, percentage})
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>
         <Typography sx={{marginInline:"2rem", fontSize:"1.5rem"}}>
-          {percentage===100 ? "Congratulations, vort didn't detect any potential dark pattern in your website" : `Only ${100-percentage}% of your website text can potentially be dark patterns`}
+          {percentage===100 ? "Congratulations, VORT didn't detect any dark pattern in your website" : `${100-percentage}% of your webpage text contains dark patterns`}
         </Typography>
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center"}}>
         <Typography sx={{marginInline:"2rem", fontSize:"1.5rem"}}>
-          Register with vort to get in depth expert evaluation and certification 
+          Register with VORT to get in-depth expert evaluation and certification
         </Typography>
       </Box>
       <Box sx={{display: "flex",justifyContent:"center", alignContent:"center", marginBottom:"2rem", marginTop:"1rem"}}>
@@ -66,7 +66,7 @@ const LandingModal:React.FC<LandingModalProps> = ({isOpen, onClose, percentage})
         </Button>
         </Link>
       </Box>
-      <p className='flex justify-center pb-3 px-3 text-gray-400 text-sm'>Vort is our AI tool which detects presence of dark patterns in websites. The vort detections may not be accurate every time</p>
+      <p className='flex justify-center pb-3 px-3 text-gray-400 text-sm'>VORT is our AI tool which detects presence of dark patterns in websites. The VORT detections may not be accurate every time.</p>
     </Dialog>
   )
 }

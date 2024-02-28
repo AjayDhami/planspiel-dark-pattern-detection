@@ -97,8 +97,7 @@ const LandingPage = () => {
           <DialogTitle
             sx={{
               display: "flex",
-              fontStyle: "normal",
-              justifyContent: "center",
+              flexDirection: "column",
               alignItems: "center",
             }}
           >
@@ -108,6 +107,7 @@ const LandingPage = () => {
                 VORT
               </span>
             </Typography>
+            <Typography>This may take few minutes. Don't refresh the page meanwhile.</Typography>
           </DialogTitle>
           <Box
             sx={{
