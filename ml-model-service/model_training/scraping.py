@@ -32,7 +32,6 @@ def get_driver(url):
 
 def web_scrap(url, website_id):
     all_text = []
-
     driver = get_driver(url)
 
     # Use explicit wait for elements to be present in the DOM
@@ -43,7 +42,7 @@ def web_scrap(url, website_id):
     data = driver.page_source
     soup = BeautifulSoup(data, 'html.parser')
 
-    # Old logic Find all div tags
+    # Old logic for finding all div tags
     # div_tags = soup.find_all('div')
 
     # # Print id and class attributes in sequence
@@ -157,3 +156,30 @@ def web_scrap(url, website_id):
     driver.quit()
 
     return 'Done'
+
+
+# Delete the files in scraped_data directory before running the code of web scraping
+def delete_files_in_scraped_data():
+    script_directory = os.path.dirname(__file__)
+    scraped_data_directory = os.path.join(script_directory, 'scraped_data')
+
+    # Check if the directory exists
+    if not os.path.exists(scraped_data_directory):
+        print(f"The directory '{scraped_data_directory}' does not exist.")
+        return 'Not deleted'
+    
+    # List all files in the directory
+    files = os.listdir(scraped_data_directory)
+    if files:
+        for file in files:
+            file_path = os.path.join(scraped_data_directory, file)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                print(f"Deleted file: {file_path}")
+        return 'Deleted'
+    else:
+        print("No files exist in the directory.")
+        return 'Not deleted'
+
+   
+    

@@ -130,6 +130,7 @@ export class WebsiteService {
         const formattedWebsites = websites.map((website) => ({
           websiteId: website.id,
           baseUrl: website.baseUrl,
+          additionalUrls: website.additionalUrls,
           websiteName: website.websiteName,
           description: website.description,
         }));

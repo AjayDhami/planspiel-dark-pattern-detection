@@ -19,7 +19,6 @@ import {
   Verified as VerifiedIcon,
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 
 const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
   isOpen,
@@ -92,6 +91,16 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
     setEditing(false);
   };
 
+  const handleUrlClick = (texttoCheck:string) => {
+    var url = document.getElementById("detectedUrl")?.getAttribute("href");
+    var suffix = "#:~:text=";
+    var tempUrl = url?.split("#")[0];
+    var text = encodeURIComponent(texttoCheck);
+    var newurl = tempUrl + suffix + text;
+    newurl.toString();
+    document.getElementById("detectedUrl")?.setAttribute("href", newurl);
+  }
+  
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
@@ -150,10 +159,10 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
-              <Link to={patternData.detectedUrl} target="_blank" className="text-blue-500">
+              <a href={patternData.detectedUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
                 {patternData.detectedUrl}&nbsp;
                 <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
-              </Link>
+              </a>
               <div className="border-b-2 p-4 bg-gray-100 rounded-lg">
                 <h2 className="font-bold">Description</h2>
                 <p>{patternData.description}</p>
