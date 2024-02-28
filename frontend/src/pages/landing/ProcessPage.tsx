@@ -15,7 +15,7 @@ const ProcessPage = () => {
           display: { xs: "none", md: "block" },
         }}
       >
-        Let's a Look Our Product Workflow
+        Dark Patterns Detection Workflow
       </Box>
       <Box
         sx={{
@@ -28,7 +28,7 @@ const ProcessPage = () => {
           display: { xs: "none", md: "block" },
         }}
       >
-        Here is our Product RoadMap
+        Let's Get Started
       </Box>
       <Box data-aos="fade-right" className="timeline">
         <Box className="timeline-container left-timeline-container">
@@ -41,12 +41,12 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Enter URL
+              Submit Website URL
             </h2>
             <p>
-              Enter URL is a user interface prompt commonly found in web
-              browsers, search engines, and various online platforms. This
-              instructive text invites users to input a URL, the web address.
+              Website owner can submit website URL for dark pattern detection.
+              Also can provide additional URLs as well as additional information
+              related to website.
             </p>
           </Box>
         </Box>
@@ -65,9 +65,8 @@ const ProcessPage = () => {
               Dark Patterns Detection
             </h2>
             <p>
-              Dark Pattern Detection is crucial in preventing deceptive
-              practices. This step ensures a clean and transparent user
-              experience.
+              It comprises two steps for detecting dark patterns, the first step involves
+              detection using automation, and the second step involves manual detection by experts.
             </p>
           </Box>
         </Box>
@@ -83,13 +82,11 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Got Feed Back From Experts
+              Feedback From Experts
             </h2>
             <p>
-              In the feedback section, our customers receive assessments from
-              experts. These experts manually analyze the website for any
-              potential dark patterns and provide feedback based on their
-              detection
+              Website owners will receive feedback from experts which can be useful
+              for them to make website dark pattern free.
             </p>
           </Box>
         </Box>
@@ -105,11 +102,12 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Got Certification
+              Certification
             </h2>
             <p>
-              After successfully completing the process, your product receives
-              certification, proving its legitimacy and adherence to standards.
+              Certification will be provided to those websites which are free of
+              dark patterns. This certifications helps to ensure the authenticity of
+              the website.
             </p>
           </Box>
         </Box>
