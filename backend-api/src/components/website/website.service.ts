@@ -178,6 +178,19 @@ export class WebsiteService {
     }
   }
 
+  async getCertificationInS3Bucket() {
+    const certificationBucketName = this.configService.get<string>(
+      'AWS_S3_CERTIFICATION_BUCKET',
+    );
+
+    const params = {
+      Bucket: certificationBucketName,
+      Key: 'Digital_Certificate_VORT.svg',
+    };
+
+    return await this.awsHelper.executeGetObjectCommand(params);
+  }
+
   async addPatternInWebsite(
     websiteId: string,
     patternCreateDto: PatternCreateDto,
