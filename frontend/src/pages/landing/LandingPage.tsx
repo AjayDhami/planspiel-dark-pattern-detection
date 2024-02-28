@@ -15,6 +15,7 @@ import PaymentPage from "./PaymentPage";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import Link from "@mui/material/Link";
 
 const LandingPage = () => {
   // const [open, setOpen] = useState(false);
@@ -548,11 +549,25 @@ const LandingPage = () => {
                   }}
                 >
                   <Box className="email-container">
-                    <LinkedInIcon fontSize="large" className="icon-linkedin" />
-                    <InstagramIcon
-                      fontSize="large"
-                      className="icon-instagram"
-                    />
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.linkedin.com/in/v-tenet/"
+                    >
+                      <LinkedInIcon
+                        fontSize="large"
+                        className="icon-linkedin"
+                      />
+                    </Link>
+
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.instagram.com/vtenet_2023/"
+                    >
+                      <InstagramIcon
+                        fontSize="large"
+                        className="icon-instagram"
+                      />
+                    </Link>
                   </Box>
                 </Box>
                 <br></br>
