@@ -15,15 +15,14 @@ const PaymentPage = () => {
           <Box className="payment-card">
             <Box className="payment-card1">
               <Box className="payment-content">
-                <h3>BASIC</h3>
-                <h4>3 Months Support</h4>
+                <h3>3 Months Support</h3>
                 <br></br>
                 <p>
                   <DoneOutlineIcon
                     sx={{
                       color: "rgba(131,58,180,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
                   Timeline 3 months
@@ -33,12 +32,21 @@ const PaymentPage = () => {
                     sx={{
                       color: "rgba(131,58,180,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
-                  Websites check: 20 Times
+                  Websites check : Unlimited Times
                 </p>
-                <br></br>
+                <p>
+                  <DoneOutlineIcon
+                    sx={{
+                      color: "rgba(131,58,180,0.9)",
+                      fontWeight: "900",
+                      fontSize: "1.5rem",
+                    }}
+                  />{" "}
+                  Certification
+                </p>
 
                 <Link style={{ textDecoration: "none" }} href="/signup">
                   <Button
@@ -69,15 +77,14 @@ const PaymentPage = () => {
           <Box className="payment-card">
             <Box className="payment-card1">
               <Box className="payment-content">
-                <h3>COMFORT</h3>
-                <h4>6 Months Support</h4>
+                <h3>6 Months Support</h3>
                 <br></br>
                 <p>
                   <DoneOutlineIcon
                     sx={{
                       color: "rgba(176, 219, 114,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
                   Timeline 6 months
@@ -87,20 +94,20 @@ const PaymentPage = () => {
                     sx={{
                       color: "rgba(176, 219, 114,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
-                  Websites check: 50 Times
+                  Websites check: Unlimited Times
                 </p>
                 <p>
                   <DoneOutlineIcon
                     sx={{
                       color: "rgba(176, 219, 114,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
-                  25% off in Certification
+                  Certification
                 </p>
                 <Link style={{ textDecoration: "none" }} href="/signup">
                   <Button
@@ -132,16 +139,14 @@ const PaymentPage = () => {
           <Box className="payment-card">
             <Box className="payment-card1">
               <Box className="payment-content">
-                <h3> PREMIUM</h3>
-
-                <h4>12 Months Support</h4>
+                <h3> 12 Months Support</h3>
                 <br></br>
                 <p>
                   <DoneOutlineIcon
                     sx={{
                       color: "rgba(228,138,19,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
                   Timeline 12 months
@@ -151,7 +156,7 @@ const PaymentPage = () => {
                     sx={{
                       color: "rgba(228,138,19,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
                   Websites check: Unlimited Times
@@ -161,10 +166,10 @@ const PaymentPage = () => {
                     sx={{
                       color: "rgba(228,138,19,0.9)",
                       fontWeight: "900",
-                      fontSize: "1.2rem",
+                      fontSize: "1.5rem",
                     }}
                   />{" "}
-                  50% off in Certification
+                  Certification
                 </p>
                 <Link style={{ textDecoration: "none" }} href="/signup">
                   <Button
