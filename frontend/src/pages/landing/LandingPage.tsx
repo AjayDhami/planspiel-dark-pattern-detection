@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
@@ -16,6 +15,7 @@ import PaymentPage from "./PaymentPage";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import Link from "@mui/material/Link";
 
 const LandingPage = () => {
   // const [open, setOpen] = useState(false);
@@ -163,7 +163,7 @@ const LandingPage = () => {
                 identify various types of deceptive online practices. It
                 primarily targets three common dark patterns:{" "}
                 <span style={{ fontWeight: "bold", color: "white" }}>
-                  1. Fake Scarcity, 2. Fake Urgency, and 3. Fake Social Proof
+                  Fake Scarcity, Fake Urgency, and Fake Social Proof.
                 </span>{" "}
                 You can easily check single webpage at a time for these dark
                 patterns by utilizing the "VORT" tool on your website. Conduct a
@@ -233,7 +233,6 @@ const LandingPage = () => {
             style={{
               padding: "5px",
               margin: "5px 0px",
-              // color: "rgb(110, 118, 129)",
               color: "white",
               fontWeight: "600",
             }}
@@ -498,10 +497,12 @@ const LandingPage = () => {
                 >
                   It is a Planspiel Web Engineering project at <br></br>
                   University of Technology Chemnitz.<br></br> Any concern
-                  regarding this website<br></br> <br></br>Contact Person is :
-                  Amay Rajvaidya<br></br>
-                  E-mail: vtenet125@gmail.com
-                  <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
+                  regarding this website please contact the provided email{" "}
+                  <br></br> <br></br>
+                  <Box>
+                    <MailOutlineIcon fontSize="large" className="icon-mail" />{" "}
+                    vtenet125@gmail.com
+                  </Box>
                 </Box>
                 <Box
                   sx={{
@@ -548,12 +549,25 @@ const LandingPage = () => {
                   }}
                 >
                   <Box className="email-container">
-                    <MailOutlineIcon fontSize="large" className="icon-mail" />
-                    <LinkedInIcon fontSize="large" className="icon-linkedin" />
-                    <InstagramIcon
-                      fontSize="large"
-                      className="icon-instagram"
-                    />
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.linkedin.com/in/v-tenet/"
+                    >
+                      <LinkedInIcon
+                        fontSize="large"
+                        className="icon-linkedin"
+                      />
+                    </Link>
+
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.instagram.com/vtenet_2023/"
+                    >
+                      <InstagramIcon
+                        fontSize="large"
+                        className="icon-instagram"
+                      />
+                    </Link>
                   </Box>
                 </Box>
                 <br></br>

@@ -83,12 +83,13 @@ const ProcessPage = () => {
                 color: "rgb(255,255,255)",
               }}
             >
-              Got Feed Back
+              Got Feed Back From Experts
             </h2>
             <p>
-              Enter URL is a user interface prompt commonly found in web
-              browsers, search engines, and various online platforms. This
-              instructive text invites users to input a URL the web address .
+              In the feedback section, our customers receive assessments from
+              experts. These experts manually analyze the website for any
+              potential dark patterns and provide feedback based on their
+              detection
             </p>
           </Box>
         </Box>
