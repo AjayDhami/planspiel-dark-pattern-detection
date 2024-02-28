@@ -44,22 +44,6 @@ button {
   cursor: pointer;
 }
 
-/* #widget-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: whitesmoke;
-    padding: 10px;
-    border: 1px solid #ccc;
-    z-index: 9999;
-    width: 30%;
-    height: auto;
-  } */
-  
-  /* #note-form {
-    display: flex;
-    flex-direction: column;
-  } */
 
   #screenshotContainer{
     display: flex;
