@@ -17,11 +17,12 @@
 }
 
 .payment-card h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: black;
   font-weight: 900;
   text-align: center;
   margin-top: 1.8rem;
+  margin-bottom: 1.2rem;
 }
 
 .payment-card h4 {
@@ -33,7 +34,7 @@
 .payment-card p {
   width: 100%;
   font-size: 1rem;
-  color: transparent;
+  color: black;
   text-align: center;
   line-height: 1.5rem;
   white-space: 1px;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box, Dialog, DialogTitle, Grid } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
 import "./LandingPage.css";
 import NavbarPage from "./NavbarPage";
 import ServicePage from "./ServicePage";
@@ -16,18 +15,13 @@ import PaymentPage from "./PaymentPage";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import Link from "@mui/material/Link";
 
 const LandingPage = () => {
-  // const [open, setOpen] = useState(false);
   const [isModalOpen, setIsmodalOpen] = useState<boolean>(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState<boolean>(false);
   const [urlForCheck, setUrlForCheck] = useState<string>("");
   const [percentage, setPercentage] = useState<number>();
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
   const handleWebsiteSubmitClick = async () => {
     if (urlForCheck === "") {
       toast.error("Please Enter the url", {
@@ -61,9 +55,6 @@ const LandingPage = () => {
     setUrlForCheck("");
   };
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
   return (
     <>
       <Box
@@ -97,8 +88,7 @@ const LandingPage = () => {
           <DialogTitle
             sx={{
               display: "flex",
-              fontStyle: "normal",
-              justifyContent: "center",
+              flexDirection: "column",
               alignItems: "center",
             }}
           >
@@ -107,6 +97,9 @@ const LandingPage = () => {
               <span className="font-CustomFont font-bold text-blue-500">
                 VORT
               </span>
+            </Typography>
+            <Typography>
+              This may take few minutes. Don't refresh the page meanwhile.
             </Typography>
           </DialogTitle>
           <Box
@@ -163,7 +156,7 @@ const LandingPage = () => {
                 identify various types of deceptive online practices. It
                 primarily targets three common dark patterns:{" "}
                 <span style={{ fontWeight: "bold", color: "white" }}>
-                  1. Fake Scarcity, 2. Fake Urgency, and 3. Fake Social Proof
+                  Fake Scarcity, Fake Urgency, and Fake Social Proof.
                 </span>{" "}
                 You can easily check single webpage at a time for these dark
                 patterns by utilizing the "VORT" tool on your website. Conduct a
@@ -233,7 +226,6 @@ const LandingPage = () => {
             style={{
               padding: "5px",
               margin: "5px 0px",
-              // color: "rgb(110, 118, 129)",
               color: "white",
               fontWeight: "600",
             }}
@@ -419,7 +411,7 @@ const LandingPage = () => {
         </Box>
         <Box
           sx={{
-            height: { xs: "70rem", md: "30rem" },
+            height: { xs: "60rem", md: "auto" },
             width: "100%",
             display: "flex",
             justifyContent: "center",
@@ -427,7 +419,7 @@ const LandingPage = () => {
             flexDirection: "column",
             background: "rgba(255,255,255,.1)",
             backdropFilter: "blur(10px)",
-            marginTop: { xs: "3rem", md: "5rem" },
+            marginTop: { xs: "3rem", md: "auto" },
           }}
         >
           <Grid container spacing={2}>
@@ -449,19 +441,17 @@ const LandingPage = () => {
                 <Box
                   sx={{
                     width: "12rem",
-                    height: "12rem",
+                    height: "14rem",
                     borderRadius: "50%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     border: "2px solid transparent",
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/logo.png)`,
-                    backgroundSize: "100px 100px",
+                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Digital_Certificate_VORT.svg)`,
+                    backgroundSize: "200px 200px",
+                    marginTop: { xs: "3rem", md: "4rem" },
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
-                    backdropFilter: "blur(10px)",
-                    backgroundColor: "rgba(0, 0, 0, 0.1)",
-                    marginTop: { xs: "3rem", md: "9rem" },
                   }}
                 ></Box>
               </Box>
@@ -496,25 +486,34 @@ const LandingPage = () => {
                     marginTop: 2,
                   }}
                 >
-                  It is a Planspiel Web Engineering project at <br></br>
-                  University of Technology Chemnitz.<br></br> Any concern
-                  regarding this website<br></br> <br></br>Contact Person is :
-                  Amay Rajvaidya<br></br>
-                  E-mail: vtenet125@gmail.com
-                  <br></br> Address : Vetterstr. 66, Chemnitz, Germany<br></br>
+                  Chemnitz University of Technology <br></br>Str. der Nationen
+                  62, 09111,Chemnitz
+                  <br></br>
+                  <br></br>
+                  <Box>
+                    <MailOutlineIcon fontSize="large" className="icon-mail" />{" "}
+                    <span
+                      style={{
+                        borderBottom: ".2rem solid rgba(256,256,256,.7)",
+                      }}
+                    >
+                      vtenet125@gmail.com
+                    </span>
+                  </Box>
                 </Box>
                 <Box
                   sx={{
-                    color: "white",
-                    marginTop: "4rem",
-                    borderBottom: ".1rem solid #2B1B42",
-                    fontFamily: "var(--secular-font)",
-                    fontSize: "1.3rem",
-                    textAlign: "center",
+                    height: "auto",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    color: "rgba(256,256,256,.7)",
+                    fontSize: "1.2rem",
+                    marginTop: 2,
                   }}
-                >
-                  © V-Tenet 2024.
-                </Box>
+                ></Box>
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -548,31 +547,45 @@ const LandingPage = () => {
                   }}
                 >
                   <Box className="email-container">
-                    <MailOutlineIcon fontSize="large" className="icon-mail" />
-                    <LinkedInIcon fontSize="large" className="icon-linkedin" />
-                    <InstagramIcon
-                      fontSize="large"
-                      className="icon-instagram"
-                    />
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.linkedin.com/in/v-tenet/"
+                    >
+                      <LinkedInIcon
+                        fontSize="large"
+                        className="icon-linkedin"
+                      />
+                    </Link>
+
+                    <Link
+                      style={{ color: "#cccc" }}
+                      href="https://www.instagram.com/vtenet_2023/"
+                    >
+                      <InstagramIcon
+                        fontSize="large"
+                        className="icon-instagram"
+                      />
+                    </Link>
                   </Box>
                 </Box>
-                <br></br>
-                <Box
-                  sx={{
-                    width: "9.2rem",
-                    height: "11.9rem",
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/assets/Digital_Certificate_VORT.svg)`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    justifyContent: "end",
-                  }}
-                ></Box>
               </Box>
             </Grid>
           </Grid>
-
           <br></br>
+          <Box
+            sx={{
+              color: "rgba(256,256,256,.7)",
+              fontSize: "1.2rem",
+              textAlign: "center",
+            }}
+          >
+            It is a Planspiel Web Engineering project at University of
+            Technology Chemnitz.
+            <span style={{ borderBottom: ".1rem solid #2B1B42" }}>
+              {" "}
+              © V-Tenet 2024.
+            </span>
+          </Box>
         </Box>
       </Box>
     </>

@@ -27,21 +27,24 @@ const ServicePage = () => {
             <Box className="service-content">
               <h3> Detection</h3>
               <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
+                Using advanced detection technology, we analyze your website to
+                identify dark patterns, ensuring a user-friendly and ethical
+                online presence
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  backgroundColor: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box className="service-card">
@@ -58,21 +61,24 @@ const ServicePage = () => {
             <Box className="service-content">
               <h3>Experts Feed Back </h3>
               <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
+                Our skilled experts manually review your website, identifying
+                dark patterns missed by automated tools. Get personalized
+                feedback for enhanced user trust and satisfaction.
               </p>
-              <Button
-                sx={{
-                  placeContent: "center",
-                  display: "flex",
-                  margin: "auto auto 10px auto",
-                  backgroundColor: "rgb(79, 104, 93)",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                Get Start
-              </Button>
+              <Link style={{ textDecoration: "none" }} href="/signup">
+                <Button
+                  sx={{
+                    placeContent: "center",
+                    display: "flex",
+                    margin: "auto auto 10px auto",
+                    backgroundColor: "rgb(79, 104, 93)",
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                >
+                  Get Start
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box className="service-card">
@@ -89,8 +95,9 @@ const ServicePage = () => {
             <Box className="service-content">
               <h3> Certification</h3>
               <p>
-                Detecting dark patterns is a critical objective in the realm of
-                user experience and ethical business practices.
+                Secure a competitive edge with our transparent, ethical
+                certification, boosting brand credibility and ensuring a
+                trustworthy online experience..
               </p>
               <Link style={{ textDecoration: "none" }} href="/signup">
                 <Button

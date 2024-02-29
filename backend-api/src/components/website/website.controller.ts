@@ -135,6 +135,14 @@ export class WebsiteController {
     return await this.websiteService.addImagesInPattern(patternId, files);
   }
 
+  @Get(':imageId/certificationImageFetch')
+  @UseGuards(AuthGuard)
+  @Roles(UserType.Client)
+  async uploadCertificationImage() {
+    this.logger.log('Get certification image in S3 Bucket');
+    return await this.websiteService.getCertificationInS3Bucket();
+  }
+
   @Put(':websiteId/automatedPatterns')
   @UseGuards(AuthGuard)
   @Roles(UserType.SuperAdmin)
