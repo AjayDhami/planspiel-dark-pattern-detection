@@ -137,11 +137,11 @@ const patternPost = async(websiteId : string, expertId : string, patternType : s
     description : description,
     detectedUrl : detectedUrl
   }
-  const response: AxiosResponse<PatternData> = await api.put<PatternData>(
+  const response = await api.put(
     `/website/${websiteId}/pattern`,
     body,
   );
-  return response.status
+  return response
 }
 
 const postVerification = async(websiteId : string, patternId : string, expertId : string, patternExists : boolean) =>{
@@ -196,6 +196,25 @@ function stringAvatar(name: string) {
   };
 }
 
+const postImages = async(patternId:string, images:FormData[]) => {
+  // const body = {
+  //   files : images
+  // }
+  try {
+    // const formData = new FormData();
+    // for(let i=0; i<images.length; i++){
+    //   formData.append('files[]', images[i])
+    // }
+    // images.forEach((image,index)=>{
+    //   formData.append('files[]', image)
+    // })
+    const response = await api.put(`/website/${patternId}/uploadImages`)
+    return response.status;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const publishWebsite = async(websiteId:string, expertId: string, isCertified: boolean, expertFeedback: string) =>{
   const body = {
     expertId: expertId,
@@ -210,4 +229,16 @@ const publishWebsite = async(websiteId:string, expertId: string, isCertified: bo
   }
 }
 
-export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails};
+const base64DataToFile = (base64: string, index:number) => {
+  const byteCharacters = atob(base64);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i=0; i<byteCharacters.length; i++){
+    byteNumbers[i] = byteCharacters.charCodeAt(i)
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], {type: "image/png"});
+  const file = new File([blob], `image-${index}`, {type:"image/png"});
+  return file;
+}
+
+export { getPatternsData, getSpecificPattern, CommentPost, replyPost, getWebsites, patternPost, stringAvatar, postVerification, getUserDetails, getSpecificWebsite, publishWebsite, getKpiDetails, postImages, base64DataToFile};

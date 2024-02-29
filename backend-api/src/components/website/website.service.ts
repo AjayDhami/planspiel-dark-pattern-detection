@@ -162,6 +162,7 @@ export class WebsiteService {
       };
 
       await this.awsHelper.executePutObjectCommand(params);
+      console.log("executed S3 Bucket");
       return fileKey;
     });
 
@@ -169,6 +170,7 @@ export class WebsiteService {
       const patternImageKeys = await Promise.all(uploadPromises);
       pattern.patternImageKeys.push(...patternImageKeys);
       await pattern.save();
+      console.log("Pattern", pattern);
       return { message: 'Images added successfully' };
     } catch (error) {
       this.logger.error(
