@@ -138,7 +138,10 @@ export class WebsiteController {
   @Get(':imageId/certificationImageFetch')
   @UseGuards(AuthGuard)
   @Roles(UserType.Client)
-  async uploadCertificationImage() {
+  @ApiOperation({
+    summary: 'Get Certification Image [For Client]',
+  })
+  async getCertificationImage() {
     this.logger.log('Get certification image in S3 Bucket');
     return await this.websiteService.getCertificationInS3Bucket();
   }
