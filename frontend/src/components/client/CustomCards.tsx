@@ -227,12 +227,7 @@ export const ImageCard = ({ imageUrl }: { imageUrl: string }) => {
     <div>
       <Card onClick={handleOpen}>
         <CardActionArea>
-          <CardMedia
-            component="img"
-            // height="194"
-            image={imageUrl}
-            alt="Paella dish"
-          />
+          <CardMedia component="img" image={imageUrl} alt="Paella dish" />
         </CardActionArea>
       </Card>
 
@@ -244,15 +239,22 @@ export const ImageCard = ({ imageUrl }: { imageUrl: string }) => {
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: { xs: "100%", md: "70%" },
+            height: "80vh",
             bgcolor: "background.paper",
             border: "2px solid #000",
             boxShadow: 24,
+            overflow: "hidden",
           }}
         >
           <img
             src={imageUrl}
             alt="Feedback Screenshot"
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              height: "auto",
+              maxWidth: "100%", // Limit image width to 100% of its container
+              maxHeight: "100%",
+            }}
           />
         </Box>
       </Modal>

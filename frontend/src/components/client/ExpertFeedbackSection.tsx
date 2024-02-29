@@ -1,4 +1,12 @@
-import { Box, Grid, Link, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Link,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getWebsiteFeedbackPatterns } from "../../api";
@@ -7,11 +15,9 @@ import { ImageCard } from "./CustomCards";
 
 const FeedbackDetail = (props: PatternData) => {
   return (
-    <Paper
-      elevation={2}
+    <Box
       sx={{
-        padding: (theme) => theme.spacing(2),
-        my: (theme) => theme.spacing(1),
+        my: (theme) => theme.spacing(2),
       }}
     >
       <Typography variant="h6" fontWeight="bold">
@@ -41,7 +47,9 @@ const FeedbackDetail = (props: PatternData) => {
           </Grid>
         </Box>
       )}
-    </Paper>
+
+      <Divider sx={{ mt: 1 }} />
+    </Box>
   );
 };
 
@@ -74,14 +82,26 @@ const ExpertFeedbackSection = ({
       <Typography variant="h5" fontWeight="bold">
         Overview
       </Typography>
-      <Typography variant="body1" mb={2}>
+      <Typography
+        variant="body1"
+        mb={2}
+        sx={{
+          borderBottom: "2px solid #ccc;",
+          paddingBlock: "15px",
+        }}
+      >
         {expertFeedback}
       </Typography>
-
+      {/* 
       <Typography variant="h5" fontWeight="bold">
         Feedback Analysis
-      </Typography>
+      </Typography> */}
       {feedbackList.map((item) => {
+        item.patternImageUrls = [
+          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
+          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
+          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
+        ];
         return <FeedbackDetail {...item} key={item.id} />;
       })}
     </Stack>

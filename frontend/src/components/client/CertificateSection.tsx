@@ -152,6 +152,18 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
   return (
     <Stack>
+      <Box display="flex" justifyContent="center" alignItems="center" pt={5}>
+        <img
+          src="/assets/vort-certificate.svg"
+          alt="VORT certificate"
+          height={250}
+          width={250}
+          style={{
+            maxHeight: 250,
+            overflow: "hidden",
+          }}
+        />
+      </Box>
       {!certificate && (
         <Stack
           spacing={1}
@@ -175,11 +187,10 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
       {certificate && (
         <>
-          <Typography variant="body1" component="h6">
-            The Certificate for your Website has been generated. Follow the
-            steps below to add the certificate to your website.
-          </Typography>
           <Stack mt={2} gap={1}>
+            <Typography variant="h6" component="h6">
+              Follow the steps below to have this certificate in your website
+            </Typography>
             <Typography variant="body1" component="p">
               1. Copy the div and put it anywhere in your website's index page
             </Typography>

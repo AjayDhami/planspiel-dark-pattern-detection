@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Container,
   Divider,
   Paper,
   Skeleton,
@@ -43,7 +44,6 @@ const LinkText = ({ url }: { url: string }) => {
 };
 
 const WebsiteDetailsPage = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const [website, setWebsite] = useState<Website | null>(null);
 
@@ -65,168 +65,134 @@ const WebsiteDetailsPage = () => {
   }, [id]);
 
   return (
-    <Paper
-      sx={(theme) => ({
-        background: theme.palette.background.paper,
-        padding: theme.spacing(2),
-      })}
-    >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
+    <Container fixed>
+      <Paper
+        sx={(theme) => ({
+          background: theme.palette.background.paper,
+          borderRadius: "8px",
+        })}
       >
-        <Typography variant="h4" color="primary">
-          Website Details
-        </Typography>
-        <Button
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate("/client/dashboard")}
-          color="secondary"
-          sx={{
-            display: { xs: "none", md: "inline-flex" },
-          }}
-        >
-          Back
-        </Button>
-      </Stack>
-
-      {website ? (
-        <>
-          <Typography variant="subtitle1" fontWeight="bold">
-            Website Name
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            {website.websiteName}
-          </Typography>
-
-          <Typography variant="subtitle1" fontWeight="bold">
-            Website URL
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            <LinkText url={website.baseUrl} />
-          </Typography>
-
-          <Typography variant="subtitle1" fontWeight="bold">
-            Additional URLs
-          </Typography>
-          {website.additionalUrls && website.additionalUrls.length ? (
-            <Box mb={2}>
-              {website.additionalUrls.map((url, index) => (
-                <LinkText key={index} url={url} />
-              ))}
-            </Box>
-          ) : (
-            <Typography variant="body1" color="gray" mb={2}>
-              No additional URLs
-            </Typography>
-          )}
-
-          <Typography variant="subtitle1" fontWeight="bold">
-            Website Status
-          </Typography>
-          <PhaseBadge
-            isCompleted={website.isCompleted}
-            isDarkPatternFree={website.isDarkPatternFree}
+        <Stack direction="row">
+          <Box
             sx={{
-              mb: 2,
+              width: "30%",
+              borderRight: "1px solid #ccc",
+              padding: (theme) => theme.spacing(2),
             }}
-          />
-
-          <Typography variant="subtitle1" fontWeight="bold">
-            Description
-          </Typography>
-          {website.description ? (
-            <Typography variant="body1">{website.description}</Typography>
-          ) : (
-            <Typography variant="body1" color="gray">
-              No Description
+          >
+            <Typography variant="h4" mb={2}>
+              {website?.websiteName}
             </Typography>
-          )}
-        </>
-      ) : (
-        <>
-          <Typography variant="subtitle1" fontWeight="bold">
-            Website Name
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            <Skeleton animation="wave" />
-          </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Website URL
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            <Skeleton animation="wave" />
-          </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Additional URLs
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            <Skeleton variant="rectangular" animation="wave" height={100} />
-          </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Description
-          </Typography>
-          <Typography variant="body1" mb={2}>
-            <Skeleton variant="rectangular" animation="wave" height={100} />
-          </Typography>
-          <Typography variant="subtitle1" color="primary">
-            Website Status
-          </Typography>
-          <Typography variant="body1">
-            <Skeleton animation="wave" />
-          </Typography>
-        </>
-      )}
 
-      {website &&
-        website.phase === "Published" &&
-        website.isDarkPatternFree && (
-          <>
-            <Divider sx={{ my: 2 }} />
-            <Typography variant="h5" color="primary">
-              Website Certification
+            <Typography variant="subtitle1" fontWeight="bold">
+              Website URL
             </Typography>
-            <CertificateSection {...website} />
-          </>
-        )}
+            <Typography variant="body1" mb={2}>
+              {website && <LinkText url={website.baseUrl} />}
+            </Typography>
 
-      {website && website.phase === "Published" && (
-        <>
-          <Divider sx={{ my: 2 }} />
-          <Typography variant="h5" color="primary">
-            Website Feedbacks
-          </Typography>
-          {website.expertFeedback ? (
-            <ExpertFeedbackSection {...website} />
-          ) : (
-            <Box
-              display="flex"
-              flex={1}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Stack
-                spacing={2}
-                direction="column"
-                alignItems="center"
-                color="gray"
-              >
-                <CelebrationIcon
-                  sx={{ width: "80px", height: "80px" }}
-                  color="success"
-                />
-                <Typography variant="subtitle1" component="p" color="green">
-                  Hurray! No Feedbacks. Seems like your website is pretty
-                  perfect and clean off Dark Patterns.
+            <Typography variant="subtitle1" fontWeight="bold">
+              Additional URLs
+            </Typography>
+            {website?.additionalUrls && website.additionalUrls.length ? (
+              <Box mb={2}>
+                {website.additionalUrls.map((url, index) => (
+                  <LinkText key={index} url={url} />
+                ))}
+              </Box>
+            ) : (
+              <Typography variant="body1" color="gray" mb={2}>
+                No additional URLs
+              </Typography>
+            )}
+
+            <Typography variant="subtitle1" fontWeight="bold">
+              Website Status
+            </Typography>
+            {website && (
+              <PhaseBadge
+                isCompleted={website.isCompleted}
+                isDarkPatternFree={website.isDarkPatternFree}
+                sx={{
+                  mb: 2,
+                }}
+              />
+            )}
+
+            <Typography variant="subtitle1" fontWeight="bold">
+              Description
+            </Typography>
+            {website?.description ? (
+              <Typography variant="body1">{website.description}</Typography>
+            ) : (
+              <Typography variant="body1" color="gray">
+                No Description
+              </Typography>
+            )}
+          </Box>
+          <Box
+            sx={{
+              flex: "70%",
+              padding: (theme) => theme.spacing(2),
+            }}
+          >
+            {website && website.phase === "Published" ? (
+              <>
+                {website.isDarkPatternFree && (
+                  <>
+                    <CertificateSection {...website} />
+                    <Divider
+                      sx={{
+                        my: 2,
+                      }}
+                    />
+                  </>
+                )}
+                <Typography variant="h5" color="primary" mb={2}>
+                  Website Feedbacks
                 </Typography>
-              </Stack>
-            </Box>
-          )}
-        </>
-      )}
-    </Paper>
+                {website.expertFeedback ? (
+                  <ExpertFeedbackSection {...website} />
+                ) : (
+                  <Box
+                    display="flex"
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Stack
+                      spacing={2}
+                      direction="column"
+                      alignItems="center"
+                      color="gray"
+                    >
+                      <CelebrationIcon
+                        sx={{ width: "80px", height: "80px" }}
+                        color="success"
+                      />
+                      <Typography
+                        variant="subtitle1"
+                        component="p"
+                        color="green"
+                      >
+                        Hurray! No Feedbacks. Seems like your website is pretty
+                        perfect and clean off Dark Patterns.
+                      </Typography>
+                    </Stack>
+                  </Box>
+                )}
+              </>
+            ) : (
+              <div className="flex items-center justify-center m-5 bg-gray-200 p-8 h-80 rounded-md">
+                <p className="font-bold text-2xl">
+                  Website evaluation in progress !!
+                </p>
+              </div>
+            )}
+          </Box>
+        </Stack>
+      </Paper>
+    </Container>
   );
 };
 
