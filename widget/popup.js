@@ -1,3 +1,5 @@
+let imageData = [];
+
 window.addEventListener("DOMContentLoaded", (event) =>{
     const el = document.getElementById("submitpat");
     if(el){

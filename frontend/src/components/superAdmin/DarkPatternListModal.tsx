@@ -69,7 +69,7 @@ const DarkPatternListModal: React.FC<AdminDarkPatternListProp> = ({ websiteId, w
         <DialogTitle sx={{
           marginLeft: "27%",
         }}>
-          {assignExpert ? 'List of Dark Patterns' : 'Assign Experts'} 
+          {assignExpert ? 'Assign Experts' : 'List of Dark Patterns'} 
         </DialogTitle>
         <DialogContent>
           {assignExpert ? (
