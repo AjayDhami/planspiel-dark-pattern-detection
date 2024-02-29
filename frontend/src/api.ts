@@ -5,7 +5,7 @@ import {
 } from "./types";
 import api from "./utils/AxiosHelper";
 import { extractUserDetails } from "./utils/DataHelper";
-import { BASE_ML_URL } from '../src/utils/constatnt';
+import { BASE_ML_URL } from "../src/utils/constatnt";
 import axios from "axios";
 
 // Function to Register User
@@ -74,6 +74,16 @@ export const getWebsite = async (websiteId: string) => {
   }
 };
 
+// Function to get Dark pattern feedbacks for the rejected websites
+export const getWebsiteFeedbackPatterns = async (websiteId: string) => {
+  try {
+    const response = await api.get(`/website/${websiteId}/pattern`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Function to add a website for certification
 export const addWebsiteForCertification = async (website: WebsiteDetails) => {
   try {
@@ -100,11 +110,13 @@ export const generateCertification = async (websiteId: string) => {
 };
 
 export const getPatternPercentage = async (websiteUrl: string) => {
-  try {    
-    const response = await axios.get(`${BASE_ML_URL}/darkPattern/freeCheck?url=${websiteUrl}`);
-    return response.data; 
+  try {
+    const response = await axios.get(
+      `${BASE_ML_URL}/darkPattern/freeCheck?url=${websiteUrl}`
+    );
+    return response.data;
   } catch (error) {
-    console.error('Error is --', error);
+    console.error("Error is --", error);
     throw error;
   }
-}
+};

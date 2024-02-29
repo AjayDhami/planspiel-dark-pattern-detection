@@ -19,6 +19,7 @@ import { Website } from "../../types";
 import { getWebsite } from "../../api";
 import { toast } from "react-toastify";
 import CertificateSection from "../../components/client/CertificateSection";
+import ExpertFeedbackSection from "../../components/client/ExpertFeedbackSection";
 
 const LinkText = ({ url }: { url: string }) => {
   return (
@@ -111,9 +112,11 @@ const WebsiteDetailsPage = () => {
             Additional URLs
           </Typography>
           {website.additionalUrls && website.additionalUrls.length ? (
-            website.additionalUrls.map((url, index) => (
-              <LinkText key={index} url={url} />
-            ))
+            <Box mb={2}>
+              {website.additionalUrls.map((url, index) => (
+                <LinkText key={index} url={url} />
+              ))}
+            </Box>
           ) : (
             <Typography variant="body1" color="gray" mb={2}>
               No additional URLs
@@ -196,17 +199,7 @@ const WebsiteDetailsPage = () => {
             Website Feedbacks
           </Typography>
           {website.expertFeedback ? (
-            <Box>
-              <Typography
-                variant="body1"
-                component="p"
-                sx={{
-                  whiteSpace: "pre-wrap",
-                }}
-              >
-                {website.expertFeedback}
-              </Typography>
-            </Box>
+            <ExpertFeedbackSection {...website} />
           ) : (
             <Box
               display="flex"

@@ -121,6 +121,7 @@ export interface PatternData {
   phaseText: string;
   hoverText: string;
   isPatternExists: boolean;
+  patternImageUrls?: string[];
 }
 
 export interface expertData {
