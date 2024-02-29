@@ -63,7 +63,6 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
         const file = base64DataToFile(base64,index)
         const imageExists = images.some((img) => img.name === file.name);
         imageExists ? toast.error("image already added") : setImages((prev) => [...prev, file])
-        console.log(images);
     }
 
     const handleAddclickExtensionPattern = (patternType:string, patternUrl: string, patternDesc:string) => {
@@ -119,7 +118,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                         });
                     }
                 } catch (error) {
-                    console.log(error);
+                    console.error(error);
                 }
             }
         }

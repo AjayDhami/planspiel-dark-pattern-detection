@@ -208,7 +208,6 @@ const postImages = async(patternId:string, images:FormData[]) => {
     // images.forEach((image,index)=>{
     //   formData.append('files[]', image)
     // })
-    console.log(images);
     const response = await api.put(`/website/${patternId}/uploadImages`)
     return response.status;
   } catch (error) {

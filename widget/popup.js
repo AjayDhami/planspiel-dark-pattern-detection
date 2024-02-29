@@ -42,7 +42,6 @@ const getData = async () => {
         });
     });
     const updatedPatterns = patterns || [];
-    console.log(patterns);
     const patternList = document.getElementById("patternobj-list");
     if(Array.isArray(imageData)){
         updatedPatterns.forEach(element => {
@@ -81,7 +80,6 @@ async function processInput() {
             resolve(urlInput)
         });
     })
-    console.log("Current url is: ", currentUrl);
     let descInput = document.getElementById("patterndesc").value;
     let tempImages = await new Promise((resolve, reject) => {
         chrome.storage.local.get("snapshots", (result) => {
@@ -216,7 +214,6 @@ async function captureImage() {
                     timestamp: Date.now(),
                     file_base64: base64.toString()
                 }
-                console.log("Image converted to base64:", base64);
                 resolve(imageObj)
             }
         })
@@ -245,7 +242,6 @@ async function captureImage() {
 }
 
 const removeImage = async (timeStamp) =>{
-    console.log(timeStamp);
     const key = "snapshots";
     let timeStampNumber = parseInt(timeStamp)
     let images = await new Promise((resolve, reject) => {

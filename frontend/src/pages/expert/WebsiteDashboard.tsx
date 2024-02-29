@@ -151,7 +151,6 @@ const WebsiteDashboard = () => {
       if (event.source === window && event.data.action === 'sendDataToReactApp') {
         // Handle the data received from the content script
         const dataFromContentScript = event.data;
-        console.log('Data received from content script:', dataFromContentScript);
         setExtensionPatterns(dataFromContentScript.result.patternType);
       }
     }
