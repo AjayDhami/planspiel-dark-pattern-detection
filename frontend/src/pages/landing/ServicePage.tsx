@@ -1,7 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
 import FindInPageOutlinedIcon from "@mui/icons-material/FindInPageOutlined";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import ImportantDevicesOutlinedIcon from "@mui/icons-material/ImportantDevicesOutlined";
@@ -31,20 +29,6 @@ const ServicePage = () => {
                 identify dark patterns, ensuring a user-friendly and ethical
                 online presence
               </p>
-              <Link style={{ textDecoration: "none" }} href="/signup">
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    margin: "auto auto 10px auto",
-                    backgroundColor: "rgb(79, 104, 93)",
-                    fontWeight: "bold",
-                    color: "white",
-                  }}
-                >
-                  Get Start
-                </Button>
-              </Link>
             </Box>
           </Box>
           <Box className="service-card">
@@ -65,20 +49,6 @@ const ServicePage = () => {
                 dark patterns missed by automated tools. Get personalized
                 feedback for enhanced user trust and satisfaction.
               </p>
-              <Link style={{ textDecoration: "none" }} href="/signup">
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    margin: "auto auto 10px auto",
-                    backgroundColor: "rgb(79, 104, 93)",
-                    fontWeight: "bold",
-                    color: "white",
-                  }}
-                >
-                  Get Start
-                </Button>
-              </Link>
             </Box>
           </Box>
           <Box className="service-card">
@@ -99,20 +69,6 @@ const ServicePage = () => {
                 certification, boosting brand credibility and ensuring a
                 trustworthy online experience..
               </p>
-              <Link style={{ textDecoration: "none" }} href="/signup">
-                <Button
-                  sx={{
-                    placeContent: "center",
-                    display: "flex",
-                    margin: "auto auto 10px auto",
-                    backgroundColor: "rgb(79, 104, 93)",
-                    fontWeight: "bold",
-                    color: "white",
-                  }}
-                >
-                  Get Start
-                </Button>
-              </Link>
             </Box>
           </Box>
         </Box>

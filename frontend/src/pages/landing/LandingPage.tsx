@@ -95,6 +95,7 @@ const LandingPage = () => {
             <Typography variant="h5" component="span">
               Pattern Check by
               <span className="font-CustomFont font-bold text-blue-500">
+                {" "}
                 VORT
               </span>
             </Typography>
@@ -117,109 +118,115 @@ const LandingPage = () => {
           }}
         >
           <NavbarPage />
-
-          <Grid
-            container
-            spacing={0}
-            height={{
-              xs: "inherit",
-              md: "auto",
-            }}
-            sx={{ marginTop: { xs: "0rem", md: "4rem" } }}
-          >
+          <Box>
             <Grid
-              item
-              md={7}
-              xs={12}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
+              container
+              spacing={2}
+              height={{
+                xs: "inherit",
+                md: "auto",
+              }}
+              sx={{
+                marginTop: { xs: "2rem", md: "4rem" },
+              }}
             >
-              <Box
-                className="main-text"
-                sx={{
-                  fontSize: { xs: "2rem", md: "4rem" },
-                  textAlign: "center",
-                }}
-              >
-                Get Started with <span className="text-white-500">Vort</span>
-              </Box>
-              <Box
-                className="main-text1"
-                sx={{
-                  fontSize: { xs: ".8rem", md: "1.2rem" },
-                  textAlign: "center",
-                }}
-              >
-                VORT works as a Dark Patterns detector, specifically designed to
-                identify various types of deceptive online practices. It
-                primarily targets three common dark patterns:{" "}
-                <span style={{ fontWeight: "bold", color: "white" }}>
-                  Fake Scarcity, Fake Urgency, and Fake Social Proof.
-                </span>{" "}
-                You can easily check single webpage at a time for these dark
-                patterns by utilizing the "VORT" tool on your website. Conduct a
-                quick and complimentary check to ensure the absence of these
-                deceptive elements.
-              </Box>
-
-              <Box
+              <Grid
+                item
+                md={7}
+                xs={12}
                 display="flex"
+                flexDirection="column"
                 alignItems="center"
-                justifyContent="space-between"
-                className="input-box"
-                marginTop="3rem"
+                justifyContent="center"
               >
-                <input
-                  type="text"
-                  placeholder="Enter Your URL Here......"
-                  onChange={(e) => setUrlForCheck(e.target.value)}
-                  value={urlForCheck}
-                  required
-                />
-                <button
-                  className="search-btn"
-                  onClick={handleWebsiteSubmitClick}
-                >
-                  <SendIcon sx={{ color: "#9fa2a5" }} />
-                </button>
-              </Box>
-            </Grid>
-            <Grid item md={4}>
-              <Box
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  backgroundColor: "",
-                }}
-              >
-                <img
-                  src="/assets/2.png"
-                  alt="..."
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    marginLeft: "15rem",
-                    backgroundColor: "transparent",
+                <Box
+                  className="main-text"
+                  sx={{
+                    fontSize: { xs: "1.7rem", md: "3rem" },
+                    textAlign: "center",
+                    width: { xs: "90%", md: "80%" },
+                    marginBottom: { xs: "1rem", md: "0" },
                   }}
-                />
-              </Box>
+                >
+                  Get Started with <span className="text-white-500">Vort</span>
+                </Box>
+                <Box
+                  className="main-text1"
+                  sx={{
+                    fontSize: { xs: ".8rem", md: "1.2rem" },
+                    textAlign: "center",
+                  }}
+                >
+                  VORT works as a Dark Patterns detector, specifically designed
+                  to identify various types of deceptive online practices. It
+                  primarily targets three common dark patterns:{" "}
+                  <span>
+                    Fake Scarcity, Fake Urgency, and Fake Social Proof.
+                  </span>{" "}
+                  You can easily check single webpage at a time for these dark
+                  patterns by utilizing the "VORT" tool on your website. Conduct
+                  a quick and complimentary check to ensure the absence of these
+                  deceptive elements.
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  className="input-box"
+                  marginTop="3rem"
+                >
+                  <input
+                    type="text"
+                    placeholder="Enter Your URL Here......"
+                    onChange={(e) => setUrlForCheck(e.target.value)}
+                    value={urlForCheck}
+                    required
+                  />
+                  <button
+                    className="search-btn"
+                    onClick={handleWebsiteSubmitClick}
+                  >
+                    <SendIcon sx={{ color: "#9fa2a5" }} />
+                  </button>
+                </Box>
+              </Grid>
+              <Grid item md={4}>
+                <Box
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    backgroundColor: "",
+                  }}
+                >
+                  <img
+                    src="/assets/2.png"
+                    alt="..."
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      marginLeft: "15rem",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
         {/* -------------------------------------------Section2------------------------------------------------- */}
         <Box
           sx={{
-            marginTop: "2rem",
+            marginTop: { xs: "3vw", md: "8vw" },
             height: { md: "40dvh" },
             width: { md: "100%" },
             display: "grid",
             placeItems: "center",
             fontSize: { xs: "3rem", md: "3rem" },
             textAlign: "center",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         >
           <h1

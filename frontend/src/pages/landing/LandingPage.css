@@ -30,6 +30,7 @@
   width: 100%;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
+  margin-top: 3rem;
 }
 ._partner-items_ {
   display: flex;
