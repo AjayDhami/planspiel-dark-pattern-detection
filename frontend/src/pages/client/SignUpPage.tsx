@@ -4,6 +4,8 @@ import {
   Container,
   FormLabel,
   Grid,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -44,12 +46,31 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
+const StyledSelect = styled(Select)(({ theme }) => ({
+  border: `1px solid ${theme.palette.common.white}`,
+  "&:hover": {
+    borderColor: theme.palette.common.white,
+    borderWidth: 2,
+  },
+  "&.Mui-focused": {
+    borderColor: theme.palette.common.white,
+    borderWidth: 2,
+  },
+  "& .MuiInputBase-input": {
+    color: theme.palette.common.white,
+  },
+  "& .MuiSelect-icon": {
+    color: theme.palette.common.white,
+  },
+}));
+
 const initialValues: UserRegistrationCredentials = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
   role: "Client",
+  subscription: "Three_Months",
 };
 
 const validationSchema = Yup.object().shape({
@@ -103,7 +124,7 @@ export default function SignUp() {
               display: "none",
             },
           })}
-        ></Grid>
+        />
         <Grid
           item
           xs={12}
@@ -114,6 +135,7 @@ export default function SignUp() {
             color: (theme) => theme.palette.common.white,
             display: "flex",
             justifyContent: "center",
+            overflow: "auto",
           }}
         >
           <Stack
@@ -262,6 +284,34 @@ export default function SignUp() {
                           }
                           sx={{ mb: 2 }}
                         />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box display="flex" flexDirection="column">
+                        <FormLabel
+                          required
+                          sx={{
+                            color: (theme) => theme.palette.secondary.light,
+                            lineHeight: "1.75em",
+                          }}
+                          error={
+                            touched.subscription && Boolean(errors.subscription)
+                          }
+                        >
+                          Subscription
+                        </FormLabel>
+                        <Field
+                          as={StyledSelect}
+                          name="subscription"
+                          className="form-input"
+                          fullWidth
+                          required
+                          sx={{ mb: 2 }}
+                        >
+                          <MenuItem value="Three_Months">3 Months</MenuItem>
+                          <MenuItem value="Six_Months">6 Months</MenuItem>
+                          <MenuItem value="Twelve_Months">12 Months</MenuItem>
+                        </Field>
                       </Box>
                     </Grid>
                     <Grid item xs={12}>

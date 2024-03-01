@@ -17,6 +17,7 @@ export interface UserRegistrationCredentials {
   lastName: string;
   email: string;
   password: string;
+  subscription: "Three_Months" | "Six_Months" | "Twelve_Months";
   role: string;
 }
 
@@ -157,17 +158,17 @@ export interface PatternCardProps {
 }
 
 export interface extensionImages {
-  file_base64 : string,
-  name : string,
-  timestamp : number,
+  file_base64: string;
+  name: string;
+  timestamp: number;
 }
 
 export interface extensionPatternDetails {
-  patternDesc : string,
-  patternType: string,
-  patternUrl : string,
-  patternTime : number,
-  patternimages : extensionImages[];
+  patternDesc: string;
+  patternType: string;
+  patternUrl: string;
+  patternTime: number;
+  patternimages: extensionImages[];
 }
 export interface PatternAdditionFormProps {
   isOpen: boolean;

@@ -1,7 +1,11 @@
 import {
   Avatar,
   Box,
+  Card,
+  CardActionArea,
+  CardMedia,
   Grid,
+  Modal,
   Paper,
   SxProps,
   Theme,
@@ -13,9 +17,9 @@ import {
   HourglassTop as PendingIcon,
   Verified as VerifiedIcon,
 } from "@mui/icons-material";
-import React, { useState } from "react";
 import { KpiCardProps, WebsiteCardProps } from "../../types";
-import WebsiteDetailsModal from "./WebsiteDetailsModal";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const kpiCardPalettes = {
   primary: {
@@ -133,8 +137,9 @@ export const WebsiteDashboardCard = ({
   isCompleted,
   isDarkPatternFree,
 }: WebsiteCardProps) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const onClose = () => setOpen(false);
+  const navigate = useNavigate();
+  // const [open, setOpen] = useState<boolean>(false);
+  // const onClose = () => setOpen(false);
 
   const getPaperStyles = (theme: Theme) => {
     let paperStyles: SxProps<Theme> = {
@@ -159,7 +164,12 @@ export const WebsiteDashboardCard = ({
 
   return (
     <>
-      <Paper elevation={2} sx={getPaperStyles} onClick={() => setOpen(true)}>
+      {/* <Paper elevation={2} sx={getPaperStyles} onClick={() => setOpen(true)}> */}
+      <Paper
+        elevation={2}
+        sx={getPaperStyles}
+        onClick={() => navigate(`/client/website/${websiteId}`)}
+      >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Tooltip title={websiteName} arrow>
             <Typography noWrap variant="subtitle1">
@@ -199,11 +209,55 @@ export const WebsiteDashboardCard = ({
         </Box>
       </Paper>
 
-      <WebsiteDetailsModal
+      {/* <WebsiteDetailsModal
         websiteId={websiteId}
         open={open}
         onClose={onClose}
-      />
+      /> */}
     </>
+  );
+};
+
+export const ImageCard = ({ imageUrl }: { imageUrl: string }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <Card onClick={handleOpen}>
+        <CardActionArea>
+          <CardMedia component="img" image={imageUrl} alt="Paella dish" />
+        </CardActionArea>
+      </Card>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "100%", md: "70%" },
+            height: "80vh",
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={imageUrl}
+            alt="Feedback Screenshot"
+            style={{
+              width: "100%",
+              height: "auto",
+              maxWidth: "100%", // Limit image width to 100% of its container
+              maxHeight: "100%",
+            }}
+          />
+        </Box>
+      </Modal>
+    </div>
   );
 };

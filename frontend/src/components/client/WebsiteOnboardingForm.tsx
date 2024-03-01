@@ -91,22 +91,24 @@ const WebsiteOnboardingForm = ({
         };
         await addWebsiteForCertification(data);
 
-      toast.success("Website sent for certification. It may take some time for expert verification");
+        toast.success(
+          "Website sent for certification. It may take some time for expert verification"
+        );
 
-      setIsFormLoading(false);
-      onSuccess();
-      onClose();
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`);
-      } else {
-        toast.error("An unknown error occurred.");
+        setIsFormLoading(false);
+        onSuccess();
+        onClose();
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
       }
+    } else {
+      setOpenTC(true);
     }
-  } else {
-    setOpenTC(true)
-  }
-}
+  };
 
   useEffect(() => {
     return () => {
@@ -183,11 +185,12 @@ const WebsiteOnboardingForm = ({
                 <Grid item xs={12}>
                   <Field
                     as={TextField}
-                    label="Description"
+                    label="Additional Details"
                     name="description"
                     fullWidth
-                    multiline
                     rows={4}
+                    multiline
+                    helperText="Add specific instructions regarding your website here. (e.g. Login credentials)"
                   />
                 </Grid>
                 <Grid item xs={12}>
