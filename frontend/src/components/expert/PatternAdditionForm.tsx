@@ -239,9 +239,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                     <div className='border-b-2 pb-2'><h1 className='text-lg text-blue-500 font-bold'>Pattern Details from VORT extension</h1></div>
                     <div className='pb-4'> 
                         {extensionPatterns.length===0 ? 
-                        <div className={`rounded-lg ${z_index} bg-gray-200 flex items-center justify-center m-3`}>
-                            <p className='py-10 font-bold'>No patterns added from extension</p>
-                        </div> : 
+                        <div className="flex justify-center items-center h-20 bg-gray-100 shadow-md rounded-md my-4"><h2>No patterns added from extension</h2></div> : 
                         extensionPatterns.map((expats)=> (
                             <div className={`relative shadow-lg m-3 ${z_index} rounded-lg`}>
                                 <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
