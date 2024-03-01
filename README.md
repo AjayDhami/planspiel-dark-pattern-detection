@@ -1,5 +1,8 @@
 # V-Tenet Dark Pattern Detection Project
 
+![VORT](Vort-LandingPage.png)
+
+
 Welcome to the V-Tenet Dark Pattern Detection Project. This is a Research Project created by V-Tenet team for the **Planspiel Web Engineering** at [Technische Universität Chemnitz](https://www.tu-chemnitz.de/index.html).
 
 ## Introduction
@@ -112,6 +115,9 @@ $ docker-compose --version
 
 
 **The application will be accessible at [http://localhost:3000](http://localhost:3000)**
+
+## Client Dashboard
+![Client Landing Page](Client-LandingPage.png)
 
 ## Contributors
 
