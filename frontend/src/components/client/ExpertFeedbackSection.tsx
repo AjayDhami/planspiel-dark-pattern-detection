@@ -89,11 +89,6 @@ const ExpertFeedbackSection = ({
         Feedback Analysis
       </Typography> */}
       {feedbackList.map((item) => {
-        item.patternImageUrls = [
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-        ];
         return <FeedbackDetail {...item} key={item.id} />;
       })}
     </Stack>
