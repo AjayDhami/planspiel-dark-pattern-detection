@@ -1,20 +1,17 @@
 import {
   Box,
-  Button,
   Container,
   Divider,
   Paper,
-  Skeleton,
   Stack,
   Typography,
 } from "@mui/material";
 import {
-  ArrowBack as ArrowBackIcon,
   Celebration as CelebrationIcon,
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PhaseBadge from "../../components/client/PhaseBadge";
 import { Website } from "../../types";
 import { getWebsite } from "../../api";
