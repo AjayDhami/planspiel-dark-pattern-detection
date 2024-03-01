@@ -17,9 +17,19 @@ const FeedbackDetail = (props: PatternData) => {
       </Typography>
       <Typography variant="subtitle1">
         Detected at:{" "}
-        <Link href={props.detectedUrl} target="_blank">
-          {props.detectedUrl}
-        </Link>
+        <Box display="flex">
+          <Typography
+            variant="body1"
+            component="span"
+            color="primary"
+            noWrap
+            mr={"4px"}
+          >
+            <Link href={props.detectedUrl} target="_blank">
+              {props.detectedUrl}
+            </Link>
+          </Typography>
+        </Box>
       </Typography>
       <Typography variant="body1" fontStyle="italic">
         {props.description}
@@ -48,7 +58,7 @@ const FeedbackDetail = (props: PatternData) => {
 const ExpertFeedbackSection = ({
   websiteId: webId,
   expertFeedback,
-  isDarkPatternFree
+  isDarkPatternFree,
 }: Website) => {
   const [feedbackList, setFeedbackList] = useState<PatternData[]>([]);
 
@@ -85,9 +95,10 @@ const ExpertFeedbackSection = ({
       >
         {expertFeedback}
       </Typography>
-      {!isDarkPatternFree && feedbackList.map((item) => {
-        return <FeedbackDetail {...item} key={item.id} />;
-      })}
+      {!isDarkPatternFree &&
+        feedbackList.map((item) => {
+          return <FeedbackDetail {...item} key={item.id} />;
+        })}
     </Stack>
   );
 };
