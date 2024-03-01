@@ -52,7 +52,7 @@ const WebsiteDashboard = () => {
     const [isPatternModalOpen, setIsPatternModalOpen] = useState(false)
     const {  setPatternData } = useExpertContext();
     const [zindex, setZindex ] = useState(false)
-    const z_index = zindex ? "z-[-20]" : "z-[10]"
+    const z_index = zindex ? "z-[-20]" : "z-[0]"
     const bgForPublishBtn = isPublishBtnDisabled ? "bg-gray-300" : "bg-green-500";
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
@@ -149,7 +149,6 @@ const WebsiteDashboard = () => {
 
     const handleMessageFromContentScript = (event:MessageEvent) => {
       if (event.source === window && event.data.action === 'sendDataToReactApp') {
-        // Handle the data received from the content script
         const dataFromContentScript = event.data;
         setExtensionPatterns(dataFromContentScript.result.patternType);
       }

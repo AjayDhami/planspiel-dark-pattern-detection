@@ -43,7 +43,7 @@ const Navbar = () => {
                 style={{ textDecoration: "none" }}
                 className="font-bold text-blue-500 text-3xl mx-3"
               >
-                Vort
+                VORt
               </Link>
             </Typography>
           </div>
