@@ -155,7 +155,7 @@ const LandingPage = () => {
                 VORT works as a Dark Patterns detector, specifically designed to
                 identify various types of deceptive online practices. It
                 primarily targets three common dark patterns:{" "}
-                <span style={{ fontWeight: "bold", color: "white" }}>
+                <span>
                   Fake Scarcity, Fake Urgency, and Fake Social Proof.
                 </span>{" "}
                 You can easily check single webpage at a time for these dark
