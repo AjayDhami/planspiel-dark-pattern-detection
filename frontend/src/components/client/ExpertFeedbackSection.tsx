@@ -48,6 +48,7 @@ const FeedbackDetail = (props: PatternData) => {
 const ExpertFeedbackSection = ({
   websiteId: webId,
   expertFeedback,
+  isDarkPatternFree
 }: Website) => {
   const [feedbackList, setFeedbackList] = useState<PatternData[]>([]);
 
@@ -84,11 +85,7 @@ const ExpertFeedbackSection = ({
       >
         {expertFeedback}
       </Typography>
-      {/* 
-      <Typography variant="h5" fontWeight="bold">
-        Feedback Analysis
-      </Typography> */}
-      {feedbackList.map((item) => {
+      {!isDarkPatternFree && feedbackList.map((item) => {
         return <FeedbackDetail {...item} key={item.id} />;
       })}
     </Stack>

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { BASE_SERVER_URL } from "../../utils/constatnt";
 import { Website } from "../../types";
 import {
   Box,
@@ -105,7 +106,7 @@ const CertificateSection = ({ websiteId, certificationId }: Website) => {
 
   const certificateScript = `<script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("http://localhost:8080/website/1/certificationImageFetch")
+      fetch("${BASE_SERVER_URL}/website/1/certificationImageFetch")
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");

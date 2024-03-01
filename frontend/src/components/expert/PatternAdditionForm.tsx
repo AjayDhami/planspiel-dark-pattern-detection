@@ -244,7 +244,7 @@ const PatternAdditionForm: React.FC<PatternAdditionFormProps> = ({isOpen, onClos
                             <div className={`relative shadow-lg m-3 ${z_index} rounded-lg`}>
                                 <p className='text-md font-bold px-4 pt-2'>Pattern type : {expats.patternType}</p>
                                 <p className='text-md pt-1 px-4'>{expats.patternDesc}</p>
-                                <p className='px-4 pt-1 pb-2'>Detected At : <span className='text-blue-500'>{expats.patternUrl}</span></p>
+                                <p className="truncate ... px-4 pt-1 pb-2 text-blue-500">Detected At: {expats.patternUrl}...</p>
                                 <Tooltip title="Add pattern for transfer"><button
                                     type="button"
                                     onClick={() => handleAddclickExtensionPattern(expats.patternType, expats.patternUrl, expats.patternDesc)}
