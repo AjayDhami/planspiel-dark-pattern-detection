@@ -2,13 +2,21 @@ import React from 'react'
 import { IoMdClose } from 'react-icons/io';
 
 interface ImageSliderProops {
-    image?: string;
+    image?: string | File;
     isOpen : boolean;
     onClose : () => void;
 }
 
 const ImageSlides:React.FC<ImageSliderProops> = ({image, isOpen, onClose})  => {
     if(!isOpen) return null
+    let imageElement = null;
+
+    if (typeof image === 'string') {
+        imageElement = <img src={image} className='w-fit p-5 h-fit border-2 border-gray-200' alt='Preview' />;
+    } else if (image instanceof File) {
+        const imgSrc = URL.createObjectURL(image);
+        imageElement = <img src={imgSrc} className='w-fit p-5 h-fit border-2 border-gray-200' alt='Preview' />;
+    }
     return (
       <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'>
           <div className='bg-white p-8 rounded-lg relative z-[50] space-y-8 w-4/5 h-4/5 overflow-auto'>
@@ -21,7 +29,7 @@ const ImageSlides:React.FC<ImageSliderProops> = ({image, isOpen, onClose})  => {
                       className="p-2 text-4xl font-bold"
                   />
               </button>
-              <div className="flex justify-center">{image && <img src={image} className='w-fit p-5 h-fit border-2 border-gray-200' alt='Preview'/>}</div>
+              <div className="flex justify-center">{imageElement}</div>
           </div>
       </div>
     )
