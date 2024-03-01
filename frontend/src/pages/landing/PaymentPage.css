@@ -89,7 +89,7 @@
     font-size: 1.8rem;
   }
   .payment-card {
-    height: 380px;
+    height: 400px;
     width: 280px;
     margin-left: 0;
     margin: 20px;
@@ -109,7 +109,7 @@
 }
 @media (max-width: 900) {
   .payment-card .payment-cards {
-    height: 380px;
+    height: 400px;
     width: 240px;
     margin: 20px 0;
   }
