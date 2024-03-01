@@ -122,6 +122,7 @@ async function processInput() {
         chrome.storage.local.set({ [key]: updatePatterns }, () => {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError);
+                alert("Delete some patterns to submit new patterns")
             } 
             resolve(updatePatterns)
         });
@@ -234,6 +235,7 @@ async function captureImage() {
         chrome.storage.local.set({ [key]: updatedImages }, () => {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError);
+                alert("Delete some patterns to submit new Images")
             } 
             resolve(updatedImages)
         });
