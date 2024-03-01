@@ -20,9 +20,8 @@ import React, { useEffect, useState } from "react";
 import { WebsiteResponse } from "../../types";
 import { getAllWebsites } from "../../api";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PhaseBadge from "../../components/client/PhaseBadge";
-import WebsiteDetailsModal from "../../components/client/WebsiteDetailsModal";
 
 interface CommonHeadCellProps {
   label: string;
@@ -67,20 +66,10 @@ const HeadCell = ({
 };
 
 const WebsiteViewPage = () => {
+  const navigate = useNavigate()
   const [websites, setWebsites] = useState<WebsiteResponse[]>([]);
   const [orderBy, setOrderBy] = useState<keyof WebsiteResponse>("websiteId");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
-  const [selectedWebsite, setSelectedWebsite] = useState<string | undefined>(
-    undefined
-  );
-  const [openDetails, setOpenDetails] = useState<boolean>(false);
-
-  const onOpenDetails = (webId: string): void => {
-    setSelectedWebsite(webId);
-    setOpenDetails(true);
-  };
-
-  const onCloseDetails = (): void => setOpenDetails(false);
 
   const handleRequestSort = (property: keyof WebsiteResponse) => {
     const isAsc = orderBy === property && order === "asc";
@@ -188,7 +177,7 @@ const WebsiteViewPage = () => {
                       <TableCell>
                         <Tooltip title="View Details" arrow>
                           <IconButton
-                            onClick={() => onOpenDetails(row.websiteId)}
+                            onClick={() => navigate(`/client/website/${row.websiteId}`)}
                           >
                             <ViewIcon color="secondary" />
                           </IconButton>
@@ -203,11 +192,7 @@ const WebsiteViewPage = () => {
         </Grid>
       </Paper>
 
-      <WebsiteDetailsModal
-        websiteId={selectedWebsite}
-        open={openDetails}
-        onClose={onCloseDetails}
-      />
+
     </>
   );
 };

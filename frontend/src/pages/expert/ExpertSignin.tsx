@@ -68,7 +68,6 @@ const ExpertSignin = () => {
                                     placeholder="Enter your password"/>
                             </div>
                         </div>
-                        <p className='font-bold text-blue-500 hover:text-blue-700 mt-4 cursor-pointer'>Forgot your password ?</p>
                         <button className='bg-blue-500 p-2 rounded-md mt-4 w-full font-bold hover:bg-blue-700' type='submit'>Login</button>
                         </form>
                     </div> 

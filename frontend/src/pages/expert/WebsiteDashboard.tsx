@@ -226,7 +226,7 @@ const WebsiteDashboard = () => {
               : websiteData.phase==="Published" ? <Tooltip title={websiteData.phaseText} arrow><p className='p-2 border-2 border-green-300 rounded-md text-green-500 font-bold'>Published</p></Tooltip> : null}
             </div>
             <Link to={websiteData.baseUrl} target="_blank" className='text-blue-500'>
-              {websiteData.baseUrl}&nbsp;
+              <p className="truncate ...">{websiteData.baseUrl}...</p>
               <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
             </Link>
             <div className='mt-3'>

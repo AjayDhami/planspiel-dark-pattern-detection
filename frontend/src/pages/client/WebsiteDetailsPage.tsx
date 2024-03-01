@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   Divider,
+  Grid,
   Paper,
   Stack,
   Typography,
@@ -62,18 +63,21 @@ const WebsiteDetailsPage = () => {
   }, [id]);
 
   return (
-    <Container fixed>
+    <Container>
       <Paper
         sx={(theme) => ({
           background: theme.palette.background.paper,
           borderRadius: "8px",
         })}
       >
-        <Stack direction="row">
-          <Box
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            md={4}
             sx={{
-              width: "30%",
-              borderRight: "1px solid #ccc",
+              borderRight: { xs: "none", md: "1px solid #ccc" },
+              borderBottom: { xs: "1px solid #ccc", md: "none" },
               padding: (theme) => theme.spacing(2),
             }}
           >
@@ -126,10 +130,12 @@ const WebsiteDetailsPage = () => {
                 No Description
               </Typography>
             )}
-          </Box>
-          <Box
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={8}
             sx={{
-              flex: "70%",
               padding: (theme) => theme.spacing(2),
             }}
           >
@@ -186,8 +192,8 @@ const WebsiteDetailsPage = () => {
                 </p>
               </div>
             )}
-          </Box>
-        </Stack>
+          </Grid>
+        </Grid>
       </Paper>
     </Container>
   );
