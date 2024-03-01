@@ -65,6 +65,7 @@ const ImageCarousel:React.FC<ImageCarouselProops> = ({image, isOpen, patternTime
         });
         setExtensionPatterns(updatedPatterns);
         window.postMessage({action : 'updateDatainStorage', updatedData : extensionPatterns},'*')
+        setDrawingEnabled(false);
         onClose();
     };
 

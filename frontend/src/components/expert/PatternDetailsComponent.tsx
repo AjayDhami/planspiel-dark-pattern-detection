@@ -184,7 +184,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
           <div className="md:grid grid-cols-3">
             <div className="md:col-span-2 h-[25rem] overflow-auto pr-4">
               <div className="border-b-2 p-4 bg-gray-100 rounded-lg mx-4 mt-4">
-                <h2 className="font-bold">Description</h2>
+                <h2 className="font-bold">Feedback</h2>
                 <p>{patternData.description}</p>
               </div>
               <div className="flex items-center mt-5">
