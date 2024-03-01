@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'CustomFont';
-  src: url('../public/assets/Copperplate.otf') format('truetype');
+  font-family: "CustomFont";
+  src: url("../public/assets/Copperplate.otf") format("truetype");
 }
 
 body {

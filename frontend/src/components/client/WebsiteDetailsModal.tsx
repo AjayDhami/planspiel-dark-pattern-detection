@@ -175,7 +175,6 @@ const WebsiteDetailsModal = ({
                 <Skeleton animation="wave" />
               ) : (
                 <PhaseBadge
-                  phase={website.phase}
                   isCompleted={website.isCompleted}
                   isDarkPatternFree={website.isDarkPatternFree}
                 />

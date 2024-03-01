@@ -181,7 +181,6 @@ const WebsiteViewPage = () => {
                       </TableCell>
                       <TableCell>
                         <PhaseBadge
-                          phase={row.phase}
                           isCompleted={row.isCompleted}
                           isDarkPatternFree={row.isDarkPatternFree}
                         />

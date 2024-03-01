@@ -42,21 +42,22 @@ def free_verification(params):
             print(f'Error reading the file: {e}')
 
         dark_patterns = predict_website_dark_pattern_type('65b3de8af380a27e55c21102')
-        len_dp = rows - len(dark_patterns)
-
-        try:
-            percentage = round((len_dp/rows)*100)
-            return jsonify({'Percentage': percentage})
-        except ZeroDivisionError as div_error:
-            error_message = str(div_error)
-            return jsonify({"error": error_message}), 400
-        except Exception as e:
-            error_message = str(e)
-            return jsonify({"error": error_message}), 500
+        if len(dark_patterns):
+            len_dp = rows - len(dark_patterns)
+            try:
+                percentage = round((len_dp/rows)*100)
+                return jsonify({'Percentage': percentage})
+            except ZeroDivisionError as div_error:
+                error_message = str(div_error)
+                return jsonify({"error": error_message}), 400
+            except Exception as e:
+                error_message = str(e)
+                return jsonify({"error": error_message}), 500
+        else:
+            return jsonify({'Percentage': 100})
         
 
 def parse_multiple_website_url(webpageList):
-    print('Parsing website')
     i=0
     total_webpages = len(webpageList)
     dark_patterns_response = []

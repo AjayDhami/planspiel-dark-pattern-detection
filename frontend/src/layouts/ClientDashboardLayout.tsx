@@ -31,9 +31,10 @@ const ClientDashboardLayout = () => {
           flexDirection: "column",
           position: "absolute",
           height: {
-            xs: "auto",
-            md: `calc(100vh - 88px)`,
+            md: "auto",
+            lg: `calc(100vh - 88px)`,
           },
+          overflowY: "auto",
           py: {
             xs: 2,
             md: 3,
