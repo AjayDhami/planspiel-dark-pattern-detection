@@ -136,8 +136,6 @@ export class WebsiteController {
   }
 
   @Get(':imageId/certificationImageFetch')
-  @UseGuards(AuthGuard)
-  @Roles(UserType.Client)
   @ApiOperation({
     summary: 'Get Certification Image [For Client]',
   })
