@@ -1,6 +1,11 @@
 # V-Tenet Dark Pattern Detection Project
+Welcome to [VORT](http://vtenet.s3-website.eu-central-1.amazonaws.com/) presented by [V-Tenet](https://v-tenet.vercel.app/) team. 
+VORT is dedicated to certifying websites that uphold transparency and are free from dark patterns.
+This is a Web Engineering Research Project created by V-Tenet team
+for the **Planspiel** at [Technische Universität Chemnitz](https://www.tu-chemnitz.de/index.html).
 
-Welcome to the V-Tenet Dark Pattern Detection Project. This is a Research Project created by V-Tenet team for the **Planspiel Web Engineering** at [Technische Universität Chemnitz](https://www.tu-chemnitz.de/index.html).
+<img src="assets/LandingPage.png" alt="VORT" width="700" height="400">
+
 
 ## Introduction
 
@@ -112,6 +117,12 @@ $ docker-compose --version
 
 
 **The application will be accessible at [http://localhost:3000](http://localhost:3000)**
+
+## Client Dashboard
+<img src="assets/Dashboard.png" alt="Client Landing Page" width="700" height="400">
+
+## Website Certification
+<img src="assets/Certification.png" alt="Client Landing Page" width="700" height="400">
 
 ## Contributors
 
