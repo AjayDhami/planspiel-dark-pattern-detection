@@ -4,9 +4,7 @@ VORT is dedicated to certifying websites that uphold transparency and are free f
 This is a Web Engineering Research Project created by V-Tenet team
 for the **Planspiel** at [Technische Universität Chemnitz](https://www.tu-chemnitz.de/index.html).
 
-<p align="center">
-    <img src="assets/LandingPage.png" alt="VORT" width="700" height="400">
-</p>
+<img src="assets/LandingPage.png" alt="VORT" width="700" height="400">
 
 
 ## Introduction
@@ -121,14 +119,10 @@ $ docker-compose --version
 **The application will be accessible at [http://localhost:3000](http://localhost:3000)**
 
 ## Client Dashboard
-<p align="center">
-    <img src="assets/Dashboard.png" alt="Client Landing Page" width="700" height="400">
-</p>
+<img src="assets/Dashboard.png" alt="Client Landing Page" width="700" height="400">
 
 ## Website Certification
-<p align="center">
-    <img src="assets/Certification.png" alt="Client Landing Page" width="700" height="400">
-</p>
+<img src="assets/Certification.png" alt="Client Landing Page" width="700" height="400">
 
 ## Contributors
 
