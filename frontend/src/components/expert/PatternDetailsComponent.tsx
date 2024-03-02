@@ -107,6 +107,7 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
 
 
   const handleUrlClick = (texttoCheck:string) => {
+    console.log(texttoCheck);
     var url = document.getElementById("detectedUrl")?.getAttribute("href");
     var suffix = "#:~:text=";
     var tempUrl = url?.split("#")[0];
