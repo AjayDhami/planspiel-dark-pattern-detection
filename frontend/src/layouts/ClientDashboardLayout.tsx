@@ -11,7 +11,6 @@ const ClientDashboardLayout = () => {
 
   useEffect(() => {
     setRedirectCallback(() => {
-      console.log("setRedirectCallback executed");
       authContext?.logoutUser();
     });
 
