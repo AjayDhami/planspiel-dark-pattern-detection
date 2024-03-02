@@ -10,7 +10,7 @@ import { setRedirectCallback } from "../../utils/AxiosHelper";
 import AuthContext from "../../context/AuthContext1";
 import withExpertAuth from '../../hoc/withExpertAuth';
 import { toast } from "react-toastify";
-import { Avatar, Tooltip} from '@mui/material';
+import { Avatar, IconButton, Tooltip} from '@mui/material';
 import LoadingPatternCard from '../../components/expert/LoadingPatternCard';
 import LoadingCards from '../../components/expert/LoadingCards';
 import PublishForm from '../../components/expert/PublishForm';
@@ -18,6 +18,8 @@ import {
   OpenInNew as OpenInNewIcon,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { patternSupportLinks } from '../../utils/patternSupportLinks';
+import { Info as InfoIcon } from "@mui/icons-material";
 
 
 const WebsiteDashboard = () => {
@@ -58,7 +60,7 @@ const WebsiteDashboard = () => {
     const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
     const [isPublishOpen, setIsPublishOpen] = useState<boolean>(false);
     const [displayEmptyPatternsText, setDisplayEmptyPatternsText] = useState<boolean>(false);
-    //const [extensionPatterns, setExtensionPatterns] = useState<extensionPatternDetails[]>();
+    const [supportUrl, setSupportUrl] = useState<string>("https://www.deceptive.design/types/fake-scarcity");
 
     const getWebsiteData = useCallback(async ()=> {
       if(websiteId){
@@ -209,6 +211,10 @@ const WebsiteDashboard = () => {
       getWebsiteData();
     }
 
+    const patternSupportUrl = (supportUrl:string) => {
+      setSupportUrl(supportUrl);
+    }
+
   return (
     <div>
         <Navbar/>
@@ -239,6 +245,26 @@ const WebsiteDashboard = () => {
                 {websiteData.expertDetails.map((expert)=>(
                   expert.id === websiteData.primaryExpertId ? <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}<span className='text-gray-400 italic'> - Primary</span></div> : <div className='flex items-center my-2'><Avatar {...stringAvatar(expert.name)} className='mx-2'/>{expert.name}</div>
                 ))}
+              </div>
+              <h2 className='font-bold py-2 px-2'>Dark Pattern References</h2>
+              <div className='flex bg-transparent border-2 rounded-xl px-4'>
+                <select id="orient" 
+                    className='p-2 rounded-md w-full cursor-pointer'
+                    onChange={(e) => patternSupportUrl(e.target.value)}
+                    >
+                    {patternSupportLinks.map((url)=>(
+                        <option value={url.patternUrl}>{url.patternName}</option>
+                    ))}
+                </select>
+                <IconButton
+                  aria-label="feedback-details"
+                  size="small"
+                  color="primary"
+                  href={supportUrl}
+                  target="_blank"
+                >
+                  <InfoIcon />
+                </IconButton>
               </div>
             </div>
           </div>
