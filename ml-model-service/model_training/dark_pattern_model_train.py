@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score
 from joblib import dump, load
@@ -32,7 +32,7 @@ def train_and_evaluate_model(df, target_column, save_filename):
     train_df, test_df = train_test_split(df, test_size=0.2, random_state=34)
 
     # Create a pipeline for the model
-    model = make_pipeline(TfidfVectorizer(), MultinomialNB())
+    model = make_pipeline(TfidfVectorizer(), SVC())
 
     # Fit the model
     model.fit(train_df['Text'], train_df[target_column])
