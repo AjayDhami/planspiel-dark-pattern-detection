@@ -82,7 +82,7 @@ const ExpertDashboard : React.FC = () => {
                                 <div className={`p-2 font-bold text-white rounded-2xl ${website.phaseColor}`}>{website.phaseText}</div>
                             </Tooltip>
                         </div>
-                        <p>{website.baseUrl}</p>
+                        <div className='w-60'><p className="truncate ... text-blue-500">{website.baseUrl}</p></div>
                         <button 
                             className='w-full my-4 py-1 px-2 border-2 border-blue-500 rounded-xl font-bold hover:bg-blue-300'
                                 onClick={() => handleClick(website.websiteId, website.websiteName)}

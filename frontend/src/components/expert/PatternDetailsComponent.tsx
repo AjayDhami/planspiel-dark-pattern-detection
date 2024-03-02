@@ -175,16 +175,17 @@ const PatternDetailsComponent: React.FC<PatternDetailsProps> = ({
                   </div>
                 )}
               </div>
+              <div className="w-60">
               <a href={patternData.detectedUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500" id="detectedUrl" onClick={()=>handleUrlClick(patternData.description)}>
-                {patternData.detectedUrl}&nbsp;
-                <OpenInNewIcon sx={{ width: "20px", height: "20px" }} />
+              <p className="truncate ...">{patternData.detectedUrl}...<OpenInNewIcon sx={{ width: "20px", height: "20px" }} /></p>
               </a>
+              </div>
             </div>
           )}
           <div className="md:grid grid-cols-3">
             <div className="md:col-span-2 h-[25rem] overflow-auto pr-4">
               <div className="border-b-2 p-4 bg-gray-100 rounded-lg mx-4 mt-4">
-                <h2 className="font-bold">Description</h2>
+                <h2 className="font-bold">Feedback</h2>
                 <p>{patternData.description}</p>
               </div>
               <div className="flex items-center mt-5">

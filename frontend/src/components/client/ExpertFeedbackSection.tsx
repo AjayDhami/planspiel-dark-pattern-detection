@@ -17,9 +17,19 @@ const FeedbackDetail = (props: PatternData) => {
       </Typography>
       <Typography variant="subtitle1">
         Detected at:{" "}
-        <Link href={props.detectedUrl} target="_blank">
-          {props.detectedUrl}
-        </Link>
+        <Box display="flex">
+          <Typography
+            variant="body1"
+            component="span"
+            color="primary"
+            noWrap
+            mr={"4px"}
+          >
+            <Link href={props.detectedUrl} target="_blank">
+              {props.detectedUrl}
+            </Link>
+          </Typography>
+        </Box>
       </Typography>
       <Typography variant="body1" fontStyle="italic">
         {props.description}
@@ -48,6 +58,7 @@ const FeedbackDetail = (props: PatternData) => {
 const ExpertFeedbackSection = ({
   websiteId: webId,
   expertFeedback,
+  isDarkPatternFree,
 }: Website) => {
   const [feedbackList, setFeedbackList] = useState<PatternData[]>([]);
 
@@ -84,18 +95,10 @@ const ExpertFeedbackSection = ({
       >
         {expertFeedback}
       </Typography>
-      {/* 
-      <Typography variant="h5" fontWeight="bold">
-        Feedback Analysis
-      </Typography> */}
-      {feedbackList.map((item) => {
-        item.patternImageUrls = [
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-          "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-        ];
-        return <FeedbackDetail {...item} key={item.id} />;
-      })}
+      {!isDarkPatternFree &&
+        feedbackList.map((item) => {
+          return <FeedbackDetail {...item} key={item.id} />;
+        })}
     </Stack>
   );
 };
