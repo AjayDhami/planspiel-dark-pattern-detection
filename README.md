@@ -9,7 +9,7 @@ for the **Planspiel** at [Technische Universität Chemnitz](https://www.tu-chemn
 
 ## Introduction
 
-The V-Tenet Dark Pattern Detection Application is designed to analyze websites for the presence of dark patterns and certify them if they are deemed free of such manipulative practices.
+The V-Tenet Dark Pattern Detection Product (**VORT**) is designed to analyze websites for the presence of dark patterns and certify them if they are deemed free of such manipulative practices.
 
 You can check out the code for the project using [this link](https://gitlab.hrz.tu-chemnitz.de/vsr/edu/planspiel/WS2324/v-tenet).
 
