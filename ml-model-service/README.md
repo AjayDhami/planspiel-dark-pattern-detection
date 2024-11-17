@@ -11,7 +11,7 @@ Before you begin, make sure you have the following installed on your system
 
 ```bash
 # clone the repository to your machine
-$ git clone https://gitlab.hrz.tu-chemnitz.de/vsr/edu/planspiel/WS2324/v-tenet.git
+$ git clone https://github.com/AjayDhami/planspiel-dark-pattern-detection
 
 # navigate to project directory
 $ cd ml-model-service

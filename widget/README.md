@@ -14,7 +14,7 @@ Before you begin, make sure you have the following installed on your system:
 Clone the repository to your local machine:
 
    ```bash
-   git clone https://gitlab.hrz.tu-chemnitz.de/vsr/edu/planspiel/WS2324/v-tenet.git
+   git clone https://github.com/AjayDhami/planspiel-dark-pattern-detection
    ```
 
 ## Loading extension package in chrome
